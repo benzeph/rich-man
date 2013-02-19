@@ -1,4 +1,4 @@
-package org.thoughtworks.zeph.rich.role;
+package org.thoughtworks.zeph.rich.player;
 
 import org.thoughtworks.zeph.rich.god.God;
 import org.thoughtworks.zeph.rich.map.Land;
@@ -9,7 +9,7 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
-public class Role {
+public class Player {
 	private int id;
 	private String name;
 	private int money;
@@ -21,7 +21,7 @@ public class Role {
 	private int hospitalDays;
 	private int prisonDays;
 
-	public Role(String name, int id) {
+	public Player(String name, int id) {
 		this.id = id;
 		this.name = name;
 		money = 10000;
@@ -121,7 +121,7 @@ public class Role {
 		money = money + land.getCost();
 	}
 
-	public boolean buyProps(Prop prop) {
+	public boolean buyProp(Prop prop) {
 		if (gamePoint >= prop.getPrice()) {
 			if (props.containsKey(prop.getId())) {
 				int n = props.get(prop.getId()) + 1;

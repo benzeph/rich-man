@@ -1,22 +1,22 @@
 package org.thoughtworks.zeph.rich.map;
 
-import org.thoughtworks.zeph.rich.role.Role;
+import org.thoughtworks.zeph.rich.player.Player;
 
 import java.util.HashSet;
 import java.util.Set;
 
 public class Prison extends Map{
-	private Set<Role> roles;
+	private Set<Player> players;
 
 	public Prison(int mapId){
 		super(mapId);
-		roles = new HashSet<Role>();
+		players = new HashSet<Player>();
 	}
-	public void addRole(Role role) {
-		roles.add(role);
+	public void addRole(Player player) {
+		players.add(player);
 	}
 
-	public Set<Role> getRoles() {
-		return roles;
+	public Set<Player> getPlayers() {
+		return players;
 	}
 }
