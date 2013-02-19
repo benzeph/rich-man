@@ -19,7 +19,7 @@ public class GiftRoomTest {
 	@Before
 	public void setUp() {
 
-		room = new GiftRoom();
+		room = new GiftRoom(3);
 		player = new Player("Qian Furen", 1);
 	}
 
