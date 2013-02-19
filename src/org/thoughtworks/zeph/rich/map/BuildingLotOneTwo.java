@@ -4,6 +4,6 @@ public class BuildingLotOneTwo extends Land {
 
 	public BuildingLotOneTwo(int mapId) {
 		super(mapId);
-		price = 200;
+		setPrice(200);
 	}
 }

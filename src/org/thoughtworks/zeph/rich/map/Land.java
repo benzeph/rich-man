@@ -1,30 +1,17 @@
 package org.thoughtworks.zeph.rich.map;
 
-public class Land {
-	protected int level;
-	protected int belongTo;
-	protected int price;
-	protected int mapId;
+public class Land extends Map {
+	private int level;
+	private int belongTo;
+	private int price;
 
 	public Land(int mapId) {
+		super(mapId);
 		level = 0;
-		this.mapId = mapId;
-	}
-
-	public int getMapId() {
-		return mapId;
 	}
 
 	public int getLevel() {
 		return level;
-	}
-
-	public void levelUp() {
-		level = level + 1;
-	}
-
-	public void setBelongTo(int belongTo) {
-		this.belongTo = belongTo;
 	}
 
 	public void setLevel(int level) {
@@ -35,20 +22,36 @@ public class Land {
 		return price;
 	}
 
+	public void setPrice(int price) {
+		this.price = price;
+	}
+
+	public int getBelongTo() {
+		return belongTo;
+	}
+
+	public void setBelongTo(int belongTo) {
+		this.belongTo = belongTo;
+	}
+
 	public int getCost() {
-		return price * (level + 1) / 2;  //To change body of created methods use File | Settings | File Templates.
+		return price * (level + 1) / 2;
+	}
+
+	public void levelUp() {
+		level = level + 1;
 	}
 
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) return true;
 		if (o == null || getClass() != o.getClass()) return false;
+		if (!super.equals(o)) return false;
 
 		Land land = (Land) o;
 
 		if (belongTo != land.belongTo) return false;
 		if (level != land.level) return false;
-		if (mapId != land.mapId) return false;
 		if (price != land.price) return false;
 
 		return true;
@@ -56,10 +59,10 @@ public class Land {
 
 	@Override
 	public int hashCode() {
-		int result = level;
+		int result = super.hashCode();
+		result = 31 * result + level;
 		result = 31 * result + belongTo;
 		result = 31 * result + price;
-		result = 31 * result + mapId;
 		return result;
 	}
 }

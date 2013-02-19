@@ -18,6 +18,8 @@ public class Role {
 	private Map<Integer, Integer> props;
 	private God god;
 	private Prop prop;
+	private int hospitalDays;
+	private int prisonDays;
 
 	public Role(String name, int id) {
 		this.id = id;
@@ -192,6 +194,30 @@ public class Role {
 		message += "Land:" + "Blank Land" + blankLand + ";" + "Room" + room + ";" + "House" + house + ";" + "skyscraper" + skyscraper + "\n";
 		message += "Props:" + "Block" + props.get(1) + ";Robot" + props.get(2) + ";Bomb" + props.get(3);
 		System.out.println(message);
+	}
+
+	public void setHospitalDays(int hospitalDays) {
+		this.hospitalDays = hospitalDays;
+	}
+
+	public void countDownHospitalDays() {
+		hospitalDays = hospitalDays - 1;
+	}
+
+	public int getHospitalDays() {
+		return hospitalDays;
+	}
+
+	public void setPrisonDays(int prisonDays) {
+		this.prisonDays = prisonDays;
+	}
+
+	public void countDownPrisonDays() {
+		prisonDays = prisonDays - 1;
+	}
+
+	public int getPrisonDays() {
+		return prisonDays;
 	}
 }
 

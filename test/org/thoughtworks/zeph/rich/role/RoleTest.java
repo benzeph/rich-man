@@ -83,6 +83,7 @@ public class RoleTest {
 		Prop block = new RoadBlock();
 		Prop robot = new Robot();
 		Prop bomb = new Bomb();
+		role.addGamePoint(1000);
 		role.buyProps(block);
 		role.buyProps(robot);
 		role.buyProps(bomb);
@@ -103,6 +104,7 @@ public class RoleTest {
 	public void should_return_1_when_role_buy_2_bomb() {
 		Prop bomb1 = new Bomb();
 		Prop bomb2 = new Bomb();
+		role.addGamePoint(1000);
 		role.buyProps(bomb1);
 		role.buyProps(bomb2);
 		Map<Integer, Integer> props = role.getProps();
@@ -113,6 +115,7 @@ public class RoleTest {
 	public void should_return_1_when_role_use_a_bomb() {
 		Prop bomb1 = new Bomb();
 		Prop bomb2 = new Bomb();
+		role.addGamePoint(1000);
 		role.buyProps(bomb1);
 		role.buyProps(bomb2);
 		boolean isUsed = role.useProp(bomb1);
