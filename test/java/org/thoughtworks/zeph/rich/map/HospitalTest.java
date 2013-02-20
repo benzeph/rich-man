@@ -39,4 +39,13 @@ public class HospitalTest {
 		player.countDownHospitalDays();
 		assertThat(player.getHospitalDays(), is(2));
 	}
+
+	@Test
+	public void should_return_0_when_prison_release_all_prisoner(){
+		Player player1 = new Player("A Tubo",2);
+		hospital.addRole(player);
+		hospital.addRole(player1);
+		hospital.release();
+		assertThat(hospital.getPlayers().size(),is(0));
+	}
 }

@@ -20,4 +20,9 @@ public class Hospital extends Map{
 	public Set<Player> getPlayers() {
 		return players;
 	}
+
+	@Override
+	public void release() {
+		players.clear();
+	}
 }

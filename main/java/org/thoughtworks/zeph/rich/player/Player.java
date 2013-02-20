@@ -4,10 +4,7 @@ import org.thoughtworks.zeph.rich.god.God;
 import org.thoughtworks.zeph.rich.map.Land;
 import org.thoughtworks.zeph.rich.props.Prop;
 
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public class Player {
 	private int id;
@@ -218,6 +215,10 @@ public class Player {
 
 	public int getPrisonDays() {
 		return prisonDays;
+	}
+
+	public int dice() {
+		return (int) new Random().nextInt(6) + 1;
 	}
 }
 

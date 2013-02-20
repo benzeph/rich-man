@@ -27,4 +27,8 @@ public class Map {
 	public int hashCode() {
 		return mapId;
 	}
+
+	public void release() {
+
+	}
 }
