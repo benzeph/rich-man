@@ -229,5 +229,13 @@ public class Player {
 	public void setCurrentMapPosition(int currentMapPosition) {
 		this.currentMapPosition = currentMapPosition;
 	}
+
+	public Prop getProp() {
+		return prop;
+	}
+
+	public void setProp(Prop prop) {
+		this.prop = prop;
+	}
 }
 

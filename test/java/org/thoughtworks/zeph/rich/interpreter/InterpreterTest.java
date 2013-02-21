@@ -7,16 +7,20 @@ import org.thoughtworks.zeph.rich.map.*;
 import org.thoughtworks.zeph.rich.player.Player;
 import org.thoughtworks.zeph.rich.props.Bomb;
 import org.thoughtworks.zeph.rich.props.Prop;
+import org.thoughtworks.zeph.rich.props.RoadBlock;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
 public class InterpreterTest {
 
 	private Map[] gameMap;
+	private Player player;
+	private Interpreter interpreter;
 
 	@Before
 	public void setUp() {
@@ -60,6 +64,8 @@ public class InterpreterTest {
 		gameMap[67] = new Mine(67, 40);
 		gameMap[68] = new Mine(68, 80);
 		gameMap[69] = new Mine(69, 60);
+		player = new Player("Qian Furen", 1);
+		interpreter = new Interpreter();
 	}
 
 	@After
@@ -69,13 +75,11 @@ public class InterpreterTest {
 
 	@Test
 	public void should_return_a_block_from_map_5_when_input_is_block_5() {
-		Player player = new Player("Qian Furen", 1);
 		player.addGamePoint(1000);
 		player.buyProp(new Bomb());
-		Prop block = new Bomb();
-		Interpreter interpreter = new Interpreter();
+		Prop bomb = new Bomb();
 		interpreter.interpret("bomb 5", gameMap, player);
-		assertThat(gameMap[5].getProp(), is(block));
+		assertThat(gameMap[5].getProp(), is(bomb));
 		assertThat(player.getProps().size(), is(0));
 	}
 
@@ -93,5 +97,39 @@ public class InterpreterTest {
 		Pattern pattern = Pattern.compile("bomb (-)?\\d*");
 		Matcher matcher = pattern.matcher(instruction);
 		assertThat(matcher.matches(), is(true));
+	}
+
+	@Test
+	public void should_return_a_block_when_input_is_block_3() {
+		player.addGamePoint(1000);
+		player.buyProp(new RoadBlock());
+		String instruction = "block 3";
+		Prop block = new RoadBlock();
+		interpreter.interpret(instruction, gameMap, player);
+		assertThat(gameMap[3].getProp(), is(block));
+		assertThat(player.getProps().size(), is(0));
+	}
+
+	@Test
+	public void should_not_stop_at_0_when_roll() {
+		String instruction = "roll";
+		interpreter.interpret(instruction, gameMap, player);
+		assertThat(player.getCurrentMapPosition(), not(0));
+	}
+
+	@Test
+	public void should_stop_at_3_when_block_3_and_roll() {
+		player.addGamePoint(1000);
+		player.buyProp(new RoadBlock());
+		String instruction = "block 3";
+		Prop block = new RoadBlock();
+		interpreter.interpret(instruction, gameMap, player);
+		String instructionRoll = "roll";
+		interpreter.interpret(instructionRoll, gameMap, player);
+		if (player.getCurrentMapPosition() != 3) {
+			interpreter.interpret(instructionRoll, gameMap, player);
+		}
+		assertThat(gameMap[3].getProp(), is(block));
+		assertThat(player.getProps().size(), is(0));
 	}
 }
