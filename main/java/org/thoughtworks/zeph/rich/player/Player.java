@@ -9,6 +9,7 @@ import java.util.*;
 public class Player {
 	private int id;
 	private String name;
+	private int currentMapPosition = 0;
 	private int money;
 	private int gamePoint;
 	private Map<Integer, Land> lands;
@@ -219,6 +220,14 @@ public class Player {
 
 	public int dice() {
 		return (int) new Random().nextInt(6) + 1;
+	}
+
+	public int getCurrentMapPosition() {
+		return currentMapPosition;
+	}
+
+	public void setCurrentMapPosition(int currentMapPosition) {
+		this.currentMapPosition = currentMapPosition;
 	}
 }
 

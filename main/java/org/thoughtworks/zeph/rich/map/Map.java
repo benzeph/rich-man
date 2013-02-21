@@ -1,7 +1,18 @@
 package org.thoughtworks.zeph.rich.map;
 
+import org.thoughtworks.zeph.rich.props.Prop;
+
 public class Map {
 	private int mapId;
+	private Prop prop;
+
+	public Prop getProp() {
+		return prop;
+	}
+
+	public void setProp(Prop prop) {
+		this.prop = prop;
+	}
 
 	public Map(int mapId) {
 		this.mapId = mapId;

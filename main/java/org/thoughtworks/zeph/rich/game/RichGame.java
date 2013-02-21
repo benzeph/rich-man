@@ -1,11 +1,18 @@
 package org.thoughtworks.zeph.rich.game;
 
 import org.thoughtworks.zeph.rich.map.*;
+import org.thoughtworks.zeph.rich.player.Player;
 
 public class RichGame extends Game {
+	private int currentPlayerNum;
+	private int totalPlayerNum;
+	private Player[] players;
 
-	public RichGame(String map) {
-		super(map);
+	public RichGame(Player[] players) {
+		this.players = players;
+		totalPlayerNum = players.length;
+		currentPlayerNum = players.length;
+		gameMap = new Map[70];
 		gameMap[0] = new Map(0);
 
 		for (int i = 1; i <= 13; i++) {
@@ -26,7 +33,7 @@ public class RichGame extends Game {
 
 		gameMap[35] = new GiftRoom(35);
 
-		for (int i = 36; i <=48; i++) {
+		for (int i = 36; i <= 48; i++) {
 			gameMap[i] = new BuildingLotFourFive(i);
 		}
 
@@ -38,11 +45,22 @@ public class RichGame extends Game {
 
 		gameMap[61] = new MagicRoom(63);
 
-		gameMap[64] = new Mine(64,20);
-		gameMap[65] = new Mine(65,80);
-		gameMap[66] = new Mine(66,100);
-		gameMap[67] = new Mine(67,40);
-		gameMap[68] = new Mine(68,80);
-		gameMap[69] = new Mine(69,60);
+		gameMap[64] = new Mine(64, 20);
+		gameMap[65] = new Mine(65, 80);
+		gameMap[66] = new Mine(66, 100);
+		gameMap[67] = new Mine(67, 40);
+		gameMap[68] = new Mine(68, 80);
+		gameMap[69] = new Mine(69, 60);
+	}
+
+	public void run() {
+		int currentPlayer = 0;
+		while (currentPlayerNum != 1) {
+			if (players[currentPlayer] != null) {
+
+			} else {
+				currentPlayer = (currentPlayer + 1) % totalPlayerNum;
+			}
+		}
 	}
 }

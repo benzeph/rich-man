@@ -6,7 +6,7 @@ public class Game {
 
 	protected Map[] gameMap;
 
-	public Game(String map) {
-		gameMap = new Map[map.length()];
+	public Game() {
+
 	}
 }
