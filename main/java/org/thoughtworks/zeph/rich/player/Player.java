@@ -64,6 +64,7 @@ public class Player {
 		if (money >= land.getPrice()) {
 			lands.put(land.getMapId(), land);
 			money = money - land.getPrice();
+			land.setBelongTo(getId());
 			return true;
 		} else {
 			return false;
@@ -82,11 +83,11 @@ public class Player {
 		}
 	}
 
-	public boolean sellLand(int mapId) {
-		if (lands.containsKey(mapId)) {
-			Land land = lands.get(mapId);
+	public boolean sellLand(Land land) {
+		if (lands.containsKey(land.getMapId())) {
 			money = money + land.getPrice() * (land.getLevel() + 1);
-			lands.remove(mapId);
+			lands.remove(land.getMapId());
+			land.setBelongTo(0);
 			return true;
 		} else {
 			return false;
@@ -236,6 +237,14 @@ public class Player {
 
 	public void setProp(Prop prop) {
 		this.prop = prop;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 }
 

@@ -13,6 +13,7 @@ import org.thoughtworks.zeph.rich.props.Robot;
 import java.util.Map;
 
 import static org.hamcrest.core.Is.is;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertThat;
 
 public class PlayerTest {
@@ -46,6 +47,7 @@ public class PlayerTest {
 		Land buildingLotOneTwo = new BuildingLotOneTwo(2);
 		Land land2 = new BuildingLotOneTwo(2);
 		land2.levelUp();
+		land2.setBelongTo(1);
 		player.buyLand(buildingLotOneTwo);
 		player.upgradeLand(buildingLotOneTwo);
 		Map<Integer, Land> lands = player.getLands();
@@ -57,10 +59,10 @@ public class PlayerTest {
 	public void should_return_null_when_role_sells_land() {
 		Land land = new BuildingLotOneTwo(2);
 		player.buyLand(land);
-		player.sellLand(2);
+		player.sellLand(land);
 		Map<Integer, Land> lands = player.getLands();
 		Land land2 = lands.get(2);
-		assertThat(null, is(land2));
+		assertNull(land2);
 	}
 
 	@Test

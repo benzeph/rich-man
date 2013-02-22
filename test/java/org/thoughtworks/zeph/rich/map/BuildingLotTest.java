@@ -56,25 +56,3 @@ public class BuildingLotTest {
 		assertThat(cost, is(100));
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

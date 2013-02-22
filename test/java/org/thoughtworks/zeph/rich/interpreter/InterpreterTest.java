@@ -151,4 +151,15 @@ public class InterpreterTest {
 			assertNull(gameMap[i].getProp());
 		}
 	}
+
+	@Test
+	public void should_return_null_and_200_when_sell_5() {
+		player.buyLand((BuildingLotOneTwo) gameMap[5]);
+		assertThat(player.getMoney(), is(9800));
+		assertThat(((BuildingLotOneTwo) gameMap[5]).getBelongTo(), is(player.getId()));
+		String instruction = "sell 5";
+		interpreter.interpret(instruction, gameMap, player);
+		assertThat(player.getMoney(), is(10000));
+		assertThat(((Land) gameMap[5]).getBelongTo(), is(0));
+	}
 }

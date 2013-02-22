@@ -1,5 +1,6 @@
 package org.thoughtworks.zeph.rich.interpreter;
 
+import org.thoughtworks.zeph.rich.map.Land;
 import org.thoughtworks.zeph.rich.map.Map;
 import org.thoughtworks.zeph.rich.player.Player;
 import org.thoughtworks.zeph.rich.props.Block;
@@ -64,6 +65,13 @@ public class Interpreter {
 			for (int i = 1; i <= 10; i++) {
 				currentMapPosition = currentMapPosition + 1;
 				gameMap[currentMapPosition].setProp(null);
+			}
+		} else if (instruction.contains("sell")) {
+			pattern = Pattern.compile("sell (-)?\\d*");
+			matcher = pattern.matcher(instruction);
+			if (matcher.matches()) {
+				int n = Integer.valueOf(instruction.replace("sell ", ""));
+				player.sellLand((Land) gameMap[n]);
 			}
 		}
 	}
