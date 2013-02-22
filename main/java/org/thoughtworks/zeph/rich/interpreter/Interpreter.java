@@ -6,6 +6,7 @@ import org.thoughtworks.zeph.rich.player.Player;
 import org.thoughtworks.zeph.rich.props.Block;
 import org.thoughtworks.zeph.rich.props.Bomb;
 import org.thoughtworks.zeph.rich.props.Prop;
+import org.thoughtworks.zeph.rich.props.Robot;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -66,13 +67,32 @@ public class Interpreter {
 				currentMapPosition = currentMapPosition + 1;
 				gameMap[currentMapPosition].setProp(null);
 			}
-		} else if (instruction.contains("sell")) {
-			pattern = Pattern.compile("sell (-)?\\d*");
+		} else if (instruction.contains("sell") && !instruction.contains("sellTool")) {
+			pattern = Pattern.compile("sell \\d*");
 			matcher = pattern.matcher(instruction);
 			if (matcher.matches()) {
 				int n = Integer.valueOf(instruction.replace("sell ", ""));
 				player.sellLand((Land) gameMap[n]);
 			}
+		} else if (instruction.contains("sellTool")) {
+			pattern = Pattern.compile("sellTool \\d");
+			matcher = pattern.matcher(instruction);
+			if (matcher.matches()) {
+				int n = Integer.valueOf(instruction.replace("sellTool ", ""));
+				switch (n) {
+					case 1:
+						player.sellProp(new Block());
+						break;
+					case 2:
+						player.sellProp(new Robot());
+						break;
+					case 3:
+						player.sellProp(new Bomb());
+						break;
+				}
+			}
+		}else if(instruction.equals("query")){
+			player.query();
 		}
 	}
 }

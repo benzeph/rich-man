@@ -1,5 +1,6 @@
 package org.thoughtworks.zeph.rich.interpreter;
 
+import org.hamcrest.CoreMatchers;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -153,7 +154,7 @@ public class InterpreterTest {
 	}
 
 	@Test
-	public void should_return_null_and_200_when_sell_5() {
+	public void should_return_9800_1_10000_0_and_200_when_sell_5() {
 		player.buyLand((BuildingLotOneTwo) gameMap[5]);
 		assertThat(player.getMoney(), is(9800));
 		assertThat(((BuildingLotOneTwo) gameMap[5]).getBelongTo(), is(player.getId()));
@@ -161,5 +162,21 @@ public class InterpreterTest {
 		interpreter.interpret(instruction, gameMap, player);
 		assertThat(player.getMoney(), is(10000));
 		assertThat(((Land) gameMap[5]).getBelongTo(), is(0));
+	}
+
+	@Test
+	public void should_return_50_100_when_sell_tool_1() {
+		player.addGamePoint(100);
+		player.buyProp(new Block());
+		assertThat(player.getGamePoint(), CoreMatchers.is(50));
+		String instruction = "sellTool 1";
+		interpreter.interpret(instruction, gameMap, player);
+		assertThat(player.getGamePoint(), CoreMatchers.is(100));
+	}
+
+	@Test
+	public void should_details_when_query() {
+		String instruction = "query";
+		interpreter.interpret(instruction,gameMap,player);
 	}
 }
