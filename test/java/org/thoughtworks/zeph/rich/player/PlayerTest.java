@@ -5,9 +5,9 @@ import org.junit.Before;
 import org.junit.Test;
 import org.thoughtworks.zeph.rich.map.BuildingLotOneTwo;
 import org.thoughtworks.zeph.rich.map.Land;
+import org.thoughtworks.zeph.rich.props.Block;
 import org.thoughtworks.zeph.rich.props.Bomb;
 import org.thoughtworks.zeph.rich.props.Prop;
-import org.thoughtworks.zeph.rich.props.RoadBlock;
 import org.thoughtworks.zeph.rich.props.Robot;
 
 import java.util.Map;
@@ -80,7 +80,7 @@ public class PlayerTest {
 
 	@Test
 	public void should_return_3_when_role_buy_3_props() {
-		Prop block = new RoadBlock();
+		Prop block = new Block();
 		Prop robot = new Robot();
 		Prop bomb = new Bomb();
 		player.addGamePoint(1000);

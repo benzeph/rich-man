@@ -2,9 +2,9 @@ package org.thoughtworks.zeph.rich.interpreter;
 
 import org.thoughtworks.zeph.rich.map.Map;
 import org.thoughtworks.zeph.rich.player.Player;
+import org.thoughtworks.zeph.rich.props.Block;
 import org.thoughtworks.zeph.rich.props.Bomb;
 import org.thoughtworks.zeph.rich.props.Prop;
-import org.thoughtworks.zeph.rich.props.RoadBlock;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -33,7 +33,7 @@ public class Interpreter {
 			int step = player.dice();
 			for (int i = 1; i <= step; i++) {
 				currentMapPosition = currentMapPosition + 1;
-				Prop block = new RoadBlock();
+				Prop block = new Block();
 				player.setCurrentMapPosition(currentMapPosition);
 				if (gameMap[currentMapPosition].getProp() == block) {
 					gameMap[currentMapPosition].setProp(null);
@@ -53,11 +53,17 @@ public class Interpreter {
 				if (-10 <= n && n <= 10) {
 					int blockPlace = player.getCurrentMapPosition() + n;
 					if (gameMap[blockPlace].getProp() == null) {
-						if (player.useProp(new RoadBlock())) {
-							gameMap[blockPlace].setProp(new RoadBlock());
+						if (player.useProp(new Block())) {
+							gameMap[blockPlace].setProp(new Block());
 						}
 					}
 				}
+			}
+		} else if (instruction.equals("robot")) {
+			int currentMapPosition = player.getCurrentMapPosition();
+			for (int i = 1; i <= 10; i++) {
+				currentMapPosition = currentMapPosition + 1;
+				gameMap[currentMapPosition].setProp(null);
 			}
 		}
 	}
