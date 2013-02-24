@@ -18,7 +18,6 @@ public class Player {
 	private Prop prop;
 	private int hospitalDays;
 	private int prisonDays;
-
 	public Player(String name, int id) {
 		this.id = id;
 		this.name = name;
@@ -27,9 +26,13 @@ public class Player {
 		props = new HashMap<Integer, Integer>();
 	}
 
-
 	public Map<Integer, Land> getLands() {
 		return lands;
+	}
+
+
+	public String getName() {
+		return name;
 	}
 
 	public Map<Integer, Integer> getProps() {
@@ -104,6 +107,7 @@ public class Player {
 			Iterator<Integer> it = set.iterator();
 			while (money < land.getCost() && !lands.isEmpty()) {
 				Land myLand = lands.get(it.next());
+				myLand.setBelongTo(0);
 				money = money + myLand.getPrice() * (myLand.getLevel() + 1);
 				lands.remove(myLand.getMapId());
 			}

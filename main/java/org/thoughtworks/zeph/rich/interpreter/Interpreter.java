@@ -39,6 +39,14 @@ public class Interpreter {
 			for (int i = 1; i <= step; i++) {
 				currentMapPosition = currentMapPosition + 1;
 				player.setCurrentMapPosition(currentMapPosition);
+				if (player.getProp() instanceof Bomb) {
+					((Bomb) player.getProp()).timeCountDown(1);
+					if (((Bomb) player.getProp()).getLeftTime() == 0) {
+						player.setCurrentMapPosition(14);
+						System.out.println("bomb explode");
+						break;
+					}
+				}
 				if (gameMap[currentMapPosition].getProp() instanceof Block) {
 					gameMap[currentMapPosition].setProp(null);
 					return "block at " + currentMapPosition;
@@ -119,6 +127,23 @@ public class Interpreter {
 			return player.query();
 		} else if (instruction.equals("quit")) {
 			return "quit";
+		} else if (instruction.equals("roll one")) {
+			int currentMapPosition = player.getCurrentMapPosition();
+			int step = 1;
+			for (int i = 1; i <= step; i++) {
+				currentMapPosition = currentMapPosition + 1;
+				player.setCurrentMapPosition(currentMapPosition);
+				if (gameMap[currentMapPosition].getProp() instanceof Block) {
+					gameMap[currentMapPosition].setProp(null);
+					return "block at " + currentMapPosition;
+				}
+			}
+			if (gameMap[currentMapPosition].getProp() instanceof Bomb) {
+				player.setProp(new Bomb());
+				gameMap[currentMapPosition].setProp(null);
+				return "stop at " + currentMapPosition + " , meet a bomb";
+			}
+			return "stop at " + currentMapPosition;
 		}
 		return "illegal instruction";
 	}

@@ -53,6 +53,7 @@ public class GameTest {
 		game.runForTest(instruction);
 		assertThat(player1.getMoney(), is(10000));
 	}
+
 	@Test
 	public void should_add_game_point_when_input_is_instructions_below() {
 		String instruction = "roll\nroll\nquit";
@@ -63,4 +64,20 @@ public class GameTest {
 		Game game = new RichGame(new Player[]{player1, player2});
 		game.runForTest(instruction);
 	}
+
+	@Test
+	public void should_pay_rent_300_when_input_is_roll_one_like_below() {
+		String instruction = "roll one\ny\nroll one\nroll one\ny\nroll one\nroll one\ny\nroll one\nquit";
+		Player player1 = new Player("Qian Furen", 1);
+		Player player2 = new Player("A Tubo", 2);
+		Game game = new RichGame(new Player[]{player1, player2});
+		game.runForTest(instruction);
+		assertThat(player1.getMoney(), is(9700));
+	}
+
+	@Test
+	public void should_stay_in_hospital_when_play_one_put_a_bomb() {
+
+	}
+
 }

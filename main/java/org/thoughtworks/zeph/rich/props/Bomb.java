@@ -15,4 +15,8 @@ public class Bomb extends Prop {
 	public int timeCountDown(int i) {
 		return leftTime - i;
 	}
+
+	public int getLeftTime() {
+		return leftTime;
+	}
 }
