@@ -68,8 +68,10 @@ public class PlayerTest {
 	@Test
 	public void should_return_9900_when_role_pay_the_rent_of_land_1_level_0() {
 		Land land = new BuildingLotOneTwo(2);
-		player.payRent(land);
+		Player player1 = new Player("A Tubo",2);
+		player.payRent(land,player1);
 		assertThat(player.getMoney(), is(9900));
+		assertThat(player1.getMoney(), is(10100));
 	}
 
 	@Test

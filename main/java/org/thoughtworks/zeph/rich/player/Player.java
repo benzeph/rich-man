@@ -94,9 +94,10 @@ public class Player {
 		}
 	}
 
-	public boolean payRent(Land land) {
+	public boolean payRent(Land land, Player player) {
 		if (money >= land.getCost()) {
 			money = money - land.getCost();
+			player.addMoney(land.getCost());
 			return true;
 		} else {
 			Set<Integer> set = lands.keySet();
@@ -108,6 +109,7 @@ public class Player {
 			}
 			if (money >= land.getCost()) {
 				money = money - land.getCost();
+				player.addMoney(land.getCost());
 				return true;
 			} else {
 				return false;

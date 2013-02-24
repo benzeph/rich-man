@@ -47,7 +47,7 @@ public class RichGame extends Game {
 			gameMap[i] = new BuildingLotFourFive(i);
 		}
 
-		gameMap[61] = new MagicRoom(63);
+		gameMap[63] = new MagicRoom(63);
 
 		gameMap[64] = new Mine(64, 20);
 		gameMap[65] = new Mine(65, 80);
@@ -80,89 +80,94 @@ public class RichGame extends Game {
 				if (order.equals("quit")) {
 					break;
 				}
-				if (gameMap[players[currentPlayer].getCurrentMapPosition()] instanceof BuildingLotOneTwo) {
-					if (((Land) gameMap[players[currentPlayer].getCurrentMapPosition()]).getBelongTo() == 0) {
-						System.out.println("Do you want to buy this land," + ((Land) gameMap[players[currentPlayer].getCurrentMapPosition()]).getPrice() + "(Y/N)?");
-						String str = input.getInput();
-						if (str.equals("Y") || str.equals("y")) {
-							if (players[currentPlayer].buyLand((Land) gameMap[players[currentPlayer].getCurrentMapPosition()])) {
-								System.out.println("buy land success");
-							} else {
-								System.out.println("buy land fail");
-							}
-						}else{
-							System.out.println("give up buy");
-						}
-					} else if (((Land) gameMap[players[currentPlayer].getCurrentMapPosition()]).getBelongTo() == players[currentPlayer].getId()) {
-						System.out.println("Do you want to level up this land," + ((Land) gameMap[players[currentPlayer].getCurrentMapPosition()]).getPrice() + "(Y/N)?");
-						String str = input.getInput();
-						if (str.equals("Y") || str.equals("y")) {
-							if (players[currentPlayer].upgradeLand((Land) gameMap[players[currentPlayer].getCurrentMapPosition()])) {
-								System.out.println("level up land success");
-							} else {
-								System.out.println("level up land fail");
-							}
-						}else{
-							System.out.println("give up level up");
-						}
+				if (currentPlayerPosition(currentPlayer) instanceof BuildingLotOneTwo) {
+					if (isLandBlank(currentPlayer)) {
+						buyLand(input, currentPlayer);
+					} else if (isLandBelongToPlayer(currentPlayer)) {
+						levelUpLand(input, currentPlayer);
+					} else {
+						payLand(currentPlayer);
 					}
-				} else if (gameMap[players[currentPlayer].getCurrentMapPosition()] instanceof BuildingLotThree) {
-					if (((Land) gameMap[players[currentPlayer].getCurrentMapPosition()]).getBelongTo() == 0) {
-						System.out.println("Do you want to buy this land," + ((Land) gameMap[players[currentPlayer].getCurrentMapPosition()]).getPrice() + "(Y/N)?");
-						String str = input.getInput();
-						if (str.equals("Y") || str.equals("y")) {
-							if (players[currentPlayer].buyLand((Land) gameMap[players[currentPlayer].getCurrentMapPosition()])) {
-								System.out.println("buy land success");
-							} else {
-								System.out.println("buy land fail");
-							}
-						}else {
-							System.out.println("give up buy");
-						}
-					} else if (((Land) gameMap[players[currentPlayer].getCurrentMapPosition()]).getBelongTo() == players[currentPlayer].getId()) {
-						System.out.println("Do you want to level up this land," + ((Land) gameMap[players[currentPlayer].getCurrentMapPosition()]).getPrice() + "(Y/N)?");
-						String str = input.getInput();
-						if (str.equals("Y") || str.equals("y")) {
-							if (players[currentPlayer].upgradeLand((Land) gameMap[players[currentPlayer].getCurrentMapPosition()])) {
-								System.out.println("level up land success");
-							} else {
-								System.out.println("level up land fail");
-							}
-						}else {
-							System.out.println("give up level up");
-						}
+				} else if (currentPlayerPosition(currentPlayer) instanceof BuildingLotThree) {
+					if (isLandBlank(currentPlayer)) {
+						buyLand(input, currentPlayer);
+					} else if (isLandBelongToPlayer(currentPlayer)) {
+						levelUpLand(input, currentPlayer);
+					} else {
+						payLand(currentPlayer);
 					}
-				} else if (gameMap[players[currentPlayer].getCurrentMapPosition()] instanceof BuildingLotFourFive) {
-					if (((Land) gameMap[players[currentPlayer].getCurrentMapPosition()]).getBelongTo() == 0) {
-						System.out.println("Do you want to buy this land," + ((Land) gameMap[players[currentPlayer].getCurrentMapPosition()]).getPrice() + "(Y/N)?");
-						String str = input.getInput();
-						if (str.equals("Y") || str.equals("y")) {
-							if (players[currentPlayer].buyLand((Land) gameMap[players[currentPlayer].getCurrentMapPosition()])) {
-								System.out.println("buy land success");
-							} else {
-								System.out.println("buy land fail");
-							}
-						}else{
-							System.out.println("give up buy");
-						}
-					} else if (((Land) gameMap[players[currentPlayer].getCurrentMapPosition()]).getBelongTo() == players[currentPlayer].getId()) {
-						System.out.println("Do you want to level up this land," + ((Land) gameMap[players[currentPlayer].getCurrentMapPosition()]).getPrice() + "(Y/N)?");
-						String str = input.getInput();
-						if (str.equals("Y") || str.equals("y")) {
-							if (players[currentPlayer].upgradeLand((Land) gameMap[players[currentPlayer].getCurrentMapPosition()])) {
-								System.out.println("level up land success");
-							} else {
-								System.out.println("level up land fail");
-							}
-						}else {
-							System.out.println("give up level up");
-						}
+				} else if (currentPlayerPosition(currentPlayer) instanceof BuildingLotFourFive) {
+					if (isLandBlank(currentPlayer)) {
+						buyLand(input, currentPlayer);
+					} else if (isLandBelongToPlayer(currentPlayer)) {
+						levelUpLand(input, currentPlayer);
+					} else {
+						payLand(currentPlayer);
 					}
+				} else if (currentPlayerPosition(currentPlayer) instanceof Mine) {
+					getMine(currentPlayer);
+				} else if (currentPlayerPosition(currentPlayer) instanceof PropRoom) {
+
+				} else if (currentPlayerPosition(currentPlayer) instanceof GiftRoom) {
+
+				} else if (currentPlayerPosition(currentPlayer) instanceof Prison) {
+
+				} else if (currentPlayerPosition(currentPlayer) instanceof Hospital) {
+
 				}
 				currentPlayer = (currentPlayer + 1) % totalPlayerNum;
 			} else {
 				currentPlayer = (currentPlayer + 1) % totalPlayerNum;
 			}
+		}
+	}
+
+	private void getMine(int currentPlayer) {
+		((Mine) gameMap[players[currentPlayer].getCurrentMapPosition()]).addGamePoint(players[currentPlayer]);
+		System.out.println("you get " + ((Mine) gameMap[players[currentPlayer].getCurrentMapPosition()]).getGamePoint());
+	}
+
+	private void payLand(int currentPlayer) {
+		players[currentPlayer].payRent((Land) gameMap[players[currentPlayer].getCurrentMapPosition()], players[((Land) gameMap[players[currentPlayer].getCurrentMapPosition()]).getBelongTo() - 1]);
+	}
+
+	private boolean isLandBelongToPlayer(int currentPlayer) {
+		return ((Land) currentPlayerPosition(currentPlayer)).getBelongTo() == players[currentPlayer].getId();
+	}
+
+	private boolean isLandBlank(int currentPlayer) {
+		return ((Land) currentPlayerPosition(currentPlayer)).getBelongTo() == 0;
+	}
+
+	private Map currentPlayerPosition(int currentPlayer) {
+		return gameMap[players[currentPlayer].getCurrentMapPosition()];
+	}
+
+	private void levelUpLand(InputSystem input, int currentPlayer) {
+		System.out.println("Do you want to level up this land," + ((Land) currentPlayerPosition(currentPlayer)).getPrice() + "(Y/N)?");
+		String str = input.getInput();
+		if (str.equals("Y") || str.equals("y")) {
+			if (players[currentPlayer].upgradeLand((Land) currentPlayerPosition(currentPlayer))) {
+				System.out.println("level up land success");
+			} else {
+				System.out.println("level up land fail");
+			}
+		} else {
+			System.out.println("give up level up");
+		}
+	}
+
+	private void buyLand(InputSystem input, int currentPlayer) {
+		System.out.println("Do you want to buy this land," + ((Land) currentPlayerPosition(currentPlayer)).getPrice() + "(Y/N)?");
+		String str = input.getInput();
+		if (str.equals("Y") || str.equals("y")) {
+			if (players[currentPlayer].buyLand((Land) currentPlayerPosition(currentPlayer))) {
+				System.out.println("buy land success");
+			} else {
+				System.out.println("buy land fail");
+			}
+		} else {
+			System.out.println("give up buy");
 		}
 	}
 }

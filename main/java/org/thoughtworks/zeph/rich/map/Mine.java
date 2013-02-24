@@ -10,7 +10,11 @@ public class Mine extends Map{
 		this.gamePoint = gamePoint;
 	}
 
-	public void getGamePoint(Player player) {
+	public int getGamePoint() {
+		return gamePoint;
+	}
+
+	public void addGamePoint(Player player) {
 		player.addGamePoint(gamePoint);
 	}
 }

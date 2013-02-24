@@ -43,13 +43,24 @@ public class GameTest {
 		String str = "S0000000000000H0000000000000T000000M0000000000000P0000000000000G$$$$$$";
 		assertThat(str.length() - 1, is(69));
 	}
+
 	@Test
-	public void should_quit_the_game_when_input_is_instructions_below(){
-		String instruction = "roll\ny\nroll\nn\nroll\ny\nquit";
-		Player player1 =  new Player("Qian Furen",1);
-		Player player2 =  new Player("A Tubo",2);
-		Game game = new RichGame(new Player[]{player1,player2});
+	public void should_quit_the_game_when_input_is_instructions_below() {
+		String instruction = "roll\nn\nroll\nn\nroll\nn\nquit";
+		Player player1 = new Player("Qian Furen", 1);
+		Player player2 = new Player("A Tubo", 2);
+		Game game = new RichGame(new Player[]{player1, player2});
 		game.runForTest(instruction);
-		assertThat(player1.getMoney(),is(9600));
+		assertThat(player1.getMoney(), is(10000));
+	}
+	@Test
+	public void should_add_game_point_when_input_is_instructions_below() {
+		String instruction = "roll\nroll\nquit";
+		Player player1 = new Player("Qian Furen", 1);
+		player1.setCurrentMapPosition(62);
+		Player player2 = new Player("A Tubo", 2);
+		player2.setCurrentMapPosition(62);
+		Game game = new RichGame(new Player[]{player1, player2});
+		game.runForTest(instruction);
 	}
 }
