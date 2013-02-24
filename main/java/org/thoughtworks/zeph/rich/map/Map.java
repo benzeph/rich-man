@@ -5,6 +5,7 @@ import org.thoughtworks.zeph.rich.props.Prop;
 public class Map {
 	private int mapId;
 	private Prop prop;
+	private char symbol;
 
 	public Prop getProp() {
 		return prop;
@@ -14,8 +15,9 @@ public class Map {
 		this.prop = prop;
 	}
 
-	public Map(int mapId) {
+	public Map(int mapId, char symbol) {
 		this.mapId = mapId;
+		this.symbol = symbol;
 	}
 
 	public int getMapId() {
@@ -41,5 +43,9 @@ public class Map {
 
 	public void release() {
 
+	}
+
+	public char getSymbol() {
+		return symbol;
 	}
 }

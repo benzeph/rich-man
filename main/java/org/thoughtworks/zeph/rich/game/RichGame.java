@@ -24,44 +24,44 @@ public class RichGame extends Game {
 		currentPlayerNum = players.length;
 		interpreter = new Interpreter();
 		gameMap = new Map[70];
-		gameMap[0] = new Map(0);
+		gameMap[0] = new Map(0, 'S');
 
 		for (int i = 1; i <= 13; i++) {
-			gameMap[i] = new BuildingLotOneTwo(i);
+			gameMap[i] = new BuildingLotOneTwo(i, '0');
 		}
 
-		gameMap[14] = new Hospital(14);
+		gameMap[14] = new Hospital(14, 'H');
 
 		for (int i = 15; i <= 27; i++) {
-			gameMap[i] = new BuildingLotOneTwo(i);
+			gameMap[i] = new BuildingLotOneTwo(i, '0');
 		}
 
-		gameMap[28] = new PropRoom(28);
+		gameMap[28] = new PropRoom(28, 'T');
 
 		for (int i = 29; i <= 34; i++) {
-			gameMap[i] = new BuildingLotThree(i);
+			gameMap[i] = new BuildingLotThree(i, '0');
 		}
 
-		gameMap[35] = new GiftRoom(35);
+		gameMap[35] = new GiftRoom(35, 'G');
 
 		for (int i = 36; i <= 48; i++) {
-			gameMap[i] = new BuildingLotFourFive(i);
+			gameMap[i] = new BuildingLotFourFive(i, '0');
 		}
 
-		gameMap[49] = new Prison(49);
+		gameMap[49] = new Prison(49, 'P');
 
 		for (int i = 50; i <= 62; i++) {
-			gameMap[i] = new BuildingLotFourFive(i);
+			gameMap[i] = new BuildingLotFourFive(i, '0');
 		}
 
-		gameMap[63] = new MagicRoom(63);
+		gameMap[63] = new MagicRoom(63, 'M');
 
-		gameMap[64] = new Mine(64, 20);
-		gameMap[65] = new Mine(65, 80);
-		gameMap[66] = new Mine(66, 100);
-		gameMap[67] = new Mine(67, 40);
-		gameMap[68] = new Mine(68, 80);
-		gameMap[69] = new Mine(69, 60);
+		gameMap[64] = new Mine(64, 20, '$');
+		gameMap[65] = new Mine(65, 80, '$');
+		gameMap[66] = new Mine(66, 100, '$');
+		gameMap[67] = new Mine(67, 40, '$');
+		gameMap[68] = new Mine(68, 80, '$');
+		gameMap[69] = new Mine(69, 60, '$');
 	}
 
 	public void run() {
@@ -244,5 +244,59 @@ public class RichGame extends Game {
 		} else {
 			System.out.println("give up buy");
 		}
+	}
+
+	@Override
+	public void drawMap() {
+		for (int i = 0; i < 29; i++) {
+			System.out.print(gameMap[i].getSymbol());
+		}
+		System.out.println();
+		///////////////////////////////////
+		System.out.print(gameMap[69].getSymbol());
+		for (int i = 1; i < 28; i++) {
+			System.out.print(" ");
+		}
+		System.out.print(gameMap[29].getSymbol());
+		System.out.println();
+		///////////////////////////////////
+		System.out.print(gameMap[68].getSymbol());
+		for (int i = 1; i < 28; i++) {
+			System.out.print(" ");
+		}
+		System.out.print(gameMap[30].getSymbol());
+		System.out.println();
+		//////////////////////////////////
+		System.out.print(gameMap[67].getSymbol());
+		for (int i = 1; i < 28; i++) {
+			System.out.print(" ");
+		}
+		System.out.print(gameMap[31].getSymbol());
+		System.out.println();
+		//////////////////////////////////
+		System.out.print(gameMap[66].getSymbol());
+		for (int i = 1; i < 28; i++) {
+			System.out.print(" ");
+		}
+		System.out.print(gameMap[32].getSymbol());
+		System.out.println();
+		////////////////////////////////
+		System.out.print(gameMap[65].getSymbol());
+		for (int i = 1; i < 28; i++) {
+			System.out.print(" ");
+		}
+		System.out.print(gameMap[33].getSymbol());
+		System.out.println();
+		////////////////////////////////
+		System.out.print(gameMap[64].getSymbol());
+		for (int i = 1; i < 28; i++) {
+			System.out.print(" ");
+		}
+		System.out.print(gameMap[34].getSymbol());
+		System.out.println();
+		for (int i = 63; i >= 35; i--) {
+			System.out.print(gameMap[i].getSymbol());
+		}
+
 	}
 }

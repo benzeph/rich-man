@@ -5,8 +5,8 @@ import org.thoughtworks.zeph.rich.player.Player;
 public class Mine extends Map{
 	private int gamePoint;
 
-	public Mine(int mapId,int gamePoint) {
-		super(mapId);
+	public Mine(int mapId,int gamePoint,char symbol) {
+		super(mapId,symbol);
 		this.gamePoint = gamePoint;
 	}
 

@@ -8,8 +8,8 @@ import java.util.Set;
 public class Hospital extends Map{
 	private Set<Player> players;
 
-	public Hospital(int mapId){
-		super(mapId);
+	public Hospital(int mapId,char symbol){
+		super(mapId,symbol);
 		players = new HashSet<Player>();
 	}
 

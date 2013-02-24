@@ -5,8 +5,8 @@ public class Land extends Map {
 	private int belongTo;
 	private int price;
 
-	public Land(int mapId) {
-		super(mapId);
+	public Land(int mapId,char symbol) {
+		super(mapId,symbol);
 		level = 0;
 	}
 

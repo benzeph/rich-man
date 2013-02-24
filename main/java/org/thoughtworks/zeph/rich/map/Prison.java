@@ -8,8 +8,8 @@ import java.util.Set;
 public class Prison extends Map{
 	private Set<Player> players;
 
-	public Prison(int mapId){
-		super(mapId);
+	public Prison(int mapId,char symbol){
+		super(mapId,symbol);
 		players = new HashSet<Player>();
 	}
 	public void addRole(Player player) {

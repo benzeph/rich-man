@@ -13,4 +13,8 @@ public class Game {
 	public void runForTest(String instruction) {
 
 	}
+
+	public void drawMap() {
+
+	}
 }

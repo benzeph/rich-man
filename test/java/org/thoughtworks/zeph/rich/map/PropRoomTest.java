@@ -25,7 +25,7 @@ public class PropRoomTest {
 
 	@Test
 	public void should_return_5_when_role_buy_two_items(){
-		PropRoom room = new PropRoom(4);
+		PropRoom room = new PropRoom(4,'T');
 		Player player = new Player("Qian Furen",1);
 		player.addGamePoint(1000);
 		Prop prop = new Bomb();

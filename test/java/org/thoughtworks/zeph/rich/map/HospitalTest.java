@@ -18,7 +18,7 @@ public class HospitalTest {
 	public void setUp() {
 
 		player = new Player("Qian Furen", 1);
-		hospital = new Hospital(1);
+		hospital = new Hospital(1,'H');
 	}
 
 	@After

@@ -34,8 +34,8 @@ public class PlayerTest {
 	@Test
 	public void should_return_2_when_role_buys_two_lands() {
 		Player player = new Player("Qian Furen", 1);
-		Land buildingLotOneTwo1 = new BuildingLotOneTwo(2);
-		Land buildingLotOneTwo2 = new BuildingLotOneTwo(3);
+		Land buildingLotOneTwo1 = new BuildingLotOneTwo(2,'0');
+		Land buildingLotOneTwo2 = new BuildingLotOneTwo(3,'0');
 		player.buyLand(buildingLotOneTwo1);
 		player.buyLand(buildingLotOneTwo2);
 		Map<Integer, Land> lands = player.getLands();
@@ -44,8 +44,8 @@ public class PlayerTest {
 
 	@Test
 	public void should_return_level_1_land_when_role_level_up_land_from_level_0() {
-		Land buildingLotOneTwo = new BuildingLotOneTwo(2);
-		Land land2 = new BuildingLotOneTwo(2);
+		Land buildingLotOneTwo = new BuildingLotOneTwo(2,'0');
+		Land land2 = new BuildingLotOneTwo(2,'0');
 		land2.levelUp();
 		land2.setBelongTo(1);
 		player.buyLand(buildingLotOneTwo);
@@ -57,7 +57,7 @@ public class PlayerTest {
 
 	@Test
 	public void should_return_null_when_role_sells_land() {
-		Land land = new BuildingLotOneTwo(2);
+		Land land = new BuildingLotOneTwo(2,'0');
 		player.buyLand(land);
 		player.sellLand(land);
 		Map<Integer, Land> lands = player.getLands();
@@ -67,7 +67,7 @@ public class PlayerTest {
 
 	@Test
 	public void should_return_9900_when_role_pay_the_rent_of_land_1_level_0() {
-		Land land = new BuildingLotOneTwo(2);
+		Land land = new BuildingLotOneTwo(2,'0');
 		Player player1 = new Player("A Tubo",2);
 		player.payRent(land,player1);
 		assertThat(player.getMoney(), is(9900));
@@ -76,7 +76,7 @@ public class PlayerTest {
 
 	@Test
 	public void should_return_10100_when_role_collect_the_rent_of_land_1_level_0() {
-		Land land = new BuildingLotOneTwo(2);
+		Land land = new BuildingLotOneTwo(2,'0');
 		player.buyLand(land);
 		player.collectRent(land.getMapId());
 		assertThat(player.getMoney(), is(9900));

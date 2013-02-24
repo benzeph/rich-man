@@ -18,7 +18,7 @@ public class PrisonTest {
 	@Before
 	public void setUp() {
 		player = new Player("Qian Furen",1);
-		prison = new Prison(2);
+		prison = new Prison(2,'P');
 	}
 
 	@After
