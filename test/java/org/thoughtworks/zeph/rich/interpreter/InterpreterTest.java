@@ -77,13 +77,20 @@ public class InterpreterTest {
 	}
 
 	@Test
-	public void should_return_a_block_from_map_5_when_input_is_block_5() {
+	public void should_return_bomb_from_map_5_when_input_is_bomb_5() {
 		player.addGamePoint(1000);
 		player.buyProp(new Bomb());
 		Prop bomb = new Bomb();
-		interpreter.interpret("bomb 5", gameMap, player);
+		assertThat(interpreter.interpret("bomb 5", gameMap, player), is("bomb set at 5"));
 		assertThat(gameMap[5].getProp(), is(bomb));
 		assertThat(player.getProps().size(), is(0));
+	}
+
+	@Test
+	public void should_return_bomb_n_when_input_is_bomb_20() {
+		player.addGamePoint(1000);
+		player.buyProp(new Bomb());
+		assertThat(interpreter.interpret("bomb 20", gameMap, player), is("bomb n(-10<=n<=10)"));
 	}
 
 	@Test
@@ -108,9 +115,15 @@ public class InterpreterTest {
 		player.buyProp(new Block());
 		String instruction = "block 3";
 		Prop block = new Block();
-		interpreter.interpret(instruction, gameMap, player);
+		assertThat(interpreter.interpret(instruction, gameMap, player), is("block at 3"));
 		assertThat(gameMap[3].getProp(), is(block));
 		assertThat(player.getProps().size(), is(0));
+	}
+
+	@Test
+	public void should_return_block_n_when_input_is_block_12() {
+		String instruction = "block 12";
+		assertThat(interpreter.interpret(instruction, gameMap, player), is("block n(-10=<n<=10)"));
 	}
 
 	@Test
@@ -126,14 +139,41 @@ public class InterpreterTest {
 		player.buyProp(new Block());
 		String instruction = "block 3";
 		Prop block = new Block();
-		interpreter.interpret(instruction, gameMap, player);
+		assertThat(interpreter.interpret(instruction, gameMap, player), is("block at 3"));
+		assertThat(gameMap[3].getProp(), is(block));
 		String instructionRoll = "roll";
 		interpreter.interpret(instructionRoll, gameMap, player);
-		if (player.getCurrentMapPosition() != 3) {
+		if (player.getCurrentMapPosition() < 3) {
 			interpreter.interpret(instructionRoll, gameMap, player);
 		}
-		assertThat(gameMap[3].getProp(), is(block));
+		if (player.getCurrentMapPosition() < 3) {
+			assertThat(interpreter.interpret(instructionRoll, gameMap, player), is("block at 3"));
+		}
 		assertThat(player.getProps().size(), is(0));
+		assertNull(gameMap[3].getProp());
+	}
+
+	@Test
+	public void should_return_you_do_no_have_a_bomb_when_input_is_bomb_3() {
+		assertThat(interpreter.interpret("bomb 1", gameMap, player), is("you don't have a bomb"));
+	}
+
+	@Test
+	public void should_return_meet_bomb_when_roll() {
+		player.addGamePoint(1000);
+		player.buyProp(new Bomb());
+		player.buyProp(new Bomb());
+		player.buyProp(new Bomb());
+		player.buyProp(new Bomb());
+		player.buyProp(new Bomb());
+		player.buyProp(new Bomb());
+		assertThat(interpreter.interpret("bomb 1", gameMap, player), is("bomb set at 1"));
+		assertThat(interpreter.interpret("bomb 2", gameMap, player), is("bomb set at 2"));
+		assertThat(interpreter.interpret("bomb 3", gameMap, player), is("bomb set at 3"));
+		assertThat(interpreter.interpret("bomb 4", gameMap, player), is("bomb set at 4"));
+		assertThat(interpreter.interpret("bomb 5", gameMap, player), is("bomb set at 5"));
+		assertThat(interpreter.interpret("bomb 6", gameMap, player), is("bomb set at 6"));
+		assertThat(interpreter.interpret("roll", gameMap, player), is("stop at " + player.getCurrentMapPosition() + " , meet a bomb"));
 	}
 
 	@Test
@@ -147,7 +187,7 @@ public class InterpreterTest {
 		String instructionBlock = "block 3";
 		interpreter.interpret(instructionBomb, gameMap, player);
 		interpreter.interpret(instructionBlock, gameMap, player);
-		interpreter.interpret(instructionRobot, gameMap, player);
+		assertThat(interpreter.interpret(instructionRobot, gameMap, player), is("robot out"));
 		for (int i = 1; i <= 10; i++) {
 			assertNull(gameMap[i].getProp());
 		}
@@ -159,9 +199,21 @@ public class InterpreterTest {
 		assertThat(player.getMoney(), is(9800));
 		assertThat(((BuildingLotOneTwo) gameMap[5]).getBelongTo(), is(player.getId()));
 		String instruction = "sell 5";
-		interpreter.interpret(instruction, gameMap, player);
+		assertThat(interpreter.interpret(instruction, gameMap, player), is("sell land 5, money:200"));
 		assertThat(player.getMoney(), is(10000));
 		assertThat(((Land) gameMap[5]).getBelongTo(), is(0));
+	}
+
+	@Test
+	public void should_return_not_your_building_when_sell_5() {
+		String instruction = "sell 5";
+		assertThat(interpreter.interpret(instruction, gameMap, player), is("not your building"));
+	}
+
+	@Test
+	public void should_return_sell_n_building_when_sell_100() {
+		String instruction = "sell 100";
+		assertThat(interpreter.interpret(instruction, gameMap, player), is("sell n(0<n<" + gameMap.length + ")"));
 	}
 
 	@Test
@@ -170,13 +222,27 @@ public class InterpreterTest {
 		player.buyProp(new Block());
 		assertThat(player.getGamePoint(), CoreMatchers.is(50));
 		String instruction = "sellTool 1";
-		interpreter.interpret(instruction, gameMap, player);
+		assertThat(interpreter.interpret(instruction, gameMap, player), is("sell block,GP:50"));
 		assertThat(player.getGamePoint(), CoreMatchers.is(100));
+	}
+
+	@Test
+	public void should_return_sell_tool_n_when_sell_tool_5() {
+		player.addGamePoint(100);
+		player.buyProp(new Block());
+		String instruction = "sellTool 5";
+		assertThat(interpreter.interpret(instruction, gameMap, player), is("sellTool n(n={1,2,3})"));
+	}
+
+	@Test
+	public void should_return_you_do_not_have_a_block_when_sell_tool_5() {
+		String instruction = "sellTool 1";
+		assertThat(interpreter.interpret(instruction, gameMap, player), is("you don't have a block"));
 	}
 
 	@Test
 	public void should_details_when_query() {
 		String instruction = "query";
-		interpreter.interpret(instruction,gameMap,player);
+		interpreter.interpret(instruction, gameMap, player);
 	}
 }

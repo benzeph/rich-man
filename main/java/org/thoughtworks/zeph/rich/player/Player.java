@@ -167,7 +167,7 @@ public class Player {
 		}
 	}
 
-	public void query() {
+	public String query() {
 		String message = "Money:" + money + "\n";
 		message += "Game Point:" + gamePoint + "\n";
 		int blankLand = 0, room = 0, house = 0, skyscraper = 0;
@@ -190,9 +190,9 @@ public class Player {
 					break;
 			}
 		}
-		message += "Land:" + "Blank Land" + blankLand + ";" + "Room" + room + ";" + "House" + house + ";" + "skyscraper" + skyscraper + "\n";
+		message += "Land:" + "BlankLand" + blankLand + ";" + "Room" + room + ";" + "House" + house + ";" + "skyscraper" + skyscraper + "\n";
 		message += "Props:" + "Block" + props.get(1) + ";Robot" + props.get(2) + ";Bomb" + props.get(3);
-		System.out.println(message);
+		return message;
 	}
 
 	public void setHospitalDays(int hospitalDays) {
