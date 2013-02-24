@@ -245,4 +245,9 @@ public class InterpreterTest {
 		String instruction = "query";
 		interpreter.interpret(instruction, gameMap, player);
 	}
+
+	@Test
+	public void should_return_quit_when_input_is_quit() {
+		assertThat(interpreter.interpret("quit", gameMap, player), is("quit"));
+	}
 }

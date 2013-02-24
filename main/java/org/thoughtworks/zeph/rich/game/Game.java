@@ -9,4 +9,8 @@ public class Game {
 	public Game() {
 
 	}
+
+	public void runForTest(String instruction) {
+
+	}
 }
