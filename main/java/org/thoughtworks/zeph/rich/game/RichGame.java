@@ -80,7 +80,8 @@ public class RichGame extends Game {
 	public void runForTest(String instruction) {
 		InputSystem input = new InputSystem(instruction);
 		int currentPlayer = 0;
-		while (currentPlayerNum != 1) {
+		boolean notBreak = true;
+		while (currentPlayerNum != 1 && notBreak) {
 			if (players[currentPlayer] != null) {
 				if (players[currentPlayer].getHospitalDays() > 0) {
 					players[currentPlayer].setHospitalDays(players[currentPlayer].getHospitalDays() - 1);
@@ -90,45 +91,50 @@ public class RichGame extends Game {
 					players[currentPlayer].setPrisonDays(players[currentPlayer].getPrisonDays() - 1);
 					break;
 				}
-				String order = interpreter.interpret(input.getInput(), gameMap, players[currentPlayer]);
-				System.out.println(order);
-				if (order.equals("quit")) {
-					break;
-				}
-				if (currentPlayerPosition(currentPlayer) instanceof BuildingLotOneTwo) {
-					if (isLandBlank(currentPlayer)) {
-						buyLand(input, currentPlayer);
-					} else if (isLandBelongToPlayer(currentPlayer)) {
-						levelUpLand(input, currentPlayer);
-					} else {
-						payLand(currentPlayer);
+				String inputStr = "";
+				while (!inputStr.equals("roll") && !inputStr.equals("roll one")) {
+					inputStr = input.getInput();
+					String order = interpreter.interpret(inputStr, gameMap, players[currentPlayer]);
+					System.out.println(order);
+					if (order.equals("quit")) {
+						notBreak = false;
+						break;
 					}
-				} else if (currentPlayerPosition(currentPlayer) instanceof BuildingLotThree) {
-					if (isLandBlank(currentPlayer)) {
-						buyLand(input, currentPlayer);
-					} else if (isLandBelongToPlayer(currentPlayer)) {
-						levelUpLand(input, currentPlayer);
-					} else {
-						payLand(currentPlayer);
-					}
-				} else if (currentPlayerPosition(currentPlayer) instanceof BuildingLotFourFive) {
-					if (isLandBlank(currentPlayer)) {
-						buyLand(input, currentPlayer);
-					} else if (isLandBelongToPlayer(currentPlayer)) {
-						levelUpLand(input, currentPlayer);
-					} else {
-						payLand(currentPlayer);
-					}
-				} else if (currentPlayerPosition(currentPlayer) instanceof Mine) {
-					getMine(currentPlayer);
-				} else if (currentPlayerPosition(currentPlayer) instanceof PropRoom) {
-					getProp(input, currentPlayer);
-				} else if (currentPlayerPosition(currentPlayer) instanceof GiftRoom) {
-					getGift(input, currentPlayer);
-				} else if (currentPlayerPosition(currentPlayer) instanceof Prison) {
-					releasePrisoner(currentPlayer);
-				} else if (currentPlayerPosition(currentPlayer) instanceof Hospital) {
+					if (currentPlayerPosition(currentPlayer) instanceof BuildingLotOneTwo) {
+						if (isLandBlank(currentPlayer)) {
+							buyLand(input, currentPlayer);
+						} else if (isLandBelongToPlayer(currentPlayer)) {
+							levelUpLand(input, currentPlayer);
+						} else {
+							payLand(currentPlayer);
+						}
+					} else if (currentPlayerPosition(currentPlayer) instanceof BuildingLotThree) {
+						if (isLandBlank(currentPlayer)) {
+							buyLand(input, currentPlayer);
+						} else if (isLandBelongToPlayer(currentPlayer)) {
+							levelUpLand(input, currentPlayer);
+						} else {
+							payLand(currentPlayer);
+						}
+					} else if (currentPlayerPosition(currentPlayer) instanceof BuildingLotFourFive) {
+						if (isLandBlank(currentPlayer)) {
+							buyLand(input, currentPlayer);
+						} else if (isLandBelongToPlayer(currentPlayer)) {
+							levelUpLand(input, currentPlayer);
+						} else {
+							payLand(currentPlayer);
+						}
+					} else if (currentPlayerPosition(currentPlayer) instanceof Mine) {
+						getMine(currentPlayer);
+					} else if (currentPlayerPosition(currentPlayer) instanceof PropRoom) {
+						getProp(input, currentPlayer);
+					} else if (currentPlayerPosition(currentPlayer) instanceof GiftRoom) {
+						getGift(input, currentPlayer);
+					} else if (currentPlayerPosition(currentPlayer) instanceof Prison) {
+						releasePrisoner(currentPlayer);
+					} else if (currentPlayerPosition(currentPlayer) instanceof Hospital) {
 
+					}
 				}
 				currentPlayer = (currentPlayer + 1) % totalPlayerNum;
 			} else {
