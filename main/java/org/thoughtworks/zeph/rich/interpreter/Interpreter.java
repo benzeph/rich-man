@@ -43,7 +43,7 @@ public class Interpreter {
 					((Bomb) player.getProp()).timeCountDown(1);
 					if (((Bomb) player.getProp()).getLeftTime() == 0) {
 						player.setCurrentMapPosition(14);
-						System.out.println("bomb explode");
+						System.out.println("bomb explode , you are in hospital");
 						break;
 					}
 				}
@@ -133,6 +133,15 @@ public class Interpreter {
 			for (int i = 1; i <= step; i++) {
 				currentMapPosition = currentMapPosition + 1;
 				player.setCurrentMapPosition(currentMapPosition);
+				if (player.getProp() instanceof Bomb) {
+					System.out.println("get a bomb");
+					((Bomb) player.getProp()).timeCountDown(1);
+					if (((Bomb) player.getProp()).getLeftTime() == 0) {
+						player.setCurrentMapPosition(14);
+						System.out.println("bomb explode , you are in hospital");
+						break;
+					}
+				}
 				if (gameMap[currentMapPosition].getProp() instanceof Block) {
 					gameMap[currentMapPosition].setProp(null);
 					return "block at " + currentMapPosition;

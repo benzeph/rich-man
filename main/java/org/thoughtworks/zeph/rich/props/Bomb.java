@@ -8,12 +8,11 @@ public class Bomb extends Prop {
 		this.id = 3;
 		this.price = 50;
 		this.icon = '@';
-		this.leftTime = 20;
+		this.leftTime = 1;
 	}
 
-	@Override
-	public int timeCountDown(int i) {
-		return leftTime - i;
+	public void timeCountDown(int i) {
+		leftTime = leftTime - i;
 	}
 
 	public int getLeftTime() {

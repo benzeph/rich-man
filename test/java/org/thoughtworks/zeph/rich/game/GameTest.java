@@ -4,6 +4,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.thoughtworks.zeph.rich.player.Player;
+import org.thoughtworks.zeph.rich.props.Bomb;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
@@ -77,7 +78,14 @@ public class GameTest {
 
 	@Test
 	public void should_stay_in_hospital_when_play_one_put_a_bomb() {
-
+		String instruction = "roll one\ny\nbomb 2\nroll one\nroll one\ny\nroll one\nroll one\nroll one\ny\nquit";
+		Player player1 = new Player("Qian Furen", 1);
+		Player player2 = new Player("A Tubo", 2);
+		player2.addGamePoint(1000);
+		player2.buyProp(new Bomb());
+		Game game = new RichGame(new Player[]{player1, player2});
+		game.runForTest(instruction);
+		assertThat(player1.getCurrentMapPosition(),is(14));
 	}
 
 }

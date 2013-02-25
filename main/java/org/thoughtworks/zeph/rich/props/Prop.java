@@ -13,10 +13,6 @@ public class Prop {
 		return price;
 	}
 
-	public int timeCountDown(int i) {
-		return 0;
-	}
-
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) return true;

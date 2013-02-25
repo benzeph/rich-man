@@ -19,8 +19,9 @@ public class PropTest {
 	}
 
 	@Test
-	public void should_return_16_when_bomb_left_time_is_20_and_role_walks_4_step_ahead() {
+	public void should_return_0_when_bomb_left_time_is_1_and_role_walks_1_step_ahead() {
 		Prop bomb = new Bomb();
-		assertThat(bomb.timeCountDown(4), is(16));
+		((Bomb) bomb).timeCountDown(1);
+		assertThat(((Bomb) bomb).getLeftTime(), is(0));
 	}
 }
