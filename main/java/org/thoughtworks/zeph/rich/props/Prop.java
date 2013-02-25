@@ -13,6 +13,10 @@ public class Prop {
 		return price;
 	}
 
+	public char getIcon() {
+		return icon;
+	}
+
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) return true;

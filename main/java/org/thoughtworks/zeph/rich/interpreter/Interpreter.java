@@ -43,21 +43,23 @@ public class Interpreter {
 					((Bomb) player.getProp()).timeCountDown(1);
 					if (((Bomb) player.getProp()).getLeftTime() == 0) {
 						player.setCurrentMapPosition(14);
-						System.out.println("bomb explode , you are in hospital");
+						player.setHospitalDays(3);
+						player.setProp(null);
+						System.out.println(player.getName() + ":bomb explode , you are in hospital");
 						break;
 					}
 				}
 				if (gameMap[currentMapPosition].getProp() instanceof Block) {
 					gameMap[currentMapPosition].setProp(null);
-					return "block at " + currentMapPosition;
+					return "roll , block at " + currentMapPosition;
 				}
 			}
 			if (gameMap[currentMapPosition].getProp() instanceof Bomb) {
 				player.setProp(new Bomb());
 				gameMap[currentMapPosition].setProp(null);
-				return "stop at " + currentMapPosition + " , meet a bomb";
+				return "roll , stop at " + currentMapPosition + " , meet a bomb";
 			}
-			return "stop at " + currentMapPosition;
+			return "roll , stop at " + currentMapPosition;
 		} else if (instruction.contains("block")) {
 			pattern = Pattern.compile("block (-)?\\d*");
 			matcher = pattern.matcher(instruction);
@@ -134,25 +136,28 @@ public class Interpreter {
 				currentMapPosition = currentMapPosition + 1;
 				player.setCurrentMapPosition(currentMapPosition);
 				if (player.getProp() instanceof Bomb) {
-					System.out.println("get a bomb");
 					((Bomb) player.getProp()).timeCountDown(1);
 					if (((Bomb) player.getProp()).getLeftTime() == 0) {
 						player.setCurrentMapPosition(14);
-						System.out.println("bomb explode , you are in hospital");
+						player.setHospitalDays(3);
+						player.setProp(null);
+						System.out.println(player.getName() + ":bomb explode , you are in hospital");
 						break;
 					}
 				}
 				if (gameMap[currentMapPosition].getProp() instanceof Block) {
 					gameMap[currentMapPosition].setProp(null);
-					return "block at " + currentMapPosition;
+					return "roll , block at " + currentMapPosition;
 				}
 			}
 			if (gameMap[currentMapPosition].getProp() instanceof Bomb) {
 				player.setProp(new Bomb());
 				gameMap[currentMapPosition].setProp(null);
-				return "stop at " + currentMapPosition + " , meet a bomb";
+				return "roll , stop at " + currentMapPosition + " , meet a bomb";
 			}
-			return "stop at " + currentMapPosition;
+			return "roll , stop at " + currentMapPosition;
+		}else if(instruction.equals("drawMap")){
+			return "drawMap";
 		}
 		return "illegal instruction";
 	}

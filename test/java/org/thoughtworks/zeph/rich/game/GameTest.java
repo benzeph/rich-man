@@ -85,7 +85,53 @@ public class GameTest {
 		player2.buyProp(new Bomb());
 		Game game = new RichGame(new Player[]{player1, player2});
 		game.runForTest(instruction);
-		assertThat(player1.getCurrentMapPosition(),is(14));
+		assertThat(player1.getCurrentMapPosition(), is(14));
 	}
 
+	@Test
+	public void should_return_3_when_player_buy_bomb_robot_block() {
+		String instruction = "roll one\n1\n2\n3\nF\nquit";
+		Player player1 = new Player("Qian Furen", 1);
+		player1.setCurrentMapPosition(27);
+		player1.addGamePoint(1000);
+		Player player2 = new Player("A Tubo", 2);
+		Game game = new RichGame(new Player[]{player1, player2});
+		game.runForTest(instruction);
+		assertThat(player1.getProps().size(), is(3));
+	}
+
+	@Test
+	public void should_return_0_when_player_walk_in_prop_room_but_do_not_have_enough_game_point() {
+		String instruction = "roll one\nquit";
+		Player player1 = new Player("Qian Furen", 1);
+		player1.setCurrentMapPosition(27);
+		Player player2 = new Player("A Tubo", 2);
+		Game game = new RichGame(new Player[]{player1, player2});
+		game.runForTest(instruction);
+		assertThat(player1.getProps().size(), is(0));
+	}
+
+	@Test
+	public void should_return_12000_when_player_walk_in_gift_room() {
+		String instruction = "roll one\n1\nquit";
+		Player player1 = new Player("Qian Furen", 1);
+		player1.setCurrentMapPosition(34);
+		Player player2 = new Player("A Tubo", 2);
+		Game game = new RichGame(new Player[]{player1, player2});
+		game.runForTest(instruction);
+		assertThat(player1.getMoney(), is(12000));
+	}
+
+	@Test
+	public void should_return_0_when_player_stay_in_hospital_3_days() {
+		String instruction = "roll one\ny\nroll one\ny\nroll one\ny\nroll one\ny\nquit";
+		Player player1 = new Player("Qian Furen", 1);
+		Player player2 = new Player("A Tubo", 2);
+		player1.setCurrentMapPosition(14);
+		player1.setHospitalDays(3);
+		Game game = new RichGame(new Player[]{player1, player2});
+		game.runForTest(instruction);
+		assertThat(player1.getCurrentMapPosition(), is(15));
+		assertThat(player1.getMoney(),is(9800));
+	}
 }
