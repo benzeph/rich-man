@@ -158,6 +158,8 @@ public class Interpreter {
 			return "roll , stop at " + currentMapPosition;
 		}else if(instruction.equals("drawMap")){
 			return "drawMap";
+		}else if(instruction.equals("help")){
+			return "help";
 		}
 		return "illegal instruction";
 	}

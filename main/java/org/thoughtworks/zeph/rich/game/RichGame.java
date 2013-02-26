@@ -112,6 +112,10 @@ public class RichGame extends Game {
 						drawMap();
 						break;
 					}
+					if (order.equals("help")) {
+						help();
+						break;
+					}
 					if (currentPlayerPosition(currentPlayer) instanceof BuildingLotOneTwo) {
 						if (isLandBlank(currentPlayer)) {
 							buyLand(input, currentPlayer);
@@ -155,6 +159,10 @@ public class RichGame extends Game {
 				currentPlayer = (currentPlayer + 1) % totalPlayerNum;
 			}
 		}
+	}
+
+	private void help() {
+		System.out.println("roll - random step 1~6\n" + "block n(-10~10) - stop you from walking ahead\n" + "bomb n(-10~10) - set a bomb\n" + "robot - clear road\n" + "sell x(game map id) - sell your land\n" + "sellTool x(tool id)\n" + "query - get detail of you\n" + "help\n" + "quit - exit game\n");
 	}
 
 	private void getProp(InputSystem input, int currentPlayer) {
