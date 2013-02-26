@@ -171,7 +171,7 @@ public class GameTest {
 
 	@Test
 	public void should_show_help_when_play_input_help(){
-		String instruction = "help\nquit";
+		String instruction = "help\nquery\nquit";
 		Player player1 = new Player("Qian Furen", 1);
 		Player player2 = new Player("A Tubo", 2);
 		Game game = new RichGame(new Player[]{player1, player2});

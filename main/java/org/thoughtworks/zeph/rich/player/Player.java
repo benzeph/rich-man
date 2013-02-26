@@ -174,7 +174,7 @@ public class Player {
 	}
 
 	public String query() {
-		String message = "Money:" + money + "\n";
+		String message = "\nMoney:" + money + "\n";
 		message += "Game Point:" + gamePoint + "\n";
 		int blankLand = 0, room = 0, house = 0, skyscraper = 0;
 		Set<Integer> set = lands.keySet();

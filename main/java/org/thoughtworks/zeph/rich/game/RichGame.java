@@ -116,6 +116,7 @@ public class RichGame extends Game {
 						help();
 						break;
 					}
+
 					if (currentPlayerPosition(currentPlayer) instanceof BuildingLotOneTwo) {
 						if (isLandBlank(currentPlayer)) {
 							buyLand(input, currentPlayer);
