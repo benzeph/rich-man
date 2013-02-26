@@ -327,6 +327,6 @@ public class RichGame extends Game {
 		for (int i = 63; i >= 35; i--) {
 			System.out.print(gameMap[i].getSymbol());
 		}
-
+		System.out.println();
 	}
 }
