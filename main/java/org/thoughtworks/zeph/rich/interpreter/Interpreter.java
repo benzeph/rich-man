@@ -155,7 +155,7 @@ public class Interpreter {
 			}
 			return "sellTool n(n={1,2,3})";
 		} else if (instruction.equals("query")) {
-			return player.query();
+			return "query";
 		} else if (instruction.equals("quit")) {
 			return "quit";
 		} else if (instruction.equals("roll one")) {

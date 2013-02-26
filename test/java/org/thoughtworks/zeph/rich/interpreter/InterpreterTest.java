@@ -117,7 +117,7 @@ public class InterpreterTest {
 		player.buyProp(new Block());
 		String instruction = "block 3";
 		Prop block = new Block();
-		assertThat(interpreter.interpret(instruction, gameMap,players, 0), is("block at 3"));
+		assertThat(interpreter.interpret(instruction, gameMap, players, 0), is("block at 3"));
 		assertThat(gameMap[3].getProp(), is(block));
 		assertThat(player.getProps().size(), is(0));
 	}
@@ -125,7 +125,7 @@ public class InterpreterTest {
 	@Test
 	public void should_return_block_n_when_input_is_block_12() {
 		String instruction = "block 12";
-		assertThat(interpreter.interpret(instruction, gameMap,players, 0), is("block n(-10=<n<=10)"));
+		assertThat(interpreter.interpret(instruction, gameMap, players, 0), is("block n(-10=<n<=10)"));
 	}
 
 	@Test
@@ -141,15 +141,15 @@ public class InterpreterTest {
 		player.buyProp(new Block());
 		String instruction = "block 3";
 		Prop block = new Block();
-		assertThat(interpreter.interpret(instruction, gameMap,players, 0), is("block at 3"));
+		assertThat(interpreter.interpret(instruction, gameMap, players, 0), is("block at 3"));
 		assertThat(gameMap[3].getProp(), is(block));
 		String instructionRoll = "roll";
-		interpreter.interpret(instructionRoll, gameMap,players, 0);
+		interpreter.interpret(instructionRoll, gameMap, players, 0);
 		if (player.getCurrentMapPosition() < 3) {
 			interpreter.interpret(instructionRoll, gameMap, players, 0);
 		}
 		if (player.getCurrentMapPosition() < 3) {
-			assertThat(interpreter.interpret(instructionRoll, gameMap,players, 0), is("block at 3"));
+			assertThat(interpreter.interpret(instructionRoll, gameMap, players, 0), is("block at 3"));
 		}
 		assertThat(player.getProps().size(), is(0));
 		assertNull(gameMap[3].getProp());
@@ -157,7 +157,7 @@ public class InterpreterTest {
 
 	@Test
 	public void should_return_you_do_no_have_a_bomb_when_input_is_bomb_3() {
-		assertThat(interpreter.interpret("bomb 1", gameMap,players, 0), is("you don't have a bomb"));
+		assertThat(interpreter.interpret("bomb 1", gameMap, players, 0), is("you don't have a bomb"));
 	}
 
 	@Test
@@ -174,7 +174,7 @@ public class InterpreterTest {
 		assertThat(interpreter.interpret("bomb 3", gameMap, players, 0), is("bomb set at 3"));
 		assertThat(interpreter.interpret("bomb 4", gameMap, players, 0), is("bomb set at 4"));
 		assertThat(interpreter.interpret("bomb 5", gameMap, players, 0), is("bomb set at 5"));
-		assertThat(interpreter.interpret("bomb 6", gameMap,players, 0), is("bomb set at 6"));
+		assertThat(interpreter.interpret("bomb 6", gameMap, players, 0), is("bomb set at 6"));
 		assertThat(interpreter.interpret("roll", gameMap, players, 0), is("roll , stop at " + player.getCurrentMapPosition() + " , meet a bomb"));
 	}
 
@@ -187,7 +187,7 @@ public class InterpreterTest {
 		String instructionRobot = "robot";
 		String instructionBomb = "bomb 5";
 		String instructionBlock = "block 3";
-		interpreter.interpret(instructionBomb, gameMap,players, 0);
+		interpreter.interpret(instructionBomb, gameMap, players, 0);
 		interpreter.interpret(instructionBlock, gameMap, players, 0);
 		assertThat(interpreter.interpret(instructionRobot, gameMap, players, 0), is("robot out"));
 		for (int i = 1; i <= 10; i++) {
@@ -209,13 +209,13 @@ public class InterpreterTest {
 	@Test
 	public void should_return_not_your_building_when_sell_5() {
 		String instruction = "sell 5";
-		assertThat(interpreter.interpret(instruction, gameMap,players, 0), is("not your building"));
+		assertThat(interpreter.interpret(instruction, gameMap, players, 0), is("not your building"));
 	}
 
 	@Test
 	public void should_return_sell_n_building_when_sell_100() {
 		String instruction = "sell 100";
-		assertThat(interpreter.interpret(instruction, gameMap,players, 0), is("sell n(0<n<" + gameMap.length + ")"));
+		assertThat(interpreter.interpret(instruction, gameMap, players, 0), is("sell n(0<n<" + gameMap.length + ")"));
 	}
 
 	@Test
@@ -239,7 +239,7 @@ public class InterpreterTest {
 	@Test
 	public void should_return_you_do_not_have_a_block_when_sell_tool_5() {
 		String instruction = "sellTool 1";
-		assertThat(interpreter.interpret(instruction, gameMap,players, 0), is("you don't have a block"));
+		assertThat(interpreter.interpret(instruction, gameMap, players, 0), is("you don't have a block"));
 	}
 
 	@Test
@@ -250,7 +250,7 @@ public class InterpreterTest {
 
 	@Test
 	public void should_return_quit_when_input_is_quit() {
-		assertThat(interpreter.interpret("quit", gameMap,players, 0), is("quit"));
+		assertThat(interpreter.interpret("quit", gameMap, players, 0), is("quit"));
 	}
 
 	@Test
@@ -260,32 +260,35 @@ public class InterpreterTest {
 	}
 
 	@Test
-	public void should_return_occupy_when_input_is_bomb_1_and_map_1_has_been_occupied(){
+	public void should_return_occupy_when_input_is_bomb_1_and_map_1_has_been_occupied() {
 		String instruction = "bomb 1";
 		gameMap[1].setProp(new Bomb());
 		assertThat(interpreter.interpret(instruction, gameMap, players, 0), is("place has been occupied"));
 	}
+
 	@Test
-	public void should_return_occupy_when_input_is_block_1_and_map_1_has_been_occupied(){
+	public void should_return_occupy_when_input_is_block_1_and_map_1_has_been_occupied() {
 		String instruction = "block 1";
 		gameMap[1].setProp(new Bomb());
 		assertThat(interpreter.interpret(instruction, gameMap, players, 0), is("place has been occupied"));
 	}
+
 	@Test
-	public void should_return_occupy_when_input_is_bomb_1_and_player_2_stand_at_map_1(){
+	public void should_return_occupy_when_input_is_bomb_1_and_player_2_stand_at_map_1() {
 		String instruction = "bomb 1";
-		Player player1 = new Player("A Tubo",2);
+		Player player1 = new Player("A Tubo", 2);
 		player1.setCurrentMapPosition(1);
-		players = new Player[]{player,player1};
+		players = new Player[]{player, player1};
 		gameMap[1].setProp(new Bomb());
 		assertThat(interpreter.interpret(instruction, gameMap, players, 0), is("place has been occupied"));
 	}
+
 	@Test
-	public void should_return_occupy_when_input_is_block_1_and_player_2_stand_at_map_1(){
+	public void should_return_occupy_when_input_is_block_1_and_player_2_stand_at_map_1() {
 		String instruction = "block 1";
-		Player player1 = new Player("A Tubo",2);
+		Player player1 = new Player("A Tubo", 2);
 		player1.setCurrentMapPosition(1);
-		players = new Player[]{player,player1};
+		players = new Player[]{player, player1};
 		gameMap[1].setProp(new Bomb());
 		assertThat(interpreter.interpret(instruction, gameMap, players, 0), is("place has been occupied"));
 	}
