@@ -82,7 +82,6 @@ public class RichGame extends Game {
 					currentPlayer = (currentPlayer + 1) % totalPlayerNum;
 					continue;
 				}
-
 				if ((null != players[currentPlayer].getGod()) && (players[currentPlayer].getGod().getLeftTime() > 0)) {
 					players[currentPlayer].getGod().timeCountDown();
 					System.out.println(players[currentPlayer].getName() + ":" + players[currentPlayer].getGod().getLeftTime());
@@ -100,13 +99,16 @@ public class RichGame extends Game {
 					}
 					if (order.equals("drawMap")) {
 						drawMap();
-						break;
+						continue;
 					}
 					if (order.equals("help")) {
 						help();
-						break;
+						continue;
 					}
-
+					if (order.equals("query")) {
+						System.out.println(players[currentPlayer].query());
+						continue;
+					}
 					if (currentPlayerPosition(currentPlayer) instanceof BuildingLotOneTwo) {
 						if (isLandBlank(currentPlayer)) {
 							buyLand(input, currentPlayer);
@@ -203,7 +205,7 @@ public class RichGame extends Game {
 						help();
 						continue;
 					}
-					if(order.equals("query")){
+					if (order.equals("query")) {
 						System.out.println(players[currentPlayer].query());
 						continue;
 					}
