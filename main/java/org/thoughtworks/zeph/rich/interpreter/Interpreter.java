@@ -37,7 +37,7 @@ public class Interpreter {
 			int currentMapPosition = player.getCurrentMapPosition();
 			int step = player.dice();
 			for (int i = 1; i <= step; i++) {
-				currentMapPosition = currentMapPosition + 1;
+				currentMapPosition = (currentMapPosition + 1) % gameMap.length;
 				player.setCurrentMapPosition(currentMapPosition);
 				if (player.getProp() instanceof Bomb) {
 					((Bomb) player.getProp()).timeCountDown();
@@ -133,7 +133,7 @@ public class Interpreter {
 			int currentMapPosition = player.getCurrentMapPosition();
 			int step = 1;
 			for (int i = 1; i <= step; i++) {
-				currentMapPosition = currentMapPosition + 1;
+				currentMapPosition = (currentMapPosition + 1) % gameMap.length;
 				player.setCurrentMapPosition(currentMapPosition);
 				if (player.getProp() instanceof Bomb) {
 					((Bomb) player.getProp()).timeCountDown();
@@ -156,9 +156,9 @@ public class Interpreter {
 				return "roll , stop at " + currentMapPosition + " , meet a bomb";
 			}
 			return "roll , stop at " + currentMapPosition;
-		}else if(instruction.equals("drawMap")){
+		} else if (instruction.equals("drawMap")) {
 			return "drawMap";
-		}else if(instruction.equals("help")){
+		} else if (instruction.equals("help")) {
 			return "help";
 		}
 		return "illegal instruction";

@@ -187,4 +187,15 @@ public class GameTest {
 		Game game = new RichGame(new Player[]{player1, player2});
 		game.runForTest(instruction);
 	}
+
+	@Test
+	public void should_stay_in_map_when_player_stay_in_68_and_roll_3_times(){
+		String instruction = "roll one\nquit";
+		Player player1 = new Player("Qian Furen", 1);
+		Player player2 = new Player("A Tubo", 2);
+		player1.setCurrentMapPosition(69);
+		Game game = new RichGame(new Player[]{player1, player2});
+		game.runForTest(instruction);
+		assertThat(player1.getCurrentMapPosition(),is(0));
+	}
 }
