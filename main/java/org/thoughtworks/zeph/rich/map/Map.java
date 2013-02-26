@@ -46,6 +46,9 @@ public class Map {
 	}
 
 	public char getSymbol() {
+		if (null != prop) {
+			return prop.getIcon();
+		}
 		return symbol;
 	}
 }

@@ -156,4 +156,16 @@ public class GameTest {
 		game.runForTest(instruction);
 		assertThat(player1.getMoney(),is(9800));
 	}
+
+	@Test
+	public void should_show_a_prop_when_player_set_a_bomb(){
+		String instruction = "bomb 2\nquit";
+		Player player1 = new Player("Qian Furen", 1);
+		Player player2 = new Player("A Tubo", 2);
+		Game game = new RichGame(new Player[]{player1, player2});
+		player1.addGamePoint(100);
+		player1.buyProp(new Bomb());
+		game.runForTest(instruction);
+		game.drawMap();
+	}
 }
