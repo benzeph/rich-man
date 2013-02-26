@@ -66,7 +66,7 @@ public class Interpreter {
 			if (matcher.matches()) {
 				int n = Integer.valueOf(instruction.replace("block ", ""));
 				if (-10 <= n && n <= 10) {
-					int blockPlace = player.getCurrentMapPosition() + n;
+					int blockPlace = (gameMap.length + player.getCurrentMapPosition() + n) % gameMap.length;
 					if (gameMap[blockPlace].getProp() == null) {
 						if (player.useProp(new Block())) {
 							gameMap[blockPlace].setProp(new Block());
