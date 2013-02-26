@@ -90,7 +90,7 @@ public class RichGame extends Game {
 				String inputStr = "";
 				while (!inputStr.equals("roll") && !inputStr.equals("roll one")) {
 					inputStr = input.getInput();
-					String order = interpreter.interpret(inputStr, gameMap, players[currentPlayer]);
+					String order = interpreter.interpret(inputStr, gameMap, players,currentPlayer);
 					System.out.println(players[currentPlayer].getName() + ":" + order);
 					if (order.equals("quit")) {
 						notBreak = false;
@@ -185,7 +185,7 @@ public class RichGame extends Game {
 				String inputStr = "";
 				while (!inputStr.equals("roll") && !inputStr.equals("roll one")) {
 					inputStr = input.getInput();
-					String order = interpreter.interpret(inputStr, gameMap, players[currentPlayer]);
+					String order = interpreter.interpret(inputStr, gameMap, players,currentPlayer);
 					System.out.println(players[currentPlayer].getName() + ":" + order);
 					if (order.equals("quit")) {
 						notBreak = false;

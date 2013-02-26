@@ -12,7 +12,8 @@ import java.util.regex.Pattern;
 
 public class Interpreter {
 
-	public String interpret(String instruction, Map[] gameMap, Player player) {
+	public String interpret(String instruction, Map[] gameMap, Player[] players, int currentPlayer) {
+		Player player = players[currentPlayer];
 		Pattern pattern;
 		Matcher matcher;
 		if (instruction.contains("bomb")) {
@@ -22,6 +23,20 @@ public class Interpreter {
 				int n = Integer.valueOf(instruction.replace("bomb ", ""));
 				if (-10 <= n && n <= 10) {
 					int bombPlace = (gameMap.length + player.getCurrentMapPosition() + n) % gameMap.length;
+					boolean isBeenOccupied = false;
+					for (int i = 0; i < players.length; i++) {
+						if (null != players[i]) {
+							if (players[i].getCurrentMapPosition() == bombPlace) {
+								isBeenOccupied = true;
+							}
+						}
+					}
+					if (null != gameMap[bombPlace].getProp()) {
+						return "place has been occupied";
+					}
+					if (isBeenOccupied) {
+						return "place has been occupied";
+					}
 					if (gameMap[bombPlace].getProp() == null) {
 						if (player.useProp(new Bomb())) {
 							gameMap[bombPlace].setProp(new Bomb());
@@ -67,6 +82,20 @@ public class Interpreter {
 				int n = Integer.valueOf(instruction.replace("block ", ""));
 				if (-10 <= n && n <= 10) {
 					int blockPlace = (gameMap.length + player.getCurrentMapPosition() + n) % gameMap.length;
+					boolean isBeenOccupied = false;
+					for (int i = 0; i < players.length; i++) {
+						if (null != players[i]) {
+							if (players[i].getCurrentMapPosition() == blockPlace) {
+								isBeenOccupied = true;
+							}
+						}
+					}
+					if (null != gameMap[blockPlace].getProp()) {
+						return "place has been occupied";
+					}
+					if (isBeenOccupied) {
+						return "place has been occupied";
+					}
 					if (gameMap[blockPlace].getProp() == null) {
 						if (player.useProp(new Block())) {
 							gameMap[blockPlace].setProp(new Block());
