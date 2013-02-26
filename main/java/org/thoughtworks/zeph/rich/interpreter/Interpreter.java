@@ -53,6 +53,12 @@ public class Interpreter {
 			int step = player.dice();
 			for (int i = 1; i <= step; i++) {
 				currentMapPosition = (currentMapPosition + 1) % gameMap.length;
+				if (gameMap[currentMapPosition].getPlayerSymbol() == ' ') {
+					gameMap[currentMapPosition].setPlayerSymbol(player.getName().charAt(0));
+				}
+				if (gameMap[currentMapPosition - 1].getPlayerSymbol() == player.getName().charAt(0)) {
+					gameMap[currentMapPosition - 1].setPlayerSymbol(' ');
+				}
 				player.setCurrentMapPosition(currentMapPosition);
 				if (player.getProp() instanceof Bomb) {
 					((Bomb) player.getProp()).timeCountDown();
@@ -163,6 +169,12 @@ public class Interpreter {
 			int step = 1;
 			for (int i = 1; i <= step; i++) {
 				currentMapPosition = (currentMapPosition + 1) % gameMap.length;
+				if (gameMap[currentMapPosition].getPlayerSymbol() == ' ') {
+					gameMap[currentMapPosition].setPlayerSymbol(player.getName().charAt(0));
+				}
+				if (gameMap[currentMapPosition - 1].getPlayerSymbol() == player.getName().charAt(0)) {
+					gameMap[currentMapPosition - 1].setPlayerSymbol(' ');
+				}
 				player.setCurrentMapPosition(currentMapPosition);
 				if (player.getProp() instanceof Bomb) {
 					((Bomb) player.getProp()).timeCountDown();

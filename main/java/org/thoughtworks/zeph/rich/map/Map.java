@@ -6,6 +6,7 @@ public class Map {
 	private int mapId;
 	private Prop prop;
 	private char symbol;
+	private char playerSymbol = ' ';
 
 	public Prop getProp() {
 		return prop;
@@ -24,6 +25,14 @@ public class Map {
 		return mapId;
 	}
 
+	public char getPlayerSymbol() {
+		return playerSymbol;
+	}
+
+	public void setPlayerSymbol(char playerSymbol) {
+		this.playerSymbol = playerSymbol;
+	}
+
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) return true;
@@ -32,13 +41,20 @@ public class Map {
 		Map map = (Map) o;
 
 		if (mapId != map.mapId) return false;
+		if (playerSymbol != map.playerSymbol) return false;
+		if (symbol != map.symbol) return false;
+		if (prop != null ? !prop.equals(map.prop) : map.prop != null) return false;
 
 		return true;
 	}
 
 	@Override
 	public int hashCode() {
-		return mapId;
+		int result = mapId;
+		result = 31 * result + (prop != null ? prop.hashCode() : 0);
+		result = 31 * result + (int) symbol;
+		result = 31 * result + (int) playerSymbol;
+		return result;
 	}
 
 	public void release() {
@@ -46,9 +62,12 @@ public class Map {
 	}
 
 	public char getSymbol() {
-		if (null != prop) {
+		if (playerSymbol != ' ') {
+			return playerSymbol;
+		} else if (null != prop) {
 			return prop.getIcon();
+		} else {
+			return symbol;
 		}
-		return symbol;
 	}
 }
