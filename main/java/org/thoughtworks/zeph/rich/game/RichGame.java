@@ -160,6 +160,15 @@ public class RichGame extends Game {
 				currentPlayer = (currentPlayer + 1) % totalPlayerNum;
 			}
 		}
+		if (currentPlayerNum != 1) {
+			System.out.println("game over");
+		} else {
+			for (int i = 0; i < players.length; i++) {
+				if (null != players[i]) {
+					System.out.println(players[i].getName() + " win");
+				}
+			}
+		}
 	}
 
 	private void help() {
@@ -242,6 +251,7 @@ public class RichGame extends Game {
 		} else {
 			System.out.println(players[currentPlayer].getName() + " broke");
 			players[currentPlayer] = null;
+			currentPlayerNum--;
 		}
 	}
 

@@ -252,5 +252,9 @@ public class Player {
 	public void setId(int id) {
 		this.id = id;
 	}
+
+	public void setMoney(int money) {
+		this.money = money;
+	}
 }
 

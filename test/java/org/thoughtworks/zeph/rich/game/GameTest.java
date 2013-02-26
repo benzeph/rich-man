@@ -170,10 +170,20 @@ public class GameTest {
 	}
 
 	@Test
-	public void should_show_help_when_play_input_help(){
+	public void should_show_help_when_player_input_help(){
 		String instruction = "help\nquery\nquit";
 		Player player1 = new Player("Qian Furen", 1);
 		Player player2 = new Player("A Tubo", 2);
+		Game game = new RichGame(new Player[]{player1, player2});
+		game.runForTest(instruction);
+	}
+
+	@Test
+	public void should_broke_when_player_do_not_have_enough_money_to_pay_the_rent(){
+		String instruction = "roll one\ny\nroll one";
+		Player player1 = new Player("Qian Furen", 1);
+		Player player2 = new Player("A Tubo", 2);
+		player2.setMoney(99);
 		Game game = new RichGame(new Player[]{player1, player2});
 		game.runForTest(instruction);
 	}
