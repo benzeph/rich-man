@@ -3,6 +3,9 @@ package org.thoughtworks.zeph.rich.game;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.thoughtworks.zeph.rich.god.WealthGod;
+import org.thoughtworks.zeph.rich.map.Land;
+import org.thoughtworks.zeph.rich.map.Map;
 import org.thoughtworks.zeph.rich.player.Player;
 import org.thoughtworks.zeph.rich.props.Bomb;
 
@@ -132,6 +135,25 @@ public class GameTest {
 		Game game = new RichGame(new Player[]{player1, player2});
 		game.runForTest(instruction);
 		assertThat(player1.getCurrentMapPosition(), is(15));
+		assertThat(player1.getMoney(),is(9800));
+	}
+
+	@Test
+	public void should_not_pay_the_rent_when_player_got_the_wealth_god(){
+		String instruction = "roll one\nroll one\ny\nroll one\nroll one\ny\nroll one\nroll one\ny\n"+
+				"roll one\nroll one\ny\nroll one\nroll one\ny\nroll one\nquit";
+		Player player1 = new Player("Qian Furen", 1);
+		Player player2 = new Player("A Tubo", 2);
+		Game game = new RichGame(new Player[]{player1, player2});
+		Map[] gameMap = game.getGameMap();
+		((Land)gameMap[1]).setBelongTo(2);
+		((Land)gameMap[2]).setBelongTo(2);
+		((Land)gameMap[3]).setBelongTo(2);
+		((Land)gameMap[4]).setBelongTo(2);
+		((Land)gameMap[5]).setBelongTo(2);
+		((Land)gameMap[6]).setBelongTo(2);
+		player1.setGod(new WealthGod());
+		game.runForTest(instruction);
 		assertThat(player1.getMoney(),is(9800));
 	}
 }

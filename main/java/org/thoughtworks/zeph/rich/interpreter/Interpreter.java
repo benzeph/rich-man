@@ -40,7 +40,7 @@ public class Interpreter {
 				currentMapPosition = currentMapPosition + 1;
 				player.setCurrentMapPosition(currentMapPosition);
 				if (player.getProp() instanceof Bomb) {
-					((Bomb) player.getProp()).timeCountDown(1);
+					((Bomb) player.getProp()).timeCountDown();
 					if (((Bomb) player.getProp()).getLeftTime() == 0) {
 						player.setCurrentMapPosition(14);
 						player.setHospitalDays(3);
@@ -136,7 +136,7 @@ public class Interpreter {
 				currentMapPosition = currentMapPosition + 1;
 				player.setCurrentMapPosition(currentMapPosition);
 				if (player.getProp() instanceof Bomb) {
-					((Bomb) player.getProp()).timeCountDown(1);
+					((Bomb) player.getProp()).timeCountDown();
 					if (((Bomb) player.getProp()).getLeftTime() == 0) {
 						player.setCurrentMapPosition(14);
 						player.setHospitalDays(3);

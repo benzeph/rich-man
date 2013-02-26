@@ -85,7 +85,7 @@ public class RichGame extends Game {
 			if (players[currentPlayer] != null) {
 				if (players[currentPlayer].getHospitalDays() > 0) {
 					players[currentPlayer].setHospitalDays(players[currentPlayer].getHospitalDays() - 1);
-					System.out.println(players[currentPlayer].getName()+":stay in hospital,hospital left time:" + players[currentPlayer].getHospitalDays());
+					System.out.println(players[currentPlayer].getName() + ":stay in hospital,hospital left time:" + players[currentPlayer].getHospitalDays());
 					currentPlayer = (currentPlayer + 1) % totalPlayerNum;
 					continue;
 				}
@@ -93,6 +93,11 @@ public class RichGame extends Game {
 					players[currentPlayer].setPrisonDays(players[currentPlayer].getPrisonDays() - 1);
 					currentPlayer = (currentPlayer + 1) % totalPlayerNum;
 					continue;
+				}
+
+				if ((null != players[currentPlayer].getGod()) && (players[currentPlayer].getGod().getLeftTime() > 0)) {
+					players[currentPlayer].getGod().timeCountDown();
+					System.out.println(players[currentPlayer].getName() + ":" + players[currentPlayer].getGod().getLeftTime());
 				}
 				String inputStr = "";
 				while (!inputStr.equals("roll") && !inputStr.equals("roll one")) {
@@ -215,12 +220,16 @@ public class RichGame extends Game {
 
 	private void getMine(int currentPlayer) {
 		((Mine) gameMap[players[currentPlayer].getCurrentMapPosition()]).addGamePoint(players[currentPlayer]);
-		System.out.println(players[currentPlayer].getName()+":you get " + ((Mine) gameMap[players[currentPlayer].getCurrentMapPosition()]).getGamePoint());
+		System.out.println(players[currentPlayer].getName() + ":you get " + ((Mine) gameMap[players[currentPlayer].getCurrentMapPosition()]).getGamePoint());
 	}
 
 	private void payLand(int currentPlayer) {
+		if ((null != players[currentPlayer].getGod()) && (players[currentPlayer].getGod().getLeftTime() > 0)) {
+			System.out.println(players[currentPlayer].getName() + ":wealthGod bless , exempt from payment");
+			return;
+		}
 		if (players[currentPlayer].payRent((Land) gameMap[players[currentPlayer].getCurrentMapPosition()], players[((Land) gameMap[players[currentPlayer].getCurrentMapPosition()]).getBelongTo() - 1])) {
-			System.out.println(players[currentPlayer].getName()+":pay " + ((Land) gameMap[players[currentPlayer].getCurrentMapPosition()]).getCost());
+			System.out.println(players[currentPlayer].getName() + ":pay " + ((Land) gameMap[players[currentPlayer].getCurrentMapPosition()]).getCost());
 		} else {
 			System.out.println(players[currentPlayer].getName() + " broke");
 			players[currentPlayer] = null;
@@ -240,30 +249,30 @@ public class RichGame extends Game {
 	}
 
 	private void levelUpLand(InputSystem input, int currentPlayer) {
-		System.out.println(players[currentPlayer].getName()+":Do you want to level up this land," + ((Land) currentPlayerPosition(currentPlayer)).getPrice() + "(Y/N)?");
+		System.out.println(players[currentPlayer].getName() + ":Do you want to level up this land," + ((Land) currentPlayerPosition(currentPlayer)).getPrice() + "(Y/N)?");
 		String str = input.getInput();
 		if (str.equals("Y") || str.equals("y")) {
 			if (players[currentPlayer].upgradeLand((Land) currentPlayerPosition(currentPlayer))) {
-				System.out.println(players[currentPlayer].getName()+":level up land success");
+				System.out.println(players[currentPlayer].getName() + ":level up land success");
 			} else {
-				System.out.println(players[currentPlayer].getName()+":level up land fail");
+				System.out.println(players[currentPlayer].getName() + ":level up land fail");
 			}
 		} else {
-			System.out.println(players[currentPlayer].getName()+":give up level up");
+			System.out.println(players[currentPlayer].getName() + ":give up level up");
 		}
 	}
 
 	private void buyLand(InputSystem input, int currentPlayer) {
-		System.out.println(players[currentPlayer].getName()+":Do you want to buy this land," + ((Land) currentPlayerPosition(currentPlayer)).getPrice() + "(Y/N)?");
+		System.out.println(players[currentPlayer].getName() + ":Do you want to buy this land," + ((Land) currentPlayerPosition(currentPlayer)).getPrice() + "(Y/N)?");
 		String str = input.getInput();
 		if (str.equals("Y") || str.equals("y")) {
 			if (players[currentPlayer].buyLand((Land) currentPlayerPosition(currentPlayer))) {
-				System.out.println(players[currentPlayer].getName()+":buy land success");
+				System.out.println(players[currentPlayer].getName() + ":buy land success");
 			} else {
-				System.out.println(players[currentPlayer].getName()+":buy land fail");
+				System.out.println(players[currentPlayer].getName() + ":buy land fail");
 			}
 		} else {
-			System.out.println(players[currentPlayer].getName()+":give up buy");
+			System.out.println(players[currentPlayer].getName() + ":give up buy");
 		}
 	}
 

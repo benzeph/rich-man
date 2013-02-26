@@ -11,8 +11,8 @@ public class Bomb extends Prop {
 		this.leftTime = 1;
 	}
 
-	public void timeCountDown(int i) {
-		leftTime = leftTime - i;
+	public void timeCountDown() {
+		leftTime = leftTime - 1;
 	}
 
 	public int getLeftTime() {

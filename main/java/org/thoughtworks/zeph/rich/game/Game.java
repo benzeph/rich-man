@@ -17,4 +17,8 @@ public class Game {
 	public void drawMap() {
 
 	}
+
+	public Map[] getGameMap() {
+		return gameMap;
+	}
 }

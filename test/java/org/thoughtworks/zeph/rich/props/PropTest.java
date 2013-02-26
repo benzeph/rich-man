@@ -21,7 +21,7 @@ public class PropTest {
 	@Test
 	public void should_return_0_when_bomb_left_time_is_1_and_role_walks_1_step_ahead() {
 		Prop bomb = new Bomb();
-		((Bomb) bomb).timeCountDown(1);
+		((Bomb) bomb).timeCountDown();
 		assertThat(((Bomb) bomb).getLeftTime(), is(0));
 	}
 }
