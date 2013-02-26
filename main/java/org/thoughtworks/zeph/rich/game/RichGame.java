@@ -64,14 +64,97 @@ public class RichGame extends Game {
 		gameMap[69] = new Mine(69, 60, '$');
 	}
 
+	@Override
 	public void run() {
 		InputSystem input = new InputSystem(System.in);
 		int currentPlayer = 0;
-		while (currentPlayerNum != 1) {
+		boolean notBreak = true;
+		while (currentPlayerNum != 1 && notBreak) {
 			if (players[currentPlayer] != null) {
+				if (players[currentPlayer].getHospitalDays() > 0) {
+					players[currentPlayer].setHospitalDays(players[currentPlayer].getHospitalDays() - 1);
+					System.out.println(players[currentPlayer].getName() + ":stay in hospital,hospital left time:" + players[currentPlayer].getHospitalDays());
+					currentPlayer = (currentPlayer + 1) % totalPlayerNum;
+					continue;
+				}
+				if (players[currentPlayer].getPrisonDays() > 0) {
+					players[currentPlayer].setPrisonDays(players[currentPlayer].getPrisonDays() - 1);
+					currentPlayer = (currentPlayer + 1) % totalPlayerNum;
+					continue;
+				}
 
+				if ((null != players[currentPlayer].getGod()) && (players[currentPlayer].getGod().getLeftTime() > 0)) {
+					players[currentPlayer].getGod().timeCountDown();
+					System.out.println(players[currentPlayer].getName() + ":" + players[currentPlayer].getGod().getLeftTime());
+				}
+				String inputStr = "";
+				while (!inputStr.equals("roll") && !inputStr.equals("roll one")) {
+					inputStr = input.getInput();
+					String order = interpreter.interpret(inputStr, gameMap, players[currentPlayer]);
+					System.out.println(players[currentPlayer].getName() + ":" + order);
+					if (order.equals("quit")) {
+						notBreak = false;
+						break;
+					}
+					if (order.equals("drawMap")) {
+						drawMap();
+						break;
+					}
+					if (order.equals("help")) {
+						help();
+						break;
+					}
+
+					if (currentPlayerPosition(currentPlayer) instanceof BuildingLotOneTwo) {
+						if (isLandBlank(currentPlayer)) {
+							buyLand(input, currentPlayer);
+						} else if (isLandBelongToPlayer(currentPlayer)) {
+							levelUpLand(input, currentPlayer);
+						} else {
+							payLand(currentPlayer);
+						}
+					} else if (currentPlayerPosition(currentPlayer) instanceof BuildingLotThree) {
+						if (isLandBlank(currentPlayer)) {
+							buyLand(input, currentPlayer);
+						} else if (isLandBelongToPlayer(currentPlayer)) {
+							levelUpLand(input, currentPlayer);
+						} else {
+							payLand(currentPlayer);
+						}
+					} else if (currentPlayerPosition(currentPlayer) instanceof BuildingLotFourFive) {
+						if (isLandBlank(currentPlayer)) {
+							buyLand(input, currentPlayer);
+						} else if (isLandBelongToPlayer(currentPlayer)) {
+							levelUpLand(input, currentPlayer);
+						} else {
+							payLand(currentPlayer);
+						}
+					} else if (currentPlayerPosition(currentPlayer) instanceof Mine) {
+						getMine(currentPlayer);
+					} else if (currentPlayerPosition(currentPlayer) instanceof PropRoom) {
+						getProp(input, currentPlayer);
+					} else if (currentPlayerPosition(currentPlayer) instanceof GiftRoom) {
+						getGift(input, currentPlayer);
+					} else if (currentPlayerPosition(currentPlayer) instanceof Prison) {
+						releasePrisoner(currentPlayer);
+					} else if (currentPlayerPosition(currentPlayer) instanceof Hospital) {
+
+					} else if (currentPlayerPosition(currentPlayer) instanceof MagicRoom) {
+
+					}
+				}
+				currentPlayer = (currentPlayer + 1) % totalPlayerNum;
 			} else {
 				currentPlayer = (currentPlayer + 1) % totalPlayerNum;
+			}
+		}
+		if (currentPlayerNum != 1) {
+			System.out.println("game over");
+		} else {
+			for (int i = 0; i < players.length; i++) {
+				if (null != players[i]) {
+					System.out.println(players[i].getName() + " win");
+				}
 			}
 		}
 	}
