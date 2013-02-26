@@ -21,7 +21,7 @@ public class Interpreter {
 			if (matcher.matches()) {
 				int n = Integer.valueOf(instruction.replace("bomb ", ""));
 				if (-10 <= n && n <= 10) {
-					int bombPlace = player.getCurrentMapPosition() + n;
+					int bombPlace = (gameMap.length + player.getCurrentMapPosition() + n) % gameMap.length;
 					if (gameMap[bombPlace].getProp() == null) {
 						if (player.useProp(new Bomb())) {
 							gameMap[bombPlace].setProp(new Bomb());

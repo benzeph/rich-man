@@ -250,4 +250,10 @@ public class InterpreterTest {
 	public void should_return_quit_when_input_is_quit() {
 		assertThat(interpreter.interpret("quit", gameMap, player), is("quit"));
 	}
+
+	@Test
+	public void should_return_69_when_input_is_negative_1() {
+		assertThat((70 + (-1)) % 70, is(69));
+		assertThat((70 + 2) % 70, is(2));
+	}
 }
