@@ -173,7 +173,7 @@ public class InterpreterTest {
 		assertThat(interpreter.interpret("bomb 4", gameMap, player), is("bomb set at 4"));
 		assertThat(interpreter.interpret("bomb 5", gameMap, player), is("bomb set at 5"));
 		assertThat(interpreter.interpret("bomb 6", gameMap, player), is("bomb set at 6"));
-		assertThat(interpreter.interpret("roll", gameMap, player), is("stop at " + player.getCurrentMapPosition() + " , meet a bomb"));
+		assertThat(interpreter.interpret("roll", gameMap, player), is("roll , stop at " + player.getCurrentMapPosition() + " , meet a bomb"));
 	}
 
 	@Test
