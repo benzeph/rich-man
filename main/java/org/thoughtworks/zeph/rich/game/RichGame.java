@@ -146,6 +146,7 @@ public class RichGame extends Game {
 
 					}
 				}
+				drawMap();
 				currentPlayer = (currentPlayer + 1) % totalPlayerNum;
 			} else {
 				currentPlayer = (currentPlayer + 1) % totalPlayerNum;
