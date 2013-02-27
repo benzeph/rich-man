@@ -56,8 +56,8 @@ public class Interpreter {
 				if (gameMap[currentMapPosition].getPlayerSymbol() == ' ') {
 					gameMap[currentMapPosition].setPlayerSymbol(player.getName().charAt(0));
 				}
-				if (gameMap[currentMapPosition - 1].getPlayerSymbol() == player.getName().charAt(0)) {
-					gameMap[currentMapPosition - 1].setPlayerSymbol(' ');
+				if (gameMap[(gameMap.length + currentMapPosition -1) % gameMap.length].getPlayerSymbol() == player.getName().charAt(0)) {
+					gameMap[(gameMap.length + currentMapPosition -1) % gameMap.length].setPlayerSymbol(' ');
 				}
 				player.setCurrentMapPosition(currentMapPosition);
 				if (player.getProp() instanceof Bomb) {
