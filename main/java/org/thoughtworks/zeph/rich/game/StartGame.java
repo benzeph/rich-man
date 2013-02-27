@@ -22,6 +22,7 @@ public class StartGame {
 	}
 
 	public void startForTest() {
+		System.out.println("input \"rich\" to start the game:");
 		String inputLine = scanner.nextLine();
 		while (!inputLine.equals("rich")) {
 			System.out.println("input \"rich\" to startForTest game");
@@ -107,6 +108,7 @@ public class StartGame {
 	}
 
 	public void start() {
+		System.out.println("input \"rich\" to start the game:");
 		String inputLine = scanner.nextLine();
 		while (!inputLine.equals("rich")) {
 			System.out.println("input \"rich\" to startForTest game");
