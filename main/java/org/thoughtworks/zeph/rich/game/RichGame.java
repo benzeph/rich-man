@@ -7,6 +7,7 @@ import org.thoughtworks.zeph.rich.gift.MoneyGift;
 import org.thoughtworks.zeph.rich.input.InputSystem;
 import org.thoughtworks.zeph.rich.interpreter.Interpreter;
 import org.thoughtworks.zeph.rich.map.*;
+import org.thoughtworks.zeph.rich.output.ColorSystemOut;
 import org.thoughtworks.zeph.rich.player.Player;
 import org.thoughtworks.zeph.rich.props.Block;
 import org.thoughtworks.zeph.rich.props.Bomb;
@@ -85,8 +86,9 @@ public class RichGame extends Game {
 				if ((null != players[currentPlayer].getGod()) && (players[currentPlayer].getGod().getLeftTime() > 0)) {
 					players[currentPlayer].getGod().timeCountDown();
 				}
-				System.out.println(players[currentPlayer].getName() + ">waiting for input");
+				ColorSystemOut.println(players[currentPlayer].getName() + ">waiting for input",players[currentPlayer].getColorNum());
 				System.out.print("command:");
+				ColorSystemOut.print("",7);
 				String inputStr = "";
 				while (!inputStr.equals("roll") && !inputStr.equals("roll one")) {
 					inputStr = input.getInput();
@@ -108,7 +110,7 @@ public class RichGame extends Game {
 						System.out.println(players[currentPlayer].query());
 						continue;
 					}
-					if (currentPlayerPosition(currentPlayer) instanceof BuildingLotOneTwo) {
+					if ((currentPlayerPosition(currentPlayer) instanceof BuildingLotOneTwo)&&!order.equals("illegal instruction")) {
 						if (isLandBlank(currentPlayer)) {
 							buyLand(input, currentPlayer);
 						} else if (isLandBelongToPlayer(currentPlayer)) {
@@ -116,7 +118,7 @@ public class RichGame extends Game {
 						} else {
 							payLand(currentPlayer);
 						}
-					} else if (currentPlayerPosition(currentPlayer) instanceof BuildingLotThree) {
+					} else if ((currentPlayerPosition(currentPlayer) instanceof BuildingLotThree)&&!order.equals("illegal instruction")) {
 						if (isLandBlank(currentPlayer)) {
 							buyLand(input, currentPlayer);
 						} else if (isLandBelongToPlayer(currentPlayer)) {
@@ -124,7 +126,7 @@ public class RichGame extends Game {
 						} else {
 							payLand(currentPlayer);
 						}
-					} else if (currentPlayerPosition(currentPlayer) instanceof BuildingLotFourFive) {
+					} else if ((currentPlayerPosition(currentPlayer) instanceof BuildingLotFourFive)&&!order.equals("illegal instruction")) {
 						if (isLandBlank(currentPlayer)) {
 							buyLand(input, currentPlayer);
 						} else if (isLandBelongToPlayer(currentPlayer)) {
@@ -208,7 +210,7 @@ public class RichGame extends Game {
 						System.out.println(players[currentPlayer].query());
 						continue;
 					}
-					if (currentPlayerPosition(currentPlayer) instanceof BuildingLotOneTwo) {
+					if ((currentPlayerPosition(currentPlayer) instanceof BuildingLotOneTwo)&&!order.equals("illegal instruction")) {
 						if (isLandBlank(currentPlayer)) {
 							buyLand(input, currentPlayer);
 						} else if (isLandBelongToPlayer(currentPlayer)) {
@@ -216,7 +218,7 @@ public class RichGame extends Game {
 						} else {
 							payLand(currentPlayer);
 						}
-					} else if (currentPlayerPosition(currentPlayer) instanceof BuildingLotThree) {
+					} else if ((currentPlayerPosition(currentPlayer) instanceof BuildingLotThree)&&!order.equals("illegal instruction")) {
 						if (isLandBlank(currentPlayer)) {
 							buyLand(input, currentPlayer);
 						} else if (isLandBelongToPlayer(currentPlayer)) {
@@ -224,7 +226,7 @@ public class RichGame extends Game {
 						} else {
 							payLand(currentPlayer);
 						}
-					} else if (currentPlayerPosition(currentPlayer) instanceof BuildingLotFourFive) {
+					} else if ((currentPlayerPosition(currentPlayer) instanceof BuildingLotFourFive)&&!order.equals("illegal instruction")) {
 						if (isLandBlank(currentPlayer)) {
 							buyLand(input, currentPlayer);
 						} else if (isLandBelongToPlayer(currentPlayer)) {
