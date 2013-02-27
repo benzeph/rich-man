@@ -84,7 +84,6 @@ public class RichGame extends Game {
 				}
 				if ((null != players[currentPlayer].getGod()) && (players[currentPlayer].getGod().getLeftTime() > 0)) {
 					players[currentPlayer].getGod().timeCountDown();
-					System.out.println(players[currentPlayer].getName() + ":" + players[currentPlayer].getGod().getLeftTime());
 				}
 				System.out.println(players[currentPlayer].getName() + ">waiting for input");
 				System.out.print("command:");
@@ -184,7 +183,6 @@ public class RichGame extends Game {
 
 				if ((null != players[currentPlayer].getGod()) && (players[currentPlayer].getGod().getLeftTime() > 0)) {
 					players[currentPlayer].getGod().timeCountDown();
-					System.out.println(players[currentPlayer].getName() + ":" + players[currentPlayer].getGod().getLeftTime());
 				}
 				String inputStr = "";
 				while (!inputStr.equals("roll") && !inputStr.equals("roll one")) {
@@ -247,6 +245,7 @@ public class RichGame extends Game {
 
 					}
 				}
+				drawMap();
 				currentPlayer = (currentPlayer + 1) % totalPlayerNum;
 			} else {
 				currentPlayer = (currentPlayer + 1) % totalPlayerNum;
@@ -335,11 +334,11 @@ public class RichGame extends Game {
 
 	private void payLand(int currentPlayer) {
 		if ((null != players[currentPlayer].getGod()) && (players[currentPlayer].getGod().getLeftTime() > 0)) {
-			System.out.println(players[currentPlayer].getName() + ":wealthGod bless , exempt from payment");
+			System.out.println("wealth god bless , exempt from payment");
 			return;
 		}
 		if (players[currentPlayer].payRent((Land) gameMap[players[currentPlayer].getCurrentMapPosition()], players[((Land) gameMap[players[currentPlayer].getCurrentMapPosition()]).getBelongTo() - 1])) {
-			System.out.println(players[currentPlayer].getName() + ":pay " + ((Land) gameMap[players[currentPlayer].getCurrentMapPosition()]).getCost());
+			System.out.println("pay " + ((Land) gameMap[players[currentPlayer].getCurrentMapPosition()]).getCost());
 		} else {
 			System.out.println(players[currentPlayer].getName() + " broke");
 			players[currentPlayer] = null;
