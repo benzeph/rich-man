@@ -7,7 +7,6 @@ import org.thoughtworks.zeph.rich.gift.MoneyGift;
 import org.thoughtworks.zeph.rich.input.InputSystem;
 import org.thoughtworks.zeph.rich.interpreter.Interpreter;
 import org.thoughtworks.zeph.rich.map.*;
-import org.thoughtworks.zeph.rich.output.ColorSystemOut;
 import org.thoughtworks.zeph.rich.player.Player;
 import org.thoughtworks.zeph.rich.props.Block;
 import org.thoughtworks.zeph.rich.props.Bomb;
@@ -86,8 +85,8 @@ public class RichGame extends Game {
 				if ((null != players[currentPlayer].getGod()) && (players[currentPlayer].getGod().getLeftTime() > 0)) {
 					players[currentPlayer].getGod().timeCountDown();
 				}
-				ColorSystemOut.println(players[currentPlayer].getName() + ">waiting for input", 4);
-				ColorSystemOut.print("command:", 4);
+				System.out.println(players[currentPlayer].getName() + ">waiting for input");
+				System.out.print("command:");
 				String inputStr = "";
 				while (!inputStr.equals("roll") && !inputStr.equals("roll one")) {
 					inputStr = input.getInput();

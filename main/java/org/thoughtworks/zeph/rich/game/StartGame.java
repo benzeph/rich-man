@@ -63,7 +63,7 @@ public class StartGame {
 					switch (inputLine.charAt(i)) {
 						case '1':
 							if (!isQianFuRenChoose) {
-								players[i] = new Player("Qian Furen", 1);
+								players[i] = new Player("Qian Furen", 1, 5);
 								players[i].setMoney(money);
 								isQianFuRenChoose = true;
 							} else {
@@ -72,7 +72,7 @@ public class StartGame {
 							break;
 						case '2':
 							if (!isATuBoChoose) {
-								players[i] = new Player("A Tubo", 2);
+								players[i] = new Player("A Tubo", 2, 6);
 								players[i].setMoney(money);
 							} else {
 								isDuplicate = true;
@@ -80,7 +80,7 @@ public class StartGame {
 							break;
 						case '3':
 							if (!isSunXiaoMeiChoose) {
-								players[i] = new Player("Sun Xiaomei", 3);
+								players[i] = new Player("Sun Xiaomei", 3, 4);
 								players[i].setMoney(money);
 							} else {
 								isDuplicate = true;
@@ -88,7 +88,7 @@ public class StartGame {
 							break;
 						case '4':
 							if (!isJinBeibeiChoose) {
-								players[i] = new Player("Jin Beibei", 4);
+								players[i] = new Player("Jin Beibei", 4, 2);
 								players[i].setMoney(money);
 							} else {
 								isDuplicate = true;
@@ -149,7 +149,7 @@ public class StartGame {
 					switch (inputLine.charAt(i)) {
 						case '1':
 							if (!isQianFuRenChoose) {
-								players[i] = new Player("Qian Furen", 1);
+								players[i] = new Player("Qian Furen", 1, 5);
 								players[i].setMoney(money);
 								isQianFuRenChoose = true;
 							} else {
@@ -158,7 +158,7 @@ public class StartGame {
 							break;
 						case '2':
 							if (!isATuBoChoose) {
-								players[i] = new Player("A Tubo", 2);
+								players[i] = new Player("A Tubo", 2, 6);
 								players[i].setMoney(money);
 							} else {
 								isDuplicate = true;
@@ -166,7 +166,7 @@ public class StartGame {
 							break;
 						case '3':
 							if (!isSunXiaoMeiChoose) {
-								players[i] = new Player("Sun Xiaomei", 3);
+								players[i] = new Player("Sun Xiaomei", 3, 4);
 								players[i].setMoney(money);
 							} else {
 								isDuplicate = true;
@@ -174,7 +174,7 @@ public class StartGame {
 							break;
 						case '4':
 							if (!isJinBeibeiChoose) {
-								players[i] = new Player("Jin Beibei", 4);
+								players[i] = new Player("Jin Beibei", 4, 2);
 								players[i].setMoney(money);
 							} else {
 								isDuplicate = true;
