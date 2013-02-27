@@ -1,5 +1,6 @@
 package org.thoughtworks.zeph.rich.map;
 
+import org.thoughtworks.zeph.rich.output.ColorSystemOut;
 import org.thoughtworks.zeph.rich.props.Prop;
 
 public class Map {
@@ -61,13 +62,21 @@ public class Map {
 
 	}
 
-	public char getSymbol() {
+	public void getSymbol() {
 		if (playerSymbol != ' ') {
-			return playerSymbol;
-		} else if (null != prop) {
-			return prop.getIcon();
-		} else {
-			return symbol;
+			ColorSystemOut.print(String.valueOf(playerSymbol), 7);
+			return;
 		}
+		if (this instanceof Land) {
+			if (((Land) this).getBelongTo() != null) {
+				ColorSystemOut.print(String.valueOf(symbol), ((Land) this).getBelongTo().getColorNum());
+				return;
+			}
+		}
+		if (null != prop) {
+			ColorSystemOut.print(String.valueOf(prop.getIcon()), 7);
+			return;
+		}
+		ColorSystemOut.print(String.valueOf(symbol), 7);
 	}
 }

@@ -199,11 +199,11 @@ public class InterpreterTest {
 	public void should_return_9800_1_10000_0_and_200_when_sell_5() {
 		player.buyLand((BuildingLotOneTwo) gameMap[5]);
 		assertThat(player.getMoney(), is(9800));
-		assertThat(((BuildingLotOneTwo) gameMap[5]).getBelongTo(), is(player.getId()));
+		assertThat(((BuildingLotOneTwo) gameMap[5]).getBelongTo(), is(player));
 		String instruction = "sell 5";
 		assertThat(interpreter.interpret(instruction, gameMap, players, 0), is("sell land 5, money:200"));
 		assertThat(player.getMoney(), is(10000));
-		assertThat(((Land) gameMap[5]).getBelongTo(), is(0));
+		assertNull(((Land) gameMap[5]).getBelongTo());
 	}
 
 	@Test

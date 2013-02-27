@@ -47,7 +47,7 @@ public class PlayerTest {
 		Land buildingLotOneTwo = new BuildingLotOneTwo(2,'0');
 		Land land2 = new BuildingLotOneTwo(2,'0');
 		land2.levelUp();
-		land2.setBelongTo(1);
+		land2.setBelongTo(player);
 		player.buyLand(buildingLotOneTwo);
 		player.upgradeLand(buildingLotOneTwo);
 		Map<Integer, Land> lands = player.getLands();

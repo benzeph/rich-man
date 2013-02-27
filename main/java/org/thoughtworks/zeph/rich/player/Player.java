@@ -18,6 +18,7 @@ public class Player {
 	private Prop prop;
 	private int hospitalDays;
 	private int prisonDays;
+	private int colorNum = 7;
 	public Player(String name, int id) {
 		this.id = id;
 		this.name = name;
@@ -25,11 +26,21 @@ public class Player {
 		lands = new HashMap<Integer, Land>();
 		props = new HashMap<Integer, Integer>();
 	}
-
+	public Player(String name, int id,int colorNum) {
+		this.id = id;
+		this.name = name;
+		this.colorNum = colorNum;
+		money = 10000;
+		lands = new HashMap<Integer, Land>();
+		props = new HashMap<Integer, Integer>();
+	}
 	public Map<Integer, Land> getLands() {
 		return lands;
 	}
 
+	public int getColorNum() {
+		return colorNum;
+	}
 
 	public String getName() {
 		return name;
@@ -67,7 +78,7 @@ public class Player {
 		if (money >= land.getPrice()) {
 			lands.put(land.getMapId(), land);
 			money = money - land.getPrice();
-			land.setBelongTo(getId());
+			land.setBelongTo(this);
 			return true;
 		} else {
 			return false;
@@ -90,7 +101,7 @@ public class Player {
 		if (lands.containsKey(land.getMapId())) {
 			money = money + land.getPrice() * (land.getLevel() + 1);
 			lands.remove(land.getMapId());
-			land.setBelongTo(0);
+			land.setBelongTo(null);
 			return true;
 		} else {
 			return false;
@@ -107,7 +118,7 @@ public class Player {
 			Iterator<Integer> it = set.iterator();
 			while (money < land.getCost() && !lands.isEmpty()) {
 				Land myLand = lands.get(it.next());
-				myLand.setBelongTo(0);
+				myLand.setBelongTo(null);
 				money = money + myLand.getPrice() * (myLand.getLevel() + 1);
 				lands.remove(myLand.getMapId());
 			}

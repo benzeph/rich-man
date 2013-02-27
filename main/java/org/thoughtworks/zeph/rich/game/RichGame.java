@@ -7,6 +7,7 @@ import org.thoughtworks.zeph.rich.gift.MoneyGift;
 import org.thoughtworks.zeph.rich.input.InputSystem;
 import org.thoughtworks.zeph.rich.interpreter.Interpreter;
 import org.thoughtworks.zeph.rich.map.*;
+import org.thoughtworks.zeph.rich.output.ColorSystemOut;
 import org.thoughtworks.zeph.rich.player.Player;
 import org.thoughtworks.zeph.rich.props.Block;
 import org.thoughtworks.zeph.rich.props.Bomb;
@@ -85,8 +86,8 @@ public class RichGame extends Game {
 				if ((null != players[currentPlayer].getGod()) && (players[currentPlayer].getGod().getLeftTime() > 0)) {
 					players[currentPlayer].getGod().timeCountDown();
 				}
-				System.out.println(players[currentPlayer].getName() + ">waiting for input");
-				System.out.print("command:");
+				ColorSystemOut.println(players[currentPlayer].getName() + ">waiting for input", 4);
+				ColorSystemOut.print("command:", 4);
 				String inputStr = "";
 				while (!inputStr.equals("roll") && !inputStr.equals("roll one")) {
 					inputStr = input.getInput();
@@ -338,7 +339,7 @@ public class RichGame extends Game {
 			System.out.println("wealth god bless , exempt from payment");
 			return;
 		}
-		if (players[currentPlayer].payRent((Land) gameMap[players[currentPlayer].getCurrentMapPosition()], players[((Land) gameMap[players[currentPlayer].getCurrentMapPosition()]).getBelongTo() - 1])) {
+		if (players[currentPlayer].payRent((Land) gameMap[players[currentPlayer].getCurrentMapPosition()], ((Land) gameMap[players[currentPlayer].getCurrentMapPosition()]).getBelongTo())) {
 			System.out.println("pay " + ((Land) gameMap[players[currentPlayer].getCurrentMapPosition()]).getCost());
 		} else {
 			System.out.println(players[currentPlayer].getName() + " broke");
@@ -348,11 +349,11 @@ public class RichGame extends Game {
 	}
 
 	private boolean isLandBelongToPlayer(int currentPlayer) {
-		return ((Land) currentPlayerPosition(currentPlayer)).getBelongTo() == players[currentPlayer].getId();
+		return ((Land) currentPlayerPosition(currentPlayer)).getBelongTo().equals(players[currentPlayer]);
 	}
 
 	private boolean isLandBlank(int currentPlayer) {
-		return ((Land) currentPlayerPosition(currentPlayer)).getBelongTo() == 0;
+		return ((Land) currentPlayerPosition(currentPlayer)).getBelongTo() == null;
 	}
 
 	private Map currentPlayerPosition(int currentPlayer) {
@@ -390,53 +391,53 @@ public class RichGame extends Game {
 	@Override
 	public void drawMap() {
 		for (int i = 0; i < 29; i++) {
-			System.out.print(gameMap[i].getSymbol());
+			gameMap[i].getSymbol();
 		}
 		System.out.println();
 		///////////////////////////////////
-		System.out.print(gameMap[69].getSymbol());
+		gameMap[69].getSymbol();
 		for (int i = 1; i < 28; i++) {
 			System.out.print(" ");
 		}
-		System.out.print(gameMap[29].getSymbol());
+		gameMap[29].getSymbol();
 		System.out.println();
 		///////////////////////////////////
-		System.out.print(gameMap[68].getSymbol());
+		gameMap[68].getSymbol();
 		for (int i = 1; i < 28; i++) {
 			System.out.print(" ");
 		}
-		System.out.print(gameMap[30].getSymbol());
+		gameMap[30].getSymbol();
 		System.out.println();
 		//////////////////////////////////
-		System.out.print(gameMap[67].getSymbol());
+		gameMap[67].getSymbol();
 		for (int i = 1; i < 28; i++) {
 			System.out.print(" ");
 		}
-		System.out.print(gameMap[31].getSymbol());
+		gameMap[31].getSymbol();
 		System.out.println();
 		//////////////////////////////////
-		System.out.print(gameMap[66].getSymbol());
+		gameMap[66].getSymbol();
 		for (int i = 1; i < 28; i++) {
 			System.out.print(" ");
 		}
-		System.out.print(gameMap[32].getSymbol());
+		gameMap[32].getSymbol();
 		System.out.println();
 		////////////////////////////////
-		System.out.print(gameMap[65].getSymbol());
+		gameMap[65].getSymbol();
 		for (int i = 1; i < 28; i++) {
 			System.out.print(" ");
 		}
-		System.out.print(gameMap[33].getSymbol());
+		gameMap[33].getSymbol();
 		System.out.println();
 		////////////////////////////////
-		System.out.print(gameMap[64].getSymbol());
+		gameMap[64].getSymbol();
 		for (int i = 1; i < 28; i++) {
 			System.out.print(" ");
 		}
-		System.out.print(gameMap[34].getSymbol());
+		gameMap[34].getSymbol();
 		System.out.println();
 		for (int i = 63; i >= 35; i--) {
-			System.out.print(gameMap[i].getSymbol());
+			gameMap[i].getSymbol();
 		}
 		System.out.println();
 	}

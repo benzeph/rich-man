@@ -133,12 +133,12 @@ public class GameTest {
 				"roll one\nroll one\ny\nroll one\nroll one\ny\nroll one\nquit";
 		Game game = new RichGame(new Player[]{player1, player2});
 		Map[] gameMap = game.getGameMap();
-		((Land) gameMap[1]).setBelongTo(2);
-		((Land) gameMap[2]).setBelongTo(2);
-		((Land) gameMap[3]).setBelongTo(2);
-		((Land) gameMap[4]).setBelongTo(2);
-		((Land) gameMap[5]).setBelongTo(2);
-		((Land) gameMap[6]).setBelongTo(2);
+		((Land) gameMap[1]).setBelongTo(player2);
+		((Land) gameMap[2]).setBelongTo(player2);
+		((Land) gameMap[3]).setBelongTo(player2);
+		((Land) gameMap[4]).setBelongTo(player2);
+		((Land) gameMap[5]).setBelongTo(player2);
+		((Land) gameMap[6]).setBelongTo(player2);
 		player1.setGod(new WealthGod());
 		game.runForTest(instruction);
 		assertThat(player1.getMoney(), is(9800));

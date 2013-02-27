@@ -194,6 +194,7 @@ public class StartGame {
 	}
 
 	public static void main(String[] args) {
+
 		StartGame startGame = new StartGame(System.in);
 		startGame.start();
 	}
