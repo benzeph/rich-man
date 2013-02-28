@@ -24,9 +24,9 @@ public class Interpreter {
 				if (-10 <= n && n <= 10) {
 					int bombPlace = (gameMap.length + player.getCurrentMapPosition() + n) % gameMap.length;
 					boolean isBeenOccupied = false;
-					for (int i = 0; i < players.length; i++) {
-						if (null != players[i]) {
-							if (players[i].getCurrentMapPosition() == bombPlace) {
+					for (Player player1 : players) {
+						if (null != player1) {
+							if (player1.getCurrentMapPosition() == bombPlace) {
 								isBeenOccupied = true;
 							}
 						}
@@ -56,8 +56,8 @@ public class Interpreter {
 				if (gameMap[currentMapPosition].getPlayerSymbol() == ' ') {
 					gameMap[currentMapPosition].setPlayerSymbol(player.getName().charAt(0));
 				}
-				if (gameMap[(gameMap.length + currentMapPosition -1) % gameMap.length].getPlayerSymbol() == player.getName().charAt(0)) {
-					gameMap[(gameMap.length + currentMapPosition -1) % gameMap.length].setPlayerSymbol(' ');
+				if (gameMap[(gameMap.length + currentMapPosition - 1) % gameMap.length].getPlayerSymbol() == player.getName().charAt(0)) {
+					gameMap[(gameMap.length + currentMapPosition - 1) % gameMap.length].setPlayerSymbol(' ');
 				}
 				player.setCurrentMapPosition(currentMapPosition);
 				if (player.getProp() instanceof Bomb) {
@@ -89,9 +89,9 @@ public class Interpreter {
 				if (-10 <= n && n <= 10) {
 					int blockPlace = (gameMap.length + player.getCurrentMapPosition() + n) % gameMap.length;
 					boolean isBeenOccupied = false;
-					for (int i = 0; i < players.length; i++) {
-						if (null != players[i]) {
-							if (players[i].getCurrentMapPosition() == blockPlace) {
+					for (Player player1 : players) {
+						if (null != player1) {
+							if (player1.getCurrentMapPosition() == blockPlace) {
 								isBeenOccupied = true;
 							}
 						}
@@ -172,8 +172,8 @@ public class Interpreter {
 				if (gameMap[currentMapPosition].getPlayerSymbol() == ' ') {
 					gameMap[currentMapPosition].setPlayerSymbol(player.getName().charAt(0));
 				}
-				if (gameMap[(gameMap.length + currentMapPosition -1) % gameMap.length].getPlayerSymbol() == player.getName().charAt(0)) {
-					gameMap[(gameMap.length + currentMapPosition -1) % gameMap.length].setPlayerSymbol(' ');
+				if (gameMap[(gameMap.length + currentMapPosition - 1) % gameMap.length].getPlayerSymbol() == player.getName().charAt(0)) {
+					gameMap[(gameMap.length + currentMapPosition - 1) % gameMap.length].setPlayerSymbol(' ');
 				}
 				player.setCurrentMapPosition(currentMapPosition);
 				if (player.getProp() instanceof Bomb) {

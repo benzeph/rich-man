@@ -22,9 +22,9 @@ public class MineTest {
 
 	@Test
 	public void should_return_80_when_player_stand_on_mine_80() {
-		Mine mine = new Mine(2,80,'$');
-		Player player = new Player("Qian Furen",1);
+		Mine mine = new Mine(2, 80, '$');
+		Player player = new Player("Qian Furen", 1);
 		mine.addGamePoint(player);
-		assertThat(player.getGamePoint(),is(80));
+		assertThat(player.getGamePoint(), is(80));
 	}
 }

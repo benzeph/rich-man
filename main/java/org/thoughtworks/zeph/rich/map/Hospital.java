@@ -5,11 +5,12 @@ import org.thoughtworks.zeph.rich.player.Player;
 import java.util.HashSet;
 import java.util.Set;
 
-public class Hospital extends Map{
+public class Hospital extends Map {
+
 	private Set<Player> players;
 
-	public Hospital(int mapId,char symbol){
-		super(mapId,symbol);
+	public Hospital(int mapId, char symbol) {
+		super(mapId, symbol);
 		players = new HashSet<Player>();
 	}
 

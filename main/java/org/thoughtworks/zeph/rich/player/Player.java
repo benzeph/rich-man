@@ -19,6 +19,7 @@ public class Player {
 	private int hospitalDays;
 	private int prisonDays;
 	private int colorNum = 7;
+
 	public Player(String name, int id) {
 		this.id = id;
 		this.name = name;
@@ -26,7 +27,8 @@ public class Player {
 		lands = new HashMap<Integer, Land>();
 		props = new HashMap<Integer, Integer>();
 	}
-	public Player(String name, int id,int colorNum) {
+
+	public Player(String name, int id, int colorNum) {
 		this.id = id;
 		this.name = name;
 		this.colorNum = colorNum;
@@ -34,6 +36,7 @@ public class Player {
 		lands = new HashMap<Integer, Land>();
 		props = new HashMap<Integer, Integer>();
 	}
+
 	public Map<Integer, Land> getLands() {
 		return lands;
 	}
@@ -64,6 +67,50 @@ public class Player {
 
 	public void setGod(God god) {
 		this.god = god;
+	}
+
+	public void setHospitalDays(int hospitalDays) {
+		this.hospitalDays = hospitalDays;
+	}
+
+	public void countDownHospitalDays() {
+		hospitalDays = hospitalDays - 1;
+	}
+
+	public int getHospitalDays() {
+		return hospitalDays;
+	}
+
+	public void setPrisonDays(int prisonDays) {
+		this.prisonDays = prisonDays;
+	}
+
+	public int getCurrentMapPosition() {
+		return currentMapPosition;
+	}
+
+	public void setCurrentMapPosition(int currentMapPosition) {
+		this.currentMapPosition = currentMapPosition;
+	}
+
+	public Prop getProp() {
+		return prop;
+	}
+
+	public void setProp(Prop prop) {
+		this.prop = prop;
+	}
+
+	public void setMoney(int money) {
+		this.money = money;
+	}
+
+	public void countDownPrisonDays() {
+		prisonDays = prisonDays - 1;
+	}
+
+	public int getPrisonDays() {
+		return prisonDays;
 	}
 
 	public void addGamePoint(int gamePoint) {
@@ -212,60 +259,9 @@ public class Player {
 		return message;
 	}
 
-	public void setHospitalDays(int hospitalDays) {
-		this.hospitalDays = hospitalDays;
-	}
-
-	public void countDownHospitalDays() {
-		hospitalDays = hospitalDays - 1;
-	}
-
-	public int getHospitalDays() {
-		return hospitalDays;
-	}
-
-	public void setPrisonDays(int prisonDays) {
-		this.prisonDays = prisonDays;
-	}
-
-	public void countDownPrisonDays() {
-		prisonDays = prisonDays - 1;
-	}
-
-	public int getPrisonDays() {
-		return prisonDays;
-	}
 
 	public int dice() {
-		return (int) new Random().nextInt(6) + 1;
-	}
-
-	public int getCurrentMapPosition() {
-		return currentMapPosition;
-	}
-
-	public void setCurrentMapPosition(int currentMapPosition) {
-		this.currentMapPosition = currentMapPosition;
-	}
-
-	public Prop getProp() {
-		return prop;
-	}
-
-	public void setProp(Prop prop) {
-		this.prop = prop;
-	}
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public void setMoney(int money) {
-		this.money = money;
+		return new Random().nextInt(6) + 1;
 	}
 }
 

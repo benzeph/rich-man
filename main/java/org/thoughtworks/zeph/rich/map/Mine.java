@@ -2,11 +2,12 @@ package org.thoughtworks.zeph.rich.map;
 
 import org.thoughtworks.zeph.rich.player.Player;
 
-public class Mine extends Map{
+public class Mine extends Map {
+
 	private int gamePoint;
 
-	public Mine(int mapId,int gamePoint,char symbol) {
-		super(mapId,symbol);
+	public Mine(int mapId, int gamePoint, char symbol) {
+		super(mapId, symbol);
 		this.gamePoint = gamePoint;
 	}
 

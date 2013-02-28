@@ -10,7 +10,9 @@ public class OutputTest {
 
 	interface api extends StdCallLibrary {
 		api INSTANCE = (api) Native.loadLibrary("kernel32", api.class);
+
 		int GetStdHandle(int stdHand);
+
 		boolean SetConsoleTextAttribute(int hConsoleOutput, int textAtt);
 	}
 

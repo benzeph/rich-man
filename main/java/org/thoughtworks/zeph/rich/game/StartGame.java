@@ -37,7 +37,7 @@ public class StartGame {
 			if (inputLine.equals(""))
 				break;
 			Matcher matcher = pattern.matcher(inputLine);
-			if (inputLine.equals(null)) {
+			if (inputLine == null) {
 				break;
 			}
 			if (matcher.matches()) {
@@ -62,36 +62,39 @@ public class StartGame {
 				for (int i = 0; i < inputLine.length(); i++) {
 					switch (inputLine.charAt(i)) {
 						case '1':
-							if (!isQianFuRenChoose) {
+							if (isQianFuRenChoose) {
+								isDuplicate = true;
+							} else {
 								players[i] = new Player("Qian Furen", 1, 5);
 								players[i].setMoney(money);
 								isQianFuRenChoose = true;
-							} else {
-								isDuplicate = true;
 							}
 							break;
 						case '2':
-							if (!isATuBoChoose) {
+							if (isATuBoChoose) {
+								isDuplicate = true;
+							} else {
 								players[i] = new Player("A Tubo", 2, 6);
 								players[i].setMoney(money);
-							} else {
-								isDuplicate = true;
+								isATuBoChoose = true;
 							}
 							break;
 						case '3':
-							if (!isSunXiaoMeiChoose) {
+							if (isSunXiaoMeiChoose) {
+								isDuplicate = true;
+							} else {
 								players[i] = new Player("Sun Xiaomei", 3, 4);
 								players[i].setMoney(money);
-							} else {
-								isDuplicate = true;
+								isSunXiaoMeiChoose = true;
 							}
 							break;
 						case '4':
-							if (!isJinBeibeiChoose) {
+							if (isJinBeibeiChoose) {
+								isDuplicate = true;
+							} else {
 								players[i] = new Player("Jin Beibei", 4, 2);
 								players[i].setMoney(money);
-							} else {
-								isDuplicate = true;
+								isJinBeibeiChoose = true;
 							}
 							break;
 						default:
@@ -123,7 +126,7 @@ public class StartGame {
 			if (inputLine.equals(""))
 				break;
 			Matcher matcher = pattern.matcher(inputLine);
-			if (inputLine.equals(null)) {
+			if (inputLine == null) {
 				break;
 			}
 			if (matcher.matches()) {
@@ -148,36 +151,39 @@ public class StartGame {
 				for (int i = 0; i < inputLine.length(); i++) {
 					switch (inputLine.charAt(i)) {
 						case '1':
-							if (!isQianFuRenChoose) {
+							if (isQianFuRenChoose) {
+								isDuplicate = true;
+							} else {
 								players[i] = new Player("Qian Furen", 1, 5);
 								players[i].setMoney(money);
 								isQianFuRenChoose = true;
-							} else {
-								isDuplicate = true;
 							}
 							break;
 						case '2':
-							if (!isATuBoChoose) {
+							if (isATuBoChoose) {
+								isDuplicate = true;
+							} else {
 								players[i] = new Player("A Tubo", 2, 6);
 								players[i].setMoney(money);
-							} else {
-								isDuplicate = true;
+								isATuBoChoose = true;
 							}
 							break;
 						case '3':
-							if (!isSunXiaoMeiChoose) {
+							if (isSunXiaoMeiChoose) {
+								isDuplicate = true;
+							} else {
 								players[i] = new Player("Sun Xiaomei", 3, 4);
 								players[i].setMoney(money);
-							} else {
-								isDuplicate = true;
+								isSunXiaoMeiChoose = true;
 							}
 							break;
 						case '4':
-							if (!isJinBeibeiChoose) {
+							if (isJinBeibeiChoose) {
+								isDuplicate = true;
+							} else {
 								players[i] = new Player("Jin Beibei", 4, 2);
 								players[i].setMoney(money);
-							} else {
-								isDuplicate = true;
+								isJinBeibeiChoose = true;
 							}
 							break;
 						default:

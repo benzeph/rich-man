@@ -5,14 +5,13 @@ import java.util.Scanner;
 
 public class InputSystem {
 
-	private String input;
-	private String inputStr;
 	private Scanner scanner;
 
 	public InputSystem(InputStream inputStream) {
 		scanner = new Scanner(inputStream);
 	}
-	public InputSystem(String instruction){
+
+	public InputSystem(String instruction) {
 		scanner = new Scanner(instruction);
 	}
 

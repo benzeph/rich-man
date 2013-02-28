@@ -1,6 +1,6 @@
 package org.thoughtworks.zeph.rich.god;
 
 
-public class WealthGod extends God{
+public class WealthGod extends God {
 
 }

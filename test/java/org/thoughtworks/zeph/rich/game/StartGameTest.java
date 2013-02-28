@@ -23,6 +23,7 @@ public class StartGameTest {
 		StartGame startGame = new StartGame(instruction);
 		startGame.startForTest();
 	}
+
 	@Test
 	public void should_set_default_money_when_game_start_and_input_quit() {
 		String instruction = "dss\nsds\nsdwe\nsdwe\nrich\n\n123\nquit";

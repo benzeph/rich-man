@@ -18,7 +18,7 @@ public class HospitalTest {
 	public void setUp() {
 
 		player = new Player("Qian Furen", 1);
-		hospital = new Hospital(1,'H');
+		hospital = new Hospital(1, 'H');
 	}
 
 	@After
@@ -41,11 +41,11 @@ public class HospitalTest {
 	}
 
 	@Test
-	public void should_return_0_when_prison_release_all_prisoner(){
-		Player player1 = new Player("A Tubo",2);
+	public void should_return_0_when_prison_release_all_prisoner() {
+		Player player1 = new Player("A Tubo", 2);
 		hospital.addRole(player);
 		hospital.addRole(player1);
 		hospital.release();
-		assertThat(hospital.getPlayers().size(),is(0));
+		assertThat(hospital.getPlayers().size(), is(0));
 	}
 }

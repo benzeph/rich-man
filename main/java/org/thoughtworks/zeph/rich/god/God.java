@@ -2,6 +2,7 @@ package org.thoughtworks.zeph.rich.god;
 
 
 public class God {
+
 	private int leftTime;
 
 	public God() {

@@ -4,6 +4,7 @@ import org.thoughtworks.zeph.rich.output.ColorSystemOut;
 import org.thoughtworks.zeph.rich.props.Prop;
 
 public class Map {
+
 	private int mapId;
 	private Prop prop;
 	private char symbol;

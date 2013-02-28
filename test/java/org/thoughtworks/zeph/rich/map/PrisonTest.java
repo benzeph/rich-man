@@ -17,8 +17,8 @@ public class PrisonTest {
 
 	@Before
 	public void setUp() {
-		player = new Player("Qian Furen",1);
-		prison = new Prison(2,'P');
+		player = new Player("Qian Furen", 1);
+		prison = new Prison(2, 'P');
 	}
 
 	@After
@@ -30,13 +30,13 @@ public class PrisonTest {
 	public void should_return_1_when_a_role_hit_by_bomb() {
 		prison.addRole(player);
 		Set<Player> players = prison.getPlayers();
-		assertThat(players.size(),is(1));
+		assertThat(players.size(), is(1));
 	}
 
 	@Test
-	public void should_return_2_when_one_round_finish(){
+	public void should_return_2_when_one_round_finish() {
 		player.setPrisonDays(3);
 		player.countDownPrisonDays();
-		assertThat(player.getPrisonDays(),is(2));
+		assertThat(player.getPrisonDays(), is(2));
 	}
 }

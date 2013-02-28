@@ -5,8 +5,8 @@ import org.thoughtworks.zeph.rich.player.Player;
 
 public class GiftRoom extends Map {
 
-	public GiftRoom(int mapId,char symbol) {
-		super(mapId,symbol);
+	public GiftRoom(int mapId, char symbol) {
+		super(mapId, symbol);
 	}
 
 	public void getGift(Player player, Gift gift) {

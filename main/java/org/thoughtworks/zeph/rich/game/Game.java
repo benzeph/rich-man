@@ -9,9 +9,11 @@ public class Game {
 	public Game() {
 
 	}
-	public void run(){
+
+	public void run() {
 
 	}
+
 	public void runForTest(String instruction) {
 
 	}

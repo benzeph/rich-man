@@ -34,8 +34,8 @@ public class PlayerTest {
 	@Test
 	public void should_return_2_when_role_buys_two_lands() {
 		Player player = new Player("Qian Furen", 1);
-		Land buildingLotOneTwo1 = new BuildingLotOneTwo(2,'0');
-		Land buildingLotOneTwo2 = new BuildingLotOneTwo(3,'0');
+		Land buildingLotOneTwo1 = new BuildingLotOneTwo(2, '0');
+		Land buildingLotOneTwo2 = new BuildingLotOneTwo(3, '0');
 		player.buyLand(buildingLotOneTwo1);
 		player.buyLand(buildingLotOneTwo2);
 		Map<Integer, Land> lands = player.getLands();
@@ -44,8 +44,8 @@ public class PlayerTest {
 
 	@Test
 	public void should_return_level_1_land_when_role_level_up_land_from_level_0() {
-		Land buildingLotOneTwo = new BuildingLotOneTwo(2,'0');
-		Land land2 = new BuildingLotOneTwo(2,'0');
+		Land buildingLotOneTwo = new BuildingLotOneTwo(2, '0');
+		Land land2 = new BuildingLotOneTwo(2, '0');
 		land2.levelUp();
 		land2.setBelongTo(player);
 		player.buyLand(buildingLotOneTwo);
@@ -57,7 +57,7 @@ public class PlayerTest {
 
 	@Test
 	public void should_return_null_when_role_sells_land() {
-		Land land = new BuildingLotOneTwo(2,'0');
+		Land land = new BuildingLotOneTwo(2, '0');
 		player.buyLand(land);
 		player.sellLand(land);
 		Map<Integer, Land> lands = player.getLands();
@@ -67,16 +67,16 @@ public class PlayerTest {
 
 	@Test
 	public void should_return_9900_when_role_pay_the_rent_of_land_1_level_0() {
-		Land land = new BuildingLotOneTwo(2,'0');
-		Player player1 = new Player("A Tubo",2);
-		player.payRent(land,player1);
+		Land land = new BuildingLotOneTwo(2, '0');
+		Player player1 = new Player("A Tubo", 2);
+		player.payRent(land, player1);
 		assertThat(player.getMoney(), is(9900));
 		assertThat(player1.getMoney(), is(10100));
 	}
 
 	@Test
 	public void should_return_10100_when_role_collect_the_rent_of_land_1_level_0() {
-		Land land = new BuildingLotOneTwo(2,'0');
+		Land land = new BuildingLotOneTwo(2, '0');
 		player.buyLand(land);
 		player.collectRent(land.getMapId());
 		assertThat(player.getMoney(), is(9900));
@@ -133,18 +133,18 @@ public class PlayerTest {
 		Prop bomb = new Bomb();
 		player.buyProp(bomb);
 		player.sellProp(bomb);
-		assertThat(player.getGamePoint(),is(0));
+		assertThat(player.getGamePoint(), is(0));
 	}
 
 	@Test
-	public void should_return_12000_when_role_get_a_gift_of_2000(){
+	public void should_return_12000_when_role_get_a_gift_of_2000() {
 		player.addMoney(2000);
-		assertThat(player.getMoney(),is(12000));
+		assertThat(player.getMoney(), is(12000));
 	}
 
 	@Test
-	public void should_return_200_when_role_get_a_gift_of_200_game_point(){
+	public void should_return_200_when_role_get_a_gift_of_200_game_point() {
 		player.addGamePoint(200);
-		assertThat(player.getGamePoint(),is(200));
+		assertThat(player.getGamePoint(), is(200));
 	}
 }

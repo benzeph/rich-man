@@ -3,12 +3,13 @@ package org.thoughtworks.zeph.rich.map;
 import org.thoughtworks.zeph.rich.player.Player;
 
 public class Land extends Map {
+
 	private int level;
 	private Player belongTo;
 	private int price;
 
-	public Land(int mapId,char symbol) {
-		super(mapId,symbol);
+	public Land(int mapId, char symbol) {
+		super(mapId, symbol);
 		level = 0;
 	}
 

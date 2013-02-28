@@ -25,6 +25,7 @@ public class GameMapOutputTest {
 		Game game = new RichGame(new Player[]{player1, player2});
 		game.drawMap();
 	}
+
 	@Test
 	public void should_draw_the_map_when_input_is_rich_map_player_stay_at_2_and_3() {
 		Player player1 = new Player("Qian Furen", 1);

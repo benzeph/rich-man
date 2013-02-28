@@ -14,6 +14,7 @@ import org.thoughtworks.zeph.rich.props.Bomb;
 import org.thoughtworks.zeph.rich.props.Robot;
 
 public class RichGame extends Game {
+
 	private int currentPlayerNum;
 	private int totalPlayerNum;
 	private Player[] players;
@@ -24,39 +25,32 @@ public class RichGame extends Game {
 		totalPlayerNum = players.length;
 		currentPlayerNum = players.length;
 		interpreter = new Interpreter();
+		mapInitialize();
+	}
+
+	private void mapInitialize() {
 		gameMap = new Map[70];
 		gameMap[0] = new Map(0, 'S');
-
 		for (int i = 1; i <= 13; i++) {
 			gameMap[i] = new BuildingLotOneTwo(i, '0');
 		}
-
 		gameMap[14] = new Hospital(14, 'H');
-
 		for (int i = 15; i <= 27; i++) {
 			gameMap[i] = new BuildingLotOneTwo(i, '0');
 		}
-
 		gameMap[28] = new PropRoom(28, 'T');
-
 		for (int i = 29; i <= 34; i++) {
 			gameMap[i] = new BuildingLotThree(i, '0');
 		}
-
 		gameMap[35] = new GiftRoom(35, 'G');
-
 		for (int i = 36; i <= 48; i++) {
 			gameMap[i] = new BuildingLotFourFive(i, '0');
 		}
-
 		gameMap[49] = new Prison(49, 'P');
-
 		for (int i = 50; i <= 62; i++) {
 			gameMap[i] = new BuildingLotFourFive(i, '0');
 		}
-
 		gameMap[63] = new MagicRoom(63, 'M');
-
 		gameMap[64] = new Mine(64, 20, '$');
 		gameMap[65] = new Mine(65, 80, '$');
 		gameMap[66] = new Mine(66, 100, '$');
@@ -68,6 +62,8 @@ public class RichGame extends Game {
 	@Override
 	public void run() {
 		InputSystem input = new InputSystem(System.in);
+		totalPlayerNum = players.length;
+		currentPlayerNum = players.length;
 		int currentPlayer = 0;
 		boolean notBreak = true;
 		while (currentPlayerNum != 1 && notBreak) {
@@ -86,9 +82,9 @@ public class RichGame extends Game {
 				if ((null != players[currentPlayer].getGod()) && (players[currentPlayer].getGod().getLeftTime() > 0)) {
 					players[currentPlayer].getGod().timeCountDown();
 				}
-				ColorSystemOut.println(players[currentPlayer].getName() + ">waiting for input",players[currentPlayer].getColorNum());
+				ColorSystemOut.println(players[currentPlayer].getName() + ">waiting for input", players[currentPlayer].getColorNum());
 				System.out.print("command:");
-				ColorSystemOut.print("",7);
+				ColorSystemOut.print("", 7);
 				String inputStr = "";
 				while (!inputStr.equals("roll") && !inputStr.equals("roll one")) {
 					inputStr = input.getInput();
@@ -110,7 +106,7 @@ public class RichGame extends Game {
 						System.out.println(players[currentPlayer].query());
 						continue;
 					}
-					if ((currentPlayerPosition(currentPlayer) instanceof BuildingLotOneTwo)&&!order.equals("illegal instruction")) {
+					if ((currentPlayerPosition(currentPlayer) instanceof BuildingLotOneTwo) && !order.equals("illegal instruction")) {
 						if (isLandBlank(currentPlayer)) {
 							buyLand(input, currentPlayer);
 						} else if (isLandBelongToPlayer(currentPlayer)) {
@@ -118,7 +114,7 @@ public class RichGame extends Game {
 						} else {
 							payLand(currentPlayer);
 						}
-					} else if ((currentPlayerPosition(currentPlayer) instanceof BuildingLotThree)&&!order.equals("illegal instruction")) {
+					} else if ((currentPlayerPosition(currentPlayer) instanceof BuildingLotThree) && !order.equals("illegal instruction")) {
 						if (isLandBlank(currentPlayer)) {
 							buyLand(input, currentPlayer);
 						} else if (isLandBelongToPlayer(currentPlayer)) {
@@ -126,7 +122,7 @@ public class RichGame extends Game {
 						} else {
 							payLand(currentPlayer);
 						}
-					} else if ((currentPlayerPosition(currentPlayer) instanceof BuildingLotFourFive)&&!order.equals("illegal instruction")) {
+					} else if ((currentPlayerPosition(currentPlayer) instanceof BuildingLotFourFive) && !order.equals("illegal instruction")) {
 						if (isLandBlank(currentPlayer)) {
 							buyLand(input, currentPlayer);
 						} else if (isLandBelongToPlayer(currentPlayer)) {
@@ -157,9 +153,9 @@ public class RichGame extends Game {
 		if (currentPlayerNum != 1) {
 			System.out.println("game over");
 		} else {
-			for (int i = 0; i < players.length; i++) {
-				if (null != players[i]) {
-					System.out.println(players[i].getName() + " win");
+			for (Player player : players) {
+				if (null != player) {
+					System.out.println(player.getName() + " win");
 				}
 			}
 		}
@@ -210,7 +206,7 @@ public class RichGame extends Game {
 						System.out.println(players[currentPlayer].query());
 						continue;
 					}
-					if ((currentPlayerPosition(currentPlayer) instanceof BuildingLotOneTwo)&&!order.equals("illegal instruction")) {
+					if ((currentPlayerPosition(currentPlayer) instanceof BuildingLotOneTwo) && !order.equals("illegal instruction")) {
 						if (isLandBlank(currentPlayer)) {
 							buyLand(input, currentPlayer);
 						} else if (isLandBelongToPlayer(currentPlayer)) {
@@ -218,7 +214,7 @@ public class RichGame extends Game {
 						} else {
 							payLand(currentPlayer);
 						}
-					} else if ((currentPlayerPosition(currentPlayer) instanceof BuildingLotThree)&&!order.equals("illegal instruction")) {
+					} else if ((currentPlayerPosition(currentPlayer) instanceof BuildingLotThree) && !order.equals("illegal instruction")) {
 						if (isLandBlank(currentPlayer)) {
 							buyLand(input, currentPlayer);
 						} else if (isLandBelongToPlayer(currentPlayer)) {
@@ -226,7 +222,7 @@ public class RichGame extends Game {
 						} else {
 							payLand(currentPlayer);
 						}
-					} else if ((currentPlayerPosition(currentPlayer) instanceof BuildingLotFourFive)&&!order.equals("illegal instruction")) {
+					} else if ((currentPlayerPosition(currentPlayer) instanceof BuildingLotFourFive) && !order.equals("illegal instruction")) {
 						if (isLandBlank(currentPlayer)) {
 							buyLand(input, currentPlayer);
 						} else if (isLandBelongToPlayer(currentPlayer)) {
@@ -257,9 +253,9 @@ public class RichGame extends Game {
 		if (currentPlayerNum != 1) {
 			System.out.println("game over");
 		} else {
-			for (int i = 0; i < players.length; i++) {
-				if (null != players[i]) {
-					System.out.println(players[i].getName() + " win");
+			for (Player player : players) {
+				if (null != player) {
+					System.out.println(player.getName() + " win");
 				}
 			}
 		}
@@ -305,7 +301,7 @@ public class RichGame extends Game {
 	}
 
 	private void releasePrisoner(int currentPlayer) {
-		((Prison) gameMap[players[currentPlayer].getCurrentMapPosition()]).release();
+		gameMap[players[currentPlayer].getCurrentMapPosition()].release();
 		System.out.println(players[currentPlayer].getName() + ":release all prisoners");
 	}
 
