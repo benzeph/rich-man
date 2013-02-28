@@ -22,7 +22,6 @@ public class Hospital extends Map {
 		return players;
 	}
 
-	@Override
 	public void release() {
 		players.clear();
 	}

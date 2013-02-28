@@ -22,7 +22,6 @@ public class Prison extends Map {
 		return players;
 	}
 
-	@Override
 	public void release() {
 		players.clear();
 	}

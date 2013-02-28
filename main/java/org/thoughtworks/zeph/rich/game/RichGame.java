@@ -301,7 +301,7 @@ public class RichGame extends Game {
 	}
 
 	private void releasePrisoner(int currentPlayer) {
-		gameMap[players[currentPlayer].getCurrentMapPosition()].release();
+		((Prison)gameMap[players[currentPlayer].getCurrentMapPosition()]).release();
 		System.out.println(players[currentPlayer].getName() + ":release all prisoners");
 	}
 
