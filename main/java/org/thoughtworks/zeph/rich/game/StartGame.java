@@ -1,5 +1,6 @@
 package org.thoughtworks.zeph.rich.game;
 
+import org.thoughtworks.zeph.rich.output.Color;
 import org.thoughtworks.zeph.rich.player.Player;
 
 import java.io.InputStream;
@@ -9,6 +10,7 @@ import java.util.regex.Pattern;
 
 public class StartGame {
 
+	public static final String MONEY_PATTERN = "\\d\\d+";
 	private Game game;
 	private Scanner scanner;
 	private Player[] players;
@@ -111,36 +113,19 @@ public class StartGame {
 	}
 
 	public void start() {
-		System.out.println("input \"rich\" to start the game:");
-		String inputLine = scanner.nextLine();
-		while (!inputLine.equals("rich")) {
-			System.out.println("input \"rich\" to startForTest game");
-			inputLine = scanner.nextLine();
-		}
-		Pattern pattern = Pattern.compile("\\d\\d+");
-		boolean isNotBetween1000To50000 = true;
-		int money = 10000;
-		while (isNotBetween1000To50000) {
-			System.out.println("set the initial money(1000~50000):");
-			inputLine = scanner.nextLine();
-			if (inputLine.equals(""))
-				break;
-			Matcher matcher = pattern.matcher(inputLine);
-			if (inputLine == null) {
-				break;
-			}
-			if (matcher.matches()) {
-				if ((Integer.valueOf(inputLine) >= 1000) && (Integer.valueOf(inputLine) <= 50000)) {
-					money = Integer.valueOf(inputLine);
-					isNotBetween1000To50000 = false;
-				}
-			}
-		}
+		int money = setPlayerInitialMoney();
 		boolean isNotBetween1234 = true;
-		while (isNotBetween1234) {
+		initialPlayer(money, isNotBetween1234);
+		game = new RichGame(players);
+		game.run();
+	}
+
+	private void initialPlayer(int money, boolean notBetween1234) {
+		String inputLine;
+		while (notBetween1234) {
 			System.out.println("please choose 2~4 players , input num(1.Qian Furen;2.A Tubo;3.Sun Xiaomei;4.Jin Beibei):");
 			inputLine = scanner.nextLine();
-			Matcher matcher = pattern.matcher(inputLine);
+			Matcher matcher = Pattern.compile(MONEY_PATTERN).matcher(inputLine);
 			if (matcher.matches()) {
 				players = new Player[inputLine.length()];
 				boolean isQianFuRenChoose = false;
@@ -154,7 +139,7 @@ public class StartGame {
 							if (isQianFuRenChoose) {
 								isDuplicate = true;
 							} else {
-								players[i] = new Player("Qian Furen", 1, 5);
+								players[i] = new Player("Qian Furen", 1, Color.PURPLE);
 								players[i].setMoney(money);
 								isQianFuRenChoose = true;
 							}
@@ -163,7 +148,7 @@ public class StartGame {
 							if (isATuBoChoose) {
 								isDuplicate = true;
 							} else {
-								players[i] = new Player("A Tubo", 2, 6);
+								players[i] = new Player("A Tubo", 2, Color.YELLOW);
 								players[i].setMoney(money);
 								isATuBoChoose = true;
 							}
@@ -172,7 +157,7 @@ public class StartGame {
 							if (isSunXiaoMeiChoose) {
 								isDuplicate = true;
 							} else {
-								players[i] = new Player("Sun Xiaomei", 3, 4);
+								players[i] = new Player("Sun Xiaomei", 3, Color.RED);
 								players[i].setMoney(money);
 								isSunXiaoMeiChoose = true;
 							}
@@ -181,7 +166,7 @@ public class StartGame {
 							if (isJinBeibeiChoose) {
 								isDuplicate = true;
 							} else {
-								players[i] = new Player("Jin Beibei", 4, 2);
+								players[i] = new Player("Jin Beibei", 4, Color.GREEN);
 								players[i].setMoney(money);
 								isJinBeibeiChoose = true;
 							}
@@ -191,12 +176,33 @@ public class StartGame {
 					}
 				}
 				if (!isDuplicate) {
-					isNotBetween1234 = false;
+					notBetween1234 = false;
 				}
 			}
 		}
-		game = new RichGame(players);
-		game.run();
+	}
+
+	private int setPlayerInitialMoney() {
+		String inputLine;
+		boolean isNotBetween1000To50000 = true;
+		int money = 10000;
+		while (isNotBetween1000To50000) {
+			System.out.println("set the initial money(1000~50000):");
+			inputLine = scanner.nextLine();
+			if (inputLine.equals(""))
+				break;
+			Matcher matcher = Pattern.compile(MONEY_PATTERN).matcher(inputLine);
+			if (inputLine == null) {
+				break;
+			}
+			if (matcher.matches()) {
+				if ((Integer.valueOf(inputLine) >= 1000) && (Integer.valueOf(inputLine) <= 50000)) {
+					money = Integer.valueOf(inputLine);
+					isNotBetween1000To50000 = false;
+				}
+			}
+		}
+		return money;
 	}
 
 	public static void main(String[] args) {
