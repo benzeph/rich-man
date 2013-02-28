@@ -75,14 +75,6 @@ public class PlayerTest {
 	}
 
 	@Test
-	public void should_return_10100_when_role_collect_the_rent_of_land_1_level_0() {
-		Land land = new BuildingLotOneTwo(2, '0');
-		player.buyLand(land);
-		player.collectRent(land.getMapId());
-		assertThat(player.getMoney(), is(9900));
-	}
-
-	@Test
 	public void should_return_3_when_role_buy_3_props() {
 		Prop block = new Block();
 		Prop robot = new Robot();

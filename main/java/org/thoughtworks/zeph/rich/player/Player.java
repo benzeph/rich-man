@@ -163,11 +163,9 @@ public class Player {
 		} else {
 			Set<Integer> set = lands.keySet();
 			Iterator<Integer> it = set.iterator();
-			while (money < land.getCost() && !lands.isEmpty()) {
+			while (!lands.isEmpty() && money < land.getCost()) {
 				Land myLand = lands.get(it.next());
-				myLand.setBelongTo(null);
-				money = money + myLand.getPrice() * (myLand.getLevel() + 1);
-				lands.remove(myLand.getMapId());
+				sellLand(myLand);
 			}
 			if (money >= land.getCost()) {
 				money = money - land.getCost();
@@ -177,11 +175,6 @@ public class Player {
 				return false;
 			}
 		}
-	}
-
-	public void collectRent(int mapId) {
-		Land land = lands.get(mapId);
-		money = money + land.getCost();
 	}
 
 	public boolean buyProp(Prop prop) {
