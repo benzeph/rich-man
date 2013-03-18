@@ -18,7 +18,7 @@ public class PrisonTest {
 
 	@Before
 	public void setUp() {
-		player = new PlayerFactoryImp().createPlayer(1,10000);
+		player = new PlayerFactoryImp().createPlayer(1, 10000);
 		prison = new Prison(2, 'P');
 	}
 

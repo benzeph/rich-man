@@ -9,24 +9,22 @@ import java.util.*;
 public class Player {
 	private int id;
 	private String name;
-	private int currentMapPosition = 0;
+	private int colorNum;
 	private int money;
-	private int gamePoint;
-	private Map<Integer, Land> lands;
-	private Map<Integer, Integer> props;
-	private God god;
-	private Prop prop;
-	private int hospitalDays;
-	private int prisonDays;
-	private int colorNum = 7;
+	private God god = null;
+	private Prop prop = null;
+	private int gamePoint = 0;
+	private int currentMapPosition = 0;
+	private int hospitalDays = 0;
+	private int prisonDays = 0;
+	private Map<Integer, Integer> props = new HashMap<Integer, Integer>();
+	private Map<Integer, Land> lands = new HashMap<Integer, Land>();
 
 	public Player(String name, int id, int colorNum, int money) {
 		this.id = id;
 		this.name = name;
 		this.colorNum = colorNum;
 		this.money = money;
-		lands = new HashMap<Integer, Land>();
-		props = new HashMap<Integer, Integer>();
 	}
 
 	public Map<Integer, Land> getLands() {
@@ -113,9 +111,21 @@ public class Player {
 		this.money = this.money + money;
 	}
 
+	public boolean isGodExist() {
+		if (null != god) {
+			if (god.getLeftTime() > 0) {
+				return true;
+			} else {
+				return false;
+			}
+		} else {
+			return false;
+		}
+	}
+
 	public boolean buyLand(Land land) {
 		if (money >= land.getPrice()) {
-			lands.put(land.getMapId(), land);
+			lands.put(land.getId(), land);
 			money = money - land.getPrice();
 			land.setBelongTo(this);
 			return true;
@@ -128,8 +138,8 @@ public class Player {
 		if (money >= land.getPrice()) {
 			land.levelUp();
 			money = money - land.getPrice();
-			lands.remove(land.getMapId());
-			lands.put(land.getMapId(), land);
+			lands.remove(land.getId());
+			lands.put(land.getId(), land);
 			return true;
 		} else {
 			return false;
@@ -137,9 +147,9 @@ public class Player {
 	}
 
 	public boolean sellLand(Land land) {
-		if (lands.containsKey(land.getMapId())) {
+		if (lands.containsKey(land.getId())) {
 			money = money + land.getPrice() * (land.getLevel() + 1);
-			lands.remove(land.getMapId());
+			lands.remove(land.getId());
 			land.setBelongTo(null);
 			return true;
 		} else {

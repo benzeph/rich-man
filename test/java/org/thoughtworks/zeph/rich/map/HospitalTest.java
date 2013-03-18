@@ -19,9 +19,9 @@ public class HospitalTest {
 	@Before
 	public void setUp() {
 
-		player = new PlayerFactoryImp().createPlayer(1,10000);
+		player = new PlayerFactoryImp().createPlayer(1, 10000);
 		hospital = new Hospital(1, 'H');
-		aTuBo = new PlayerFactoryImp().createPlayer(2,10000);
+		aTuBo = new PlayerFactoryImp().createPlayer(2, 10000);
 	}
 
 	@After

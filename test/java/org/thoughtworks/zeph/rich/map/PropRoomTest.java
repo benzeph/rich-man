@@ -20,7 +20,7 @@ public class PropRoomTest {
 	@Before
 	public void setUp() {
 
-		qianFuRen = new PlayerFactoryImp().createPlayer(1,10000);
+		qianFuRen = new PlayerFactoryImp().createPlayer(1, 10000);
 	}
 
 	@After

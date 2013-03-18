@@ -4,9 +4,9 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.thoughtworks.zeph.rich.god.WealthGod;
-import org.thoughtworks.zeph.rich.map.Land;
-import org.thoughtworks.zeph.rich.map.Map;
+import org.thoughtworks.zeph.rich.map.*;
 import org.thoughtworks.zeph.rich.player.Player;
+import org.thoughtworks.zeph.rich.player.PlayerFactory;
 import org.thoughtworks.zeph.rich.player.PlayerFactoryImp;
 import org.thoughtworks.zeph.rich.props.Bomb;
 
@@ -18,12 +18,46 @@ public class GameTest {
 	private Player qianFuRen;
 	private Player aTuBo;
 	private Rich game;
+	private Map[] map;
+	private PlayerFactory playerFactory = new PlayerFactoryImp();
+
+	private void mapInitialize() {
+		map = new Map[70];
+		map[0] = new Map(0, 'S');
+		for (int i = 1; i <= 13; i++) {
+			map[i] = new BuildingLandOneTwo(i, '0');
+		}
+		map[14] = new Hospital(14, 'H');
+		for (int i = 15; i <= 27; i++) {
+			map[i] = new BuildingLandOneTwo(i, '0');
+		}
+		map[28] = new PropRoom(28, 'T');
+		for (int i = 29; i <= 34; i++) {
+			map[i] = new BuildingLandThree(i, '0');
+		}
+		map[35] = new GiftRoom(35, 'G');
+		for (int i = 36; i <= 48; i++) {
+			map[i] = new BuildingLandFourFive(i, '0');
+		}
+		map[49] = new Prison(49, 'P');
+		for (int i = 50; i <= 62; i++) {
+			map[i] = new BuildingLandFourFive(i, '0');
+		}
+		map[63] = new MagicRoom(63, 'M');
+		map[64] = new Mine(64, 20, '$');
+		map[65] = new Mine(65, 80, '$');
+		map[66] = new Mine(66, 100, '$');
+		map[67] = new Mine(67, 40, '$');
+		map[68] = new Mine(68, 80, '$');
+		map[69] = new Mine(69, 60, '$');
+	}
 
 	@Before
 	public void setUp() {
-		qianFuRen =  new PlayerFactoryImp().createPlayer(1,10000);
-		aTuBo = new PlayerFactoryImp().createPlayer(2,10000);
-		game = new Rich(new Player[]{qianFuRen, aTuBo});
+		qianFuRen = playerFactory.createPlayer(1, 10000);
+		aTuBo = playerFactory.createPlayer(2, 10000);
+		mapInitialize();
+		game = new Rich(new Player[]{qianFuRen, aTuBo}, map);
 	}
 
 	@After
@@ -101,7 +135,7 @@ public class GameTest {
 	public void should_not_pay_the_rent_when_player_got_the_wealth_god() {
 		String instruction = "roll one\nroll one\ny\nroll one\nroll one\ny\nroll one\nroll one\ny\n" +
 				"roll one\nroll one\ny\nroll one\nroll one\ny\nroll one\nquit";
-		Map[] gameMap = game.getGameMap();
+		Map[] gameMap = game.getMap();
 		((Land) gameMap[1]).setBelongTo(aTuBo);
 		((Land) gameMap[2]).setBelongTo(aTuBo);
 		((Land) gameMap[3]).setBelongTo(aTuBo);

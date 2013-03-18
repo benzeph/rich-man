@@ -6,7 +6,7 @@ import org.thoughtworks.zeph.rich.props.Prop;
 
 public class Map {
 
-	private int mapId;
+	private int id;
 	private Prop prop;
 	private char symbol;
 	private char playerSymbol = ' ';
@@ -19,13 +19,13 @@ public class Map {
 		this.prop = prop;
 	}
 
-	public Map(int mapId, char symbol) {
-		this.mapId = mapId;
+	public Map(int id, char symbol) {
+		this.id = id;
 		this.symbol = symbol;
 	}
 
-	public int getMapId() {
-		return mapId;
+	public int getId() {
+		return id;
 	}
 
 	public char getPlayerSymbol() {
@@ -56,7 +56,7 @@ public class Map {
 
 	@Override
 	public int hashCode() {
-		int result = mapId;
+		int result = id;
 		result = 31 * result + (prop != null ? prop.hashCode() : 0);
 		result = 31 * result + (int) symbol;
 		result = 31 * result + (int) playerSymbol;
@@ -70,7 +70,7 @@ public class Map {
 
 		Map map = (Map) o;
 
-		if (mapId != map.mapId) return false;
+		if (id != map.id) return false;
 		if (playerSymbol != map.playerSymbol) return false;
 		if (symbol != map.symbol) return false;
 		if (prop != null ? !prop.equals(map.prop) : map.prop != null) return false;

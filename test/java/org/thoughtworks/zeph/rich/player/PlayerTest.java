@@ -3,7 +3,7 @@ package org.thoughtworks.zeph.rich.player;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.thoughtworks.zeph.rich.map.BuildingLotOneTwo;
+import org.thoughtworks.zeph.rich.map.BuildingLandOneTwo;
 import org.thoughtworks.zeph.rich.map.Land;
 import org.thoughtworks.zeph.rich.props.Block;
 import org.thoughtworks.zeph.rich.props.Bomb;
@@ -18,14 +18,13 @@ import static org.junit.Assert.assertThat;
 
 public class PlayerTest {
 
-	private Player player;
-	private Player aTuBo;
+	private PlayerFactory playerFactory = new PlayerFactoryImp();
+	private Player player = playerFactory.createPlayer(1, 10000);
+	private Player aTuBo = playerFactory.createPlayer(2, 10000);
 
 	@Before
 	public void setUp() {
 
-		player = new PlayerFactoryImp().createPlayer(1,10000);
-		aTuBo = new PlayerFactoryImp().createPlayer(2,10000);
 	}
 
 	@After
@@ -35,8 +34,8 @@ public class PlayerTest {
 
 	@Test
 	public void should_return_2_when_role_buys_two_lands() {
-		Land buildingLotOneTwo1 = new BuildingLotOneTwo(2, '0');
-		Land buildingLotOneTwo2 = new BuildingLotOneTwo(3, '0');
+		Land buildingLotOneTwo1 = new BuildingLandOneTwo(2, '0');
+		Land buildingLotOneTwo2 = new BuildingLandOneTwo(3, '0');
 		player.buyLand(buildingLotOneTwo1);
 		player.buyLand(buildingLotOneTwo2);
 		Map<Integer, Land> lands = player.getLands();
@@ -45,8 +44,8 @@ public class PlayerTest {
 
 	@Test
 	public void should_return_level_1_land_when_role_level_up_land_from_level_0() {
-		Land buildingLotOneTwo = new BuildingLotOneTwo(2, '0');
-		Land land2 = new BuildingLotOneTwo(2, '0');
+		Land buildingLotOneTwo = new BuildingLandOneTwo(2, '0');
+		Land land2 = new BuildingLandOneTwo(2, '0');
 		land2.levelUp();
 		land2.setBelongTo(player);
 		player.buyLand(buildingLotOneTwo);
@@ -58,7 +57,7 @@ public class PlayerTest {
 
 	@Test
 	public void should_return_null_when_role_sells_land() {
-		Land land = new BuildingLotOneTwo(2, '0');
+		Land land = new BuildingLandOneTwo(2, '0');
 		player.buyLand(land);
 		player.sellLand(land);
 		Map<Integer, Land> lands = player.getLands();
@@ -68,7 +67,7 @@ public class PlayerTest {
 
 	@Test
 	public void should_return_9900_when_role_pay_the_rent_of_land_1_level_0() {
-		Land land = new BuildingLotOneTwo(2, '0');
+		Land land = new BuildingLandOneTwo(2, '0');
 		player.payRent(land, aTuBo);
 		assertThat(player.getMoney(), is(9900));
 		assertThat(aTuBo.getMoney(), is(10100));

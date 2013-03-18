@@ -21,7 +21,7 @@ public class GiftRoomTest {
 	public void setUp() {
 
 		room = new GiftRoom(3, 'G');
-		player = new PlayerFactoryImp().createPlayer(1,10000);
+		player = new PlayerFactoryImp().createPlayer(1, 10000);
 	}
 
 	@After

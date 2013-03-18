@@ -35,31 +35,31 @@ public class InterpreterTest {
 		gameMap[0] = new Map(0, 'S');
 
 		for (int i = 1; i <= 13; i++) {
-			gameMap[i] = new BuildingLotOneTwo(i, '0');
+			gameMap[i] = new BuildingLandOneTwo(i, '0');
 		}
 
 		gameMap[14] = new Hospital(14, 'H');
 
 		for (int i = 15; i <= 27; i++) {
-			gameMap[i] = new BuildingLotOneTwo(i, '0');
+			gameMap[i] = new BuildingLandOneTwo(i, '0');
 		}
 
 		gameMap[28] = new PropRoom(28, 'T');
 
 		for (int i = 29; i <= 34; i++) {
-			gameMap[i] = new BuildingLotThree(i, '0');
+			gameMap[i] = new BuildingLandThree(i, '0');
 		}
 
 		gameMap[35] = new GiftRoom(35, 'G');
 
 		for (int i = 36; i <= 48; i++) {
-			gameMap[i] = new BuildingLotFourFive(i, '0');
+			gameMap[i] = new BuildingLandFourFive(i, '0');
 		}
 
 		gameMap[49] = new Prison(49, 'P');
 
 		for (int i = 50; i <= 62; i++) {
-			gameMap[i] = new BuildingLotFourFive(i, '0');
+			gameMap[i] = new BuildingLandFourFive(i, '0');
 		}
 
 		gameMap[63] = new MagicRoom(63, 'M');
@@ -70,10 +70,10 @@ public class InterpreterTest {
 		gameMap[67] = new Mine(67, 40, '$');
 		gameMap[68] = new Mine(68, 80, '$');
 		gameMap[69] = new Mine(69, 60, '$');
-		qianFuRen = new PlayerFactoryImp().createPlayer(1,10000);
+		qianFuRen = new PlayerFactoryImp().createPlayer(1, 10000);
 		interpreter = new Interpreter();
 		players = new Player[]{qianFuRen};
-		aTuBo = new PlayerFactoryImp().createPlayer(2,10000);
+		aTuBo = new PlayerFactoryImp().createPlayer(2, 10000);
 	}
 
 	@After
@@ -200,9 +200,9 @@ public class InterpreterTest {
 
 	@Test
 	public void should_return_9800_1_10000_0_and_200_when_sell_5() {
-		qianFuRen.buyLand((BuildingLotOneTwo) gameMap[5]);
+		qianFuRen.buyLand((BuildingLandOneTwo) gameMap[5]);
 		assertThat(qianFuRen.getMoney(), is(9800));
-		assertThat(((BuildingLotOneTwo) gameMap[5]).getBelongTo(), is(qianFuRen));
+		assertThat(((BuildingLandOneTwo) gameMap[5]).getBelongTo(), is(qianFuRen));
 		String instruction = "sell 5";
 		assertThat(interpreter.interpret(instruction, gameMap, players, 0), is("sell land 5, money:200"));
 		assertThat(qianFuRen.getMoney(), is(10000));

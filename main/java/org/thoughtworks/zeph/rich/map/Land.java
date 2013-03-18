@@ -5,8 +5,8 @@ import org.thoughtworks.zeph.rich.player.Player;
 public class Land extends Map {
 
 	private int level;
-	private Player belongTo;
 	private int price;
+	private Player belongTo;
 
 	public Land(int mapId, char symbol) {
 		super(mapId, symbol);

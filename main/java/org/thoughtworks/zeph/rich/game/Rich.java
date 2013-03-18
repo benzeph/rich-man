@@ -19,44 +19,13 @@ public class Rich {
 	private int totalPlayerNum;
 	private Player[] players;
 	private Interpreter interpreter = new Interpreter();
-	private Map[] gameMap;
+	private Map[] map;
 
-	public Rich(Player[] players) {
+	public Rich(Player[] players, Map[] map) {
 		this.players = players;
 		totalPlayerNum = players.length;
 		currentPlayerNum = players.length;
-		mapInitialize();
-	}
-
-	private void mapInitialize() {
-		gameMap = new Map[70];
-		gameMap[0] = new Map(0, 'S');
-		for (int i = 1; i <= 13; i++) {
-			gameMap[i] = new BuildingLotOneTwo(i, '0');
-		}
-		gameMap[14] = new Hospital(14, 'H');
-		for (int i = 15; i <= 27; i++) {
-			gameMap[i] = new BuildingLotOneTwo(i, '0');
-		}
-		gameMap[28] = new PropRoom(28, 'T');
-		for (int i = 29; i <= 34; i++) {
-			gameMap[i] = new BuildingLotThree(i, '0');
-		}
-		gameMap[35] = new GiftRoom(35, 'G');
-		for (int i = 36; i <= 48; i++) {
-			gameMap[i] = new BuildingLotFourFive(i, '0');
-		}
-		gameMap[49] = new Prison(49, 'P');
-		for (int i = 50; i <= 62; i++) {
-			gameMap[i] = new BuildingLotFourFive(i, '0');
-		}
-		gameMap[63] = new MagicRoom(63, 'M');
-		gameMap[64] = new Mine(64, 20, '$');
-		gameMap[65] = new Mine(65, 80, '$');
-		gameMap[66] = new Mine(66, 100, '$');
-		gameMap[67] = new Mine(67, 40, '$');
-		gameMap[68] = new Mine(68, 80, '$');
-		gameMap[69] = new Mine(69, 60, '$');
+		this.map = map;
 	}
 
 	public void run() {
@@ -75,14 +44,14 @@ public class Rich {
 					currentPlayer = stayInPrison(currentPlayer);
 					continue;
 				}
-				if (isYouGetAGod(currentPlayer)) {
+				if (hasYouGetAGod(currentPlayer)) {
 					players[currentPlayer].getGod().timeCountDown();
 				}
 				printWaitingForInputString(currentPlayer);
 				String inputStr = "";
 				while (!inputStr.equals("roll") && !inputStr.equals("roll one")) {
 					inputStr = input.getInput();
-					String order = interpreter.interpret(inputStr, gameMap, players, currentPlayer);
+					String order = interpreter.interpret(inputStr, map, players, currentPlayer);
 					System.out.println(order);
 					if (order.equals("quit")) {
 						notBreak = false;
@@ -100,7 +69,7 @@ public class Rich {
 						System.out.println(players[currentPlayer].query());
 						continue;
 					}
-					doWhatItNeedTodoAfterStop(input, currentPlayer, order);
+					doesWhatItNeedTodoAfterStop(input, currentPlayer, order);
 				}
 				drawMap();
 				currentPlayer = (currentPlayer + 1) % totalPlayerNum;
@@ -120,11 +89,11 @@ public class Rich {
 	}
 
 	private boolean isStopAtBuildingLotFourFive(int currentPlayer, String order) {
-		return (currentPlayerPosition(currentPlayer) instanceof BuildingLotFourFive) && !order.equals("illegal instruction");
+		return (getCurrentPlayerPosition(currentPlayer) instanceof BuildingLandFourFive) && !order.equals("illegal instruction");
 	}
 
 	private boolean isStopAtBuildingLotOneTwo(int currentPlayer, String order) {
-		return (currentPlayerPosition(currentPlayer) instanceof BuildingLotOneTwo) && !order.equals("illegal instruction");
+		return (getCurrentPlayerPosition(currentPlayer) instanceof BuildingLandOneTwo) && !order.equals("illegal instruction");
 	}
 
 	private void printWaitingForInputString(int currentPlayer) {
@@ -160,7 +129,7 @@ public class Rich {
 					currentPlayer = stayInPrison(currentPlayer);
 					continue;
 				}
-				if (isYouGetAGod(currentPlayer)) {
+				if (hasYouGetAGod(currentPlayer)) {
 					players[currentPlayer].getGod().timeCountDown();
 				}
 				String inputStr = "";
@@ -168,7 +137,7 @@ public class Rich {
 					System.out.println(players[currentPlayer].getName() + ">waiting for input");
 					System.out.print("command:");
 					inputStr = input.getInput();
-					String order = interpreter.interpret(inputStr, gameMap, players, currentPlayer);
+					String order = interpreter.interpret(inputStr, map, players, currentPlayer);
 					System.out.println(order);
 					if (order.equals("quit")) {
 						notBreak = false;
@@ -186,7 +155,7 @@ public class Rich {
 						System.out.println(players[currentPlayer].query());
 						continue;
 					}
-					doWhatItNeedTodoAfterStop(input, currentPlayer, order);
+					doesWhatItNeedTodoAfterStop(input, currentPlayer, order);
 				}
 				drawMap();
 				currentPlayer = (currentPlayer + 1) % totalPlayerNum;
@@ -205,11 +174,11 @@ public class Rich {
 		}
 	}
 
-	private boolean isYouGetAGod(int currentPlayer) {
-		return (null != players[currentPlayer].getGod()) && (players[currentPlayer].getGod().getLeftTime() > 0);
+	private boolean hasYouGetAGod(int currentPlayer) {
+		return players[currentPlayer].isGodExist();
 	}
 
-	private void doWhatItNeedTodoAfterStop(InputSystem input, int currentPlayer, String order) {
+	private void doesWhatItNeedTodoAfterStop(InputSystem input, int currentPlayer, String order) {
 		if (isStopAtBuildingLotOneTwo(currentPlayer, order)) {
 			if (isLandBlank(currentPlayer)) {
 				buyLand(input, currentPlayer);
@@ -234,23 +203,23 @@ public class Rich {
 			} else {
 				payLand(currentPlayer);
 			}
-		} else if (currentPlayerPosition(currentPlayer) instanceof Mine) {
+		} else if (getCurrentPlayerPosition(currentPlayer) instanceof Mine) {
 			getMine(currentPlayer);
-		} else if (currentPlayerPosition(currentPlayer) instanceof PropRoom) {
+		} else if (getCurrentPlayerPosition(currentPlayer) instanceof PropRoom) {
 			getProp(input, currentPlayer);
-		} else if (currentPlayerPosition(currentPlayer) instanceof GiftRoom) {
+		} else if (getCurrentPlayerPosition(currentPlayer) instanceof GiftRoom) {
 			getGift(input, currentPlayer);
-		} else if (currentPlayerPosition(currentPlayer) instanceof Prison) {
+		} else if (getCurrentPlayerPosition(currentPlayer) instanceof Prison) {
 			releasePrisoner(currentPlayer);
-		} else if (currentPlayerPosition(currentPlayer) instanceof Hospital) {
+		} else if (getCurrentPlayerPosition(currentPlayer) instanceof Hospital) {
 
-		} else if (currentPlayerPosition(currentPlayer) instanceof MagicRoom) {
+		} else if (getCurrentPlayerPosition(currentPlayer) instanceof MagicRoom) {
 
 		}
 	}
 
 	private boolean isStopAtBuildingLotThree(int currentPlayer, String order) {
-		return (currentPlayerPosition(currentPlayer) instanceof BuildingLotThree) && !order.equals("illegal instruction");
+		return (getCurrentPlayerPosition(currentPlayer) instanceof BuildingLandThree) && !order.equals("illegal instruction");
 	}
 
 	private void help() {
@@ -293,11 +262,11 @@ public class Rich {
 	}
 
 	private PropRoom getPropRoomByMapPosition(int currentPlayer) {
-		return ((PropRoom) gameMap[players[currentPlayer].getCurrentMapPosition()]);
+		return ((PropRoom) map[players[currentPlayer].getCurrentMapPosition()]);
 	}
 
 	private void releasePrisoner(int currentPlayer) {
-		((Prison) gameMap[players[currentPlayer].getCurrentMapPosition()]).release();
+		((Prison) map[players[currentPlayer].getCurrentMapPosition()]).release();
 		System.out.println(players[currentPlayer].getName() + ":release all prisoners");
 	}
 
@@ -323,7 +292,7 @@ public class Rich {
 	}
 
 	private GiftRoom getGiftRoomByMapPosition(int currentPlayer) {
-		return ((GiftRoom) gameMap[players[currentPlayer].getCurrentMapPosition()]);
+		return ((GiftRoom) map[players[currentPlayer].getCurrentMapPosition()]);
 	}
 
 	private void getMine(int currentPlayer) {
@@ -332,11 +301,11 @@ public class Rich {
 	}
 
 	private Mine getMineByMapPosition(int currentPlayer) {
-		return ((Mine) gameMap[players[currentPlayer].getCurrentMapPosition()]);
+		return ((Mine) map[players[currentPlayer].getCurrentMapPosition()]);
 	}
 
 	private void payLand(int currentPlayer) {
-		if (isYouGetAGod(currentPlayer)) {
+		if (hasYouGetAGod(currentPlayer)) {
 			System.out.println("wealth god bless , exempt from payment");
 			return;
 		}
@@ -350,26 +319,26 @@ public class Rich {
 	}
 
 	private Land getLandByMapPosition(int currentPlayer) {
-		return (Land) gameMap[players[currentPlayer].getCurrentMapPosition()];
+		return (Land) map[players[currentPlayer].getCurrentMapPosition()];
 	}
 
 	private boolean isLandBelongToPlayer(int currentPlayer) {
-		return ((Land) currentPlayerPosition(currentPlayer)).getBelongTo().equals(players[currentPlayer]);
+		return ((Land) getCurrentPlayerPosition(currentPlayer)).getBelongTo().equals(players[currentPlayer]);
 	}
 
 	private boolean isLandBlank(int currentPlayer) {
-		return ((Land) currentPlayerPosition(currentPlayer)).getBelongTo() == null;
+		return ((Land) getCurrentPlayerPosition(currentPlayer)).getBelongTo() == null;
 	}
 
-	private Map currentPlayerPosition(int currentPlayer) {
-		return gameMap[players[currentPlayer].getCurrentMapPosition()];
+	private Map getCurrentPlayerPosition(int currentPlayer) {
+		return map[players[currentPlayer].getCurrentMapPosition()];
 	}
 
 	private void levelUpLand(InputSystem input, int currentPlayer) {
-		System.out.println("Do you want to level up this land," + ((Land) currentPlayerPosition(currentPlayer)).getPrice() + "(Y/N)?");
+		System.out.println("Do you want to level up this land," + ((Land) getCurrentPlayerPosition(currentPlayer)).getPrice() + "(Y/N)?");
 		String str = input.getInput();
 		if (str.equals("Y") || str.equals("y")) {
-			if (players[currentPlayer].upgradeLand((Land) currentPlayerPosition(currentPlayer))) {
+			if (players[currentPlayer].upgradeLand((Land) getCurrentPlayerPosition(currentPlayer))) {
 				System.out.println("level up land success");
 			} else {
 				System.out.println("level up land fail");
@@ -380,10 +349,10 @@ public class Rich {
 	}
 
 	private void buyLand(InputSystem input, int currentPlayer) {
-		System.out.println("Do you want to buy this land," + ((Land) currentPlayerPosition(currentPlayer)).getPrice() + "(Y/N)?");
+		System.out.println("Do you want to buy this land," + ((Land) getCurrentPlayerPosition(currentPlayer)).getPrice() + "(Y/N)?");
 		String str = input.getInput();
 		if (str.equals("Y") || str.equals("y")) {
-			if (players[currentPlayer].buyLand((Land) currentPlayerPosition(currentPlayer))) {
+			if (players[currentPlayer].buyLand((Land) getCurrentPlayerPosition(currentPlayer))) {
 				System.out.println("buy land success");
 			} else {
 				System.out.println("buy land fail");
@@ -395,52 +364,52 @@ public class Rich {
 
 	public void drawMap() {
 		for (int i = 0; i < 29; i++) {
-			gameMap[i].getSymbol();
+			map[i].getSymbol();
 		}
 		System.out.println();
-		gameMap[69].getSymbol();
+		map[69].getSymbol();
 		for (int i = 1; i < 28; i++) {
 			System.out.print(" ");
 		}
-		gameMap[29].getSymbol();
+		map[29].getSymbol();
 		System.out.println();
-		gameMap[68].getSymbol();
+		map[68].getSymbol();
 		for (int i = 1; i < 28; i++) {
 			System.out.print(" ");
 		}
-		gameMap[30].getSymbol();
+		map[30].getSymbol();
 		System.out.println();
-		gameMap[67].getSymbol();
+		map[67].getSymbol();
 		for (int i = 1; i < 28; i++) {
 			System.out.print(" ");
 		}
-		gameMap[31].getSymbol();
+		map[31].getSymbol();
 		System.out.println();
-		gameMap[66].getSymbol();
+		map[66].getSymbol();
 		for (int i = 1; i < 28; i++) {
 			System.out.print(" ");
 		}
-		gameMap[32].getSymbol();
+		map[32].getSymbol();
 		System.out.println();
-		gameMap[65].getSymbol();
+		map[65].getSymbol();
 		for (int i = 1; i < 28; i++) {
 			System.out.print(" ");
 		}
-		gameMap[33].getSymbol();
+		map[33].getSymbol();
 		System.out.println();
-		gameMap[64].getSymbol();
+		map[64].getSymbol();
 		for (int i = 1; i < 28; i++) {
 			System.out.print(" ");
 		}
-		gameMap[34].getSymbol();
+		map[34].getSymbol();
 		System.out.println();
 		for (int i = 63; i >= 35; i--) {
-			gameMap[i].getSymbol();
+			map[i].getSymbol();
 		}
 		System.out.println();
 	}
 
-	public Map[] getGameMap() {
-		return gameMap;
+	public Map[] getMap() {
+		return map;
 	}
 }

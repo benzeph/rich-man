@@ -1,5 +1,6 @@
 package org.thoughtworks.zeph.rich.game;
 
+import org.thoughtworks.zeph.rich.map.Map;
 import org.thoughtworks.zeph.rich.player.Player;
 import org.thoughtworks.zeph.rich.player.PlayerFactoryImp;
 
@@ -12,6 +13,7 @@ public class StartGame {
 
 	public static final String MONEY_PATTERN = "\\d\\d+";
 	private Rich game;
+	private Map[] map;
 	private Scanner scanner;
 	private Player[] players;
 
@@ -23,7 +25,7 @@ public class StartGame {
 		int money = setPlayerInitialMoney();
 		boolean isNotBetween1234 = true;
 		initialPlayer(money, isNotBetween1234);
-		game = new Rich(players);
+		game = new Rich(players, map);
 		game.run();
 	}
 
@@ -46,7 +48,7 @@ public class StartGame {
 							if (isQianFuRenChoose) {
 								isDuplicate = true;
 							} else {
-								players[i] = new PlayerFactoryImp().createPlayer(1,money);
+								players[i] = new PlayerFactoryImp().createPlayer(1, money);
 								isQianFuRenChoose = true;
 							}
 							break;
@@ -54,7 +56,7 @@ public class StartGame {
 							if (isATuBoChoose) {
 								isDuplicate = true;
 							} else {
-								players[i] =  new PlayerFactoryImp().createPlayer(2,money);
+								players[i] = new PlayerFactoryImp().createPlayer(2, money);
 								players[i].setMoney(money);
 								isATuBoChoose = true;
 							}
@@ -63,7 +65,7 @@ public class StartGame {
 							if (isSunXiaoMeiChoose) {
 								isDuplicate = true;
 							} else {
-								players[i] =  new PlayerFactoryImp().createPlayer(3,money);
+								players[i] = new PlayerFactoryImp().createPlayer(3, money);
 								players[i].setMoney(money);
 								isSunXiaoMeiChoose = true;
 							}
@@ -72,7 +74,7 @@ public class StartGame {
 							if (isJinBeibeiChoose) {
 								isDuplicate = true;
 							} else {
-								players[i] =  new PlayerFactoryImp().createPlayer(4,money);
+								players[i] = new PlayerFactoryImp().createPlayer(4, money);
 								players[i].setMoney(money);
 								isJinBeibeiChoose = true;
 							}
