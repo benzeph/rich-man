@@ -13,12 +13,13 @@ import org.thoughtworks.zeph.rich.props.Block;
 import org.thoughtworks.zeph.rich.props.Bomb;
 import org.thoughtworks.zeph.rich.props.Robot;
 
-public class RichGame extends Game {
+public class RichGame{
 
 	private int currentPlayerNum;
 	private int totalPlayerNum;
 	private Player[] players;
 	private Interpreter interpreter = new Interpreter();
+	protected Map[] gameMap;
 
 	public RichGame(Player[] players) {
 		this.players = players;
@@ -58,7 +59,6 @@ public class RichGame extends Game {
 		gameMap[69] = new Mine(69, 60, '$');
 	}
 
-	@Override
 	public void run() {
 		InputSystem input = new InputSystem(System.in);
 		totalPlayerNum = players.length;
@@ -146,7 +146,6 @@ public class RichGame extends Game {
 		return currentPlayer;
 	}
 
-	@Override
 	public void runForTest(String instruction) {
 		InputSystem input = new InputSystem(instruction);
 		int currentPlayer = 0;
@@ -394,7 +393,6 @@ public class RichGame extends Game {
 		}
 	}
 
-	@Override
 	public void drawMap() {
 		for (int i = 0; i < 29; i++) {
 			gameMap[i].getSymbol();
@@ -440,5 +438,9 @@ public class RichGame extends Game {
 			gameMap[i].getSymbol();
 		}
 		System.out.println();
+	}
+
+	public Map[] getGameMap() {
+		return gameMap;
 	}
 }

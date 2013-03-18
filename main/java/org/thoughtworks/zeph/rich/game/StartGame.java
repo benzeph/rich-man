@@ -11,7 +11,7 @@ import java.util.regex.Pattern;
 public class StartGame {
 
 	public static final String MONEY_PATTERN = "\\d\\d+";
-	private Game game;
+	private RichGame game;
 	private Scanner scanner;
 	private Player[] players;
 
