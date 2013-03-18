@@ -2,6 +2,7 @@ package org.thoughtworks.zeph.rich.game;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.thoughtworks.zeph.rich.god.WealthGod;
 import org.thoughtworks.zeph.rich.map.*;
@@ -12,6 +13,8 @@ import org.thoughtworks.zeph.rich.props.Bomb;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 public class GameTest {
 
@@ -168,11 +171,15 @@ public class GameTest {
 		aTuBo.setMoney(99);
 		game.runForTest(instruction);
 	}
-
+	@Ignore
 	@Test
-	public void should_stay_in_map_when_player_stay_in_68_and_roll_3_times() {
-		String instruction = "roll one\nquit";
+	public void should_stay_in_0_when_player_stay_in_69_and_roll_one_step() {
+		String instruction = "roll\nquit";
+		Player qianFuRen = mock(Player.class);
+		Player aTuBo = mock(Player.class);
+		when(qianFuRen.dice()).thenReturn(1);
 		qianFuRen.setCurrentMapPosition(69);
+		Rich game = new Rich(new Player[]{qianFuRen, aTuBo}, map);
 		game.runForTest(instruction);
 		assertThat(qianFuRen.getCurrentMapPosition(), is(0));
 	}

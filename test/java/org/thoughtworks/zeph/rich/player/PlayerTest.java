@@ -15,11 +15,13 @@ import java.util.Map;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertThat;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 public class PlayerTest {
 
 	private PlayerFactory playerFactory = new PlayerFactoryImp();
-	private Player player = playerFactory.createPlayer(1, 10000);
+	private Player qianFuRen = playerFactory.createPlayer(1, 10000);
 	private Player aTuBo = playerFactory.createPlayer(2, 10000);
 
 	@Before
@@ -36,9 +38,9 @@ public class PlayerTest {
 	public void should_return_2_when_role_buys_two_lands() {
 		Land buildingLotOneTwo1 = new BuildingLandOneTwo(2, '0');
 		Land buildingLotOneTwo2 = new BuildingLandOneTwo(3, '0');
-		player.buyLand(buildingLotOneTwo1);
-		player.buyLand(buildingLotOneTwo2);
-		Map<Integer, Land> lands = player.getLands();
+		qianFuRen.buyLand(buildingLotOneTwo1);
+		qianFuRen.buyLand(buildingLotOneTwo2);
+		Map<Integer, Land> lands = qianFuRen.getLands();
 		assertThat(lands.size(), is(2));
 	}
 
@@ -47,10 +49,10 @@ public class PlayerTest {
 		Land buildingLotOneTwo = new BuildingLandOneTwo(2, '0');
 		Land land2 = new BuildingLandOneTwo(2, '0');
 		land2.levelUp();
-		land2.setBelongTo(player);
-		player.buyLand(buildingLotOneTwo);
-		player.upgradeLand(buildingLotOneTwo);
-		Map<Integer, Land> lands = player.getLands();
+		land2.setBelongTo(qianFuRen);
+		qianFuRen.buyLand(buildingLotOneTwo);
+		qianFuRen.upgradeLand(buildingLotOneTwo);
+		Map<Integer, Land> lands = qianFuRen.getLands();
 		Land land = lands.get(2);
 		assertThat(land, is(land2));
 	}
@@ -58,9 +60,9 @@ public class PlayerTest {
 	@Test
 	public void should_return_null_when_role_sells_land() {
 		Land land = new BuildingLandOneTwo(2, '0');
-		player.buyLand(land);
-		player.sellLand(land);
-		Map<Integer, Land> lands = player.getLands();
+		qianFuRen.buyLand(land);
+		qianFuRen.sellLand(land);
+		Map<Integer, Land> lands = qianFuRen.getLands();
 		Land land2 = lands.get(2);
 		assertNull(land2);
 	}
@@ -68,8 +70,8 @@ public class PlayerTest {
 	@Test
 	public void should_return_9900_when_role_pay_the_rent_of_land_1_level_0() {
 		Land land = new BuildingLandOneTwo(2, '0');
-		player.payRent(land, aTuBo);
-		assertThat(player.getMoney(), is(9900));
+		qianFuRen.payRent(land, aTuBo);
+		assertThat(qianFuRen.getMoney(), is(9900));
 		assertThat(aTuBo.getMoney(), is(10100));
 	}
 
@@ -78,31 +80,31 @@ public class PlayerTest {
 		Prop block = new Block();
 		Prop robot = new Robot();
 		Prop bomb = new Bomb();
-		player.addGamePoint(1000);
-		player.buyProp(block);
-		player.buyProp(robot);
-		player.buyProp(bomb);
-		Map<Integer, Integer> props = player.getProps();
+		qianFuRen.addGamePoint(1000);
+		qianFuRen.buyProp(block);
+		qianFuRen.buyProp(robot);
+		qianFuRen.buyProp(bomb);
+		Map<Integer, Integer> props = qianFuRen.getProps();
 		assertThat(props.size(), is(3));
 	}
 
 	@Test
 	public void should_return_15_when_role_buy_1_bomb() {
 		Prop bomb = new Bomb();
-		player.addGamePoint(15);
-		player.addGamePoint(50);
-		player.buyProp(bomb);
-		assertThat(player.getGamePoint(), is(15));
+		qianFuRen.addGamePoint(15);
+		qianFuRen.addGamePoint(50);
+		qianFuRen.buyProp(bomb);
+		assertThat(qianFuRen.getGamePoint(), is(15));
 	}
 
 	@Test
 	public void should_return_1_when_role_buy_2_bomb() {
 		Prop bomb1 = new Bomb();
 		Prop bomb2 = new Bomb();
-		player.addGamePoint(1000);
-		player.buyProp(bomb1);
-		player.buyProp(bomb2);
-		Map<Integer, Integer> props = player.getProps();
+		qianFuRen.addGamePoint(1000);
+		qianFuRen.buyProp(bomb1);
+		qianFuRen.buyProp(bomb2);
+		Map<Integer, Integer> props = qianFuRen.getProps();
 		assertThat(props.size(), is(1));
 	}
 
@@ -110,11 +112,11 @@ public class PlayerTest {
 	public void should_return_1_when_role_use_a_bomb() {
 		Prop bomb1 = new Bomb();
 		Prop bomb2 = new Bomb();
-		player.addGamePoint(1000);
-		player.buyProp(bomb1);
-		player.buyProp(bomb2);
-		boolean isUsed = player.useProp(bomb1);
-		Map<Integer, Integer> props = player.getProps();
+		qianFuRen.addGamePoint(1000);
+		qianFuRen.buyProp(bomb1);
+		qianFuRen.buyProp(bomb2);
+		boolean isUsed = qianFuRen.useProp(bomb1);
+		Map<Integer, Integer> props = qianFuRen.getProps();
 		assertThat(isUsed, is(true));
 		assertThat(props.get(bomb1.getId()), is(1));
 	}
@@ -122,20 +124,27 @@ public class PlayerTest {
 	@Test
 	public void should_return_0_when_role_buy_and_sell_a_bomb() {
 		Prop bomb = new Bomb();
-		player.buyProp(bomb);
-		player.sellProp(bomb);
-		assertThat(player.getGamePoint(), is(0));
+		qianFuRen.buyProp(bomb);
+		qianFuRen.sellProp(bomb);
+		assertThat(qianFuRen.getGamePoint(), is(0));
 	}
 
 	@Test
 	public void should_return_12000_when_role_get_a_gift_of_2000() {
-		player.addMoney(2000);
-		assertThat(player.getMoney(), is(12000));
+		qianFuRen.addMoney(2000);
+		assertThat(qianFuRen.getMoney(), is(12000));
 	}
 
 	@Test
 	public void should_return_200_when_role_get_a_gift_of_200_game_point() {
-		player.addGamePoint(200);
-		assertThat(player.getGamePoint(), is(200));
+		qianFuRen.addGamePoint(200);
+		assertThat(qianFuRen.getGamePoint(), is(200));
+	}
+
+	@Test
+	public void should_return_1_when_mock_a_player_dice(){
+		Player player = mock(Player.class);
+		when(player.dice()).thenReturn(1);
+		assertThat(player.dice(),is(1));
 	}
 }
