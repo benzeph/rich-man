@@ -192,9 +192,7 @@ public class StartGame {
 			if (inputLine.equals(""))
 				break;
 			Matcher matcher = Pattern.compile(MONEY_PATTERN).matcher(inputLine);
-			if (inputLine == null) {
-				break;
-			}
+
 			if (matcher.matches()) {
 				if ((Integer.valueOf(inputLine) >= 1000) && (Integer.valueOf(inputLine) <= 50000)) {
 					money = Integer.valueOf(inputLine);
@@ -206,7 +204,6 @@ public class StartGame {
 	}
 
 	public static void main(String[] args) {
-
 		StartGame startGame = new StartGame(System.in);
 		startGame.start();
 	}
