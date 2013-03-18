@@ -1,7 +1,7 @@
 package org.thoughtworks.zeph.rich.game;
 
-import org.thoughtworks.zeph.rich.output.Color;
 import org.thoughtworks.zeph.rich.player.Player;
+import org.thoughtworks.zeph.rich.player.PlayerFactoryImp;
 
 import java.io.InputStream;
 import java.util.Scanner;
@@ -11,7 +11,7 @@ import java.util.regex.Pattern;
 public class StartGame {
 
 	public static final String MONEY_PATTERN = "\\d\\d+";
-	private RichGame game;
+	private Rich game;
 	private Scanner scanner;
 	private Player[] players;
 
@@ -23,7 +23,7 @@ public class StartGame {
 		int money = setPlayerInitialMoney();
 		boolean isNotBetween1234 = true;
 		initialPlayer(money, isNotBetween1234);
-		game = new RichGame(players);
+		game = new Rich(players);
 		game.run();
 	}
 
@@ -46,8 +46,7 @@ public class StartGame {
 							if (isQianFuRenChoose) {
 								isDuplicate = true;
 							} else {
-								players[i] = new Player("Qian Furen", 1, Color.PURPLE);
-								players[i].setMoney(money);
+								players[i] = new PlayerFactoryImp().createPlayer(1,money);
 								isQianFuRenChoose = true;
 							}
 							break;
@@ -55,7 +54,7 @@ public class StartGame {
 							if (isATuBoChoose) {
 								isDuplicate = true;
 							} else {
-								players[i] = new Player("A Tubo", 2, Color.YELLOW);
+								players[i] =  new PlayerFactoryImp().createPlayer(2,money);
 								players[i].setMoney(money);
 								isATuBoChoose = true;
 							}
@@ -64,7 +63,7 @@ public class StartGame {
 							if (isSunXiaoMeiChoose) {
 								isDuplicate = true;
 							} else {
-								players[i] = new Player("Sun Xiaomei", 3, Color.RED);
+								players[i] =  new PlayerFactoryImp().createPlayer(3,money);
 								players[i].setMoney(money);
 								isSunXiaoMeiChoose = true;
 							}
@@ -73,7 +72,7 @@ public class StartGame {
 							if (isJinBeibeiChoose) {
 								isDuplicate = true;
 							} else {
-								players[i] = new Player("Jin Beibei", 4, Color.GREEN);
+								players[i] =  new PlayerFactoryImp().createPlayer(4,money);
 								players[i].setMoney(money);
 								isJinBeibeiChoose = true;
 							}

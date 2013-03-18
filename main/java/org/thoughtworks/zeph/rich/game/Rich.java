@@ -13,15 +13,15 @@ import org.thoughtworks.zeph.rich.props.Block;
 import org.thoughtworks.zeph.rich.props.Bomb;
 import org.thoughtworks.zeph.rich.props.Robot;
 
-public class RichGame{
+public class Rich {
 
 	private int currentPlayerNum;
 	private int totalPlayerNum;
 	private Player[] players;
 	private Interpreter interpreter = new Interpreter();
-	protected Map[] gameMap;
+	private Map[] gameMap;
 
-	public RichGame(Player[] players) {
+	public Rich(Player[] players) {
 		this.players = players;
 		totalPlayerNum = players.length;
 		currentPlayerNum = players.length;

@@ -4,6 +4,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.thoughtworks.zeph.rich.player.Player;
+import org.thoughtworks.zeph.rich.player.PlayerFactoryImp;
 
 import java.util.Set;
 
@@ -13,12 +14,14 @@ import static org.junit.Assert.assertThat;
 public class HospitalTest {
 	private Player player;
 	private Hospital hospital;
+	private Player aTuBo;
 
 	@Before
 	public void setUp() {
 
-		player = new Player("Qian Furen", 1);
+		player = new PlayerFactoryImp().createPlayer(1,10000);
 		hospital = new Hospital(1, 'H');
+		aTuBo = new PlayerFactoryImp().createPlayer(2,10000);
 	}
 
 	@After
@@ -42,9 +45,8 @@ public class HospitalTest {
 
 	@Test
 	public void should_return_0_when_prison_release_all_prisoner() {
-		Player player1 = new Player("A Tubo", 2);
 		hospital.addRole(player);
-		hospital.addRole(player1);
+		hospital.addRole(aTuBo);
 		hospital.release();
 		assertThat(hospital.getPlayers().size(), is(0));
 	}

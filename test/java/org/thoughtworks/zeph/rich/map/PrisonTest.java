@@ -4,6 +4,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.thoughtworks.zeph.rich.player.Player;
+import org.thoughtworks.zeph.rich.player.PlayerFactoryImp;
 
 import java.util.Set;
 
@@ -17,7 +18,7 @@ public class PrisonTest {
 
 	@Before
 	public void setUp() {
-		player = new Player("Qian Furen", 1);
+		player = new PlayerFactoryImp().createPlayer(1,10000);
 		prison = new Prison(2, 'P');
 	}
 

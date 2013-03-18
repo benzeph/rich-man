@@ -6,6 +6,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.thoughtworks.zeph.rich.map.*;
 import org.thoughtworks.zeph.rich.player.Player;
+import org.thoughtworks.zeph.rich.player.PlayerFactoryImp;
 import org.thoughtworks.zeph.rich.props.Block;
 import org.thoughtworks.zeph.rich.props.Bomb;
 import org.thoughtworks.zeph.rich.props.Prop;
@@ -22,9 +23,10 @@ import static org.junit.Assert.assertThat;
 public class InterpreterTest {
 
 	private Map[] gameMap;
-	private Player player;
+	private Player qianFuRen;
 	private Interpreter interpreter;
 	private Player[] players;
+	private Player aTuBo;
 
 	@Before
 	public void setUp() {
@@ -68,9 +70,10 @@ public class InterpreterTest {
 		gameMap[67] = new Mine(67, 40, '$');
 		gameMap[68] = new Mine(68, 80, '$');
 		gameMap[69] = new Mine(69, 60, '$');
-		player = new Player("Qian Furen", 1);
+		qianFuRen = new PlayerFactoryImp().createPlayer(1,10000);
 		interpreter = new Interpreter();
-		players = new Player[]{player};
+		players = new Player[]{qianFuRen};
+		aTuBo = new PlayerFactoryImp().createPlayer(2,10000);
 	}
 
 	@After
@@ -80,18 +83,18 @@ public class InterpreterTest {
 
 	@Test
 	public void should_return_bomb_from_map_5_when_input_is_bomb_5() {
-		player.addGamePoint(1000);
-		player.buyProp(new Bomb());
+		qianFuRen.addGamePoint(1000);
+		qianFuRen.buyProp(new Bomb());
 		Prop bomb = new Bomb();
 		assertThat(interpreter.interpret("bomb 5", gameMap, players, 0), is("bomb set at 5"));
 		assertThat(gameMap[5].getProp(), is(bomb));
-		assertThat(player.getProps().size(), is(0));
+		assertThat(qianFuRen.getProps().size(), is(0));
 	}
 
 	@Test
 	public void should_return_bomb_n_when_input_is_bomb_20() {
-		player.addGamePoint(1000);
-		player.buyProp(new Bomb());
+		qianFuRen.addGamePoint(1000);
+		qianFuRen.buyProp(new Bomb());
 		assertThat(interpreter.interpret("bomb 20", gameMap, players, 0), is("bomb n(-10<=n<=10)"));
 	}
 
@@ -113,13 +116,13 @@ public class InterpreterTest {
 
 	@Test
 	public void should_return_a_block_when_input_is_block_3() {
-		player.addGamePoint(1000);
-		player.buyProp(new Block());
+		qianFuRen.addGamePoint(1000);
+		qianFuRen.buyProp(new Block());
 		String instruction = "block 3";
 		Prop block = new Block();
 		assertThat(interpreter.interpret(instruction, gameMap, players, 0), is("block at 3"));
 		assertThat(gameMap[3].getProp(), is(block));
-		assertThat(player.getProps().size(), is(0));
+		assertThat(qianFuRen.getProps().size(), is(0));
 	}
 
 	@Test
@@ -132,26 +135,26 @@ public class InterpreterTest {
 	public void should_not_stop_at_0_when_roll() {
 		String instruction = "roll";
 		interpreter.interpret(instruction, gameMap, players, 0);
-		assertThat(player.getCurrentMapPosition(), not(0));
+		assertThat(qianFuRen.getCurrentMapPosition(), not(0));
 	}
 
 	@Test
 	public void should_stop_at_3_when_block_3_and_roll() {
-		player.addGamePoint(1000);
-		player.buyProp(new Block());
+		qianFuRen.addGamePoint(1000);
+		qianFuRen.buyProp(new Block());
 		String instruction = "block 3";
 		Prop block = new Block();
 		assertThat(interpreter.interpret(instruction, gameMap, players, 0), is("block at 3"));
 		assertThat(gameMap[3].getProp(), is(block));
 		String instructionRoll = "roll";
 		interpreter.interpret(instructionRoll, gameMap, players, 0);
-		if (player.getCurrentMapPosition() < 3) {
+		if (qianFuRen.getCurrentMapPosition() < 3) {
 			interpreter.interpret(instructionRoll, gameMap, players, 0);
 		}
-		if (player.getCurrentMapPosition() < 3) {
+		if (qianFuRen.getCurrentMapPosition() < 3) {
 			assertThat(interpreter.interpret(instructionRoll, gameMap, players, 0), is("block at 3"));
 		}
-		assertThat(player.getProps().size(), is(0));
+		assertThat(qianFuRen.getProps().size(), is(0));
 		assertNull(gameMap[3].getProp());
 	}
 
@@ -162,28 +165,28 @@ public class InterpreterTest {
 
 	@Test
 	public void should_return_meet_bomb_when_roll() {
-		player.addGamePoint(1000);
-		player.buyProp(new Bomb());
-		player.buyProp(new Bomb());
-		player.buyProp(new Bomb());
-		player.buyProp(new Bomb());
-		player.buyProp(new Bomb());
-		player.buyProp(new Bomb());
+		qianFuRen.addGamePoint(1000);
+		qianFuRen.buyProp(new Bomb());
+		qianFuRen.buyProp(new Bomb());
+		qianFuRen.buyProp(new Bomb());
+		qianFuRen.buyProp(new Bomb());
+		qianFuRen.buyProp(new Bomb());
+		qianFuRen.buyProp(new Bomb());
 		assertThat(interpreter.interpret("bomb 1", gameMap, players, 0), is("bomb set at 1"));
 		assertThat(interpreter.interpret("bomb 2", gameMap, players, 0), is("bomb set at 2"));
 		assertThat(interpreter.interpret("bomb 3", gameMap, players, 0), is("bomb set at 3"));
 		assertThat(interpreter.interpret("bomb 4", gameMap, players, 0), is("bomb set at 4"));
 		assertThat(interpreter.interpret("bomb 5", gameMap, players, 0), is("bomb set at 5"));
 		assertThat(interpreter.interpret("bomb 6", gameMap, players, 0), is("bomb set at 6"));
-		assertThat(interpreter.interpret("roll", gameMap, players, 0), is("roll , stop at " + player.getCurrentMapPosition() + " , meet a bomb"));
+		assertThat(interpreter.interpret("roll", gameMap, players, 0), is("roll , stop at " + qianFuRen.getCurrentMapPosition() + " , meet a bomb"));
 	}
 
 	@Test
 	public void should_return_null_when_robot() {
-		player.addGamePoint(1000);
-		player.buyProp(new Bomb());
-		player.buyProp(new Block());
-		player.buyProp(new Robot());
+		qianFuRen.addGamePoint(1000);
+		qianFuRen.buyProp(new Bomb());
+		qianFuRen.buyProp(new Block());
+		qianFuRen.buyProp(new Robot());
 		String instructionRobot = "robot";
 		String instructionBomb = "bomb 5";
 		String instructionBlock = "block 3";
@@ -197,12 +200,12 @@ public class InterpreterTest {
 
 	@Test
 	public void should_return_9800_1_10000_0_and_200_when_sell_5() {
-		player.buyLand((BuildingLotOneTwo) gameMap[5]);
-		assertThat(player.getMoney(), is(9800));
-		assertThat(((BuildingLotOneTwo) gameMap[5]).getBelongTo(), is(player));
+		qianFuRen.buyLand((BuildingLotOneTwo) gameMap[5]);
+		assertThat(qianFuRen.getMoney(), is(9800));
+		assertThat(((BuildingLotOneTwo) gameMap[5]).getBelongTo(), is(qianFuRen));
 		String instruction = "sell 5";
 		assertThat(interpreter.interpret(instruction, gameMap, players, 0), is("sell land 5, money:200"));
-		assertThat(player.getMoney(), is(10000));
+		assertThat(qianFuRen.getMoney(), is(10000));
 		assertNull(((Land) gameMap[5]).getBelongTo());
 	}
 
@@ -220,18 +223,18 @@ public class InterpreterTest {
 
 	@Test
 	public void should_return_50_100_when_sell_tool_1() {
-		player.addGamePoint(100);
-		player.buyProp(new Block());
-		assertThat(player.getGamePoint(), CoreMatchers.is(50));
+		qianFuRen.addGamePoint(100);
+		qianFuRen.buyProp(new Block());
+		assertThat(qianFuRen.getGamePoint(), CoreMatchers.is(50));
 		String instruction = "sellTool 1";
 		assertThat(interpreter.interpret(instruction, gameMap, players, 0), is("sell block,GP:50"));
-		assertThat(player.getGamePoint(), CoreMatchers.is(100));
+		assertThat(qianFuRen.getGamePoint(), CoreMatchers.is(100));
 	}
 
 	@Test
 	public void should_return_sell_tool_n_when_sell_tool_5() {
-		player.addGamePoint(100);
-		player.buyProp(new Block());
+		qianFuRen.addGamePoint(100);
+		qianFuRen.buyProp(new Block());
 		String instruction = "sellTool 5";
 		assertThat(interpreter.interpret(instruction, gameMap, players, 0), is("sellTool n(n={1,2,3})"));
 	}
@@ -276,9 +279,8 @@ public class InterpreterTest {
 	@Test
 	public void should_return_occupy_when_input_is_bomb_1_and_player_2_stand_at_map_1() {
 		String instruction = "bomb 1";
-		Player player1 = new Player("A Tubo", 2);
-		player1.setCurrentMapPosition(1);
-		players = new Player[]{player, player1};
+		aTuBo.setCurrentMapPosition(1);
+		players = new Player[]{qianFuRen, aTuBo};
 		gameMap[1].setProp(new Bomb());
 		assertThat(interpreter.interpret(instruction, gameMap, players, 0), is("place has been occupied"));
 	}
@@ -286,9 +288,8 @@ public class InterpreterTest {
 	@Test
 	public void should_return_occupy_when_input_is_block_1_and_player_2_stand_at_map_1() {
 		String instruction = "block 1";
-		Player player1 = new Player("A Tubo", 2);
-		player1.setCurrentMapPosition(1);
-		players = new Player[]{player, player1};
+		aTuBo.setCurrentMapPosition(1);
+		players = new Player[]{qianFuRen, aTuBo};
 		gameMap[1].setProp(new Bomb());
 		assertThat(interpreter.interpret(instruction, gameMap, players, 0), is("place has been occupied"));
 	}

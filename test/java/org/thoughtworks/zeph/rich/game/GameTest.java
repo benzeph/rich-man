@@ -7,6 +7,7 @@ import org.thoughtworks.zeph.rich.god.WealthGod;
 import org.thoughtworks.zeph.rich.map.Land;
 import org.thoughtworks.zeph.rich.map.Map;
 import org.thoughtworks.zeph.rich.player.Player;
+import org.thoughtworks.zeph.rich.player.PlayerFactoryImp;
 import org.thoughtworks.zeph.rich.props.Bomb;
 
 import static org.hamcrest.core.Is.is;
@@ -16,14 +17,13 @@ public class GameTest {
 
 	private Player qianFuRen;
 	private Player aTuBo;
-	private RichGame game;
+	private Rich game;
 
 	@Before
 	public void setUp() {
-
-		qianFuRen = new Player("Qian Furen", 1);
-		aTuBo = new Player("A Tubo", 2);
-		game = new RichGame(new Player[]{qianFuRen, aTuBo});
+		qianFuRen =  new PlayerFactoryImp().createPlayer(1,10000);
+		aTuBo = new PlayerFactoryImp().createPlayer(2,10000);
+		game = new Rich(new Player[]{qianFuRen, aTuBo});
 	}
 
 	@After

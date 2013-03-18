@@ -20,19 +20,11 @@ public class Player {
 	private int prisonDays;
 	private int colorNum = 7;
 
-	public Player(String name, int id) {
-		this.id = id;
-		this.name = name;
-		money = 10000;
-		lands = new HashMap<Integer, Land>();
-		props = new HashMap<Integer, Integer>();
-	}
-
-	public Player(String name, int id, int colorNum) {
+	public Player(String name, int id, int colorNum, int money) {
 		this.id = id;
 		this.name = name;
 		this.colorNum = colorNum;
-		money = 10000;
+		this.money = money;
 		lands = new HashMap<Integer, Land>();
 		props = new HashMap<Integer, Integer>();
 	}
