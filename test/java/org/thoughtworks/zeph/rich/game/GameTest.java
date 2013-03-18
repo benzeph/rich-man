@@ -14,14 +14,14 @@ import static org.junit.Assert.assertThat;
 
 public class GameTest {
 
-	private Player player1;
-	private Player player2;
+	private Player qianFuRen;
+	private Player aTuBo;
 
 	@Before
 	public void setUp() {
 
-		player1 = new Player("Qian Furen", 1);
-		player2 = new Player("A Tubo", 2);
+		qianFuRen = new Player("Qian Furen", 1);
+		aTuBo = new Player("A Tubo", 2);
 	}
 
 	@After
@@ -32,125 +32,125 @@ public class GameTest {
 	@Test
 	public void should_quit_the_game_when_input_is_instructions_below() {
 		String instruction = "roll\nn\nroll\nn\nroll\nn\nquit";
-		Game game = new RichGame(new Player[]{player1, player2});
+		Game game = new RichGame(new Player[]{qianFuRen, aTuBo});
 		game.runForTest(instruction);
-		assertThat(player1.getMoney(), is(10000));
+		assertThat(qianFuRen.getMoney(), is(10000));
 	}
 
 	@Test
 	public void should_add_game_point_when_input_is_instructions_below() {
 		String instruction = "roll\nroll\nquit";
-		player1.setCurrentMapPosition(62);
-		player2.setCurrentMapPosition(62);
-		Game game = new RichGame(new Player[]{player1, player2});
+		qianFuRen.setCurrentMapPosition(62);
+		aTuBo.setCurrentMapPosition(62);
+		Game game = new RichGame(new Player[]{qianFuRen, aTuBo});
 		game.runForTest(instruction);
 	}
 
 	@Test
 	public void should_pay_rent_300_when_input_is_roll_one_like_below() {
 		String instruction = "roll one\ny\nroll one\nroll one\ny\nroll one\nroll one\ny\nroll one\nquit";
-		Game game = new RichGame(new Player[]{player1, player2});
+		Game game = new RichGame(new Player[]{qianFuRen, aTuBo});
 		game.runForTest(instruction);
-		assertThat(player1.getMoney(), is(9700));
+		assertThat(qianFuRen.getMoney(), is(9700));
 	}
 
 	@Test
 	public void should_stay_in_hospital_when_play_one_put_a_bomb() {
 		String instruction = "roll one\ny\nbomb 2\nroll one\nroll one\ny\nroll one\nroll one\nroll one\ny\nquit";
-		player2.addGamePoint(1000);
-		player2.buyProp(new Bomb());
-		Game game = new RichGame(new Player[]{player1, player2});
+		aTuBo.addGamePoint(1000);
+		aTuBo.buyProp(new Bomb());
+		Game game = new RichGame(new Player[]{qianFuRen, aTuBo});
 		game.runForTest(instruction);
-		assertThat(player1.getCurrentMapPosition(), is(14));
+		assertThat(qianFuRen.getCurrentMapPosition(), is(14));
 	}
 
 	@Test
 	public void should_return_3_when_player_buy_bomb_robot_block() {
 		String instruction = "roll one\n1\n2\n3\nF\nquit";
-		player1.setCurrentMapPosition(27);
-		player1.addGamePoint(1000);
-		Game game = new RichGame(new Player[]{player1, player2});
+		qianFuRen.setCurrentMapPosition(27);
+		qianFuRen.addGamePoint(1000);
+		Game game = new RichGame(new Player[]{qianFuRen, aTuBo});
 		game.runForTest(instruction);
-		assertThat(player1.getProps().size(), is(3));
+		assertThat(qianFuRen.getProps().size(), is(3));
 	}
 
 	@Test
 	public void should_return_0_when_player_walk_in_prop_room_but_do_not_have_enough_game_point() {
 		String instruction = "roll one\nquit";
-		player1.setCurrentMapPosition(27);
-		Game game = new RichGame(new Player[]{player1, player2});
+		qianFuRen.setCurrentMapPosition(27);
+		Game game = new RichGame(new Player[]{qianFuRen, aTuBo});
 		game.runForTest(instruction);
-		assertThat(player1.getProps().size(), is(0));
+		assertThat(qianFuRen.getProps().size(), is(0));
 	}
 
 	@Test
 	public void should_return_12000_when_player_walk_in_gift_room() {
 		String instruction = "roll one\n1\nquit";
-		player1.setCurrentMapPosition(34);
-		Game game = new RichGame(new Player[]{player1, player2});
+		qianFuRen.setCurrentMapPosition(34);
+		Game game = new RichGame(new Player[]{qianFuRen, aTuBo});
 		game.runForTest(instruction);
-		assertThat(player1.getMoney(), is(12000));
+		assertThat(qianFuRen.getMoney(), is(12000));
 	}
 
 	@Test
 	public void should_return_0_when_player_stay_in_hospital_3_days() {
 		String instruction = "roll one\ny\nroll one\ny\nroll one\ny\nroll one\ny\nquit";
-		player1.setCurrentMapPosition(14);
-		player1.setHospitalDays(3);
-		Game game = new RichGame(new Player[]{player1, player2});
+		qianFuRen.setCurrentMapPosition(14);
+		qianFuRen.setHospitalDays(3);
+		Game game = new RichGame(new Player[]{qianFuRen, aTuBo});
 		game.runForTest(instruction);
-		assertThat(player1.getCurrentMapPosition(), is(15));
-		assertThat(player1.getMoney(), is(9800));
+		assertThat(qianFuRen.getCurrentMapPosition(), is(15));
+		assertThat(qianFuRen.getMoney(), is(9800));
 	}
 
 	@Test
 	public void should_not_pay_the_rent_when_player_got_the_wealth_god() {
 		String instruction = "roll one\nroll one\ny\nroll one\nroll one\ny\nroll one\nroll one\ny\n" +
 				"roll one\nroll one\ny\nroll one\nroll one\ny\nroll one\nquit";
-		Game game = new RichGame(new Player[]{player1, player2});
+		Game game = new RichGame(new Player[]{qianFuRen, aTuBo});
 		Map[] gameMap = game.getGameMap();
-		((Land) gameMap[1]).setBelongTo(player2);
-		((Land) gameMap[2]).setBelongTo(player2);
-		((Land) gameMap[3]).setBelongTo(player2);
-		((Land) gameMap[4]).setBelongTo(player2);
-		((Land) gameMap[5]).setBelongTo(player2);
-		((Land) gameMap[6]).setBelongTo(player2);
-		player1.setGod(new WealthGod());
+		((Land) gameMap[1]).setBelongTo(aTuBo);
+		((Land) gameMap[2]).setBelongTo(aTuBo);
+		((Land) gameMap[3]).setBelongTo(aTuBo);
+		((Land) gameMap[4]).setBelongTo(aTuBo);
+		((Land) gameMap[5]).setBelongTo(aTuBo);
+		((Land) gameMap[6]).setBelongTo(aTuBo);
+		qianFuRen.setGod(new WealthGod());
 		game.runForTest(instruction);
-		assertThat(player1.getMoney(), is(9800));
+		assertThat(qianFuRen.getMoney(), is(9800));
 	}
 
 	@Test
 	public void should_show_a_prop_when_player_set_a_bomb() {
 		String instruction = "bomb 2\nbomb 3\ndrawMap\nquit";
-		Game game = new RichGame(new Player[]{player1, player2});
-		player1.addGamePoint(1000);
-		player1.buyProp(new Bomb());
-		player1.buyProp(new Bomb());
+		Game game = new RichGame(new Player[]{qianFuRen, aTuBo});
+		qianFuRen.addGamePoint(1000);
+		qianFuRen.buyProp(new Bomb());
+		qianFuRen.buyProp(new Bomb());
 		game.runForTest(instruction);
 	}
 
 	@Test
 	public void should_show_help_when_player_input_help() {
 		String instruction = "help\nquery\nquit";
-		Game game = new RichGame(new Player[]{player1, player2});
+		Game game = new RichGame(new Player[]{qianFuRen, aTuBo});
 		game.runForTest(instruction);
 	}
 
 	@Test
 	public void should_broke_when_player_do_not_have_enough_money_to_pay_the_rent() {
 		String instruction = "roll one\ny\nroll one";
-		player2.setMoney(99);
-		Game game = new RichGame(new Player[]{player1, player2});
+		aTuBo.setMoney(99);
+		Game game = new RichGame(new Player[]{qianFuRen, aTuBo});
 		game.runForTest(instruction);
 	}
 
 	@Test
 	public void should_stay_in_map_when_player_stay_in_68_and_roll_3_times() {
 		String instruction = "roll one\nquit";
-		player1.setCurrentMapPosition(69);
-		Game game = new RichGame(new Player[]{player1, player2});
+		qianFuRen.setCurrentMapPosition(69);
+		Game game = new RichGame(new Player[]{qianFuRen, aTuBo});
 		game.runForTest(instruction);
-		assertThat(player1.getCurrentMapPosition(), is(0));
+		assertThat(qianFuRen.getCurrentMapPosition(), is(0));
 	}
 }

@@ -18,13 +18,12 @@ public class RichGame extends Game {
 	private int currentPlayerNum;
 	private int totalPlayerNum;
 	private Player[] players;
-	private Interpreter interpreter;
+	private Interpreter interpreter = new Interpreter();
 
 	public RichGame(Player[] players) {
 		this.players = players;
 		totalPlayerNum = players.length;
 		currentPlayerNum = players.length;
-		interpreter = new Interpreter();
 		mapInitialize();
 	}
 
@@ -299,7 +298,7 @@ public class RichGame extends Game {
 	}
 
 	private void releasePrisoner(int currentPlayer) {
-		((Prison)gameMap[players[currentPlayer].getCurrentMapPosition()]).release();
+		((Prison) gameMap[players[currentPlayer].getCurrentMapPosition()]).release();
 		System.out.println(players[currentPlayer].getName() + ":release all prisoners");
 	}
 
@@ -401,42 +400,36 @@ public class RichGame extends Game {
 			gameMap[i].getSymbol();
 		}
 		System.out.println();
-		///////////////////////////////////
 		gameMap[69].getSymbol();
 		for (int i = 1; i < 28; i++) {
 			System.out.print(" ");
 		}
 		gameMap[29].getSymbol();
 		System.out.println();
-		///////////////////////////////////
 		gameMap[68].getSymbol();
 		for (int i = 1; i < 28; i++) {
 			System.out.print(" ");
 		}
 		gameMap[30].getSymbol();
 		System.out.println();
-		//////////////////////////////////
 		gameMap[67].getSymbol();
 		for (int i = 1; i < 28; i++) {
 			System.out.print(" ");
 		}
 		gameMap[31].getSymbol();
 		System.out.println();
-		//////////////////////////////////
 		gameMap[66].getSymbol();
 		for (int i = 1; i < 28; i++) {
 			System.out.print(" ");
 		}
 		gameMap[32].getSymbol();
 		System.out.println();
-		////////////////////////////////
 		gameMap[65].getSymbol();
 		for (int i = 1; i < 28; i++) {
 			System.out.print(" ");
 		}
 		gameMap[33].getSymbol();
 		System.out.println();
-		////////////////////////////////
 		gameMap[64].getSymbol();
 		for (int i = 1; i < 28; i++) {
 			System.out.print(" ");
