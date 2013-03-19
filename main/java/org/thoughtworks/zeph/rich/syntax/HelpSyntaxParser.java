@@ -1,6 +1,7 @@
 package org.thoughtworks.zeph.rich.syntax;
 
 import org.thoughtworks.zeph.rich.executor.Executor;
+import org.thoughtworks.zeph.rich.executor.HelpExecutor;
 import org.thoughtworks.zeph.rich.map.Map;
 import org.thoughtworks.zeph.rich.player.Player;
 
@@ -17,6 +18,6 @@ public class HelpSyntaxParser implements SyntaxParser {
 
 	@Override
 	public Executor parser() {
-		return null;  //To change body of implemented methods use File | Settings | File Templates.
+		return new HelpExecutor();
 	}
 }

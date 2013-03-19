@@ -27,6 +27,7 @@ public class BlockExecutor implements Executor {
 
 		}
 		if (isBeenOccupied) {
+
 		}
 		if (map[blockPlace].getProp() == null) {
 			if (player.useProp(new Block())) {

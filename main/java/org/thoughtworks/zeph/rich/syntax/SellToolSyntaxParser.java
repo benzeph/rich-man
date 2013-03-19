@@ -1,6 +1,7 @@
 package org.thoughtworks.zeph.rich.syntax;
 
 import org.thoughtworks.zeph.rich.executor.Executor;
+import org.thoughtworks.zeph.rich.executor.SellToolExecutor;
 import org.thoughtworks.zeph.rich.map.Map;
 import org.thoughtworks.zeph.rich.player.Player;
 
@@ -18,6 +19,11 @@ public class SellToolSyntaxParser implements SyntaxParser {
 
 	@Override
 	public Executor parser() {
-		return null;  //To change body of implemented methods use File | Settings | File Templates.
+		int n = Integer.valueOf(instruction.replace("sellTool ", ""));
+		if (n >= 1 && n <= 3) {
+			return new SellToolExecutor(map, player, n);
+		} else {
+			return null;
+		}
 	}
 }

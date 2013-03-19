@@ -171,7 +171,6 @@ public class Interpreter {
 					return "not your building";
 				}
 			}
-
 		}
 		return "sell n(0<n<" + gameMap.length + ")";
 	}
