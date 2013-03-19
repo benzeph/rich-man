@@ -5,8 +5,4 @@ public class QuitExecutor implements Executor {
 	public void execute() {
 
 	}
-
-	@Override
-	public void execute(int para) {
-	}
 }

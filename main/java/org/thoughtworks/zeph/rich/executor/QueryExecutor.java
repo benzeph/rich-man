@@ -13,9 +13,4 @@ public class QueryExecutor implements Executor {
 	public void execute() {
 		player.query();
 	}
-
-	@Override
-	public void execute(int para) {
-
-	}
 }

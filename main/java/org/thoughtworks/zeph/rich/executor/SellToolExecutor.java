@@ -11,20 +11,17 @@ public class SellToolExecutor implements Executor {
 
 	private Map[] map;
 	private Player player;
+	private int n;
 
-	public SellToolExecutor(Map[] map, Player player) {
+	public SellToolExecutor(Map[] map, Player player, int n) {
 		this.map = map;
 		this.player = player;
+		this.n = n;
 	}
 
 	@Override
 	public void execute() {
-
-	}
-
-	@Override
-	public void execute(int para) {
-		switch (para) {
+		switch (n) {
 			case 1:
 				sellBlock(player);
 				break;

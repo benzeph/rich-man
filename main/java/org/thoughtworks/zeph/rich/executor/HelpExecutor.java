@@ -7,8 +7,4 @@ public class HelpExecutor implements Executor {
 		System.out.println("");
 	}
 
-	@Override
-	public void execute(int para) {
-
-	}
 }

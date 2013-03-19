@@ -43,11 +43,6 @@ public class RollExecutor implements Executor {
 
 	}
 
-	@Override
-	public void execute(int para) {
-
-	}
-
 	private void bombExplode(Player player) {
 		player.setCurrentMapPosition(14);
 		player.setHospitalDays(3);

@@ -21,9 +21,4 @@ public class RobotExecutor implements Executor {
 			map[robotMapPosition].setProp(null);
 		}
 	}
-
-	@Override
-	public void execute(int para) {
-
-	}
 }

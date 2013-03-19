@@ -9,20 +9,17 @@ public class BombExecutor implements Executor {
 
 	private Map[] map;
 	private Player player;
+	private int n;
 
-	public BombExecutor(Map[] map, Player player) {
+	public BombExecutor(Map[] map, Player player, int n) {
 		this.map = map;
 		this.player = player;
+		this.n = n;
 	}
 
 	@Override
 	public void execute() {
-
-	}
-
-	@Override
-	public void execute(int para) {
-		int bombPlace = (map.length + player.getCurrentMapPosition() + para) % map.length;
+		int bombPlace = (map.length + player.getCurrentMapPosition() + n) % map.length;
 		boolean isBeenOccupied = false;
 		if (map[bombPlace].isPlayerHere()) {
 			isBeenOccupied = true;

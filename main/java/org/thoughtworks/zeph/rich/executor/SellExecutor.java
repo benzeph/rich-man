@@ -8,21 +8,17 @@ import org.thoughtworks.zeph.rich.player.Player;
 public class SellExecutor implements Executor {
 	private Map[] map;
 	private Player player;
+	private int n;
 
-	public SellExecutor(Map[] map, Player player) {
+	public SellExecutor(Map[] map, Player player, int n) {
 		this.map = map;
 		this.player = player;
+		this.n = n;
 	}
 
 	@Override
 	public void execute() {
-
-	}
-
-	@Override
-	public void execute(int para) {
-
-		if (player.sellLand((Land) map[para])) {
+		if (player.sellLand((Land) map[n])) {
 
 		} else {
 

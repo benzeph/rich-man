@@ -5,5 +5,4 @@ public interface Executor {
 
 	public void execute();
 
-	public void execute(int para);
 }
