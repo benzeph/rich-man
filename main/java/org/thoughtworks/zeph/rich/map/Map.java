@@ -10,6 +10,15 @@ public class Map {
 	private Prop prop;
 	private char symbol;
 	private char playerSymbol = ' ';
+	private boolean isPlayerHere = false;
+
+	public boolean isPlayerHere() {
+		return isPlayerHere;
+	}
+
+	public void setPlayerHere(boolean playerHere) {
+		isPlayerHere = playerHere;
+	}
 
 	public Prop getProp() {
 		return prop;

@@ -11,6 +11,7 @@ public class Player {
 	private String name;
 	private int colorNum;
 	private int money;
+	private char symbol;
 	private God god = null;
 	private Prop prop = null;
 	private int gamePoint = 0;
@@ -25,6 +26,11 @@ public class Player {
 		this.name = name;
 		this.colorNum = colorNum;
 		this.money = money;
+		symbol = name.charAt(0);
+	}
+
+	public char getSymbol() {
+		return symbol;
 	}
 
 	public Map<Integer, Land> getLands() {

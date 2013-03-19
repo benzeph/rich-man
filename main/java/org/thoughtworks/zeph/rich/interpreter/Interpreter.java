@@ -48,12 +48,12 @@ public class Interpreter {
 		}
 	}
 
-	private String rollAction(Map[] gameMap, Player player) {
+	private String rollAction(Map[] map, Player player) {
 		int currentMapPosition = player.getCurrentMapPosition();
 		int step = player.dice();
 		for (int i = 1; i <= step; i++) {
-			currentMapPosition = (currentMapPosition + 1) % gameMap.length;
-			setMapSymbolEveryStep(gameMap, player, currentMapPosition);
+			currentMapPosition = (currentMapPosition + 1) % map.length;
+			setMapSymbolEveryStep(map, player, currentMapPosition);
 			player.setCurrentMapPosition(currentMapPosition);
 			if (player.getProp() instanceof Bomb) {
 				((Bomb) player.getProp()).timeCountDown();
@@ -62,14 +62,14 @@ public class Interpreter {
 					break;
 				}
 			}
-			if (gameMap[currentMapPosition].getProp() instanceof Block) {
-				gameMap[currentMapPosition].setProp(null);
+			if (map[currentMapPosition].getProp() instanceof Block) {
+				map[currentMapPosition].setProp(null);
 				return "roll , block at " + currentMapPosition;
 			}
 		}
-		if (gameMap[currentMapPosition].getProp() instanceof Bomb) {
+		if (map[currentMapPosition].getProp() instanceof Bomb) {
 			player.setProp(new Bomb());
-			gameMap[currentMapPosition].setProp(null);
+			map[currentMapPosition].setProp(null);
 			return "roll , stop at " + currentMapPosition + " , meet a bomb";
 		}
 		return "roll , stop at " + currentMapPosition;
@@ -77,9 +77,9 @@ public class Interpreter {
 
 	private void setMapSymbolEveryStep(Map[] gameMap, Player player, int currentMapPosition) {
 		if (gameMap[currentMapPosition].getPlayerSymbol() == ' ') {
-			gameMap[currentMapPosition].setPlayerSymbol(player.getName().charAt(0));
+			gameMap[currentMapPosition].setPlayerSymbol(player.getSymbol());
 		}
-		if (gameMap[(gameMap.length + currentMapPosition - 1) % gameMap.length].getPlayerSymbol() == player.getName().charAt(0)) {
+		if (gameMap[(gameMap.length + currentMapPosition - 1) % gameMap.length].getPlayerSymbol() == player.getSymbol()) {
 			gameMap[(gameMap.length + currentMapPosition - 1) % gameMap.length].setPlayerSymbol(' ');
 		}
 	}
@@ -185,13 +185,13 @@ public class Interpreter {
 		return "robot out";
 	}
 
-	private String blockAction(String instruction, Map[] gameMap, Player[] players, Player player) {
+	private String blockAction(String instruction, Map[] map, Player[] players, Player player) {
 		pattern = Pattern.compile(BLOCK_PATTERN);
 		matcher = pattern.matcher(instruction);
 		if (matcher.matches()) {
 			int n = Integer.valueOf(instruction.replace("block ", ""));
 			if (-10 <= n && n <= 10) {
-				int blockPlace = (gameMap.length + player.getCurrentMapPosition() + n) % gameMap.length;
+				int blockPlace = (map.length + player.getCurrentMapPosition() + n) % map.length;
 				boolean isBeenOccupied = false;
 				for (Player everyonePlayer : players) {
 					if (null != everyonePlayer) {
@@ -200,15 +200,15 @@ public class Interpreter {
 						}
 					}
 				}
-				if (null != gameMap[blockPlace].getProp()) {
+				if (null != map[blockPlace].getProp()) {
 					return "place has been occupied";
 				}
 				if (isBeenOccupied) {
 					return "place has been occupied";
 				}
-				if (gameMap[blockPlace].getProp() == null) {
+				if (map[blockPlace].getProp() == null) {
 					if (player.useProp(new Block())) {
-						gameMap[blockPlace].setProp(new Block());
+						map[blockPlace].setProp(new Block());
 						return "block at " + blockPlace;
 					}
 				}
@@ -217,13 +217,13 @@ public class Interpreter {
 		return "block n(-10=<n<=10)";
 	}
 
-	private String bombAction(String instruction, Map[] gameMap, Player[] players, Player player) {
+	private String bombAction(String instruction, Map[] map, Player[] players, Player player) {
 		pattern = Pattern.compile(BOMB_PATTEN);
 		matcher = pattern.matcher(instruction);
 		if (matcher.matches()) {
 			int n = Integer.valueOf(instruction.replace("bomb ", ""));
 			if (-10 <= n && n <= 10) {
-				int bombPlace = (gameMap.length + player.getCurrentMapPosition() + n) % gameMap.length;
+				int bombPlace = (map.length + player.getCurrentMapPosition() + n) % map.length;
 				boolean isBeenOccupied = false;
 				for (Player everyPlayer : players) {
 					if (null != everyPlayer) {
@@ -232,15 +232,15 @@ public class Interpreter {
 						}
 					}
 				}
-				if (null != gameMap[bombPlace].getProp()) {
+				if (null != map[bombPlace].getProp()) {
 					return "place has been occupied";
 				}
 				if (isBeenOccupied) {
 					return "place has been occupied";
 				}
-				if (gameMap[bombPlace].getProp() == null) {
+				if (map[bombPlace].getProp() == null) {
 					if (player.useProp(new Bomb())) {
-						gameMap[bombPlace].setProp(new Bomb());
+						map[bombPlace].setProp(new Bomb());
 						return "bomb set at " + bombPlace;
 					} else {
 						return "you don't have a bomb";

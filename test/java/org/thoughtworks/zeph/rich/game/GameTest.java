@@ -2,7 +2,6 @@ package org.thoughtworks.zeph.rich.game;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.thoughtworks.zeph.rich.god.WealthGod;
 import org.thoughtworks.zeph.rich.map.*;
@@ -171,7 +170,7 @@ public class GameTest {
 		aTuBo.setMoney(99);
 		game.runForTest(instruction);
 	}
-	@Ignore
+
 	@Test
 	public void should_stay_in_0_when_player_stay_in_69_and_roll_one_step() {
 		String instruction = "roll\nquit";
