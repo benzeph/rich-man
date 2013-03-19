@@ -6,6 +6,7 @@ import org.thoughtworks.zeph.rich.player.Player;
 import org.thoughtworks.zeph.rich.props.Block;
 import org.thoughtworks.zeph.rich.props.Bomb;
 import org.thoughtworks.zeph.rich.props.Robot;
+import org.thoughtworks.zeph.rich.syntax.SyntaxParserFactory;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -18,7 +19,7 @@ public class Interpreter {
 	public static final String SELL_TOOL_PATTERN = "sellTool \\d";
 	private Pattern pattern;
 	private Matcher matcher;
-
+	private SyntaxParserFactory factory = new SyntaxParserFactory();
 	public String interpret(String instruction, Map[] gameMap, Player[] players, int currentPlayer) {
 		Player player = players[currentPlayer];
 		if (instruction.contains("bomb")) {

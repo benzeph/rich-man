@@ -12,9 +12,6 @@ import org.thoughtworks.zeph.rich.props.Bomb;
 import org.thoughtworks.zeph.rich.props.Prop;
 import org.thoughtworks.zeph.rich.props.Robot;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertNull;
@@ -30,7 +27,6 @@ public class InterpreterTest {
 
 	@Before
 	public void setUp() {
-
 		gameMap = new Map[70];
 		gameMap[0] = new Map(0, 'S');
 
@@ -96,22 +92,6 @@ public class InterpreterTest {
 		qianFuRen.addGamePoint(1000);
 		qianFuRen.buyProp(new Bomb());
 		assertThat(interpreter.interpret("bomb 20", gameMap, players, 0), is("bomb n(-10<=n<=10)"));
-	}
-
-	@Test
-	public void should_return_true_when_match_bomb_10() {
-		String instruction = "bomb 10";
-		Pattern pattern = Pattern.compile("bomb (-)?\\d*");
-		Matcher matcher = pattern.matcher(instruction);
-		assertThat(matcher.matches(), is(true));
-	}
-
-	@Test
-	public void should_return_true_when_match_bomb_n10() {
-		String instruction = "bomb -10";
-		Pattern pattern = Pattern.compile("bomb (-)?\\d*");
-		Matcher matcher = pattern.matcher(instruction);
-		assertThat(matcher.matches(), is(true));
 	}
 
 	@Test
@@ -199,7 +179,7 @@ public class InterpreterTest {
 	}
 
 	@Test
-	public void should_return_9800_1_10000_0_and_200_when_sell_5() {
+	public void should_return_9800_qianFuRen_10000_0_and_200_when_sell_5() {
 		qianFuRen.buyLand((BuildingLandOneTwo) gameMap[5]);
 		assertThat(qianFuRen.getMoney(), is(9800));
 		assertThat(((BuildingLandOneTwo) gameMap[5]).getBelongTo(), is(qianFuRen));
@@ -246,21 +226,10 @@ public class InterpreterTest {
 	}
 
 	@Test
-	public void should_details_when_query() {
-		String instruction = "query";
-		interpreter.interpret(instruction, gameMap, players, 0);
-	}
-
-	@Test
 	public void should_return_quit_when_input_is_quit() {
 		assertThat(interpreter.interpret("quit", gameMap, players, 0), is("quit"));
 	}
 
-	@Test
-	public void should_return_69_when_input_is_negative_1() {
-		assertThat((70 + (-1)) % 70, is(69));
-		assertThat((70 + 2) % 70, is(2));
-	}
 
 	@Test
 	public void should_return_occupy_when_input_is_bomb_1_and_map_1_has_been_occupied() {

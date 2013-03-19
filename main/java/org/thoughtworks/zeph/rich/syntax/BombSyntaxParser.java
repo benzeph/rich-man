@@ -1,6 +1,6 @@
 package org.thoughtworks.zeph.rich.syntax;
 
-import org.thoughtworks.zeph.rich.executor.BlockExecutor;
+import org.thoughtworks.zeph.rich.executor.BombExecutor;
 import org.thoughtworks.zeph.rich.executor.Executor;
 import org.thoughtworks.zeph.rich.map.Map;
 import org.thoughtworks.zeph.rich.player.Player;
@@ -20,7 +20,7 @@ public class BombSyntaxParser implements SyntaxParser {
 	public Executor parser() {
 		int n = Integer.valueOf(instruction.replace("bomb ", ""));
 		if (-10 <= n && n <= 10) {
-			return new BlockExecutor(map, player, n);
+			return new BombExecutor(map, player, n);
 		} else {
 			return null;
 		}
