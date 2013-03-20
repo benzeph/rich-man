@@ -28,15 +28,6 @@ public class SyntaxParserFactory {
 		if (isRobot(instruction)) {
 			return new RobotSyntaxParser(instruction, map, player);
 		}
-		if (isQuery(instruction)) {
-			return new QuerySyntaxParser(instruction, map, player);
-		}
-		if (isQuit(instruction)) {
-			return new QuitSyntaxParser(instruction, map, player);
-		}
-		if (isHelp(instruction)) {
-			return new HelpSyntaxParser(instruction, map, player);
-		}
 		if (isBomb(instruction)) {
 			return new BombSyntaxParser(instruction, map, player);
 		}
@@ -48,6 +39,15 @@ public class SyntaxParserFactory {
 		}
 		if (isSellTool(instruction)) {
 			return new SellToolSyntaxParser(instruction, map, player);
+		}
+		if (isQuery(instruction)) {
+			return new QuerySyntaxParser(player);
+		}
+		if (isHelp(instruction)) {
+			return new HelpSyntaxParser();
+		}
+		if (isQuit(instruction)) {
+			return new QuitSyntaxParser();
 		}
 		return null;
 	}
