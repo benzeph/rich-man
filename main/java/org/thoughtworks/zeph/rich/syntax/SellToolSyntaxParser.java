@@ -15,7 +15,7 @@ public class SellToolSyntaxParser implements SyntaxParser {
 	}
 
 	@Override
-	public Executor parser() {
+	public Executor parse() {
 		int n = Integer.valueOf(instruction.replace("sellTool ", ""));
 		if (n >= 1 && n <= 3) {
 			return new SellToolExecutor(player, n);

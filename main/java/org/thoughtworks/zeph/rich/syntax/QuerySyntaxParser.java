@@ -13,7 +13,7 @@ public class QuerySyntaxParser implements SyntaxParser {
 	}
 
 	@Override
-	public Executor parser() {
+	public Executor parse() {
 		return new QueryExecutor(player);
 	}
 

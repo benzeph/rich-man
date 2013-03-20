@@ -18,7 +18,7 @@ public class SellSyntaxParser implements SyntaxParser {
 	}
 
 	@Override
-	public Executor parser() {
+	public Executor parse() {
 		int n = Integer.valueOf(instruction.replace("sell ", ""));
 		if (0 < n && n < map.getMapLength()) {
 			return new SellExecutor(map, player, n);

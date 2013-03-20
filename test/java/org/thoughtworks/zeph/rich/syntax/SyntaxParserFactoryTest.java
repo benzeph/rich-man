@@ -13,7 +13,7 @@ import org.thoughtworks.zeph.rich.player.PlayerFactoryImp;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
-public class SyntaxTest {
+public class SyntaxParserFactoryTest {
 
 	private SyntaxParserFactory parserFactory = new SyntaxParserFactory();
 	private PlayerFactory playerFactory = new PlayerFactoryImp();

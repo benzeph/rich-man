@@ -17,7 +17,7 @@ public class BombSyntaxParser implements SyntaxParser {
 	}
 
 	@Override
-	public Executor parser() {
+	public Executor parse() {
 		int n = Integer.valueOf(instruction.replace("bomb ", ""));
 		if (-10 <= n && n <= 10) {
 			return new BombExecutor(map, player, n);

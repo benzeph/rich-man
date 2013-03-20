@@ -57,18 +57,6 @@ public class Rich {
 						notBreak = false;
 						break;
 					}
-					if (order.equals("drawMap")) {
-						drawMap();
-						continue;
-					}
-					if (order.equals("help")) {
-						help();
-						continue;
-					}
-					if (order.equals("query")) {
-						System.out.println(players[currentPlayer].query());
-						continue;
-					}
 					doesWhatItNeedTodoAfterStop(input, currentPlayer, order);
 				}
 				drawMap();
@@ -138,22 +126,9 @@ public class Rich {
 					System.out.print("command:");
 					inputStr = input.getInput();
 					String order = interpreter.interpret(inputStr, map, players, currentPlayer);
-					System.out.println(order);
-					if (order.equals("quit")) {
+					if (inputStr.equals("quit")) {
 						notBreak = false;
 						break;
-					}
-					if (order.equals("drawMap")) {
-						drawMap();
-						continue;
-					}
-					if (order.equals("help")) {
-						help();
-						continue;
-					}
-					if (order.equals("query")) {
-						System.out.println(players[currentPlayer].query());
-						continue;
 					}
 					doesWhatItNeedTodoAfterStop(input, currentPlayer, order);
 				}

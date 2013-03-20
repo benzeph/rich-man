@@ -18,7 +18,7 @@ public class RobotSyntaxParser implements SyntaxParser {
 	}
 
 	@Override
-	public Executor parser() {
+	public Executor parse() {
 		return new RobotExecutor(map,player);
 	}
 

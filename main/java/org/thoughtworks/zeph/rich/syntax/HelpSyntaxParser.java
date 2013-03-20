@@ -5,7 +5,7 @@ import org.thoughtworks.zeph.rich.executor.HelpExecutor;
 
 public class HelpSyntaxParser implements SyntaxParser {
 	@Override
-	public Executor parser() {
+	public Executor parse() {
 		return new HelpExecutor();
 	}
 }

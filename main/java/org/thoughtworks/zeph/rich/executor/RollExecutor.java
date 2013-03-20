@@ -48,11 +48,19 @@ public class RollExecutor implements Executor {
 	}
 
 	private void reviseMapSymbolEveryStep(Map map, Player player, int currentMapPosition) {
-		if (map.getGrid(currentMapPosition).getPlayerSymbol() == ' ') {
-			map.getGrid(currentMapPosition).setPlayerSymbol(player.getSymbol());
-		}
+		reviseCurrentPositionSymbol(map, player, currentMapPosition);
+		reviseBackwardPositionSymbol(map, player, currentMapPosition);
+	}
+
+	private void reviseBackwardPositionSymbol(Map map, Player player, int currentMapPosition) {
 		if (map.getGrid((map.getMapLength() + currentMapPosition - 1) % map.getMapLength()).getPlayerSymbol() == player.getSymbol()) {
 			map.getGrid((map.getMapLength() + currentMapPosition - 1) % map.getMapLength()).setPlayerSymbol(' ');
+		}
+	}
+
+	private void reviseCurrentPositionSymbol(Map map, Player player, int currentMapPosition) {
+		if (map.getGrid(currentMapPosition).getPlayerSymbol() == ' ') {
+			map.getGrid(currentMapPosition).setPlayerSymbol(player.getSymbol());
 		}
 	}
 

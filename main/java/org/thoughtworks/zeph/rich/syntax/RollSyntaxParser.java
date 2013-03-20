@@ -18,7 +18,7 @@ public class RollSyntaxParser implements SyntaxParser {
 	}
 
 	@Override
-	public Executor parser() {
+	public Executor parse() {
 		return new RollExecutor(map, player);
 	}
 

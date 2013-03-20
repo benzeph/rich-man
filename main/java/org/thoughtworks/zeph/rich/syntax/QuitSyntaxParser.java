@@ -5,7 +5,7 @@ import org.thoughtworks.zeph.rich.executor.QuitExecutor;
 
 public class QuitSyntaxParser implements SyntaxParser {
 	@Override
-	public Executor parser() {
+	public Executor parse() {
 		return new QuitExecutor();
 	}
 }

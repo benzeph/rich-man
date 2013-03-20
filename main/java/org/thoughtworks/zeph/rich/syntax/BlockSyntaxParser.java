@@ -17,7 +17,7 @@ public class BlockSyntaxParser implements SyntaxParser {
 	}
 
 	@Override
-	public Executor parser() {
+	public Executor parse() {
 		int n = Integer.valueOf(instruction.replace("block ", ""));
 		if (-10 <= n && n <= 10) {
 			return new BlockExecutor(map, player, n);
