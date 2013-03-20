@@ -57,7 +57,7 @@ public class Rich {
 						notBreak = false;
 						break;
 					}
-					doesWhatItNeedTodoAfterStop(input, currentPlayer, order);
+					doesWhatItNeedTodoAfterStop(input, currentPlayer);
 				}
 				drawMap();
 				currentPlayer = (currentPlayer + 1) % totalPlayerNum;
@@ -76,12 +76,12 @@ public class Rich {
 		}
 	}
 
-	private boolean isStopAtBuildingLotFourFive(int currentPlayer, String order) {
-		return (getCurrentPlayerPosition(currentPlayer) instanceof BuildingLandFourFive) && !order.equals("illegal instruction");
+	private boolean isStopAtBuildingLotFourFive(int currentPlayer) {
+		return (getCurrentPlayerPosition(currentPlayer) instanceof BuildingLandFourFive) ;
 	}
 
-	private boolean isStopAtBuildingLotOneTwo(int currentPlayer, String order) {
-		return (getCurrentPlayerPosition(currentPlayer) instanceof BuildingLandOneTwo) && !order.equals("illegal instruction");
+	private boolean isStopAtBuildingLotOneTwo(int currentPlayer) {
+		return (getCurrentPlayerPosition(currentPlayer) instanceof BuildingLandOneTwo);
 	}
 
 	private void printWaitingForInputString(int currentPlayer) {
@@ -125,12 +125,12 @@ public class Rich {
 					System.out.println(players[currentPlayer].getName() + ">waiting for input");
 					System.out.print("command:");
 					inputStr = input.getInput();
-					String order = interpreter.interpret(inputStr, map, players, currentPlayer);
+					interpreter.interpret(inputStr, map, players, currentPlayer);
 					if (inputStr.equals("quit")) {
 						notBreak = false;
 						break;
 					}
-					doesWhatItNeedTodoAfterStop(input, currentPlayer, order);
+					doesWhatItNeedTodoAfterStop(input, currentPlayer);
 				}
 				drawMap();
 				currentPlayer = (currentPlayer + 1) % totalPlayerNum;
@@ -153,8 +153,8 @@ public class Rich {
 		return players[currentPlayer].isGodExist();
 	}
 
-	private void doesWhatItNeedTodoAfterStop(InputSystem input, int currentPlayer, String order) {
-		if (isStopAtBuildingLotOneTwo(currentPlayer, order)) {
+	private void doesWhatItNeedTodoAfterStop(InputSystem input, int currentPlayer) {
+		if (isStopAtBuildingLotOneTwo(currentPlayer)) {
 			if (isLandBlank(currentPlayer)) {
 				buyLand(input, currentPlayer);
 			} else if (isLandBelongToPlayer(currentPlayer)) {
@@ -162,7 +162,7 @@ public class Rich {
 			} else {
 				payLand(currentPlayer);
 			}
-		} else if (isStopAtBuildingLotThree(currentPlayer, order)) {
+		} else if (isStopAtBuildingLotThree(currentPlayer)) {
 			if (isLandBlank(currentPlayer)) {
 				buyLand(input, currentPlayer);
 			} else if (isLandBelongToPlayer(currentPlayer)) {
@@ -170,7 +170,7 @@ public class Rich {
 			} else {
 				payLand(currentPlayer);
 			}
-		} else if (isStopAtBuildingLotFourFive(currentPlayer, order)) {
+		} else if (isStopAtBuildingLotFourFive(currentPlayer)) {
 			if (isLandBlank(currentPlayer)) {
 				buyLand(input, currentPlayer);
 			} else if (isLandBelongToPlayer(currentPlayer)) {
@@ -193,8 +193,8 @@ public class Rich {
 		}
 	}
 
-	private boolean isStopAtBuildingLotThree(int currentPlayer, String order) {
-		return (getCurrentPlayerPosition(currentPlayer) instanceof BuildingLandThree) && !order.equals("illegal instruction");
+	private boolean isStopAtBuildingLotThree(int currentPlayer) {
+		return (getCurrentPlayerPosition(currentPlayer) instanceof BuildingLandThree);
 	}
 
 	private void help() {

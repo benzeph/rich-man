@@ -174,7 +174,7 @@ public class GameTest {
 
 	@Ignore
 	@Test
-	public void should_stay_in_0_when_player_stay_in_69_and_roll_one_step() {
+	public void should_stay_in_0_when_player_stay_in_69_and_roll_one_step_mock() {
 		String instruction = "roll\nquit";
 		Player qianFuRen = mock(Player.class);
 		Player aTuBo = mock(Player.class);

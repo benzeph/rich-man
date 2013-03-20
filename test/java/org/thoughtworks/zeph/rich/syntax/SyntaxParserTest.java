@@ -17,7 +17,7 @@ public class SyntaxParserTest {
 
 	private String instruction;
 	private Map map;
-	private final PlayerFactory factory = new PlayerFactoryImp();
+	private PlayerFactory factory = new PlayerFactoryImp();
 	private Player player;
 	private SyntaxParser parser;
 	private Executor executor;
