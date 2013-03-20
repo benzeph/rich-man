@@ -1,22 +1,17 @@
 package org.thoughtworks.zeph.rich.executor;
 
 
-import org.thoughtworks.zeph.rich.map.Grid;
 import org.thoughtworks.zeph.rich.player.Player;
 import org.thoughtworks.zeph.rich.props.Block;
 import org.thoughtworks.zeph.rich.props.Bomb;
 import org.thoughtworks.zeph.rich.props.Robot;
 
-import java.util.Arrays;
-
 public class SellToolExecutor implements Executor {
 
-	private Grid[] map;
 	private Player player;
 	private int n;
 
-	public SellToolExecutor(Grid[] map, Player player, int n) {
-		this.map = map;
+	public SellToolExecutor(Player player, int n) {
 		this.player = player;
 		this.n = n;
 	}
@@ -68,7 +63,6 @@ public class SellToolExecutor implements Executor {
 		SellToolExecutor that = (SellToolExecutor) o;
 
 		if (n != that.n) return false;
-		if (!Arrays.equals(map, that.map)) return false;
 		if (player != null ? !player.equals(that.player) : that.player != null) return false;
 
 		return true;
@@ -76,8 +70,7 @@ public class SellToolExecutor implements Executor {
 
 	@Override
 	public int hashCode() {
-		int result = map != null ? Arrays.hashCode(map) : 0;
-		result = 31 * result + (player != null ? player.hashCode() : 0);
+		int result = player != null ? player.hashCode() : 0;
 		result = 31 * result + n;
 		return result;
 	}

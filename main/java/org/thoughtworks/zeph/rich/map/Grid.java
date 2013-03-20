@@ -2,6 +2,8 @@ package org.thoughtworks.zeph.rich.map;
 
 import org.thoughtworks.zeph.rich.output.Color;
 import org.thoughtworks.zeph.rich.output.ColorSystemOut;
+import org.thoughtworks.zeph.rich.props.Block;
+import org.thoughtworks.zeph.rich.props.Bomb;
 import org.thoughtworks.zeph.rich.props.Prop;
 
 public class Grid {
@@ -15,7 +17,20 @@ public class Grid {
 	public boolean isPropHere() {
 		return prop != null;
 	}
-
+	public boolean isBlockHere(){
+		if(null==prop){
+			return false;
+		}else {
+			return prop instanceof Block;
+		}
+	}
+	public boolean isBombHere(){
+		if(null==prop){
+			return false;
+		}else {
+			return prop instanceof Bomb;
+		}
+	}
 	public boolean isPlayerHere() {
 		return isPlayerHere;
 	}

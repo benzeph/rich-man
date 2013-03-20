@@ -1,19 +1,17 @@
 package org.thoughtworks.zeph.rich.executor;
 
 
-import org.thoughtworks.zeph.rich.map.Grid;
+import org.thoughtworks.zeph.rich.map.Map;
 import org.thoughtworks.zeph.rich.player.Player;
 import org.thoughtworks.zeph.rich.props.Bomb;
 
-import java.util.Arrays;
-
 public class BombExecutor implements Executor {
 
-	private Grid[] map;
+	private Map map;
 	private Player player;
 	private int n;
 
-	public BombExecutor(Grid[] map, Player player, int n) {
+	public BombExecutor(Map map, Player player, int n) {
 		this.map = map;
 		this.player = player;
 		this.n = n;
@@ -21,19 +19,19 @@ public class BombExecutor implements Executor {
 
 	@Override
 	public void execute() {
-		int bombPlace = (map.length + player.getCurrentMapPosition() + n) % map.length;
+		int bombPlace = (map.getMapLength() + player.getCurrentMapPosition() + n) % map.getMapLength();
 		boolean isBeenOccupied = false;
-		if (map[bombPlace].isPlayerHere()) {
+		if (map.getGrid(bombPlace).isPlayerHere()) {
 			isBeenOccupied = true;
 		}
-		if (map[bombPlace].isPropHere()) {
+		if (map.getGrid(bombPlace).isPropHere()) {
 			isBeenOccupied = true;
 		}
 		if (isBeenOccupied) {
 
 		} else {
 			if (player.useProp(new Bomb())) {
-				map[bombPlace].setProp(new Bomb());
+				map.getGrid(bombPlace).setProp(new Bomb());
 			} else {
 
 			}
@@ -48,7 +46,7 @@ public class BombExecutor implements Executor {
 		BombExecutor that = (BombExecutor) o;
 
 		if (n != that.n) return false;
-		if (!Arrays.equals(map, that.map)) return false;
+		if (map != null ? !map.equals(that.map) : that.map != null) return false;
 		if (player != null ? !player.equals(that.player) : that.player != null) return false;
 
 		return true;
@@ -56,7 +54,7 @@ public class BombExecutor implements Executor {
 
 	@Override
 	public int hashCode() {
-		int result = map != null ? Arrays.hashCode(map) : 0;
+		int result = map != null ? map.hashCode() : 0;
 		result = 31 * result + (player != null ? player.hashCode() : 0);
 		result = 31 * result + n;
 		return result;

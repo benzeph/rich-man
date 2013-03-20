@@ -1,17 +1,15 @@
 package org.thoughtworks.zeph.rich.executor;
 
 
-import org.thoughtworks.zeph.rich.map.Grid;
+import org.thoughtworks.zeph.rich.map.Map;
 import org.thoughtworks.zeph.rich.player.Player;
-
-import java.util.Arrays;
 
 public class RobotExecutor implements Executor {
 	public static final int step = 1;
-	private Grid[] map;
+	private Map map;
 	private Player player;
 
-	public RobotExecutor(Grid[] map, Player player) {
+	public RobotExecutor(Map map, Player player) {
 		this.map = map;
 		this.player = player;
 	}
@@ -21,7 +19,7 @@ public class RobotExecutor implements Executor {
 		int robotMapPosition = player.getCurrentMapPosition();
 		for (int i = 1; i <= 10; i++) {
 			robotMapPosition = robotMapPosition + step;
-			map[robotMapPosition].setProp(null);
+			map.getGrid(robotMapPosition).setProp(null);
 		}
 	}
 
@@ -32,7 +30,7 @@ public class RobotExecutor implements Executor {
 
 		RobotExecutor that = (RobotExecutor) o;
 
-		if (!Arrays.equals(map, that.map)) return false;
+		if (map != null ? !map.equals(that.map) : that.map != null) return false;
 		if (player != null ? !player.equals(that.player) : that.player != null) return false;
 
 		return true;
@@ -40,7 +38,7 @@ public class RobotExecutor implements Executor {
 
 	@Override
 	public int hashCode() {
-		int result = map != null ? Arrays.hashCode(map) : 0;
+		int result = map != null ? map.hashCode() : 0;
 		result = 31 * result + (player != null ? player.hashCode() : 0);
 		return result;
 	}

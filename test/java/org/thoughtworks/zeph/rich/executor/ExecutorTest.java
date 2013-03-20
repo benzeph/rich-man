@@ -4,8 +4,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.thoughtworks.zeph.rich.map.FirstMapFactory;
-import org.thoughtworks.zeph.rich.map.Grid;
 import org.thoughtworks.zeph.rich.map.Land;
+import org.thoughtworks.zeph.rich.map.Map;
 import org.thoughtworks.zeph.rich.map.MapFactory;
 import org.thoughtworks.zeph.rich.player.Player;
 import org.thoughtworks.zeph.rich.player.PlayerFactoryImp;
@@ -22,7 +22,7 @@ public class ExecutorTest {
 
 	private Player player = new PlayerFactoryImp().createPlayer(1, 10000);
 	private MapFactory mapFactory = new FirstMapFactory();
-	private Grid[] map;
+	private Map map;
 	private Executor executor;
 
 	@Before
@@ -43,7 +43,7 @@ public class ExecutorTest {
 		executor = new BlockExecutor(map, player, n);
 		executor.execute();
 		Prop expectProp = new Block();
-		assertThat(map[5].getProp(), is(expectProp));
+		assertThat(map.getGrid(5).getProp(), is(expectProp));
 
 	}
 
@@ -54,7 +54,7 @@ public class ExecutorTest {
 		executor = new BombExecutor(map, player, n);
 		executor.execute();
 		Prop expectProp = new Bomb();
-		assertThat(map[5].getProp(), is(expectProp));
+		assertThat(map.getGrid(5).getProp(), is(expectProp));
 	}
 
 	@Test
@@ -72,12 +72,12 @@ public class ExecutorTest {
 		executor.execute();
 		executor = new RobotExecutor(map, player);
 		executor.execute();
-		assertNull(map[5].getProp());
+		assertNull(map.getGrid(5).getProp());
 	}
 
 	@Test
 	public void should_return_10000_when_sell_5() {
-		player.buyLand((Land) map[5]);
+		player.buyLand((Land) map.getGrid(5));
 		executor = new SellExecutor(map, player, 5);
 		executor.execute();
 		assertThat(player.getMoney(), is(10000));
@@ -86,7 +86,7 @@ public class ExecutorTest {
 	@Test
 	public void should_return_1000_when_sell_tool_1() {
 		player.buyProp(new Block());
-		executor = new SellToolExecutor(map, player, 1);
+		executor = new SellToolExecutor(player, 1);
 		executor.execute();
 		assertThat(player.getGamePoint(), is(1000));
 	}

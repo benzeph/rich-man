@@ -2,6 +2,7 @@ package org.thoughtworks.zeph.rich.player;
 
 import org.thoughtworks.zeph.rich.god.God;
 import org.thoughtworks.zeph.rich.map.Land;
+import org.thoughtworks.zeph.rich.props.Bomb;
 import org.thoughtworks.zeph.rich.props.Prop;
 
 import java.util.*;
@@ -27,6 +28,14 @@ public class Player {
 		this.colorNum = colorNum;
 		this.money = money;
 		symbol = name.charAt(0);
+	}
+
+	public boolean isCarriedWithABomb() {
+		if (null == prop) {
+			return false;
+		} else {
+			return prop instanceof Bomb;
+		}
 	}
 
 	public char getSymbol() {
@@ -305,6 +314,16 @@ public class Player {
 		result = 31 * result + (props != null ? props.hashCode() : 0);
 		result = 31 * result + (lands != null ? lands.hashCode() : 0);
 		return result;
+	}
+
+	public void bombTimeCountDown() {
+		Bomb bomb = (Bomb) prop;
+		bomb.timeCountDown();
+	}
+
+	public boolean isBombExplode() {
+		Bomb bomb = (Bomb) prop;
+		return bomb.getLeftTime() == 0;
 	}
 }
 

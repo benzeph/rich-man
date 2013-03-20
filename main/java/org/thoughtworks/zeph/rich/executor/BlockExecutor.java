@@ -1,18 +1,16 @@
 package org.thoughtworks.zeph.rich.executor;
 
 
-import org.thoughtworks.zeph.rich.map.Grid;
+import org.thoughtworks.zeph.rich.map.Map;
 import org.thoughtworks.zeph.rich.player.Player;
 import org.thoughtworks.zeph.rich.props.Block;
 
-import java.util.Arrays;
-
 public class BlockExecutor implements Executor {
-	private Grid[] map;
+	private Map map;
 	private Player player;
 	private int n;
 
-	public BlockExecutor(Grid[] map, Player player, int n) {
+	public BlockExecutor(Map map, Player player, int n) {
 		this.map = map;
 		this.player = player;
 		this.n = n;
@@ -20,19 +18,19 @@ public class BlockExecutor implements Executor {
 
 	@Override
 	public void execute() {
-		int blockPlace = (map.length + player.getCurrentMapPosition() + n) % map.length;
+		int blockPlace = (map.getMapLength() + player.getCurrentMapPosition() + n) % map.getMapLength();
 		boolean isBeenOccupied = false;
-		if (map[blockPlace].isPlayerHere()) {
+		if (map.getGrid(blockPlace).isPlayerHere()) {
 			isBeenOccupied = true;
 		}
-		if (map[blockPlace].isPropHere()) {
+		if (map.getGrid(blockPlace).isPropHere()) {
 			isBeenOccupied = true;
 		}
 		if (isBeenOccupied) {
 
 		} else {
 			if (player.useProp(new Block())) {
-				map[blockPlace].setProp(new Block());
+				map.getGrid(blockPlace).setProp(new Block());
 			} else {
 
 			}
@@ -48,7 +46,7 @@ public class BlockExecutor implements Executor {
 		BlockExecutor that = (BlockExecutor) o;
 
 		if (n != that.n) return false;
-		if (!Arrays.equals(map, that.map)) return false;
+		if (map != null ? !map.equals(that.map) : that.map != null) return false;
 		if (player != null ? !player.equals(that.player) : that.player != null) return false;
 
 		return true;
@@ -56,7 +54,7 @@ public class BlockExecutor implements Executor {
 
 	@Override
 	public int hashCode() {
-		int result = map != null ? Arrays.hashCode(map) : 0;
+		int result = map != null ? map.hashCode() : 0;
 		result = 31 * result + (player != null ? player.hashCode() : 0);
 		result = 31 * result + n;
 		return result;
