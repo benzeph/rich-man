@@ -22,7 +22,6 @@ import static org.junit.Assert.assertThat;
 public class ExecutorTest {
 
 	private Player player = new PlayerFactoryImp().createPlayer(1, 10000);
-	private SyntaxParserFactory parserFactory = new SyntaxParserFactory();
 	private MapFactory mapFactory = new FirstMapFactory();
 	private Grid[] map;
 	private Executor executor;
