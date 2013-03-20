@@ -1,7 +1,7 @@
 package org.thoughtworks.zeph.rich.interpreter;
 
+import org.thoughtworks.zeph.rich.map.Grid;
 import org.thoughtworks.zeph.rich.map.Land;
-import org.thoughtworks.zeph.rich.map.Map;
 import org.thoughtworks.zeph.rich.player.Player;
 import org.thoughtworks.zeph.rich.props.Block;
 import org.thoughtworks.zeph.rich.props.Bomb;
@@ -20,7 +20,7 @@ public class Interpreter {
 	private Pattern pattern;
 	private Matcher matcher;
 	private SyntaxParserFactory factory = new SyntaxParserFactory();
-	public String interpret(String instruction, Map[] gameMap, Player[] players, int currentPlayer) {
+	public String interpret(String instruction, Grid[] gameMap, Player[] players, int currentPlayer) {
 		Player player = players[currentPlayer];
 		if (instruction.contains("bomb")) {
 			return bombAction(instruction, gameMap, players, player);
@@ -49,7 +49,7 @@ public class Interpreter {
 		}
 	}
 
-	private String rollAction(Map[] map, Player player) {
+	private String rollAction(Grid[] map, Player player) {
 		int currentMapPosition = player.getCurrentMapPosition();
 		int step = player.dice();
 		for (int i = 1; i <= step; i++) {
@@ -76,7 +76,7 @@ public class Interpreter {
 		return "roll , stop at " + currentMapPosition;
 	}
 
-	private void setMapSymbolEveryStep(Map[] gameMap, Player player, int currentMapPosition) {
+	private void setMapSymbolEveryStep(Grid[] gameMap, Player player, int currentMapPosition) {
 		if (gameMap[currentMapPosition].getPlayerSymbol() == ' ') {
 			gameMap[currentMapPosition].setPlayerSymbol(player.getSymbol());
 		}
@@ -85,7 +85,7 @@ public class Interpreter {
 		}
 	}
 
-	private String rollOneAction(Map[] gameMap, Player player) {
+	private String rollOneAction(Grid[] gameMap, Player player) {
 		int currentMapPosition = player.getCurrentMapPosition();
 		int step = 1;
 		for (int i = 1; i <= step; i++) {
@@ -160,7 +160,7 @@ public class Interpreter {
 		}
 	}
 
-	private String sellAction(String instruction, Map[] gameMap, Player player) {
+	private String sellAction(String instruction, Grid[] gameMap, Player player) {
 		pattern = Pattern.compile(SELL_PATTERN);
 		matcher = pattern.matcher(instruction);
 		if (matcher.matches()) {
@@ -176,7 +176,7 @@ public class Interpreter {
 		return "sell n(0<n<" + gameMap.length + ")";
 	}
 
-	private String robotAction(Map[] gameMap, Player player) {
+	private String robotAction(Grid[] gameMap, Player player) {
 		int robotMapPosition = player.getCurrentMapPosition();
 		for (int i = 1; i <= 10; i++) {
 			robotMapPosition = robotMapPosition + 1;
@@ -185,7 +185,7 @@ public class Interpreter {
 		return "robot out";
 	}
 
-	private String blockAction(String instruction, Map[] map, Player[] players, Player player) {
+	private String blockAction(String instruction, Grid[] map, Player[] players, Player player) {
 		pattern = Pattern.compile(BLOCK_PATTERN);
 		matcher = pattern.matcher(instruction);
 		if (matcher.matches()) {
@@ -217,7 +217,7 @@ public class Interpreter {
 		return "block n(-10=<n<=10)";
 	}
 
-	private String bombAction(String instruction, Map[] map, Player[] players, Player player) {
+	private String bombAction(String instruction, Grid[] map, Player[] players, Player player) {
 		pattern = Pattern.compile(BOMB_PATTEN);
 		matcher = pattern.matcher(instruction);
 		if (matcher.matches()) {

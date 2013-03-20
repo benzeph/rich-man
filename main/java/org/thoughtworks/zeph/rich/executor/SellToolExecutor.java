@@ -1,7 +1,7 @@
 package org.thoughtworks.zeph.rich.executor;
 
 
-import org.thoughtworks.zeph.rich.map.Map;
+import org.thoughtworks.zeph.rich.map.Grid;
 import org.thoughtworks.zeph.rich.player.Player;
 import org.thoughtworks.zeph.rich.props.Block;
 import org.thoughtworks.zeph.rich.props.Bomb;
@@ -11,11 +11,11 @@ import java.util.Arrays;
 
 public class SellToolExecutor implements Executor {
 
-	private Map[] map;
+	private Grid[] map;
 	private Player player;
 	private int n;
 
-	public SellToolExecutor(Map[] map, Player player, int n) {
+	public SellToolExecutor(Grid[] map, Player player, int n) {
 		this.map = map;
 		this.player = player;
 		this.n = n;

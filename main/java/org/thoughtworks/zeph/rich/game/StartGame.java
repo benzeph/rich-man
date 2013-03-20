@@ -1,6 +1,6 @@
 package org.thoughtworks.zeph.rich.game;
 
-import org.thoughtworks.zeph.rich.map.Map;
+import org.thoughtworks.zeph.rich.map.Grid;
 import org.thoughtworks.zeph.rich.player.Player;
 import org.thoughtworks.zeph.rich.player.PlayerFactoryImp;
 
@@ -13,7 +13,7 @@ public class StartGame {
 
 	public static final String MONEY_PATTERN = "\\d\\d+";
 	private Rich game;
-	private Map[] map;
+	private Grid[] map;
 	private Scanner scanner;
 	private Player[] players;
 

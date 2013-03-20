@@ -19,9 +19,9 @@ public class Rich {
 	private int totalPlayerNum;
 	private Player[] players;
 	private Interpreter interpreter = new Interpreter();
-	private Map[] map;
+	private Grid[] map;
 
-	public Rich(Player[] players, Map[] map) {
+	public Rich(Player[] players, Grid[] map) {
 		this.players = players;
 		totalPlayerNum = players.length;
 		currentPlayerNum = players.length;
@@ -330,7 +330,7 @@ public class Rich {
 		return ((Land) getCurrentPlayerPosition(currentPlayer)).getBelongTo() == null;
 	}
 
-	private Map getCurrentPlayerPosition(int currentPlayer) {
+	private Grid getCurrentPlayerPosition(int currentPlayer) {
 		return map[players[currentPlayer].getCurrentMapPosition()];
 	}
 
@@ -409,7 +409,7 @@ public class Rich {
 		System.out.println();
 	}
 
-	public Map[] getMap() {
+	public Grid[] getMap() {
 		return map;
 	}
 }

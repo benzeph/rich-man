@@ -1,18 +1,18 @@
 package org.thoughtworks.zeph.rich.executor;
 
 
-import org.thoughtworks.zeph.rich.map.Map;
+import org.thoughtworks.zeph.rich.map.Grid;
 import org.thoughtworks.zeph.rich.player.Player;
 import org.thoughtworks.zeph.rich.props.Block;
 
 import java.util.Arrays;
 
 public class BlockExecutor implements Executor {
-	private Map[] map;
+	private Grid[] map;
 	private Player player;
 	private int n;
 
-	public BlockExecutor(Map[] map, Player player, int n) {
+	public BlockExecutor(Grid[] map, Player player, int n) {
 		this.map = map;
 		this.player = player;
 		this.n = n;

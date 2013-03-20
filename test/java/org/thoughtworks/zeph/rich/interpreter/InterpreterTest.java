@@ -19,7 +19,7 @@ import static org.junit.Assert.assertThat;
 
 public class InterpreterTest {
 
-	private Map[] gameMap;
+	private Grid[] gameMap;
 	private Player qianFuRen;
 	private Interpreter interpreter;
 	private Player[] players;
@@ -27,8 +27,8 @@ public class InterpreterTest {
 
 	@Before
 	public void setUp() {
-		gameMap = new Map[70];
-		gameMap[0] = new Map(0, 'S');
+		gameMap = new Grid[70];
+		gameMap[0] = new Grid(0, 'S');
 
 		for (int i = 1; i <= 13; i++) {
 			gameMap[i] = new BuildingLandOneTwo(i, '0');

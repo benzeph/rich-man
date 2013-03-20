@@ -4,7 +4,7 @@ import org.thoughtworks.zeph.rich.output.Color;
 import org.thoughtworks.zeph.rich.output.ColorSystemOut;
 import org.thoughtworks.zeph.rich.props.Prop;
 
-public class Map {
+public class Grid {
 
 	private int id;
 	private Prop prop;
@@ -28,7 +28,7 @@ public class Map {
 		this.prop = prop;
 	}
 
-	public Map(int id, char symbol) {
+	public Grid(int id, char symbol) {
 		this.id = id;
 		this.symbol = symbol;
 	}
@@ -68,7 +68,7 @@ public class Map {
 		if (this == o) return true;
 		if (o == null || getClass() != o.getClass()) return false;
 
-		Map map = (Map) o;
+		Grid map = (Grid) o;
 
 		if (id != map.id) return false;
 		if (isPlayerHere != map.isPlayerHere) return false;

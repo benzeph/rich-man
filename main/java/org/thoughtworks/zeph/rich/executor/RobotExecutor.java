@@ -1,16 +1,16 @@
 package org.thoughtworks.zeph.rich.executor;
 
 
-import org.thoughtworks.zeph.rich.map.Map;
+import org.thoughtworks.zeph.rich.map.Grid;
 import org.thoughtworks.zeph.rich.player.Player;
 
 import java.util.Arrays;
 
 public class RobotExecutor implements Executor {
-	private Map[] map;
+	private Grid[] map;
 	private Player player;
 
-	public RobotExecutor(Map[] map, Player player) {
+	public RobotExecutor(Grid[] map, Player player) {
 		this.map = map;
 		this.player = player;
 	}

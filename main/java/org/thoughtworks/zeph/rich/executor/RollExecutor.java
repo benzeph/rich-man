@@ -1,6 +1,6 @@
 package org.thoughtworks.zeph.rich.executor;
 
-import org.thoughtworks.zeph.rich.map.Map;
+import org.thoughtworks.zeph.rich.map.Grid;
 import org.thoughtworks.zeph.rich.player.Player;
 import org.thoughtworks.zeph.rich.props.Block;
 import org.thoughtworks.zeph.rich.props.Bomb;
@@ -9,10 +9,10 @@ import java.util.Arrays;
 
 public class RollExecutor implements Executor {
 
-	private Map[] map;
+	private Grid[] map;
 	private Player player;
 
-	public RollExecutor(Map[] map, Player player) {
+	public RollExecutor(Grid[] map, Player player) {
 		this.map = map;
 		this.player = player;
 	}
@@ -52,7 +52,7 @@ public class RollExecutor implements Executor {
 		System.out.println(player.getName() + ":bomb explode , you are in hospital");
 	}
 
-	private void setMapSymbolEveryStep(Map[] gameMap, Player player, int currentMapPosition) {
+	private void setMapSymbolEveryStep(Grid[] gameMap, Player player, int currentMapPosition) {
 		if (gameMap[currentMapPosition].getPlayerSymbol() == ' ') {
 			gameMap[currentMapPosition].setPlayerSymbol(player.getSymbol());
 		}

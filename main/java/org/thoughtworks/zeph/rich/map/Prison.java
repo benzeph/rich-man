@@ -5,7 +5,7 @@ import org.thoughtworks.zeph.rich.player.Player;
 import java.util.HashSet;
 import java.util.Set;
 
-public class Prison extends Map {
+public class Prison extends Grid {
 
 	private Set<Player> players;
 

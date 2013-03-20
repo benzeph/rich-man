@@ -23,13 +23,13 @@ public class ExecutorTest {
 	private Player qianFuRen = new PlayerFactoryImp().createPlayer(1, 10000);
 	private Player aTuBo = new PlayerFactoryImp().createPlayer(2, 10000);
 	private Player[] players;
-	private Map[] map;
+	private Grid[] map;
 	private SyntaxParserFactory factory = new SyntaxParserFactory();
 
 	@Before
 	public void setUp() {
-		map = new Map[70];
-		map[0] = new Map(0, 'S');
+		map = new Grid[70];
+		map[0] = new Grid(0, 'S');
 		for (int i = 1; i <= 13; i++) {
 			map[i] = new BuildingLandOneTwo(i, '0');
 		}

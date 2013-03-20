@@ -1,6 +1,6 @@
 package org.thoughtworks.zeph.rich.syntax;
 
-import org.thoughtworks.zeph.rich.map.Map;
+import org.thoughtworks.zeph.rich.map.Grid;
 import org.thoughtworks.zeph.rich.player.Player;
 
 import java.util.regex.Matcher;
@@ -20,7 +20,7 @@ public class SyntaxParserFactory {
 	private Pattern pattern;
 	private Matcher matcher;
 
-	public SyntaxParser buildSyntaxParser(String instruction, Map[] map, Player player) {
+	public SyntaxParser buildSyntaxParser(String instruction, Grid[] map, Player player) {
 
 		if (isRoll(instruction)) {
 			return new RollSyntaxParser(instruction, map, player);

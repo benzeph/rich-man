@@ -2,7 +2,7 @@ package org.thoughtworks.zeph.rich.map;
 
 import org.thoughtworks.zeph.rich.player.Player;
 
-public class Mine extends Map {
+public class Mine extends Grid {
 
 	private int gamePoint;
 

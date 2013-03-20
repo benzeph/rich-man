@@ -2,7 +2,7 @@ package org.thoughtworks.zeph.rich.map;
 
 import org.thoughtworks.zeph.rich.player.Player;
 
-public class Land extends Map {
+public class Land extends Grid {
 
 	private int level;
 	private int price;

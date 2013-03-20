@@ -21,12 +21,12 @@ public class GameTest {
 	private Player qianFuRen;
 	private Player aTuBo;
 	private Rich game;
-	private Map[] map;
+	private Grid[] map;
 	private PlayerFactory playerFactory = new PlayerFactoryImp();
 
 	private void mapInitialize() {
-		map = new Map[70];
-		map[0] = new Map(0, 'S');
+		map = new Grid[70];
+		map[0] = new Grid(0, 'S');
 		for (int i = 1; i <= 13; i++) {
 			map[i] = new BuildingLandOneTwo(i, '0');
 		}
@@ -138,7 +138,7 @@ public class GameTest {
 	public void should_not_pay_the_rent_when_player_got_the_wealth_god() {
 		String instruction = "roll one\nroll one\ny\nroll one\nroll one\ny\nroll one\nroll one\ny\n" +
 				"roll one\nroll one\ny\nroll one\nroll one\ny\nroll one\nquit";
-		Map[] gameMap = game.getMap();
+		Grid[] gameMap = game.getMap();
 		((Land) gameMap[1]).setBelongTo(aTuBo);
 		((Land) gameMap[2]).setBelongTo(aTuBo);
 		((Land) gameMap[3]).setBelongTo(aTuBo);
