@@ -13,4 +13,21 @@ public class QueryExecutor implements Executor {
 	public void execute() {
 		player.query();
 	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+
+		QueryExecutor that = (QueryExecutor) o;
+
+		if (player != null ? !player.equals(that.player) : that.player != null) return false;
+
+		return true;
+	}
+
+	@Override
+	public int hashCode() {
+		return player != null ? player.hashCode() : 0;
+	}
 }

@@ -1,4 +1,4 @@
-package org.thoughtworks.zeph.rich.syntax;
+package org.thoughtworks.zeph.rich.executor;
 
 import org.hamcrest.CoreMatchers;
 import org.junit.After;
@@ -11,17 +11,17 @@ import org.thoughtworks.zeph.rich.props.Block;
 import org.thoughtworks.zeph.rich.props.Bomb;
 import org.thoughtworks.zeph.rich.props.Prop;
 import org.thoughtworks.zeph.rich.props.Robot;
+import org.thoughtworks.zeph.rich.syntax.SyntaxParserFactory;
 
 import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertThat;
 
-public class SyntaxTest {
+public class ExecutorTest {
 
 	private Player qianFuRen = new PlayerFactoryImp().createPlayer(1, 10000);
 	private Player aTuBo = new PlayerFactoryImp().createPlayer(2, 10000);
-	;
 	private Player[] players;
 	private Map[] map;
 	private SyntaxParserFactory factory = new SyntaxParserFactory();

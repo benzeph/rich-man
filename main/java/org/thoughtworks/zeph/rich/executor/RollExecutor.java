@@ -5,6 +5,8 @@ import org.thoughtworks.zeph.rich.player.Player;
 import org.thoughtworks.zeph.rich.props.Block;
 import org.thoughtworks.zeph.rich.props.Bomb;
 
+import java.util.Arrays;
+
 public class RollExecutor implements Executor {
 
 	private Map[] map;
@@ -57,5 +59,25 @@ public class RollExecutor implements Executor {
 		if (gameMap[(gameMap.length + currentMapPosition - 1) % gameMap.length].getPlayerSymbol() == player.getSymbol()) {
 			gameMap[(gameMap.length + currentMapPosition - 1) % gameMap.length].setPlayerSymbol(' ');
 		}
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+
+		RollExecutor that = (RollExecutor) o;
+
+		if (!Arrays.equals(map, that.map)) return false;
+		if (player != null ? !player.equals(that.player) : that.player != null) return false;
+
+		return true;
+	}
+
+	@Override
+	public int hashCode() {
+		int result = map != null ? Arrays.hashCode(map) : 0;
+		result = 31 * result + (player != null ? player.hashCode() : 0);
+		return result;
 	}
 }
