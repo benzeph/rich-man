@@ -12,6 +12,10 @@ public class Grid {
 	private char playerSymbol = ' ';
 	private boolean isPlayerHere = false;
 
+	public boolean isPropHere() {
+		return prop != null;
+	}
+
 	public boolean isPlayerHere() {
 		return isPlayerHere;
 	}

@@ -26,13 +26,12 @@ public class BombExecutor implements Executor {
 		if (map[bombPlace].isPlayerHere()) {
 			isBeenOccupied = true;
 		}
-		if (null != map[bombPlace].getProp()) {
-
+		if (map[bombPlace].isPropHere()) {
+			isBeenOccupied = true;
 		}
 		if (isBeenOccupied) {
 
-		}
-		if (map[bombPlace].getProp() == null) {
+		} else {
 			if (player.useProp(new Bomb())) {
 				map[bombPlace].setProp(new Bomb());
 			} else {

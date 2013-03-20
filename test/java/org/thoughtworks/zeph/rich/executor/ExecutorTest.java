@@ -12,7 +12,6 @@ import org.thoughtworks.zeph.rich.player.PlayerFactoryImp;
 import org.thoughtworks.zeph.rich.props.Block;
 import org.thoughtworks.zeph.rich.props.Bomb;
 import org.thoughtworks.zeph.rich.props.Prop;
-import org.thoughtworks.zeph.rich.syntax.SyntaxParserFactory;
 
 import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.core.Is.is;
@@ -87,7 +86,7 @@ public class ExecutorTest {
 	@Test
 	public void should_return_1000_when_sell_tool_1() {
 		player.buyProp(new Block());
-		executor = new SellToolExecutor(map,player,1);
+		executor = new SellToolExecutor(map, player, 1);
 		executor.execute();
 		assertThat(player.getGamePoint(), is(1000));
 	}

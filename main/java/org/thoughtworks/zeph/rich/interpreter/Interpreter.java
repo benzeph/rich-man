@@ -19,7 +19,6 @@ public class Interpreter {
 	public static final String SELL_TOOL_PATTERN = "sellTool \\d";
 	private Pattern pattern;
 	private Matcher matcher;
-	private SyntaxParserFactory factory = new SyntaxParserFactory();
 	public String interpret(String instruction, Grid[] gameMap, Player[] players, int currentPlayer) {
 		Player player = players[currentPlayer];
 		if (instruction.contains("bomb")) {

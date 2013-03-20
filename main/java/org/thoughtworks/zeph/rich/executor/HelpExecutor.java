@@ -6,5 +6,4 @@ public class HelpExecutor implements Executor {
 	public void execute() {
 		System.out.println("");
 	}
-
 }
