@@ -56,6 +56,9 @@ public class BuildingLandFourFive extends Grid {
 				}
 			}
 		} else {
+			if (player.isGodExist()) {
+				return;
+			}
 			if (player.getMoney() > price * (level + 1) / 2) {
 				player.subtractMoney(price * (level + 1) / 2);
 				owner.addMoney(price * (level + 1) / 2);
