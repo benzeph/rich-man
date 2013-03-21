@@ -2,14 +2,17 @@ package org.thoughtworks.zeph.rich.map.unit;
 
 import org.thoughtworks.zeph.rich.player.Player;
 
+import java.util.Iterator;
+import java.util.Map;
 import java.util.Scanner;
+import java.util.Set;
 
 public class BuildingLandOneTwo extends Grid {
 
 	public static final int TOP_LEVEL = 3;
 	private int level;
 	private int price;
-	private Player belongTo;//refactoring the name of this member field,owner
+	private Player owner;//refactoring the name of this member field,owner
 	private Scanner scanner = new Scanner(System.in);
 	private String instruction;
 
@@ -20,24 +23,23 @@ public class BuildingLandOneTwo extends Grid {
 
 	@Override
 	public void doesWhatItNeedToDo(Player player) {
-		if (belongTo == null) {
+		if (owner == null) {
 			instruction = scanner.next();
 			while (instruction != "Y" && instruction != "N") {
 				instruction = scanner.next();
 			}
 			if (instruction.equals("Y")) {
 				if (player.getMoney() > price) {
-					belongTo = player;
+					owner = player;
 					player.subtractMoney(price);
 					player.addBuilding((Grid) this);
 				} else {
-					//money not enough
 					return;
 				}
 			} else {
 				return;
 			}
-		} else if (belongTo.equals(player)) {
+		} else if (owner.equals(player)) {
 			if (level < TOP_LEVEL) {
 				instruction = scanner.next();
 				while (instruction != "Y" && instruction != "N") {
@@ -48,7 +50,6 @@ public class BuildingLandOneTwo extends Grid {
 						level++;
 						player.subtractMoney(price);
 					} else {
-						//money not enough
 						return;
 					}
 				} else {
@@ -58,15 +59,20 @@ public class BuildingLandOneTwo extends Grid {
 		} else {
 			if (player.getMoney() > price * (level + 1) / 2) {
 				player.subtractMoney(price * (level + 1) / 2);
-				belongTo.addMoney(price * (level + 1) / 2);
+				owner.addMoney(price * (level + 1) / 2);
 			} else {
-				//Player has to sell some land to pay for the rent
-				/*Set<Integer> set = lands.keySet();
+				Map<Integer, Grid> lands = player.getLands();
+				Set<Integer> set = lands.keySet();
 				Iterator<Integer> it = set.iterator();
-				while (!lands.isEmpty() && money < land.getCost()) {
-					Grid myLand = lands.get(it.next());
-					sellLand(myLand);
-				}*/
+				while (it.hasNext()) {
+					Grid land = lands.get(it.next());
+					player.sellLand(land);
+					if (player.getMoney() > price * (level + 1) / 2) {
+						player.subtractMoney(price * (level + 1) / 2);
+						owner.addMoney(price * (level + 1) / 2);
+						break;
+					}
+				}
 			}
 		}
 	}
@@ -83,6 +89,6 @@ public class BuildingLandOneTwo extends Grid {
 
 	@Override
 	public void setOwner(Player player) {
-		belongTo = player;
+		owner = player;
 	}
 }
