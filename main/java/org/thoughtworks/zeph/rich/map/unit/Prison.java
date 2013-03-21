@@ -26,29 +26,15 @@ public class Prison extends Grid {
 	}
 
 	@Override
-	public int getCost() {
-		return 0;  //To change body of implemented methods use File | Settings | File Templates.
-	}
-
-	@Override
-	public void setBelongTo(Player player) {
-		//To change body of implemented methods use File | Settings | File Templates.
-	}
-
-	@Override
-	public Player getBelongTo() {
-		return null;  //To change body of implemented methods use File | Settings | File Templates.
-	}
-
-	@Override
-	public void levelUp() {
-		//To change body of implemented methods use File | Settings | File Templates.
-	}
-
-	@Override
 	public int getLevel() {
 		return 0;  //To change body of implemented methods use File | Settings | File Templates.
 	}
+
+	@Override
+	public void setOwner(Player player) {
+		//To change body of implemented methods use File | Settings | File Templates.
+	}
+
 
 	public Prison(int mapId, char symbol) {
 		super(mapId, symbol);
@@ -61,9 +47,5 @@ public class Prison extends Grid {
 
 	public Set<Player> getPlayers() {
 		return players;
-	}
-
-	public void release() {
-		players.clear();
 	}
 }

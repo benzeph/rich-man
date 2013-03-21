@@ -12,6 +12,10 @@ public class PropRoom extends Grid {
 	private Scanner scanner = new Scanner(System.in);
 	private String instruction;
 
+	public PropRoom(int mapId, char symbol) {
+		super(mapId, symbol);
+	}
+
 	@Override
 	public void doesWhatItNeedToDo(Player player) {
 		//say welcome
@@ -31,29 +35,10 @@ public class PropRoom extends Grid {
 		//say you game point is not enough ,exit
 	}
 
+
 	@Override
 	public int getPrice() {
 		return 0;  //To change body of implemented methods use File | Settings | File Templates.
-	}
-
-	@Override
-	public int getCost() {
-		return 0;  //To change body of implemented methods use File | Settings | File Templates.
-	}
-
-	@Override
-	public void setBelongTo(Player player) {
-		//To change body of implemented methods use File | Settings | File Templates.
-	}
-
-	@Override
-	public Player getBelongTo() {
-		return null;  //To change body of implemented methods use File | Settings | File Templates.
-	}
-
-	@Override
-	public void levelUp() {
-		//To change body of implemented methods use File | Settings | File Templates.
 	}
 
 	@Override
@@ -61,8 +46,9 @@ public class PropRoom extends Grid {
 		return 0;  //To change body of implemented methods use File | Settings | File Templates.
 	}
 
-	public PropRoom(int mapId, char symbol) {
-		super(mapId, symbol);
+	@Override
+	public void setOwner(Player player) {
+		//To change body of implemented methods use File | Settings | File Templates.
 	}
 
 }

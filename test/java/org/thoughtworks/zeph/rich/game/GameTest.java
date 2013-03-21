@@ -108,12 +108,12 @@ public class GameTest {
 		String instruction = "roll one\nroll one\ny\nroll one\nroll one\ny\nroll one\nroll one\ny\n" +
 				"roll one\nroll one\ny\nroll one\nroll one\ny\nroll one\nquit";
 		/*Grid[] gameMap = game.getMap();
-		((Land) gameMap[1]).setBelongTo(aTuBo);
-		((Land) gameMap[2]).setBelongTo(aTuBo);
-		((Land) gameMap[3]).setBelongTo(aTuBo);
-		((Land) gameMap[4]).setBelongTo(aTuBo);
-		((Land) gameMap[5]).setBelongTo(aTuBo);
-		((Land) gameMap[6]).setBelongTo(aTuBo);
+		((Land) gameMap[1]).setOwner(aTuBo);
+		((Land) gameMap[2]).setOwner(aTuBo);
+		((Land) gameMap[3]).setOwner(aTuBo);
+		((Land) gameMap[4]).setOwner(aTuBo);
+		((Land) gameMap[5]).setOwner(aTuBo);
+		((Land) gameMap[6]).setOwner(aTuBo);
 		qianFuRen.setGod(new WealthGod());
 		game.run(instruction);
 		assertThat(qianFuRen.getMoney(), is(9800));*/

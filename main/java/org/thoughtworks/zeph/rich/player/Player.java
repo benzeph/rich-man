@@ -161,7 +161,7 @@ public class Player {
 		if (lands.containsKey(land.getId())) {
 			money = money + land.getPrice() * (land.getLevel() + 1);
 			lands.remove(land.getId());
-			land.setBelongTo(null);
+			land.setOwner(null);
 			return true;
 		} else {
 			return false;

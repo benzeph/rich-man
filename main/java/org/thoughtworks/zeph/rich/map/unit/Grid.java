@@ -14,12 +14,13 @@ public abstract class Grid {
 	private boolean isPlayerHere = false;
 
 	public abstract void doesWhatItNeedToDo(Player player);
+
 	public abstract int getPrice();
-	public abstract int getCost();
-	public abstract void setBelongTo(Player player);
-	public abstract Player getBelongTo();
-	public abstract void levelUp();
+
 	public abstract int getLevel();
+
+	public abstract void setOwner(Player player);
+
 	public boolean isPropHere() {
 		return prop != null;
 	}

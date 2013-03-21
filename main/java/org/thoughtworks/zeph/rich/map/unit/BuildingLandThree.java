@@ -15,39 +15,23 @@ public class BuildingLandThree extends Grid {
 
 	public BuildingLandThree(int mapId, char symbol) {
 		super(mapId, symbol);
-		setPrice(500);
+		this.price = 500;
 	}
 
-	public void setLevel(int level) {
-		this.level = level;
-	}
 
 	public int getPrice() {
 		return price;
 	}
 
-	public void setPrice(int price) {
-		this.price = price;
-	}
-
-	public Player getBelongTo() {
-		return belongTo;
-	}
-
-	public void setBelongTo(Player belongTo) {
-		this.belongTo = belongTo;
-	}
-
-	public int getCost() {
-		return price * (level + 1) / 2;
-	}
-
-	public void levelUp() {
-		level = level + 1;
+	@Override
+	public int getLevel() {
+		return 0;
 	}
 
 	@Override
-	public int getLevel() {
-		return 0;  //To change body of implemented methods use File | Settings | File Templates.
+	public void setOwner(Player player) {
+		belongTo = player;
 	}
+
+
 }
