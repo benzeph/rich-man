@@ -5,8 +5,8 @@ public class God {
 
 	private int leftTime;
 
-	public God() {
-		leftTime = 5;
+	public God(int leftTime) {
+		this.leftTime = leftTime;
 	}
 
 	public void timeCountDown() {
