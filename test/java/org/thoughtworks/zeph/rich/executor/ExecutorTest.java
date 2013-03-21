@@ -4,7 +4,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.thoughtworks.zeph.rich.map.FirstMapFactory;
-import org.thoughtworks.zeph.rich.map.Land;
+import org.thoughtworks.zeph.rich.map.unit.Land;
 import org.thoughtworks.zeph.rich.map.Map;
 import org.thoughtworks.zeph.rich.map.MapFactory;
 import org.thoughtworks.zeph.rich.player.Player;

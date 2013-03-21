@@ -3,6 +3,7 @@ package org.thoughtworks.zeph.rich.map;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.thoughtworks.zeph.rich.map.unit.Mine;
 import org.thoughtworks.zeph.rich.player.Player;
 import org.thoughtworks.zeph.rich.player.PlayerFactoryImp;
 

@@ -6,6 +6,7 @@ import org.thoughtworks.zeph.rich.gift.GodGift;
 import org.thoughtworks.zeph.rich.gift.MoneyGift;
 import org.thoughtworks.zeph.rich.input.InputSystem;
 import org.thoughtworks.zeph.rich.map.*;
+import org.thoughtworks.zeph.rich.map.unit.*;
 import org.thoughtworks.zeph.rich.player.Player;
 import org.thoughtworks.zeph.rich.props.Block;
 import org.thoughtworks.zeph.rich.props.Bomb;

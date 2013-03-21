@@ -1,7 +1,7 @@
 package org.thoughtworks.zeph.rich.player;
 
 import org.thoughtworks.zeph.rich.god.God;
-import org.thoughtworks.zeph.rich.map.Land;
+import org.thoughtworks.zeph.rich.map.unit.Land;
 import org.thoughtworks.zeph.rich.props.Bomb;
 import org.thoughtworks.zeph.rich.props.Prop;
 

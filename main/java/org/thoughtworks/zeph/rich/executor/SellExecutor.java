@@ -1,7 +1,7 @@
 package org.thoughtworks.zeph.rich.executor;
 
 
-import org.thoughtworks.zeph.rich.map.Land;
+import org.thoughtworks.zeph.rich.map.unit.Land;
 import org.thoughtworks.zeph.rich.map.Map;
 import org.thoughtworks.zeph.rich.player.Player;
 

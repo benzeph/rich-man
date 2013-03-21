@@ -1,5 +1,7 @@
 package org.thoughtworks.zeph.rich.map;
 
+import org.thoughtworks.zeph.rich.map.unit.*;
+
 public class FirstMap implements Map {
 
 	private Grid[] grids;

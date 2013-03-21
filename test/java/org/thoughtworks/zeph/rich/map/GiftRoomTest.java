@@ -6,6 +6,7 @@ import org.junit.Test;
 import org.thoughtworks.zeph.rich.gift.GamePointGift;
 import org.thoughtworks.zeph.rich.gift.Gift;
 import org.thoughtworks.zeph.rich.gift.MoneyGift;
+import org.thoughtworks.zeph.rich.map.unit.GiftRoom;
 import org.thoughtworks.zeph.rich.player.Player;
 import org.thoughtworks.zeph.rich.player.PlayerFactoryImp;
 

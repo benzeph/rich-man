@@ -3,6 +3,10 @@ package org.thoughtworks.zeph.rich.map;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.thoughtworks.zeph.rich.map.unit.BuildingLandFourFive;
+import org.thoughtworks.zeph.rich.map.unit.BuildingLandOneTwo;
+import org.thoughtworks.zeph.rich.map.unit.BuildingLandThree;
+import org.thoughtworks.zeph.rich.map.unit.Land;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
