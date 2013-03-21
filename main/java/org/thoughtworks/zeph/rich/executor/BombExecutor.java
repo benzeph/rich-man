@@ -30,7 +30,8 @@ public class BombExecutor implements Executor {
 		if (isBeenOccupied) {
 
 		} else {
-			if (player.useProp(new Bomb())) {
+			if (player.isPlayerHasABomb()) {
+				player.useProp(new Bomb());
 				map.getGrid(bombPlace).setProp(new Bomb());
 			} else {
 

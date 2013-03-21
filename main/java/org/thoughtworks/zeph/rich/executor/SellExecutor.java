@@ -18,8 +18,9 @@ public class SellExecutor implements Executor {
 
 	@Override
 	public void execute() {
-		if (player.sellLand((Grid) map.getGrid(n))) {
 
+		if (player.isPlayerHasBuilding(n)) {
+			player.sellLand((Grid) map.getGrid(n));
 		} else {
 
 		}

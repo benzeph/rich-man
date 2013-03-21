@@ -75,6 +75,10 @@ public class Player {
 		return props.containsKey(3);
 	}
 
+	public boolean isPlayerHasBuilding(int id) {
+		return lands.containsKey(id);
+	}
+
 	public char getSymbol() {
 		return symbol;
 	}
@@ -164,18 +168,13 @@ public class Player {
 		}
 	}
 
-	public boolean useProp(Prop prop) {
-		if (props.containsKey(prop.getId())) {
-			int n = props.get(prop.getId()) - 1;
-			if (n == 0) {
-				props.remove(prop.getId());
-			} else {
-				props.remove(prop.getId());
-				props.put(prop.getId(), n);
-			}
-			return true;
+	public void useProp(Prop prop) {
+		int n = props.get(prop.getId()) - 1;
+		if (n == 0) {
+			props.remove(prop.getId());
 		} else {
-			return false;
+			props.remove(prop.getId());
+			props.put(prop.getId(), n);
 		}
 	}
 

@@ -20,13 +20,19 @@ public class SellToolExecutor implements Executor {
 	public void execute() {
 		switch (n) {
 			case 1:
-				sellBlock(player);
+				if (player.isPlayerHasABlock()) {
+					sellBlock(player);
+				}
 				break;
 			case 2:
-				sellRobot(player);
+				if (player.isPlayerHasARobot()) {
+					sellRobot(player);
+				}
 				break;
 			case 3:
-				sellBomb(player);
+				if (player.isPlayerHasABomb()) {
+					sellBomb(player);
+				}
 				break;
 		}
 	}
