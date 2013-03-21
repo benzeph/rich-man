@@ -37,7 +37,7 @@ public class ExecutorTest {
 
 	@Test
 	public void grid_5_should_has_a_block_when_parameter_n_is_5() {
-		player.buyProp(new Block());
+		player.addProp(1);
 		int n = 5;
 		executor = new BlockExecutor(map, player, n);
 		executor.execute();
@@ -48,7 +48,7 @@ public class ExecutorTest {
 
 	@Test
 	public void grid_5_should_has_a_bomb_when_parameter_n_5() {
-		player.buyProp(new Bomb());
+		player.addProp(3);
 		int n = 5;
 		executor = new BombExecutor(map, player, n);
 		executor.execute();
@@ -65,7 +65,7 @@ public class ExecutorTest {
 
 	@Test
 	public void should_return_null_when_robot() {
-		player.buyProp(new Block());
+		player.addProp(1);
 		int n = 5;
 		executor = new BlockExecutor(map, player, n);
 		executor.execute();
@@ -76,17 +76,17 @@ public class ExecutorTest {
 
 	@Test
 	public void should_return_10000_when_sell_5() {
-		player.buyLand(map.getGrid(5));
+		player.addBuilding(map.getGrid(5));
 		executor = new SellExecutor(map, player, 5);
 		executor.execute();
-		assertThat(player.getMoney(), is(10000));
+		assertThat(player.getMoney(), is(10200));
 	}
 
 	@Test
 	public void should_return_1000_when_sell_tool_1() {
-		player.buyProp(new Block());
+		player.addProp(1);
 		executor = new SellToolExecutor(player, 1);
 		executor.execute();
-		assertThat(player.getGamePoint(), is(1000));
+		assertThat(player.getGamePoint(), is(1050));
 	}
 }

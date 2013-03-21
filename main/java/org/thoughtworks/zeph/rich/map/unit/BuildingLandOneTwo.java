@@ -56,6 +56,12 @@ public class BuildingLandOneTwo extends Grid {
 				belongTo.addMoney(price * (level + 1) / 2);
 			} else {
 				//Player has to sell some land to pay for the rent
+				/*Set<Integer> set = lands.keySet();
+				Iterator<Integer> it = set.iterator();
+				while (!lands.isEmpty() && money < land.getCost()) {
+					Grid myLand = lands.get(it.next());
+					sellLand(myLand);
+				}*/
 			}
 		}
 	}

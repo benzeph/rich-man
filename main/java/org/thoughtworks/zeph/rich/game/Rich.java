@@ -8,9 +8,6 @@ import org.thoughtworks.zeph.rich.input.InputSystem;
 import org.thoughtworks.zeph.rich.map.Map;
 import org.thoughtworks.zeph.rich.map.unit.*;
 import org.thoughtworks.zeph.rich.player.Player;
-import org.thoughtworks.zeph.rich.props.Block;
-import org.thoughtworks.zeph.rich.props.Bomb;
-import org.thoughtworks.zeph.rich.props.Robot;
 import org.thoughtworks.zeph.rich.syntax.SyntaxParserFactory;
 
 public class Rich {
@@ -130,13 +127,13 @@ public class Rich {
 			if (players[currentPlayer].getProps().size() < 10) {
 				String num = input.getInput();
 				if (num.equals("1")) {
-					getPropRoomByMapPosition(currentPlayer).sell(players[currentPlayer], new Block());
+					//getPropRoomByMapPosition(currentPlayer).sell(players[currentPlayer], new Block());
 					System.out.println("you bought a block");
 				} else if (num.equals("2")) {
-					getPropRoomByMapPosition(currentPlayer).sell(players[currentPlayer], new Robot());
+					//getPropRoomByMapPosition(currentPlayer).sell(players[currentPlayer], new Robot());
 					System.out.println("you bought a robot");
 				} else if (num.equals("3")) {
-					getPropRoomByMapPosition(currentPlayer).sell(players[currentPlayer], new Bomb());
+					//getPropRoomByMapPosition(currentPlayer).sell(players[currentPlayer], new Bomb());
 					System.out.println("you bought a bomb");
 				} else if (num.equals("F")) {
 					System.out.println("hope to see you again");
@@ -200,13 +197,13 @@ public class Rich {
 			System.out.println("wealth god bless , exempt from payment");
 			return;
 		}
-		if (players[currentPlayer].payRent(getLandByMapPosition(currentPlayer), (getLandByMapPosition(currentPlayer)).getBelongTo())) {
+		/*if (players[currentPlayer].payRent(getLandByMapPosition(currentPlayer), (getLandByMapPosition(currentPlayer)).getBelongTo())) {
 			System.out.println("pay " + (getLandByMapPosition(currentPlayer)).getCost());
 		} else {
 			System.out.println(players[currentPlayer].getName() + " broke");
 			players[currentPlayer] = null;
 			currentPlayerNum--;
-		}
+		}*/
 	}
 
 	private Grid getLandByMapPosition(int currentPlayer) {
@@ -228,11 +225,11 @@ public class Rich {
 	private void levelUpLand(InputSystem input, int currentPlayer) {
 		String str = input.getInput();
 		if (str.equals("Y") || str.equals("y")) {
-			if (players[currentPlayer].upgradeLand(getCurrentPlayerPosition(currentPlayer))) {
+			/*if (players[currentPlayer].upgradeLand(getCurrentPlayerPosition(currentPlayer))) {
 				System.out.println("level up land success");
 			} else {
 				System.out.println("level up land fail");
-			}
+			}*/
 		} else {
 			System.out.println("give up level up");
 		}
@@ -242,11 +239,11 @@ public class Rich {
 		System.out.println("Do you want to buy this land," + ((Grid) getCurrentPlayerPosition(currentPlayer)).getPrice() + "(Y/N)?");
 		String str = input.getInput();
 		if (str.equals("Y") || str.equals("y")) {
-			if (players[currentPlayer].buyLand((Grid) getCurrentPlayerPosition(currentPlayer))) {
+			/*if (players[currentPlayer].buyLand((Grid) getCurrentPlayerPosition(currentPlayer))) {
 				System.out.println("buy land success");
 			} else {
 				System.out.println("buy land fail");
-			}
+			}*/
 		} else {
 			System.out.println("give up buy");
 		}

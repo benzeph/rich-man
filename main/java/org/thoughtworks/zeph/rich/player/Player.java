@@ -146,28 +146,6 @@ public class Player {
 		}
 	}
 
-	public boolean buyLand(Grid land) {
-		if (money >= land.getPrice()) {
-			lands.put(land.getId(), land);
-			money = money - land.getPrice();
-			land.setBelongTo(this);
-			return true;
-		} else {
-			return false;
-		}
-	}
-
-	public boolean upgradeLand(Grid land) {
-		if (money >= land.getPrice()) {
-			land.levelUp();
-			money = money - land.getPrice();
-			lands.remove(land.getId());
-			lands.put(land.getId(), land);
-			return true;
-		} else {
-			return false;
-		}
-	}
 
 	public boolean sellLand(Grid land) {
 		if (lands.containsKey(land.getId())) {
@@ -180,43 +158,6 @@ public class Player {
 		}
 	}
 
-	public boolean payRent(Grid land, Player player) {
-		if (money >= land.getCost()) {
-			money = money - land.getCost();
-			player.addMoney(land.getCost());
-			return true;
-		} else {
-			Set<Integer> set = lands.keySet();
-			Iterator<Integer> it = set.iterator();
-			while (!lands.isEmpty() && money < land.getCost()) {
-				Grid myLand = lands.get(it.next());
-				sellLand(myLand);
-			}
-			if (money >= land.getCost()) {
-				money = money - land.getCost();
-				player.addMoney(land.getCost());
-				return true;
-			} else {
-				return false;
-			}
-		}
-	}
-
-	public boolean buyProp(Prop prop) {
-		if (gamePoint >= prop.getPrice()) {
-			if (props.containsKey(prop.getId())) {
-				int n = props.get(prop.getId()) + 1;
-				props.remove(prop.getId());
-				props.put(prop.getId(), n);
-			} else {
-				props.put(prop.getId(), 1);
-			}
-			gamePoint = gamePoint - prop.getPrice();
-			return true;
-		} else {
-			return false;
-		}
-	}
 
 	public boolean useProp(Prop prop) {
 		if (props.containsKey(prop.getId())) {

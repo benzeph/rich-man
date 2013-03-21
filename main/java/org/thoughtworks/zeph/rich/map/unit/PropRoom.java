@@ -3,7 +3,6 @@ package org.thoughtworks.zeph.rich.map.unit;
 import org.thoughtworks.zeph.rich.player.Player;
 import org.thoughtworks.zeph.rich.props.Block;
 import org.thoughtworks.zeph.rich.props.Bomb;
-import org.thoughtworks.zeph.rich.props.Prop;
 import org.thoughtworks.zeph.rich.props.Robot;
 
 import java.util.Scanner;
@@ -66,7 +65,4 @@ public class PropRoom extends Grid {
 		super(mapId, symbol);
 	}
 
-	public void sell(Player player, Prop prop) {
-		player.buyProp(prop);
-	}
 }

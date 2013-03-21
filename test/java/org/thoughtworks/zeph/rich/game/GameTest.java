@@ -10,7 +10,6 @@ import org.thoughtworks.zeph.rich.map.MapFactory;
 import org.thoughtworks.zeph.rich.player.Player;
 import org.thoughtworks.zeph.rich.player.PlayerFactory;
 import org.thoughtworks.zeph.rich.player.PlayerFactoryImp;
-import org.thoughtworks.zeph.rich.props.Bomb;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
@@ -63,15 +62,6 @@ public class GameTest {
 		assertThat(qianFuRen.getMoney(), is(9700));
 	}
 
-	@Ignore
-	@Test
-	public void should_stay_in_hospital_when_play_one_put_a_bomb() {
-		String instruction = "roll one\ny\nbomb 2\nroll one\nroll one\ny\nroll one\nroll one\nroll one\ny\nquit";
-		aTuBo.addGamePoint(1000);
-		aTuBo.buyProp(new Bomb());
-		game.run(instruction);
-		assertThat(qianFuRen.getCurrentMapPosition(), is(14));
-	}
 
 	@Ignore
 	@Test
@@ -129,15 +119,6 @@ public class GameTest {
 		assertThat(qianFuRen.getMoney(), is(9800));*/
 	}
 
-	@Ignore
-	@Test
-	public void should_show_a_prop_when_player_set_a_bomb() {
-		String instruction = "bomb 2\nbomb 3\nquit";
-		qianFuRen.addGamePoint(1000);
-		qianFuRen.buyProp(new Bomb());
-		qianFuRen.buyProp(new Bomb());
-		game.run(instruction);
-	}
 
 	@Ignore
 	@Test
