@@ -8,6 +8,12 @@ import java.util.Scanner;
 
 public class Rich {
 
+	public static final String ROLL = "roll";
+	public static final int PLAY_ARRAY_STEP = 1;
+	public static final String WIN = " win";
+	public static final String WHAT_EVER = "what ever";
+	public static final int MINIMUM_PLAYER_NUMBER = 1;
+	public static final int FIRST_PLAYER_NUMER = 0;
 	private int currentPlayerNum;
 	private int totalPlayerNum;
 	private Player[] players;
@@ -31,8 +37,8 @@ public class Rich {
 	}
 
 	public void run() {
-		int currentPlayer = 0;
-		while (currentPlayerNum > 1) {
+		int currentPlayer = FIRST_PLAYER_NUMER;
+		while (currentPlayerNum > MINIMUM_PLAYER_NUMBER) {
 			if (players[currentPlayer] != null) {
 				if (players[currentPlayer].isInHospital()) {
 					players[currentPlayer].countDownHospitalDays();
@@ -42,22 +48,22 @@ public class Rich {
 					if (players[currentPlayer].isGodExist()) {
 						players[currentPlayer].getGod().timeCountDown();
 					}
-					String instruction = "";
-					while (!instruction.equals("roll")) {
+					String instruction = WHAT_EVER;
+					while (!instruction.equals(ROLL)) {
 						instruction = scanner.nextLine();
 						parserFactory.buildSyntaxParser(instruction, map, players[currentPlayer]).parse().execute();
 						map.getGrid(players[currentPlayer].getCurrentMapPosition()).doesWhatItNeedToDo(players[currentPlayer]);
 					}
 				}
 				map.drawMap();
-				currentPlayer = (currentPlayer + 1) % totalPlayerNum;
+				currentPlayer = (currentPlayer + PLAY_ARRAY_STEP) % totalPlayerNum;
 			} else {
-				currentPlayer = (currentPlayer + 1) % totalPlayerNum;
+				currentPlayer = (currentPlayer + PLAY_ARRAY_STEP) % totalPlayerNum;
 			}
 		}
 		for (Player player : players) {
 			if (null != player) {
-				System.out.println(player.getName() + " win");
+				System.out.println(player.getName() + WIN);
 			}
 		}
 	}
