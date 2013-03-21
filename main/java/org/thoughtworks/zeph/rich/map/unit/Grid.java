@@ -1,36 +1,45 @@
 package org.thoughtworks.zeph.rich.map.unit;
 
-import org.thoughtworks.zeph.rich.output.Color;
-import org.thoughtworks.zeph.rich.output.ColorSystemOut;
+import org.thoughtworks.zeph.rich.player.Player;
 import org.thoughtworks.zeph.rich.props.Block;
 import org.thoughtworks.zeph.rich.props.Bomb;
 import org.thoughtworks.zeph.rich.props.Prop;
 
-public class Grid {
+public abstract class Grid {
 
 	private int id;
-	private Prop prop;
 	private char symbol;
+	private Prop prop;
 	private char playerSymbol = ' ';
 	private boolean isPlayerHere = false;
 
+	public abstract void doesWhatItNeedToDo(Player player);
+	public abstract int getPrice();
+	public abstract int getCost();
+	public abstract void setBelongTo(Player player);
+	public abstract Player getBelongTo();
+	public abstract void levelUp();
+	public abstract int getLevel();
 	public boolean isPropHere() {
 		return prop != null;
 	}
-	public boolean isBlockHere(){
-		if(null==prop){
+
+	public boolean isBlockHere() {
+		if (null == prop) {
 			return false;
-		}else {
+		} else {
 			return prop instanceof Block;
 		}
 	}
-	public boolean isBombHere(){
-		if(null==prop){
+
+	public boolean isBombHere() {
+		if (null == prop) {
 			return false;
-		}else {
+		} else {
 			return prop instanceof Bomb;
 		}
 	}
+
 	public boolean isPlayerHere() {
 		return isPlayerHere;
 	}
@@ -65,7 +74,7 @@ public class Grid {
 	}
 
 	public void getSymbol() {
-		if (playerSymbol != ' ') {
+		/*if (playerSymbol != ' ') {
 			ColorSystemOut.print(String.valueOf(playerSymbol), Color.WHITE);
 			return;
 		}
@@ -79,7 +88,7 @@ public class Grid {
 			ColorSystemOut.print(String.valueOf(prop.getIcon()), Color.WHITE);
 			return;
 		}
-		ColorSystemOut.print(String.valueOf(symbol), Color.WHITE);
+		ColorSystemOut.print(String.valueOf(symbol), Color.WHITE);*/
 	}
 
 	@Override

@@ -42,7 +42,7 @@ public class GameTest {
 	@Test
 	public void should_quit_the_game_when_input_is_instructions_below() {
 		String instruction = "roll\nn\nroll\nn\nroll\nn\nquit";
-		game.runForTest(instruction);
+		game.run(instruction);
 		assertThat(qianFuRen.getMoney(), is(10000));
 	}
 
@@ -52,14 +52,14 @@ public class GameTest {
 		String instruction = "roll\nroll\nquit";
 		qianFuRen.setCurrentMapPosition(62);
 		aTuBo.setCurrentMapPosition(62);
-		game.runForTest(instruction);
+		game.run(instruction);
 	}
 
 	@Ignore
 	@Test
 	public void should_pay_rent_300_when_input_is_roll_one_like_below() {
 		String instruction = "roll one\ny\nroll one\nroll one\ny\nroll one\nroll one\ny\nroll one\nquit";
-		game.runForTest(instruction);
+		game.run(instruction);
 		assertThat(qianFuRen.getMoney(), is(9700));
 	}
 
@@ -69,7 +69,7 @@ public class GameTest {
 		String instruction = "roll one\ny\nbomb 2\nroll one\nroll one\ny\nroll one\nroll one\nroll one\ny\nquit";
 		aTuBo.addGamePoint(1000);
 		aTuBo.buyProp(new Bomb());
-		game.runForTest(instruction);
+		game.run(instruction);
 		assertThat(qianFuRen.getCurrentMapPosition(), is(14));
 	}
 
@@ -79,7 +79,7 @@ public class GameTest {
 		String instruction = "roll one\n1\n2\n3\nF\nquit";
 		qianFuRen.setCurrentMapPosition(27);
 		qianFuRen.addGamePoint(1000);
-		game.runForTest(instruction);
+		game.run(instruction);
 		assertThat(qianFuRen.getProps().size(), is(3));
 	}
 
@@ -88,7 +88,7 @@ public class GameTest {
 	public void should_return_0_when_player_walk_in_prop_room_but_do_not_have_enough_game_point() {
 		String instruction = "roll one\nquit";
 		qianFuRen.setCurrentMapPosition(27);
-		game.runForTest(instruction);
+		game.run(instruction);
 		assertThat(qianFuRen.getProps().size(), is(0));
 	}
 
@@ -97,7 +97,7 @@ public class GameTest {
 	public void should_return_12000_when_player_walk_in_gift_room() {
 		String instruction = "roll one\n1\nquit";
 		qianFuRen.setCurrentMapPosition(34);
-		game.runForTest(instruction);
+		game.run(instruction);
 		assertThat(qianFuRen.getMoney(), is(12000));
 	}
 
@@ -107,7 +107,7 @@ public class GameTest {
 		String instruction = "roll one\ny\nroll one\ny\nroll one\ny\nroll one\ny\nquit";
 		qianFuRen.setCurrentMapPosition(14);
 		qianFuRen.setHospitalDays(3);
-		game.runForTest(instruction);
+		game.run(instruction);
 		assertThat(qianFuRen.getCurrentMapPosition(), is(15));
 		assertThat(qianFuRen.getMoney(), is(9800));
 	}
@@ -125,7 +125,7 @@ public class GameTest {
 		((Land) gameMap[5]).setBelongTo(aTuBo);
 		((Land) gameMap[6]).setBelongTo(aTuBo);
 		qianFuRen.setGod(new WealthGod());
-		game.runForTest(instruction);
+		game.run(instruction);
 		assertThat(qianFuRen.getMoney(), is(9800));*/
 	}
 
@@ -136,14 +136,14 @@ public class GameTest {
 		qianFuRen.addGamePoint(1000);
 		qianFuRen.buyProp(new Bomb());
 		qianFuRen.buyProp(new Bomb());
-		game.runForTest(instruction);
+		game.run(instruction);
 	}
 
 	@Ignore
 	@Test
 	public void should_show_help_when_player_input_help() {
 		String instruction = "help\nquery\nquit";
-		game.runForTest(instruction);
+		game.run(instruction);
 	}
 
 	@Ignore
@@ -151,7 +151,7 @@ public class GameTest {
 	public void should_broke_when_player_do_not_have_enough_money_to_pay_the_rent() {
 		String instruction = "roll one\ny\nroll one";
 		aTuBo.setMoney(99);
-		game.runForTest(instruction);
+		game.run(instruction);
 	}
 
 	@Ignore
@@ -163,7 +163,7 @@ public class GameTest {
 		when(qianFuRen.dice()).thenReturn(1);
 		qianFuRen.setCurrentMapPosition(69);
 		Rich game = new Rich(new Player[]{qianFuRen, aTuBo}, map);
-		game.runForTest(instruction);
+		game.run(instruction);
 		assertThat(qianFuRen.getCurrentMapPosition(), is(0));
 	}
 }

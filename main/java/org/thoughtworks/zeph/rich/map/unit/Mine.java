@@ -18,4 +18,34 @@ public class Mine extends Grid {
 	public void addGamePoint(Player player) {
 		player.addGamePoint(gamePoint);
 	}
+
+	@Override
+	public void doesWhatItNeedToDo(Player player) {
+
+	}
+
+	@Override
+	public int getPrice() {
+		return 0;  //To change body of implemented methods use File | Settings | File Templates.
+	}
+
+	@Override
+	public int getCost() {
+		return 0;  //To change body of implemented methods use File | Settings | File Templates.
+	}
+
+	@Override
+	public void setBelongTo(Player player) {
+		//To change body of implemented methods use File | Settings | File Templates.
+	}
+
+	@Override
+	public void levelUp() {
+		//To change body of implemented methods use File | Settings | File Templates.
+	}
+
+	@Override
+	public int getLevel() {
+		return 0;  //To change body of implemented methods use File | Settings | File Templates.
+	}
 }

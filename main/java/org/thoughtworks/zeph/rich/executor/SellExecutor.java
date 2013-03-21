@@ -1,8 +1,8 @@
 package org.thoughtworks.zeph.rich.executor;
 
 
-import org.thoughtworks.zeph.rich.map.unit.Land;
 import org.thoughtworks.zeph.rich.map.Map;
+import org.thoughtworks.zeph.rich.map.unit.Grid;
 import org.thoughtworks.zeph.rich.player.Player;
 
 public class SellExecutor implements Executor {
@@ -18,7 +18,7 @@ public class SellExecutor implements Executor {
 
 	@Override
 	public void execute() {
-		if (player.sellLand((Land) map.getGrid(n))) {
+		if (player.sellLand((Grid) map.getGrid(n))) {
 
 		} else {
 

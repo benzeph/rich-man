@@ -1,7 +1,7 @@
 package org.thoughtworks.zeph.rich.player;
 
 import org.thoughtworks.zeph.rich.god.God;
-import org.thoughtworks.zeph.rich.map.unit.Land;
+import org.thoughtworks.zeph.rich.map.unit.Grid;
 import org.thoughtworks.zeph.rich.props.Bomb;
 import org.thoughtworks.zeph.rich.props.Prop;
 
@@ -20,7 +20,7 @@ public class Player {
 	private int hospitalDays = 0;
 	private int prisonDays = 0;
 	private Map<Integer, Integer> props = new HashMap<Integer, Integer>();
-	private Map<Integer, Land> lands = new HashMap<Integer, Land>();
+	private Map<Integer, Grid> lands = new HashMap<Integer, Grid>();
 
 	public Player(String name, int id, int colorNum, int money) {
 		this.id = id;
@@ -50,7 +50,7 @@ public class Player {
 		return symbol;
 	}
 
-	public Map<Integer, Land> getLands() {
+	public Map<Integer, Grid> getLands() {
 		return lands;
 	}
 
@@ -146,7 +146,7 @@ public class Player {
 		}
 	}
 
-	public boolean buyLand(Land land) {
+	public boolean buyLand(Grid land) {
 		if (money >= land.getPrice()) {
 			lands.put(land.getId(), land);
 			money = money - land.getPrice();
@@ -157,7 +157,7 @@ public class Player {
 		}
 	}
 
-	public boolean upgradeLand(Land land) {
+	public boolean upgradeLand(Grid land) {
 		if (money >= land.getPrice()) {
 			land.levelUp();
 			money = money - land.getPrice();
@@ -169,7 +169,7 @@ public class Player {
 		}
 	}
 
-	public boolean sellLand(Land land) {
+	public boolean sellLand(Grid land) {
 		if (lands.containsKey(land.getId())) {
 			money = money + land.getPrice() * (land.getLevel() + 1);
 			lands.remove(land.getId());
@@ -180,7 +180,7 @@ public class Player {
 		}
 	}
 
-	public boolean payRent(Land land, Player player) {
+	public boolean payRent(Grid land, Player player) {
 		if (money >= land.getCost()) {
 			money = money - land.getCost();
 			player.addMoney(land.getCost());
@@ -189,7 +189,7 @@ public class Player {
 			Set<Integer> set = lands.keySet();
 			Iterator<Integer> it = set.iterator();
 			while (!lands.isEmpty() && money < land.getCost()) {
-				Land myLand = lands.get(it.next());
+				Grid myLand = lands.get(it.next());
 				sellLand(myLand);
 			}
 			if (money >= land.getCost()) {
@@ -256,7 +256,7 @@ public class Player {
 		Set<Integer> set = lands.keySet();
 		Iterator<Integer> it = set.iterator();
 		while (it.hasNext()) {
-			Land land = lands.get(it.next());
+			Grid land = lands.get(it.next());
 			switch (land.getLevel()) {
 				case 0:
 					blankLand++;

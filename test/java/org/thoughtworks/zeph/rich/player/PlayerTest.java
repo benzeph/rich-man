@@ -4,7 +4,6 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.thoughtworks.zeph.rich.map.unit.BuildingLandOneTwo;
-import org.thoughtworks.zeph.rich.map.unit.Land;
 import org.thoughtworks.zeph.rich.props.Block;
 import org.thoughtworks.zeph.rich.props.Bomb;
 import org.thoughtworks.zeph.rich.props.Prop;

@@ -5,7 +5,7 @@ import org.thoughtworks.zeph.rich.gift.Gift;
 import org.thoughtworks.zeph.rich.gift.GodGift;
 import org.thoughtworks.zeph.rich.gift.MoneyGift;
 import org.thoughtworks.zeph.rich.input.InputSystem;
-import org.thoughtworks.zeph.rich.map.*;
+import org.thoughtworks.zeph.rich.map.Map;
 import org.thoughtworks.zeph.rich.map.unit.*;
 import org.thoughtworks.zeph.rich.player.Player;
 import org.thoughtworks.zeph.rich.props.Block;
@@ -28,7 +28,7 @@ public class Rich {
 		this.map = map;
 	}
 
-	public void runForTest(String instructions) {
+	public void run(String instructions) {
 		InputSystem input = new InputSystem(instructions);
 		int currentPlayer = 0;
 		while (currentPlayerNum > 1) {
@@ -45,7 +45,7 @@ public class Rich {
 					while (!instruction.equals("roll")) {
 						instruction = input.getInput();
 						parserFactory.buildSyntaxParser(instruction, map, players[currentPlayer]).parse().execute();
-						doesWhatItNeedTodoAfterStop(input, currentPlayer);
+						map.getGrid(players[currentPlayer].getCurrentMapPosition()).doesWhatItNeedToDo(players[currentPlayer]);
 					}
 				}
 				map.drawMap();
@@ -54,13 +54,9 @@ public class Rich {
 				currentPlayer = (currentPlayer + 1) % totalPlayerNum;
 			}
 		}
-		if (currentPlayerNum != 1) {
-			System.out.println("game over");
-		} else {
-			for (Player player : players) {
-				if (null != player) {
-					System.out.println(player.getName() + " win");
-				}
+		for (Player player : players) {
+			if (null != player) {
+				System.out.println(player.getName() + " win");
 			}
 		}
 	}
@@ -213,16 +209,16 @@ public class Rich {
 		}
 	}
 
-	private Land getLandByMapPosition(int currentPlayer) {
-		return (Land) map.getGrid(players[currentPlayer].getCurrentMapPosition());
+	private Grid getLandByMapPosition(int currentPlayer) {
+		return map.getGrid(players[currentPlayer].getCurrentMapPosition());
 	}
 
 	private boolean isLandBelongToPlayer(int currentPlayer) {
-		return ((Land) getCurrentPlayerPosition(currentPlayer)).getBelongTo().equals(players[currentPlayer]);
+		return (getCurrentPlayerPosition(currentPlayer)).getBelongTo().equals(players[currentPlayer]);
 	}
 
 	private boolean isLandBlank(int currentPlayer) {
-		return ((Land) getCurrentPlayerPosition(currentPlayer)).getBelongTo() == null;
+		return (getCurrentPlayerPosition(currentPlayer)).getBelongTo() == null;
 	}
 
 	private Grid getCurrentPlayerPosition(int currentPlayer) {
@@ -230,10 +226,9 @@ public class Rich {
 	}
 
 	private void levelUpLand(InputSystem input, int currentPlayer) {
-		System.out.println("Do you want to level up this land," + ((Land) getCurrentPlayerPosition(currentPlayer)).getPrice() + "(Y/N)?");
 		String str = input.getInput();
 		if (str.equals("Y") || str.equals("y")) {
-			if (players[currentPlayer].upgradeLand((Land) getCurrentPlayerPosition(currentPlayer))) {
+			if (players[currentPlayer].upgradeLand(getCurrentPlayerPosition(currentPlayer))) {
 				System.out.println("level up land success");
 			} else {
 				System.out.println("level up land fail");
@@ -244,10 +239,10 @@ public class Rich {
 	}
 
 	private void buyLand(InputSystem input, int currentPlayer) {
-		System.out.println("Do you want to buy this land," + ((Land) getCurrentPlayerPosition(currentPlayer)).getPrice() + "(Y/N)?");
+		System.out.println("Do you want to buy this land," + ((Grid) getCurrentPlayerPosition(currentPlayer)).getPrice() + "(Y/N)?");
 		String str = input.getInput();
 		if (str.equals("Y") || str.equals("y")) {
-			if (players[currentPlayer].buyLand((Land) getCurrentPlayerPosition(currentPlayer))) {
+			if (players[currentPlayer].buyLand((Grid) getCurrentPlayerPosition(currentPlayer))) {
 				System.out.println("buy land success");
 			} else {
 				System.out.println("buy land fail");
