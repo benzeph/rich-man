@@ -54,4 +54,52 @@ public class FirstMap implements Map {
 	public int getMapLength() {
 		return grids.length;
 	}
+
+	@Override
+	public void drawMap() {
+		for (int i = 0; i < 29; i++) {
+			getGrid(i).getSymbol();
+		}
+		System.out.println();
+		getGrid(69).getSymbol();
+		for (int i = 1; i < 28; i++) {
+			System.out.print(" ");
+		}
+		getGrid(29).getSymbol();
+		System.out.println();
+		getGrid(68).getSymbol();
+		for (int i = 1; i < 28; i++) {
+			System.out.print(" ");
+		}
+		getGrid(30).getSymbol();
+		System.out.println();
+		getGrid(67).getSymbol();
+		for (int i = 1; i < 28; i++) {
+			System.out.print(" ");
+		}
+		getGrid(31).getSymbol();
+		System.out.println();
+		getGrid(66).getSymbol();
+		for (int i = 1; i < 28; i++) {
+			System.out.print(" ");
+		}
+		getGrid(32).getSymbol();
+		System.out.println();
+		getGrid(65).getSymbol();
+		for (int i = 1; i < 28; i++) {
+			System.out.print(" ");
+		}
+		getGrid(33).getSymbol();
+		System.out.println();
+		getGrid(64).getSymbol();
+		for (int i = 1; i < 28; i++) {
+			System.out.print(" ");
+		}
+		getGrid(34).getSymbol();
+		System.out.println();
+		for (int i = 63; i >= 35; i--) {
+			getGrid(i).getSymbol();
+		}
+		System.out.println();
+	}
 }

@@ -10,4 +10,6 @@ public interface Map {
 	public Grid getGrid(int id);
 
 	public int getMapLength();
+
+	public void drawMap();
 }

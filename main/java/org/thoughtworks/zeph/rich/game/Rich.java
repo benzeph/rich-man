@@ -5,23 +5,23 @@ import org.thoughtworks.zeph.rich.gift.Gift;
 import org.thoughtworks.zeph.rich.gift.GodGift;
 import org.thoughtworks.zeph.rich.gift.MoneyGift;
 import org.thoughtworks.zeph.rich.input.InputSystem;
-import org.thoughtworks.zeph.rich.interpreter.Interpreter;
 import org.thoughtworks.zeph.rich.map.*;
 import org.thoughtworks.zeph.rich.output.ColorSystemOut;
 import org.thoughtworks.zeph.rich.player.Player;
 import org.thoughtworks.zeph.rich.props.Block;
 import org.thoughtworks.zeph.rich.props.Bomb;
 import org.thoughtworks.zeph.rich.props.Robot;
+import org.thoughtworks.zeph.rich.syntax.SyntaxParserFactory;
 
 public class Rich {
 
 	private int currentPlayerNum;
 	private int totalPlayerNum;
 	private Player[] players;
-	private Interpreter interpreter = new Interpreter();
-	private Grid[] map;
+	private Map map;
+	private final SyntaxParserFactory parserFactory = new SyntaxParserFactory();
 
-	public Rich(Player[] players, Grid[] map) {
+	public Rich(Player[] players, Map map) {
 		this.players = players;
 		totalPlayerNum = players.length;
 		currentPlayerNum = players.length;
@@ -51,15 +51,10 @@ public class Rich {
 				String inputStr = "";
 				while (!inputStr.equals("roll") && !inputStr.equals("roll one")) {
 					inputStr = input.getInput();
-					String order = interpreter.interpret(inputStr, map, players, currentPlayer);
-					System.out.println(order);
-					if (order.equals("quit")) {
-						notBreak = false;
-						break;
-					}
+					//parserFactory.buildSyntaxParser(in)
 					doesWhatItNeedTodoAfterStop(input, currentPlayer);
 				}
-				drawMap();
+				map.drawMap();
 				currentPlayer = (currentPlayer + 1) % totalPlayerNum;
 			} else {
 				currentPlayer = (currentPlayer + 1) % totalPlayerNum;
@@ -77,7 +72,7 @@ public class Rich {
 	}
 
 	private boolean isStopAtBuildingLotFourFive(int currentPlayer) {
-		return (getCurrentPlayerPosition(currentPlayer) instanceof BuildingLandFourFive) ;
+		return (getCurrentPlayerPosition(currentPlayer) instanceof BuildingLandFourFive);
 	}
 
 	private boolean isStopAtBuildingLotOneTwo(int currentPlayer) {
@@ -103,8 +98,8 @@ public class Rich {
 		return currentPlayer;
 	}
 
-	public void runForTest(String instruction) {
-		InputSystem input = new InputSystem(instruction);
+	public void runForTest(String instructions) {
+		InputSystem input = new InputSystem(instructions);
 		int currentPlayer = 0;
 		boolean notBreak = true;
 		while (currentPlayerNum != 1 && notBreak) {
@@ -120,19 +115,15 @@ public class Rich {
 				if (hasYouGetAGod(currentPlayer)) {
 					players[currentPlayer].getGod().timeCountDown();
 				}
-				String inputStr = "";
-				while (!inputStr.equals("roll") && !inputStr.equals("roll one")) {
+				String instruction = "";
+				while (!instruction.equals("roll") && !instruction.equals("roll one")) {
 					System.out.println(players[currentPlayer].getName() + ">waiting for input");
 					System.out.print("command:");
-					inputStr = input.getInput();
-					interpreter.interpret(inputStr, map, players, currentPlayer);
-					if (inputStr.equals("quit")) {
-						notBreak = false;
-						break;
-					}
+					instruction = input.getInput();
+					parserFactory.buildSyntaxParser(instruction,map,players[currentPlayer]);
 					doesWhatItNeedTodoAfterStop(input, currentPlayer);
 				}
-				drawMap();
+				map.drawMap();
 				currentPlayer = (currentPlayer + 1) % totalPlayerNum;
 			} else {
 				currentPlayer = (currentPlayer + 1) % totalPlayerNum;
@@ -237,11 +228,11 @@ public class Rich {
 	}
 
 	private PropRoom getPropRoomByMapPosition(int currentPlayer) {
-		return ((PropRoom) map[players[currentPlayer].getCurrentMapPosition()]);
+		return ((PropRoom) map.getGrid(players[currentPlayer].getCurrentMapPosition()));
 	}
 
 	private void releasePrisoner(int currentPlayer) {
-		((Prison) map[players[currentPlayer].getCurrentMapPosition()]).release();
+		((Prison) map.getGrid(players[currentPlayer].getCurrentMapPosition())).release();
 		System.out.println(players[currentPlayer].getName() + ":release all prisoners");
 	}
 
@@ -267,7 +258,7 @@ public class Rich {
 	}
 
 	private GiftRoom getGiftRoomByMapPosition(int currentPlayer) {
-		return ((GiftRoom) map[players[currentPlayer].getCurrentMapPosition()]);
+		return ((GiftRoom) map.getGrid(players[currentPlayer].getCurrentMapPosition()));
 	}
 
 	private void getMine(int currentPlayer) {
@@ -276,7 +267,7 @@ public class Rich {
 	}
 
 	private Mine getMineByMapPosition(int currentPlayer) {
-		return ((Mine) map[players[currentPlayer].getCurrentMapPosition()]);
+		return ((Mine) map.getGrid(players[currentPlayer].getCurrentMapPosition()));
 	}
 
 	private void payLand(int currentPlayer) {
@@ -294,7 +285,7 @@ public class Rich {
 	}
 
 	private Land getLandByMapPosition(int currentPlayer) {
-		return (Land) map[players[currentPlayer].getCurrentMapPosition()];
+		return (Land) map.getGrid(players[currentPlayer].getCurrentMapPosition());
 	}
 
 	private boolean isLandBelongToPlayer(int currentPlayer) {
@@ -306,7 +297,7 @@ public class Rich {
 	}
 
 	private Grid getCurrentPlayerPosition(int currentPlayer) {
-		return map[players[currentPlayer].getCurrentMapPosition()];
+		return map.getGrid(players[currentPlayer].getCurrentMapPosition());
 	}
 
 	private void levelUpLand(InputSystem input, int currentPlayer) {
@@ -335,56 +326,5 @@ public class Rich {
 		} else {
 			System.out.println("give up buy");
 		}
-	}
-
-	public void drawMap() {
-		for (int i = 0; i < 29; i++) {
-			map[i].getSymbol();
-		}
-		System.out.println();
-		map[69].getSymbol();
-		for (int i = 1; i < 28; i++) {
-			System.out.print(" ");
-		}
-		map[29].getSymbol();
-		System.out.println();
-		map[68].getSymbol();
-		for (int i = 1; i < 28; i++) {
-			System.out.print(" ");
-		}
-		map[30].getSymbol();
-		System.out.println();
-		map[67].getSymbol();
-		for (int i = 1; i < 28; i++) {
-			System.out.print(" ");
-		}
-		map[31].getSymbol();
-		System.out.println();
-		map[66].getSymbol();
-		for (int i = 1; i < 28; i++) {
-			System.out.print(" ");
-		}
-		map[32].getSymbol();
-		System.out.println();
-		map[65].getSymbol();
-		for (int i = 1; i < 28; i++) {
-			System.out.print(" ");
-		}
-		map[33].getSymbol();
-		System.out.println();
-		map[64].getSymbol();
-		for (int i = 1; i < 28; i++) {
-			System.out.print(" ");
-		}
-		map[34].getSymbol();
-		System.out.println();
-		for (int i = 63; i >= 35; i--) {
-			map[i].getSymbol();
-		}
-		System.out.println();
-	}
-
-	public Grid[] getMap() {
-		return map;
 	}
 }
