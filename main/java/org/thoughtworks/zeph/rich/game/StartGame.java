@@ -26,7 +26,7 @@ public class StartGame {
 		boolean isNotBetween1234 = true;
 		initialPlayer(money, isNotBetween1234);
 		game = new Rich(players, map);
-		game.run();
+		//game.run();
 	}
 
 	private void initialPlayer(int money, boolean notBetween1234) {

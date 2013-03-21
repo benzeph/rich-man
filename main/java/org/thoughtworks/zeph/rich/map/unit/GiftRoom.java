@@ -26,6 +26,11 @@ public class GiftRoom extends Grid {
 	}
 
 	@Override
+	public Player getBelongTo() {
+		return null;  //To change body of implemented methods use File | Settings | File Templates.
+	}
+
+	@Override
 	public void levelUp() {
 		//To change body of implemented methods use File | Settings | File Templates.
 	}

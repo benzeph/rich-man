@@ -8,7 +8,7 @@ public class FirstMap implements Map {
 
 	public FirstMap() {
 		grids = new Grid[70];
-		grids[0] = new Grid(0, 'S');
+		grids[0] = new Start(0, 'S');
 		for (int i = 1; i <= 13; i++) {
 			grids[i] = new BuildingLandOneTwo(i, '0');
 		}

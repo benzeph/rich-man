@@ -76,7 +76,7 @@ public class ExecutorTest {
 
 	@Test
 	public void should_return_10000_when_sell_5() {
-		player.buyLand((Land) map.getGrid(5));
+		player.buyLand(map.getGrid(5));
 		executor = new SellExecutor(map, player, 5);
 		executor.execute();
 		assertThat(player.getMoney(), is(10000));

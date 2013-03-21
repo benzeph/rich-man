@@ -2,26 +2,22 @@ package org.thoughtworks.zeph.rich.map.unit;
 
 import org.thoughtworks.zeph.rich.player.Player;
 
-public class Mine extends Grid {
+/**
+ * Created with IntelliJ IDEA.
+ * User: lenovo
+ * Date: 13-3-21
+ * Time: 下午9:32
+ * To change this template use File | Settings | File Templates.
+ */
+public class Start extends Grid {
 
-	private int gamePoint;
-
-	public Mine(int mapId, int gamePoint, char symbol) {
-		super(mapId, symbol);
-		this.gamePoint = gamePoint;
-	}
-
-	public int getGamePoint() {
-		return gamePoint;
-	}
-
-	public void addGamePoint(Player player) {
-		player.addGamePoint(gamePoint);
+	public Start(int id, char symbol) {
+		super(id, symbol);
 	}
 
 	@Override
 	public void doesWhatItNeedToDo(Player player) {
-
+		//To change body of implemented methods use File | Settings | File Templates.
 	}
 
 	@Override
