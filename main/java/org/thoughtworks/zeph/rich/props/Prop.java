@@ -1,9 +1,15 @@
 package org.thoughtworks.zeph.rich.props;
 
-public class Prop {
-	protected int id;
-	protected int price;
-	protected char icon;
+public abstract class Prop {
+	private int id;
+	private int price;
+	private char icon;
+
+	public Prop(int id, int price, char icon) {
+		this.id = id;
+		this.price = price;
+		this.icon = icon;
+	}
 
 	public int getId() {
 		return id;

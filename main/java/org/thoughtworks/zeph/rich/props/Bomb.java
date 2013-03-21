@@ -4,10 +4,8 @@ public class Bomb extends Prop {
 	private int leftTime;
 
 	public Bomb() {
-		this.id = 3;
-		this.price = 50;
-		this.icon = '@';
-		this.leftTime = 1;
+		super(3,60,'@');
+		this.leftTime = 3;
 	}
 
 	public void timeCountDown() {

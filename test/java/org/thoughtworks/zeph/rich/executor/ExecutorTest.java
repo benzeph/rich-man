@@ -66,6 +66,7 @@ public class ExecutorTest {
 	@Test
 	public void should_return_null_when_robot() {
 		player.addProp(1);
+		player.addProp(2);
 		int n = 5;
 		executor = new BlockExecutor(map, player, n);
 		executor.execute();
