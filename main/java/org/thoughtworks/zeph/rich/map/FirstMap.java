@@ -102,4 +102,21 @@ public class FirstMap implements Map {
 		}
 		System.out.println();
 	}
+
+	@Override
+	public boolean isBuildingLandOneTwo(int id) {
+		return (id >= 1 && id <= 13) || (id >= 15 && id <= 27);
+	}
+
+	@Override
+	public boolean isBuildingLandThree(int id) {
+		return id >= 29 && id <= 34;
+	}
+
+	@Override
+	public boolean isBuildingLandFour(int id) {
+		return (id >= 36 && id <= 48) || (id >= 50 && id <= 62);
+	}
+
+
 }

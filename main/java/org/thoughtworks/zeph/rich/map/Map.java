@@ -12,4 +12,10 @@ public interface Map {
 	public int getMapLength();
 
 	public void drawMap();
+
+	public boolean isBuildingLandOneTwo(int id);
+
+	public boolean isBuildingLandThree(int id);
+
+	public boolean isBuildingLandFour(int id);
 }

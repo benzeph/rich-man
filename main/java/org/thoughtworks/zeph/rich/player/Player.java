@@ -38,6 +38,14 @@ public class Player {
 		}
 	}
 
+	public boolean isInHospital() {
+		return hospitalDays > 0;
+	}
+
+	public boolean isInPrison() {
+		return prisonDays > 0;
+	}
+
 	public char getSymbol() {
 		return symbol;
 	}

@@ -6,7 +6,6 @@ import org.thoughtworks.zeph.rich.gift.GodGift;
 import org.thoughtworks.zeph.rich.gift.MoneyGift;
 import org.thoughtworks.zeph.rich.input.InputSystem;
 import org.thoughtworks.zeph.rich.map.*;
-import org.thoughtworks.zeph.rich.output.ColorSystemOut;
 import org.thoughtworks.zeph.rich.player.Player;
 import org.thoughtworks.zeph.rich.props.Block;
 import org.thoughtworks.zeph.rich.props.Bomb;
@@ -19,7 +18,7 @@ public class Rich {
 	private int totalPlayerNum;
 	private Player[] players;
 	private Map map;
-	private final SyntaxParserFactory parserFactory = new SyntaxParserFactory();
+	private SyntaxParserFactory parserFactory = new SyntaxParserFactory();
 
 	public Rich(Player[] players, Map map) {
 		this.players = players;
@@ -28,100 +27,25 @@ public class Rich {
 		this.map = map;
 	}
 
-	public void run() {
-		InputSystem input = new InputSystem(System.in);
-		totalPlayerNum = players.length;
-		currentPlayerNum = players.length;
-		int currentPlayer = 0;
-		boolean notBreak = true;
-		while (currentPlayerNum != 1 && notBreak) {
-			if (players[currentPlayer] != null) {
-				if (players[currentPlayer].getHospitalDays() > 0) {
-					currentPlayer = stayInHospital(currentPlayer);
-					continue;
-				}
-				if (players[currentPlayer].getPrisonDays() > 0) {
-					currentPlayer = stayInPrison(currentPlayer);
-					continue;
-				}
-				if (hasYouGetAGod(currentPlayer)) {
-					players[currentPlayer].getGod().timeCountDown();
-				}
-				printWaitingForInputString(currentPlayer);
-				String inputStr = "";
-				while (!inputStr.equals("roll") && !inputStr.equals("roll one")) {
-					inputStr = input.getInput();
-					//parserFactory.buildSyntaxParser(in)
-					doesWhatItNeedTodoAfterStop(input, currentPlayer);
-				}
-				map.drawMap();
-				currentPlayer = (currentPlayer + 1) % totalPlayerNum;
-			} else {
-				currentPlayer = (currentPlayer + 1) % totalPlayerNum;
-			}
-		}
-		if (currentPlayerNum != 1) {
-			System.out.println("game over");
-		} else {
-			for (Player player : players) {
-				if (null != player) {
-					System.out.println(player.getName() + " win");
-				}
-			}
-		}
-	}
-
-	private boolean isStopAtBuildingLotFourFive(int currentPlayer) {
-		return (getCurrentPlayerPosition(currentPlayer) instanceof BuildingLandFourFive);
-	}
-
-	private boolean isStopAtBuildingLotOneTwo(int currentPlayer) {
-		return (getCurrentPlayerPosition(currentPlayer) instanceof BuildingLandOneTwo);
-	}
-
-	private void printWaitingForInputString(int currentPlayer) {
-		ColorSystemOut.println(players[currentPlayer].getName() + ">waiting for input", players[currentPlayer].getColorNum());
-		System.out.print("command:");
-		ColorSystemOut.print("", 7);
-	}
-
-	private int stayInPrison(int currentPlayer) {
-		players[currentPlayer].setPrisonDays(players[currentPlayer].getPrisonDays() - 1);
-		currentPlayer = (currentPlayer + 1) % totalPlayerNum;
-		return currentPlayer;
-	}
-
-	private int stayInHospital(int currentPlayer) {
-		players[currentPlayer].setHospitalDays(players[currentPlayer].getHospitalDays() - 1);
-		System.out.println(players[currentPlayer].getName() + ":stay in hospital,hospital left time:" + players[currentPlayer].getHospitalDays());
-		currentPlayer = (currentPlayer + 1) % totalPlayerNum;
-		return currentPlayer;
-	}
-
 	public void runForTest(String instructions) {
 		InputSystem input = new InputSystem(instructions);
 		int currentPlayer = 0;
-		boolean notBreak = true;
-		while (currentPlayerNum != 1 && notBreak) {
+		while (currentPlayerNum > 1) {
 			if (players[currentPlayer] != null) {
-				if (players[currentPlayer].getHospitalDays() > 0) {
-					currentPlayer = stayInHospital(currentPlayer);
-					continue;
-				}
-				if (players[currentPlayer].getPrisonDays() > 0) {
-					currentPlayer = stayInPrison(currentPlayer);
-					continue;
-				}
-				if (hasYouGetAGod(currentPlayer)) {
-					players[currentPlayer].getGod().timeCountDown();
-				}
-				String instruction = "";
-				while (!instruction.equals("roll") && !instruction.equals("roll one")) {
-					System.out.println(players[currentPlayer].getName() + ">waiting for input");
-					System.out.print("command:");
-					instruction = input.getInput();
-					parserFactory.buildSyntaxParser(instruction,map,players[currentPlayer]);
-					doesWhatItNeedTodoAfterStop(input, currentPlayer);
+				if (players[currentPlayer].isInHospital()) {
+					players[currentPlayer].countDownHospitalDays();
+				} else if (players[currentPlayer].isInPrison()) {
+					players[currentPlayer].countDownPrisonDays();
+				} else {
+					if (players[currentPlayer].isGodExist()) {
+						players[currentPlayer].getGod().timeCountDown();
+					}
+					String instruction = "";
+					while (!instruction.equals("roll")) {
+						instruction = input.getInput();
+						parserFactory.buildSyntaxParser(instruction, map, players[currentPlayer]).parse().execute();
+						doesWhatItNeedTodoAfterStop(input, currentPlayer);
+					}
 				}
 				map.drawMap();
 				currentPlayer = (currentPlayer + 1) % totalPlayerNum;
@@ -138,10 +62,6 @@ public class Rich {
 				}
 			}
 		}
-	}
-
-	private boolean hasYouGetAGod(int currentPlayer) {
-		return players[currentPlayer].isGodExist();
 	}
 
 	private void doesWhatItNeedTodoAfterStop(InputSystem input, int currentPlayer) {
@@ -184,12 +104,20 @@ public class Rich {
 		}
 	}
 
-	private boolean isStopAtBuildingLotThree(int currentPlayer) {
-		return (getCurrentPlayerPosition(currentPlayer) instanceof BuildingLandThree);
+	private boolean isStopAtBuildingLotFourFive(int currentPlayer) {
+		return map.isBuildingLandFour(players[currentPlayer].getCurrentMapPosition());
 	}
 
-	private void help() {
-		System.out.println("roll - random step 1~6\n" + "block n(-10~10) - stop you from walking ahead\n" + "bomb n(-10~10) - set a bomb\n" + "robot - clear road\n" + "sell x(game map id) - sell your land\n" + "sellTool x(tool id)\n" + "query - get detail of you\n" + "help\n" + "quit - exit game\n");
+	private boolean isStopAtBuildingLotOneTwo(int currentPlayer) {
+		return map.isBuildingLandOneTwo(players[currentPlayer].getCurrentMapPosition());
+	}
+
+	private boolean isStopAtBuildingLotThree(int currentPlayer) {
+		return map.isBuildingLandThree(players[currentPlayer].getCurrentMapPosition());
+	}
+
+	private boolean hasYouGetAGod(int currentPlayer) {
+		return players[currentPlayer].isGodExist();
 	}
 
 	private void getProp(InputSystem input, int currentPlayer) {
