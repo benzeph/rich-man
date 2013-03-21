@@ -57,7 +57,6 @@ public class StartGame {
 								isDuplicate = true;
 							} else {
 								players[i] = new PlayerFactoryImp().createPlayer(2, money);
-								players[i].setMoney(money);
 								isATuBoChoose = true;
 							}
 							break;
@@ -66,7 +65,6 @@ public class StartGame {
 								isDuplicate = true;
 							} else {
 								players[i] = new PlayerFactoryImp().createPlayer(3, money);
-								players[i].setMoney(money);
 								isSunXiaoMeiChoose = true;
 							}
 							break;
@@ -75,7 +73,6 @@ public class StartGame {
 								isDuplicate = true;
 							} else {
 								players[i] = new PlayerFactoryImp().createPlayer(4, money);
-								players[i].setMoney(money);
 								isJinBeibeiChoose = true;
 							}
 							break;

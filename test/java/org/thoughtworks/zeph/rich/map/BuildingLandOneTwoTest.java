@@ -4,7 +4,6 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
-import org.thoughtworks.zeph.rich.map.unit.BuildingLandOneTwo;
 import org.thoughtworks.zeph.rich.map.unit.Grid;
 import org.thoughtworks.zeph.rich.player.Player;
 import org.thoughtworks.zeph.rich.player.PlayerFactory;
@@ -26,11 +25,6 @@ public class BuildingLandOneTwoTest {
 
 	}
 
-	@Test
-	public void test(){
-		grid = new BuildingLandOneTwo(2,'0');
-		grid.doesWhatItNeedToDo(player);
-	}
 
 	@Ignore
 	@Test

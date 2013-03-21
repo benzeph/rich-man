@@ -124,7 +124,7 @@ public class Rich {
 		}
 		while (players[currentPlayer].getGamePoint() >= 30) {
 			System.out.println("you have " + players[currentPlayer].getGamePoint() + " game point left");
-			if (players[currentPlayer].getProps().size() < 10) {
+			/*if (players[currentPlayer].getProps().size() < 10) {
 				String num = input.getInput();
 				if (num.equals("1")) {
 					//getPropRoomByMapPosition(currentPlayer).sell(players[currentPlayer], new Block());
@@ -145,7 +145,7 @@ public class Rich {
 				if (str.equals("F")) {
 					break;
 				}
-			}
+			}*/
 		}
 	}
 
