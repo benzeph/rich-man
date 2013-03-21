@@ -3,6 +3,7 @@ package org.thoughtworks.zeph.rich.map.unit;
 import org.thoughtworks.zeph.rich.player.Player;
 
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
 
 public class Prison extends Grid {
@@ -11,7 +12,12 @@ public class Prison extends Grid {
 
 	@Override
 	public void doesWhatItNeedToDo(Player player) {
-
+		Iterator it = players.iterator();
+		while (it.hasNext()) {
+			Player prisoner = (Player) it.next();
+			prisoner.setPrisonDays(0);
+		}
+		players.clear();
 	}
 
 	@Override

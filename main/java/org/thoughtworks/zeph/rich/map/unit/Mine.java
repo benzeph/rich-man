@@ -21,7 +21,7 @@ public class Mine extends Grid {
 
 	@Override
 	public void doesWhatItNeedToDo(Player player) {
-
+		player.addGamePoint(gamePoint);
 	}
 
 	@Override

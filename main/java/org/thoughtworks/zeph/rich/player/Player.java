@@ -333,5 +333,28 @@ public class Player {
 		Bomb bomb = (Bomb) prop;
 		return bomb.getLeftTime() == 0;
 	}
+
+
+	public void subtractMoney(int price) {
+		money = money - price;
+	}
+
+	public void addBuilding(Grid grid) {
+		lands.put(grid.getId(), grid);
+	}
+
+	public void subtractGamePoint(int price) {
+		gamePoint = gamePoint - price;
+	}
+
+	public void addProp(int i) {
+		if (props.containsKey(i)) {
+			int n = props.get(i) + 1;
+			props.remove(i);
+			props.put(i, n);
+		} else {
+			props.put(i, 1);
+		}
+	}
 }
 
