@@ -20,13 +20,17 @@ public class BuildingLandOneTwo extends Grid {
 		super(mapId, symbol);
 		this.price = 200;
 	}
-
+	public BuildingLandOneTwo(int mapId, char symbol,String instructions) {
+		super(mapId, symbol);
+		this.price = 200;
+		scanner = new Scanner(instructions);
+	}
 	@Override
 	public void doesWhatItNeedToDo(Player player) {
 		if (owner == null) {
-			instruction = scanner.next();
-			while (instruction != "Y" && instruction != "N") {
-				instruction = scanner.next();
+			instruction = scanner.nextLine();
+			while (instruction.equals("Y") && instruction.equals("N")) {
+				instruction = scanner.nextLine();
 			}
 			if (instruction.equals("Y")) {
 				if (player.getMoney() > price) {
@@ -41,9 +45,9 @@ public class BuildingLandOneTwo extends Grid {
 			}
 		} else if (owner.equals(player)) {
 			if (level < TOP_LEVEL) {
-				instruction = scanner.next();
+				instruction = scanner.nextLine();
 				while (instruction != "Y" && instruction != "N") {
-					instruction = scanner.next();
+					instruction = scanner.nextLine();
 				}
 				if (instruction.equals("Y")) {
 					if (player.getMoney() > price) {

@@ -24,9 +24,9 @@ public class BuildingLandThree extends Grid {
 	@Override
 	public void doesWhatItNeedToDo(Player player) {
 		if (owner == null) {
-			instruction = scanner.next();
-			while (instruction != "Y" && instruction != "N") {
-				instruction = scanner.next();
+			instruction = scanner.nextLine();
+			while (instruction.equals("Y") && instruction.equals("N")) {
+				instruction = scanner.nextLine();
 			}
 			if (instruction.equals("Y")) {
 				if (player.getMoney() > price) {
@@ -41,9 +41,9 @@ public class BuildingLandThree extends Grid {
 			}
 		} else if (owner.equals(player)) {
 			if (level < TOP_LEVEL) {
-				instruction = scanner.next();
+				instruction = scanner.nextLine();
 				while (instruction != "Y" && instruction != "N") {
-					instruction = scanner.next();
+					instruction = scanner.nextLine();
 				}
 				if (instruction.equals("Y")) {
 					if (player.getMoney() > price) {

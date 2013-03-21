@@ -2,12 +2,15 @@ package org.thoughtworks.zeph.rich.map;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
+import org.thoughtworks.zeph.rich.map.unit.BuildingLandOneTwo;
 import org.thoughtworks.zeph.rich.map.unit.Grid;
 import org.thoughtworks.zeph.rich.player.Player;
 import org.thoughtworks.zeph.rich.player.PlayerFactory;
 import org.thoughtworks.zeph.rich.player.PlayerFactoryImp;
+
+import static org.hamcrest.core.Is.is;
+import static org.junit.Assert.assertThat;
 
 public class BuildingLandOneTwoTest {
 
@@ -25,28 +28,11 @@ public class BuildingLandOneTwoTest {
 
 	}
 
-
-	@Ignore
 	@Test
-	public void should_return_level_1_building_lot_1_when_input_is_level_0_building_lot_1_and_level_up() {
-
+	public void should_return_9800_when_player_buy_this_empty_building_land() {
+		grid = new BuildingLandOneTwo(2, '0', "Y");
+		grid.doesWhatItNeedToDo(player);
+		assertThat(player.getMoney(), is(9800));
 	}
 
-	@Ignore
-	@Test
-	public void should_return_level_2_building_lot_3_when_input_is_level_1_building_lot_3_and_level_up() {
-
-	}
-
-	@Ignore
-	@Test
-	public void should_return_level_3_building_lot_45_when_input_is_level_2_building_lot_45_and_level_up() {
-
-	}
-
-	@Ignore
-	@Test
-	public void should_return_100_when_input_is_level_0_building_lot_12() {
-
-	}
 }
