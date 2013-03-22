@@ -1,6 +1,5 @@
 package org.thoughtworks.zeph.rich.map.unit;
 
-import org.thoughtworks.zeph.rich.gift.Gift;
 import org.thoughtworks.zeph.rich.god.WealthGod;
 import org.thoughtworks.zeph.rich.player.Player;
 
@@ -10,6 +9,15 @@ public class GiftRoom extends Grid {
 
 	private Scanner scanner = new Scanner(System.in);
 	private String instruction;
+
+	public GiftRoom(int mapId, char symbol) {
+		super(mapId, symbol);
+	}
+
+	public GiftRoom(int mapId, char symbol, String instructions) {
+		super(mapId, symbol);
+		scanner = new Scanner(instructions);
+	}
 
 	@Override
 	public void doesWhatItNeedToDo(Player player) {
@@ -25,25 +33,17 @@ public class GiftRoom extends Grid {
 
 	@Override
 	public int getPrice() {
-		return 0;  //To change body of implemented methods use File | Settings | File Templates.
+		return 0;
 	}
+
 
 	@Override
 	public int getLevel() {
-		return 0;  //To change body of implemented methods use File | Settings | File Templates.
+		return 0;
 	}
 
 	@Override
 	public void setOwner(Player player) {
-		//To change body of implemented methods use File | Settings | File Templates.
-	}
 
-
-	public GiftRoom(int mapId, char symbol) {
-		super(mapId, symbol);
-	}
-
-	public void getGift(Player player, Gift gift) {
-		gift.openGift(player);
 	}
 }
