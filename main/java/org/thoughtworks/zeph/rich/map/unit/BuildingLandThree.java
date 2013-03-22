@@ -21,6 +21,12 @@ public class BuildingLandThree extends Grid {
 		this.price = 500;
 	}
 
+	public BuildingLandThree(int mapId, char symbol, String instructions) {
+		super(mapId, symbol);
+		this.price = 500;
+		scanner = new Scanner(instructions);
+	}
+
 	@Override
 	public void doesWhatItNeedToDo(Player player) {
 		if (owner == null) {
