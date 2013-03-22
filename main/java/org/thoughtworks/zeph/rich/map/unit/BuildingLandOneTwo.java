@@ -21,25 +21,29 @@ public class BuildingLandOneTwo extends Grid {
 		super(mapId, symbol);
 		this.price = 200;
 	}
-	public BuildingLandOneTwo(int mapId, char symbol,String instructions) {
+
+	public BuildingLandOneTwo(int mapId, char symbol, String instructions) {
 		super(mapId, symbol);
 		this.price = 200;
 		scanner = new Scanner(instructions);
 	}
+
 	@Override
 	public void doesWhatItNeedToDo(Player player) {
 		if (owner == null) {
 			SystemOut.doYouWantToBuyThisLand(price);
 			instruction = scanner.nextLine();
-			while (instruction.equals("Y") && instruction.equals("N")) {
+			while (!instruction.equals("Y") && !instruction.equals("N")) {
+				SystemOut.doYouWantToBuyThisLand(price);
 				instruction = scanner.nextLine();
 			}
 			if (instruction.equals("Y")) {
 				if (player.getMoney() > price) {
 					owner = player;
 					player.subtractMoney(price);
-					player.addBuilding((Grid) this);
+					player.addBuilding(this);
 				} else {
+					SystemOut.yourMoneyIsNotEnough();
 					return;
 				}
 			} else {
@@ -49,7 +53,7 @@ public class BuildingLandOneTwo extends Grid {
 			if (level < TOP_LEVEL) {
 				SystemOut.doYouWantToLevelUpThisLand(price);
 				instruction = scanner.nextLine();
-				while (instruction.equals("Y") && instruction.equals("N")) {
+				while (!instruction.equals("Y") && !instruction.equals("N")) {
 					instruction = scanner.nextLine();
 				}
 				if (instruction.equals("Y")) {
@@ -79,7 +83,7 @@ public class BuildingLandOneTwo extends Grid {
 			if (player.getMoney() > price * (level + 1) / 2) {
 				player.subtractMoney(price * (level + 1) / 2);
 				owner.addMoney(price * (level + 1) / 2);
-				SystemOut.paySomeoneMoney(owner.getName(),price * (level + 1) / 2);
+				SystemOut.paySomeoneMoney(owner.getName(), price * (level + 1) / 2);
 			} else {
 				Map<Integer, Grid> lands = player.getLands();
 				Set<Integer> set = lands.keySet();
@@ -104,9 +108,11 @@ public class BuildingLandOneTwo extends Grid {
 	public int getPrice() {
 		return price;
 	}
-	public boolean isOwnerExist(){
+
+	public boolean isOwnerExist() {
 		return owner != null;
 	}
+
 	@Override
 	public int getLevel() {
 		return 0;

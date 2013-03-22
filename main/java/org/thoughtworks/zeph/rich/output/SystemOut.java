@@ -144,4 +144,8 @@ public class SystemOut {
 	public static void ownerIsInThePrison(String name) {
 		colorPrintLn(name + "在监狱，免交过路费", WHITE);
 	}
+
+	public static void yourMoneyIsNotEnough() {
+		colorPrintLn("你的现金不够", WHITE);
+	}
 }

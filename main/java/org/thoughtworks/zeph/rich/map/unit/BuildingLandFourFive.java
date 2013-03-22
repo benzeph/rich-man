@@ -32,15 +32,17 @@ public class BuildingLandFourFive extends Grid {
 		if (owner == null) {
 			SystemOut.doYouWantToBuyThisLand(price);
 			instruction = scanner.nextLine();
-			while (instruction.equals("Y") && instruction.equals("N")) {
+			while (!instruction.equals("Y") && !instruction.equals("N")) {
+				SystemOut.doYouWantToBuyThisLand(price);
 				instruction = scanner.nextLine();
 			}
 			if (instruction.equals("Y")) {
 				if (player.getMoney() > price) {
 					owner = player;
 					player.subtractMoney(price);
-					player.addBuilding((Grid) this);
+					player.addBuilding(this);
 				} else {
+					SystemOut.yourMoneyIsNotEnough();
 					return;
 				}
 			} else {
@@ -50,7 +52,7 @@ public class BuildingLandFourFive extends Grid {
 			if (level < TOP_LEVEL) {
 				SystemOut.doYouWantToLevelUpThisLand(price);
 				instruction = scanner.nextLine();
-				while (instruction.equals("Y") && instruction.equals("N")) {
+				while (!instruction.equals("Y") && !instruction.equals("N")) {
 					instruction = scanner.nextLine();
 				}
 				if (instruction.equals("Y")) {
