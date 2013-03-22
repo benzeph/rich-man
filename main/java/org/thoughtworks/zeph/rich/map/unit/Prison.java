@@ -36,16 +36,16 @@ public class Prison extends Grid {
 
 	@Override
 	public int getPrice() {
-		return 0;  //To change body of implemented methods use File | Settings | File Templates.
+		return 0;
 	}
 
 	@Override
 	public int getLevel() {
-		return 0;  //To change body of implemented methods use File | Settings | File Templates.
+		return 0;
 	}
 
 	@Override
 	public void setOwner(Player player) {
-		//To change body of implemented methods use File | Settings | File Templates.
+
 	}
 }
