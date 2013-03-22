@@ -6,7 +6,6 @@
     <artifactId>rich</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
-
     <name>rich</name>
     <url>http://maven.apache.org</url>
 
@@ -28,4 +27,5 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
+
 </project>

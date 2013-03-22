@@ -92,7 +92,9 @@ public class BuildingLandThree extends Grid {
 	public Player getOwner() {
 		return owner;
 	}
-
+	public boolean isOwnerExist(){
+		return owner != null;
+	}
 	public int getPrice() {
 		return price;
 	}

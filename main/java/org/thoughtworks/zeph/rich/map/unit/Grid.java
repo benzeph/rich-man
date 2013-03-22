@@ -13,6 +13,11 @@ public abstract class Grid {
 	private char symbol;
 	private char playerSymbol = ' ';
 	private Tool tool;
+	public Grid(int id, char symbol) {
+		this.id = id;
+		this.symbol = symbol;
+	}
+
 	private boolean isPlayerHere = false;
 
 	public abstract void doesWhatItNeedToDo(Player player);
@@ -59,11 +64,6 @@ public abstract class Grid {
 		this.tool = tool;
 	}
 
-	public Grid(int id, char symbol) {
-		this.id = id;
-		this.symbol = symbol;
-	}
-
 	public int getId() {
 		return id;
 	}
@@ -83,7 +83,7 @@ public abstract class Grid {
 		if (null != tool) {
 			return tool.getIcon();
 		}
-		return getSymbol();
+		return symbol;
 	}
 
 	@Override

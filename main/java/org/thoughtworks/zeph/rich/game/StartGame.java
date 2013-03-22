@@ -108,8 +108,8 @@ public class StartGame {
 		return money;
 	}
 
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		StartGame startGame = new StartGame(System.in);
 		startGame.start();
-	}
+	}*/
 }

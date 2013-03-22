@@ -1,8 +1,11 @@
 package org.thoughtworks.zeph.rich.game;
 
+import org.thoughtworks.zeph.rich.map.FirstMap;
 import org.thoughtworks.zeph.rich.map.Map;
 import org.thoughtworks.zeph.rich.output.SystemOut;
 import org.thoughtworks.zeph.rich.player.Player;
+import org.thoughtworks.zeph.rich.player.PlayerFactory;
+import org.thoughtworks.zeph.rich.player.PlayerFactoryImp;
 import org.thoughtworks.zeph.rich.syntax.SyntaxParserFactory;
 
 import java.util.Scanner;
@@ -68,5 +71,15 @@ public class Rich {
 				System.out.println(player.getName() + WIN);
 			}
 		}
+	}
+
+	public static void main(String[] args) {
+		Map map = new FirstMap();
+		PlayerFactory playerFactory = new PlayerFactoryImp();
+		Player player_1 = playerFactory.createPlayer(1, 10000);
+		Player player_2 = playerFactory.createPlayer(2, 10000);
+		Player[] players = {player_1, player_2};
+		Rich rich = new Rich(players,map);
+		rich.run();
 	}
 }

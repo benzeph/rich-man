@@ -94,7 +94,9 @@ public class BuildingLandOneTwo extends Grid {
 	public int getPrice() {
 		return price;
 	}
-
+	public boolean isOwnerExist(){
+		return owner != null;
+	}
 	@Override
 	public int getLevel() {
 		return 0;

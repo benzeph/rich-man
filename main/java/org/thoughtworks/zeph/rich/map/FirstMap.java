@@ -1,10 +1,11 @@
 package org.thoughtworks.zeph.rich.map;
 
 import org.thoughtworks.zeph.rich.map.unit.*;
-import org.thoughtworks.zeph.rich.output.ColorSystemOut;
+import org.thoughtworks.zeph.rich.output.SystemOut;
 
 public class FirstMap implements Map {
 
+	public static final int WHITE = 7;
 	private Grid[] grids;
 
 	public FirstMap() {
@@ -117,13 +118,27 @@ public class FirstMap implements Map {
 	public void printGrid(int id, char symbol) {
 		if (isBuildingLandOneTwo(id)) {
 			BuildingLandOneTwo buildingLandOneTwo = (BuildingLandOneTwo) grids[id];
-			ColorSystemOut.print(symbol, buildingLandOneTwo.getOwner().getColorNum());
+			if (buildingLandOneTwo.isOwnerExist()) {
+				SystemOut.colorPrint(symbol, buildingLandOneTwo.getOwner().getColorNum());
+			} else {
+				SystemOut.colorPrint(symbol, WHITE);
+			}
 		} else if (isBuildingLandThree(id)) {
 			BuildingLandThree buildingLandThree = (BuildingLandThree) grids[id];
-			ColorSystemOut.print(symbol, buildingLandThree.getOwner().getColorNum());
+			if (buildingLandThree.isOwnerExist()) {
+				SystemOut.colorPrint(symbol, buildingLandThree.getOwner().getColorNum());
+			} else {
+				SystemOut.colorPrint(symbol, WHITE);
+			}
 		} else if (isBuildingLandFour(id)) {
 			BuildingLandFourFive buildingLandFourFive = (BuildingLandFourFive) grids[id];
-			ColorSystemOut.print(symbol, buildingLandFourFive.getOwner().getColorNum());
+			if (buildingLandFourFive.isOwnerExist()) {
+				SystemOut.colorPrint(symbol, buildingLandFourFive.getOwner().getColorNum());
+			} else {
+				SystemOut.colorPrint(symbol, WHITE);
+			}
+		} else {
+			SystemOut.colorPrint(grids[id].getSymbol(), WHITE);
 		}
 	}
 
