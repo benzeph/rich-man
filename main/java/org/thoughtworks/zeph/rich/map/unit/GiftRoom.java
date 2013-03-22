@@ -1,7 +1,7 @@
 package org.thoughtworks.zeph.rich.map.unit;
 
 import org.thoughtworks.zeph.rich.gift.Gift;
-import org.thoughtworks.zeph.rich.god.God;
+import org.thoughtworks.zeph.rich.god.WealthGod;
 import org.thoughtworks.zeph.rich.player.Player;
 
 import java.util.Scanner;
@@ -19,7 +19,7 @@ public class GiftRoom extends Grid {
 		} else if (instruction.equals("2")) {
 			player.addGamePoint(200);
 		} else if (instruction.equals("3")) {
-			player.setGod(new God());
+			player.setGod(new WealthGod());
 		}
 	}
 

@@ -35,4 +35,35 @@ public class BuildingLandOneTwoTest {
 		assertThat(player.getMoney(), is(9800));
 	}
 
+	@Test
+	public void should_return_10000_when_player_do_not_buy_this_empty_building_land() {
+		grid = new BuildingLandOneTwo(2, '0', "N");
+		grid.doesWhatItNeedToDo(player);
+		assertThat(player.getMoney(), is(10000));
+	}
+
+	@Test
+	public void should_return_9900_when_player_pay_rent() {
+		Player anotherPlayer = playerFactory.createPlayer(2, 10000);
+		grid = new BuildingLandOneTwo(2, '0');
+		grid.setOwner(anotherPlayer);
+		grid.doesWhatItNeedToDo(player);
+		assertThat(player.getMoney(), is(9900));
+	}
+
+	@Test
+	public void should_return_9800_when_player_level_building() {
+		grid = new BuildingLandOneTwo(2, '0', "Y");
+		grid.setOwner(player);
+		grid.doesWhatItNeedToDo(player);
+		assertThat(player.getMoney(), is(9800));
+	}
+
+	@Test
+	public void should_return_9800_when_player_do_not_level_building() {
+		grid = new BuildingLandOneTwo(2, '0', "N");
+		grid.setOwner(player);
+		grid.doesWhatItNeedToDo(player);
+		assertThat(player.getMoney(), is(10000));
+	}
 }

@@ -42,7 +42,7 @@ public class BuildingLandThree extends Grid {
 		} else if (owner.equals(player)) {
 			if (level < TOP_LEVEL) {
 				instruction = scanner.nextLine();
-				while (instruction != "Y" && instruction != "N") {
+				while (instruction.equals("Y") && instruction.equals("N")) {
 					instruction = scanner.nextLine();
 				}
 				if (instruction.equals("Y")) {
