@@ -101,5 +101,15 @@ public class BuildingLandThree extends Grid {
 		owner = player;
 	}
 
+	@Override
+	public void addPlayer(Player player) {
+		//To change body of implemented methods use File | Settings | File Templates.
+	}
+
+	@Override
+	public Set<Player> getPlayers() {
+		return null;  //To change body of implemented methods use File | Settings | File Templates.
+	}
+
 
 }

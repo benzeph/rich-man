@@ -5,6 +5,8 @@ import org.thoughtworks.zeph.rich.props.Block;
 import org.thoughtworks.zeph.rich.props.Bomb;
 import org.thoughtworks.zeph.rich.props.Prop;
 
+import java.util.Set;
+
 public abstract class Grid {
 
 	private int id;
@@ -20,6 +22,10 @@ public abstract class Grid {
 	public abstract int getLevel();
 
 	public abstract void setOwner(Player player);
+
+	public abstract void addPlayer(Player player);
+
+	public abstract Set<Player> getPlayers();
 
 	public boolean isPropHere() {
 		return prop != null;

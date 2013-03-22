@@ -4,7 +4,7 @@ public class Bomb extends Prop {
 	private int leftTime;
 
 	public Bomb() {
-		super(3,60,'@');
+		super(3,50,'@');
 		this.leftTime = 3;
 	}
 

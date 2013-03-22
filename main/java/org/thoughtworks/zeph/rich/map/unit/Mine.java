@@ -2,6 +2,8 @@ package org.thoughtworks.zeph.rich.map.unit;
 
 import org.thoughtworks.zeph.rich.player.Player;
 
+import java.util.Set;
+
 public class Mine extends Grid {
 
 	private int gamePoint;
@@ -29,6 +31,16 @@ public class Mine extends Grid {
 	@Override
 	public void setOwner(Player player) {
 
+	}
+
+	@Override
+	public void addPlayer(Player player) {
+		//To change body of implemented methods use File | Settings | File Templates.
+	}
+
+	@Override
+	public Set<Player> getPlayers() {
+		return null;  //To change body of implemented methods use File | Settings | File Templates.
 	}
 
 }

@@ -3,6 +3,7 @@ package org.thoughtworks.zeph.rich.map;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.thoughtworks.zeph.rich.map.unit.Grid;
 import org.thoughtworks.zeph.rich.map.unit.Prison;
 import org.thoughtworks.zeph.rich.player.Player;
 import org.thoughtworks.zeph.rich.player.PlayerFactory;
@@ -14,7 +15,7 @@ import static org.junit.Assert.assertThat;
 public class PrisonTest {
 
 	private Player player;
-	private Prison prison;
+	private Grid prison;
 	private PlayerFactory playerFactory = new PlayerFactoryImp();
 
 	@Before

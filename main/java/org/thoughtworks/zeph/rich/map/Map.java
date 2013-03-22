@@ -15,6 +15,8 @@ public interface Map {
 
 	public void drawMap();
 
+
+
 	public boolean isBuildingLandOneTwo(int id);
 
 	public boolean isBuildingLandThree(int id);
