@@ -35,14 +35,14 @@ public class PlayerTest {
 	@Test
 	public void should_return_50_when_sell_a_block() {
 		player.addProp(1);
-		player.sellProp(new Block());
+		player.sellTool(new Block());
 		assertThat(player.getGamePoint(), is(50));
 	}
 
 	@Test
 	public void should_return_false_when_use_a_robot() {
 		player.addProp(2);
-		player.useProp(new Robot());
+		player.useTool(new Robot());
 		assertThat(player.isPlayerHasARobot(), is(false));
 	}
 }

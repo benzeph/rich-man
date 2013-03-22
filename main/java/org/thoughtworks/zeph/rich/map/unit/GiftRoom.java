@@ -1,6 +1,7 @@
 package org.thoughtworks.zeph.rich.map.unit;
 
 import org.thoughtworks.zeph.rich.god.WealthGod;
+import org.thoughtworks.zeph.rich.output.SystemOut;
 import org.thoughtworks.zeph.rich.player.Player;
 
 import java.util.Scanner;
@@ -22,6 +23,7 @@ public class GiftRoom extends Grid {
 
 	@Override
 	public void doesWhatItNeedToDo(Player player) {
+		SystemOut.welcomeToGiftRoom();
 		instruction = scanner.nextLine();
 		if (instruction.equals("1")) {
 			player.addMoney(2000);

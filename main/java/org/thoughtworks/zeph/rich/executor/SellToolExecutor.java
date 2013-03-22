@@ -38,7 +38,7 @@ public class SellToolExecutor implements Executor {
 	}
 
 	private void sellBomb(Player player) {
-		if (player.sellProp(new Bomb())) {
+		if (player.sellTool(new Bomb())) {
 
 		} else {
 
@@ -46,7 +46,7 @@ public class SellToolExecutor implements Executor {
 	}
 
 	private void sellRobot(Player player) {
-		if (player.sellProp(new Robot())) {
+		if (player.sellTool(new Robot())) {
 
 		} else {
 
@@ -54,7 +54,7 @@ public class SellToolExecutor implements Executor {
 	}
 
 	private void sellBlock(Player player) {
-		if (player.sellProp(new Block())) {
+		if (player.sellTool(new Block())) {
 
 		} else {
 

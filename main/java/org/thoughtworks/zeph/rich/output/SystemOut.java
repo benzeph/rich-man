@@ -29,4 +29,8 @@ public class SystemOut {
 		System.out.println("点数卡\t2");
 		System.out.println("福神\t\t3");
 	}
+
+	public static void youHaveExitToolRoom(){
+		System.out.println("你的点数不足或者道具栏已满，自动离开道具屋");
+	}
 }

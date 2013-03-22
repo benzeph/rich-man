@@ -30,7 +30,7 @@ public class BlockExecutor implements Executor {
 
 		} else {
 			if (player.isPlayerHasABlock()) {
-				player.useProp(new Block());
+				player.useTool(new Block());
 				map.getGrid(blockPlace).setTool(new Block());
 			} else {
 

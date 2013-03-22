@@ -19,7 +19,7 @@ public class Player {
 	private int currentMapPosition = 0;
 	private int hospitalDays = 0;
 	private int prisonDays = 0;
-	private Map<Integer, Integer> props = new HashMap<Integer, Integer>();
+	private Map<Integer, Integer> tools = new HashMap<Integer, Integer>();
 	private Map<Integer, Grid> lands = new HashMap<Integer, Grid>();
 
 	public Player(String name, int id, int colorNum, int money) {
@@ -64,19 +64,29 @@ public class Player {
 	}
 
 	public boolean isPlayerHasABlock() {
-		return props.containsKey(1);
+		return tools.containsKey(1);
 	}
 
 	public boolean isPlayerHasARobot() {
-		return props.containsKey(2);
+		return tools.containsKey(2);
 	}
 
 	public boolean isPlayerHasABomb() {
-		return props.containsKey(3);
+		return tools.containsKey(3);
 	}
 
 	public boolean isPlayerHasBuilding(int id) {
 		return lands.containsKey(id);
+	}
+
+	public boolean isYourToolBagFull() {
+		int num = 0;
+		Set<Integer> set = tools.keySet();
+		Iterator<Integer> it = set.iterator();
+		while (it.hasNext()) {
+			num = num + tools.get(it.next());
+		}
+		return num >= 10;
 	}
 
 	public char getSymbol() {
@@ -161,24 +171,24 @@ public class Player {
 		}
 	}
 
-	public void useProp(Tool tool) {
-		int n = props.get(tool.getId()) - 1;
+	public void useTool(Tool tool) {
+		int n = tools.get(tool.getId()) - 1;
 		if (n == 0) {
-			props.remove(tool.getId());
+			tools.remove(tool.getId());
 		} else {
-			props.remove(tool.getId());
-			props.put(tool.getId(), n);
+			tools.remove(tool.getId());
+			tools.put(tool.getId(), n);
 		}
 	}
 
-	public boolean sellProp(Tool tool) {
-		if (props.containsKey(tool.getId())) {
-			int n = props.get(tool.getId()) - 1;
+	public boolean sellTool(Tool tool) {
+		if (tools.containsKey(tool.getId())) {
+			int n = tools.get(tool.getId()) - 1;
 			if (n == 0) {
-				props.remove(tool.getId());
+				tools.remove(tool.getId());
 			} else {
-				props.remove(tool.getId());
-				props.put(tool.getId(), n);
+				tools.remove(tool.getId());
+				tools.put(tool.getId(), n);
 			}
 			gamePoint = gamePoint + tool.getPrice();
 			return true;
@@ -212,7 +222,7 @@ public class Player {
 			}
 		}
 		message += "地产:" + "空地" + blankLand + "处;" + "茅房" + room + "处;" + "洋房" + house + "处;" + "摩天楼" + skyscraper + "处\n";
-		message += "道具:" + "障碍" + props.get(1) + "个;炸弹" + props.get(3) + ";机器娃娃" + props.get(2);
+		message += "道具:" + "障碍" + tools.get(1) + "个;炸弹" + tools.get(3) + ";机器娃娃" + tools.get(2);
 		return message;
 	}
 
@@ -238,12 +248,12 @@ public class Player {
 	}
 
 	public void addProp(int i) {
-		if (props.containsKey(i)) {
-			int n = props.get(i) + 1;
-			props.remove(i);
-			props.put(i, n);
+		if (tools.containsKey(i)) {
+			int n = tools.get(i) + 1;
+			tools.remove(i);
+			tools.put(i, n);
 		} else {
-			props.put(i, 1);
+			tools.put(i, 1);
 		}
 	}
 }

@@ -1,5 +1,6 @@
 package org.thoughtworks.zeph.rich.map.unit;
 
+import org.thoughtworks.zeph.rich.output.SystemOut;
 import org.thoughtworks.zeph.rich.player.Player;
 import org.thoughtworks.zeph.rich.tools.Block;
 import org.thoughtworks.zeph.rich.tools.Bomb;
@@ -8,24 +9,25 @@ import org.thoughtworks.zeph.rich.tools.Robot;
 import java.util.Scanner;
 import java.util.Set;
 
-public class PropRoom extends Grid {
+public class ToolRoom extends Grid {
 
 	public static final int BOTTOM_PRICE = 30;
 	private Scanner scanner = new Scanner(System.in);
 	private String instruction;
 
-	public PropRoom(int mapId, char symbol) {
+	public ToolRoom(int mapId, char symbol) {
 		super(mapId, symbol);
 	}
-	public PropRoom(int mapId, char symbol,String instructions) {
+
+	public ToolRoom(int mapId, char symbol, String instructions) {
 		super(mapId, symbol);
 		scanner = new Scanner(instructions);
 	}
 
 	@Override
 	public void doesWhatItNeedToDo(Player player) {
-		//say welcome
-		while (player.getGamePoint() >= BOTTOM_PRICE) {
+		SystemOut.welcomeToToolRoom();
+		while (player.getGamePoint() >= BOTTOM_PRICE && !player.isYourToolBagFull()) {
 			instruction = scanner.nextLine();
 			if (instruction.equals("1")) {
 				player.subtractGamePoint(new Block().getPrice());
@@ -38,6 +40,7 @@ public class PropRoom extends Grid {
 				player.addProp(3);
 			}
 		}
+		SystemOut.youHaveExitToolRoom();
 		//say you game point is not enough ,exit
 	}
 

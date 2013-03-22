@@ -17,7 +17,7 @@ public class FirstMap implements Map {
 		for (int i = 15; i <= 27; i++) {
 			grids[i] = new BuildingLandOneTwo(i, '0');
 		}
-		grids[28] = new PropRoom(28, 'T');
+		grids[28] = new ToolRoom(28, 'T');
 		for (int i = 29; i <= 34; i++) {
 			grids[i] = new BuildingLandThree(i, '0');
 		}

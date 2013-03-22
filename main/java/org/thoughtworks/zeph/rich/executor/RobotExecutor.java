@@ -18,7 +18,7 @@ public class RobotExecutor implements Executor {
 	@Override
 	public void execute() {
 		if (player.isPlayerHasARobot()) {
-			player.useProp(new Robot());
+			player.useTool(new Robot());
 			int robotMapPosition = player.getCurrentMapPosition();
 			for (int i = 1; i <= 10; i++) {
 				robotMapPosition = robotMapPosition + step;

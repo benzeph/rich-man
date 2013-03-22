@@ -31,7 +31,7 @@ public class BombExecutor implements Executor {
 
 		} else {
 			if (player.isPlayerHasABomb()) {
-				player.useProp(new Bomb());
+				player.useTool(new Bomb());
 				map.getGrid(bombPlace).setTool(new Bomb());
 			} else {
 

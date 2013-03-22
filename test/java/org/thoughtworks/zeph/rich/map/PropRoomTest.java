@@ -4,7 +4,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.thoughtworks.zeph.rich.map.unit.Grid;
-import org.thoughtworks.zeph.rich.map.unit.PropRoom;
+import org.thoughtworks.zeph.rich.map.unit.ToolRoom;
 import org.thoughtworks.zeph.rich.player.Player;
 import org.thoughtworks.zeph.rich.player.PlayerFactory;
 import org.thoughtworks.zeph.rich.player.PlayerFactoryImp;
@@ -31,7 +31,7 @@ public class PropRoomTest {
 
 	@Test
 	public void should_return_10_when_play_buy_3_bomb() {
-		grid = new PropRoom(23, 'T', "3\n3\n3");
+		grid = new ToolRoom(23, 'T', "3\n3\n3");
 		player.addGamePoint(160);
 		grid.doesWhatItNeedToDo(player);
 		assertThat(player.getGamePoint(), is(10));
@@ -39,7 +39,7 @@ public class PropRoomTest {
 
 	@Test
 	public void should_return_0_when_play_buy_3_bomb() {
-		grid = new PropRoom(23, 'T', "1\n2\n3\n2");
+		grid = new ToolRoom(23, 'T', "1\n2\n3\n2");
 		player.addGamePoint(160);
 		grid.doesWhatItNeedToDo(player);
 		assertThat(player.getGamePoint(), is(0));

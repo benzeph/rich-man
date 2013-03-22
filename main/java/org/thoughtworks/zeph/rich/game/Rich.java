@@ -1,6 +1,7 @@
 package org.thoughtworks.zeph.rich.game;
 
 import org.thoughtworks.zeph.rich.map.Map;
+import org.thoughtworks.zeph.rich.output.SystemOut;
 import org.thoughtworks.zeph.rich.player.Player;
 import org.thoughtworks.zeph.rich.syntax.SyntaxParserFactory;
 
@@ -50,6 +51,7 @@ public class Rich {
 					}
 					String instruction = WHAT_EVER;
 					while (!instruction.equals(ROLL)) {
+						SystemOut.waitForInstruction(players[currentPlayer].getName());
 						instruction = scanner.nextLine();
 						parserFactory.buildSyntaxParser(instruction, map, players[currentPlayer]).parse().execute();
 						map.getGrid(players[currentPlayer].getCurrentMapPosition()).doesWhatItNeedToDo(players[currentPlayer]);
