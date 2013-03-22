@@ -10,6 +10,11 @@ public class Prison extends Grid {
 
 	private Set<Player> players;
 
+	public Prison(int mapId, char symbol) {
+		super(mapId, symbol);
+		players = new HashSet<Player>();
+	}
+
 	@Override
 	public void doesWhatItNeedToDo(Player player) {
 		Iterator it = players.iterator();
@@ -19,6 +24,15 @@ public class Prison extends Grid {
 		}
 		players.clear();
 	}
+
+	public void addPlayer(Player player) {
+		players.add(player);
+	}
+
+	public Set<Player> getPlayers() {
+		return players;
+	}
+
 
 	@Override
 	public int getPrice() {
@@ -33,19 +47,5 @@ public class Prison extends Grid {
 	@Override
 	public void setOwner(Player player) {
 		//To change body of implemented methods use File | Settings | File Templates.
-	}
-
-
-	public Prison(int mapId, char symbol) {
-		super(mapId, symbol);
-		players = new HashSet<Player>();
-	}
-
-	public void addRole(Player player) {
-		players.add(player);
-	}
-
-	public Set<Player> getPlayers() {
-		return players;
 	}
 }
