@@ -1,5 +1,6 @@
 package org.thoughtworks.zeph.rich.map.unit;
 
+import org.thoughtworks.zeph.rich.output.SystemOut;
 import org.thoughtworks.zeph.rich.player.Player;
 
 import java.util.HashSet;
@@ -23,6 +24,7 @@ public class Prison extends Grid {
 			prisoner.setPrisonDays(0);
 		}
 		players.clear();
+		SystemOut.youReleaseAllPrisoner();
 	}
 
 	public void addPlayer(Player player) {

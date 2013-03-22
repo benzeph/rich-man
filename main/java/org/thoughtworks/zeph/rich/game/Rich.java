@@ -35,8 +35,10 @@ public class Rich {
 			if (players[currentPlayer] != null) {
 				if (players[currentPlayer].isInHospital()) {
 					players[currentPlayer].countDownHospitalDays();
+					SystemOut.hospitalLeftTime(players[currentPlayer].getName(), players[currentPlayer].getHospitalDays());
 				} else if (players[currentPlayer].isInPrison()) {
 					players[currentPlayer].countDownPrisonDays();
+					SystemOut.prisonLeftTime(players[currentPlayer].getName(), players[currentPlayer].getPrisonDays());
 				} else {
 					if (players[currentPlayer].isGodExist()) {
 						players[currentPlayer].getGod().timeCountDown();

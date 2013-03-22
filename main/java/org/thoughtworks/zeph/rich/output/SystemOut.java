@@ -108,4 +108,24 @@ public class SystemOut {
 	public static void paySomeoneMoney(String ownerName, int money) {
 		colorPrintLn("支付给玩家" + ownerName + money + "元过路费", WHITE);
 	}
+
+	public static void printGetGamePoint(int gamePoint) {
+		colorPrintLn("得到游戏点" + gamePoint, WHITE);
+	}
+
+	public static void youReleaseAllPrisoner() {
+		colorPrintLn("你释放了所有的囚犯", WHITE);
+	}
+
+	public static void youReleaseAllPatient() {
+		colorPrintLn("你释放了所有的病人", WHITE);
+	}
+
+	public static void hospitalLeftTime(String name, int hospitalDays) {
+		colorPrintLn(name + "在医院休息还剩下" + hospitalDays + "天", WHITE);
+	}
+
+	public static void prisonLeftTime(String name, int prisonDays) {
+		colorPrintLn(name + "在监狱里关着还剩下" + prisonDays + "天", WHITE);
+	}
 }

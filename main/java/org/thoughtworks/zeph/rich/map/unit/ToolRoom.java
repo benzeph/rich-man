@@ -41,7 +41,6 @@ public class ToolRoom extends Grid {
 			}
 		}
 		SystemOut.youHaveExitToolRoom();
-		//say you game point is not enough ,exit
 	}
 
 

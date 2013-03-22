@@ -1,5 +1,6 @@
 package org.thoughtworks.zeph.rich.map.unit;
 
+import org.thoughtworks.zeph.rich.output.SystemOut;
 import org.thoughtworks.zeph.rich.player.Player;
 
 import java.util.HashSet;
@@ -23,6 +24,7 @@ public class Hospital extends Grid {
 			patient.setHospitalDays(0);
 		}
 		players.clear();
+		SystemOut.youReleaseAllPatient();
 	}
 
 	public Set<Player> getPlayers() {

@@ -89,6 +89,14 @@ public class Player {
 		return num >= 10;
 	}
 
+	public int getPrisonDays() {
+		return prisonDays;
+	}
+
+	public int getHospitalDays() {
+		return hospitalDays;
+	}
+
 	public char getSymbol() {
 		return symbol;
 	}
