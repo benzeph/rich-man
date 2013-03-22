@@ -1,10 +1,10 @@
 package org.thoughtworks.zeph.rich.executor;
 
+import org.thoughtworks.zeph.rich.output.Color;
 import org.thoughtworks.zeph.rich.output.SystemOut;
 import org.thoughtworks.zeph.rich.player.Player;
 
 public class QueryExecutor implements Executor {
-	public static final int WHITE = 7;
 	private Player player;
 
 	public QueryExecutor(Player player) {
@@ -13,7 +13,7 @@ public class QueryExecutor implements Executor {
 
 	@Override
 	public void execute() {
-		SystemOut.colorPrint(player.query(), WHITE);
+		SystemOut.colorPrint(player.query(), Color.WHITE);
 	}
 
 	@Override

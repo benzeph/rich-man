@@ -20,6 +20,7 @@ public class RollExecutor implements Executor {
 	public void execute() {
 		int currentMapPosition = player.getCurrentMapPosition();
 		int step = player.dice();
+		SystemOut.dice(step);
 		for (int i = 1; i <= step; i++) {
 			currentMapPosition = (currentMapPosition + 1) % map.getMapLength();
 			player.setCurrentMapPosition(currentMapPosition);

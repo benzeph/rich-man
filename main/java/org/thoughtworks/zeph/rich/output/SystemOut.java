@@ -147,4 +147,8 @@ public class SystemOut {
 	public static void yourMoneyIsNotEnough() {
 		colorPrintLn("你的现金不够", Color.WHITE);
 	}
+
+	public static void dice(int step) {
+		colorPrintLn("走" + step + "步", Color.WHITE);
+	}
 }
