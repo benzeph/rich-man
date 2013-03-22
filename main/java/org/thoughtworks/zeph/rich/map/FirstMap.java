@@ -1,6 +1,7 @@
 package org.thoughtworks.zeph.rich.map;
 
 import org.thoughtworks.zeph.rich.map.unit.*;
+import org.thoughtworks.zeph.rich.output.Color;
 import org.thoughtworks.zeph.rich.output.SystemOut;
 
 public class FirstMap implements Map {
@@ -121,24 +122,24 @@ public class FirstMap implements Map {
 			if (buildingLandOneTwo.isOwnerExist()) {
 				SystemOut.colorPrint(symbol, buildingLandOneTwo.getOwner().getColorNum());
 			} else {
-				SystemOut.colorPrint(symbol, WHITE);
+				SystemOut.colorPrint(symbol, Color.WHITE);
 			}
 		} else if (isBuildingLandThree(id)) {
 			BuildingLandThree buildingLandThree = (BuildingLandThree) grids[id];
 			if (buildingLandThree.isOwnerExist()) {
 				SystemOut.colorPrint(symbol, buildingLandThree.getOwner().getColorNum());
 			} else {
-				SystemOut.colorPrint(symbol, WHITE);
+				SystemOut.colorPrint(symbol, Color.WHITE);
 			}
 		} else if (isBuildingLandFour(id)) {
 			BuildingLandFourFive buildingLandFourFive = (BuildingLandFourFive) grids[id];
 			if (buildingLandFourFive.isOwnerExist()) {
 				SystemOut.colorPrint(symbol, buildingLandFourFive.getOwner().getColorNum());
 			} else {
-				SystemOut.colorPrint(symbol, WHITE);
+				SystemOut.colorPrint(symbol, Color.WHITE);
 			}
 		} else {
-			SystemOut.colorPrint(grids[id].getSymbol(), WHITE);
+			SystemOut.colorPrint(grids[id].getSymbol(), Color.WHITE);
 		}
 	}
 
