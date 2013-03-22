@@ -27,10 +27,13 @@ public class GiftRoom extends Grid {
 		instruction = scanner.nextLine();
 		if (instruction.equals("1")) {
 			player.addMoney(2000);
+			SystemOut.youGetGift("2000元");
 		} else if (instruction.equals("2")) {
 			player.addGamePoint(200);
+			SystemOut.youGetGift("200游戏点");
 		} else if (instruction.equals("3")) {
 			player.setGod(new WealthGod());
+			SystemOut.youGetGift("财神爷");
 		}
 	}
 

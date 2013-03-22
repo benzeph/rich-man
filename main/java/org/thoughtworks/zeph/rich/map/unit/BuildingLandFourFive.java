@@ -66,12 +66,15 @@ public class BuildingLandFourFive extends Grid {
 			}
 		} else {
 			if (player.isGodExist()) {
+				SystemOut.godBlessYou();
 				return;
 			}
 			if (owner.isInHospital()) {
+				SystemOut.ownerIsInTheHosptial(owner.getName());
 				return;
 			}
 			if (owner.isInPrison()) {
+				SystemOut.ownerIsInThePrison(owner.getName());
 				return;
 			}
 			if (player.getMoney() > price * (level + 1) / 2) {

@@ -128,4 +128,20 @@ public class SystemOut {
 	public static void prisonLeftTime(String name, int prisonDays) {
 		colorPrintLn(name + "在监狱里关着还剩下" + prisonDays + "天", WHITE);
 	}
+
+	public static void youGetGift(String str) {
+		colorPrintLn("你得到了礼物：" + str, WHITE);
+	}
+
+	public static void godBlessYou() {
+		colorPrintLn("财神保佑你，免交过路费", WHITE);
+	}
+
+	public static void ownerIsInTheHosptial(String name) {
+		colorPrintLn(name + "在医院，免交过路费", WHITE);
+	}
+
+	public static void ownerIsInThePrison(String name) {
+		colorPrintLn(name + "在监狱，免交过路费", WHITE);
+	}
 }
