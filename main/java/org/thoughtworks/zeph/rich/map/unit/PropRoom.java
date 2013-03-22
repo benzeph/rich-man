@@ -1,9 +1,9 @@
 package org.thoughtworks.zeph.rich.map.unit;
 
 import org.thoughtworks.zeph.rich.player.Player;
-import org.thoughtworks.zeph.rich.props.Block;
-import org.thoughtworks.zeph.rich.props.Bomb;
-import org.thoughtworks.zeph.rich.props.Robot;
+import org.thoughtworks.zeph.rich.tools.Block;
+import org.thoughtworks.zeph.rich.tools.Bomb;
+import org.thoughtworks.zeph.rich.tools.Robot;
 
 import java.util.Scanner;
 import java.util.Set;

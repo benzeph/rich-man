@@ -2,8 +2,8 @@ package org.thoughtworks.zeph.rich.player;
 
 import org.thoughtworks.zeph.rich.god.God;
 import org.thoughtworks.zeph.rich.map.unit.Grid;
-import org.thoughtworks.zeph.rich.props.Bomb;
-import org.thoughtworks.zeph.rich.props.Prop;
+import org.thoughtworks.zeph.rich.tools.Bomb;
+import org.thoughtworks.zeph.rich.tools.Tool;
 
 import java.util.*;
 
@@ -14,7 +14,7 @@ public class Player {
 	private int money;
 	private char symbol;
 	private God god = null;
-	private Prop prop = null;
+	private Tool tool = null;
 	private int gamePoint = 0;
 	private int currentMapPosition = 0;
 	private int hospitalDays = 0;
@@ -31,10 +31,10 @@ public class Player {
 	}
 
 	public boolean isCarriedWithABomb() {
-		if (null == prop) {
+		if (null == tool) {
 			return false;
 		} else {
-			return prop instanceof Bomb;
+			return tool instanceof Bomb;
 		}
 	}
 
@@ -47,7 +47,7 @@ public class Player {
 	}
 
 	public boolean isBombExplode() {
-		Bomb bomb = (Bomb) prop;
+		Bomb bomb = (Bomb) tool;
 		return bomb.getLeftTime() == 0;
 	}
 
@@ -132,8 +132,8 @@ public class Player {
 		this.currentMapPosition = currentMapPosition;
 	}
 
-	public void setProp(Prop prop) {
-		this.prop = prop;
+	public void setTool(Tool tool) {
+		this.tool = tool;
 	}
 
 	public void countDownPrisonDays() {
@@ -161,26 +161,26 @@ public class Player {
 		}
 	}
 
-	public void useProp(Prop prop) {
-		int n = props.get(prop.getId()) - 1;
+	public void useProp(Tool tool) {
+		int n = props.get(tool.getId()) - 1;
 		if (n == 0) {
-			props.remove(prop.getId());
+			props.remove(tool.getId());
 		} else {
-			props.remove(prop.getId());
-			props.put(prop.getId(), n);
+			props.remove(tool.getId());
+			props.put(tool.getId(), n);
 		}
 	}
 
-	public boolean sellProp(Prop prop) {
-		if (props.containsKey(prop.getId())) {
-			int n = props.get(prop.getId()) - 1;
+	public boolean sellProp(Tool tool) {
+		if (props.containsKey(tool.getId())) {
+			int n = props.get(tool.getId()) - 1;
 			if (n == 0) {
-				props.remove(prop.getId());
+				props.remove(tool.getId());
 			} else {
-				props.remove(prop.getId());
-				props.put(prop.getId(), n);
+				props.remove(tool.getId());
+				props.put(tool.getId(), n);
 			}
-			gamePoint = gamePoint + prop.getPrice();
+			gamePoint = gamePoint + tool.getPrice();
 			return true;
 		} else {
 			return false;
@@ -189,8 +189,8 @@ public class Player {
 
 
 	public String query() {
-		String message = "\nMoney:" + money + "\n";
-		message += "Game Point:" + gamePoint + "\n";
+		String message = "\n资金:" + money + "\n";
+		message += "点数:" + gamePoint + "\n";
 		int blankLand = 0, room = 0, house = 0, skyscraper = 0;
 		Set<Integer> set = lands.keySet();
 		Iterator<Integer> it = set.iterator();
@@ -211,8 +211,8 @@ public class Player {
 					break;
 			}
 		}
-		message += "Land:" + "BlankLand" + blankLand + ";" + "Room" + room + ";" + "House" + house + ";" + "skyscraper" + skyscraper + "\n";
-		message += "Props:" + "Block" + props.get(1) + ";Robot" + props.get(2) + ";Bomb" + props.get(3);
+		message += "地产:" + "空地" + blankLand + "处;" + "茅房" + room + "处;" + "洋房" + house + "处;" + "摩天楼" + skyscraper + "处\n";
+		message += "道具:" + "障碍" + props.get(1) + "个;炸弹" + props.get(3) + ";机器娃娃" + props.get(2);
 		return message;
 	}
 
@@ -221,7 +221,7 @@ public class Player {
 	}
 
 	public void bombTimeCountDown() {
-		Bomb bomb = (Bomb) prop;
+		Bomb bomb = (Bomb) tool;
 		bomb.timeCountDown();
 	}
 

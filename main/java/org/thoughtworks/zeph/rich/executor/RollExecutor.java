@@ -2,7 +2,7 @@ package org.thoughtworks.zeph.rich.executor;
 
 import org.thoughtworks.zeph.rich.map.Map;
 import org.thoughtworks.zeph.rich.player.Player;
-import org.thoughtworks.zeph.rich.props.Bomb;
+import org.thoughtworks.zeph.rich.tools.Bomb;
 
 public class RollExecutor implements Executor {
 
@@ -31,13 +31,13 @@ public class RollExecutor implements Executor {
 				}
 			}
 			if (map.getGrid(currentMapPosition).isBlockHere()) {
-				map.getGrid(currentMapPosition).setProp(null);
+				map.getGrid(currentMapPosition).setTool(null);
 				break;
 			}
 		}
 		if (map.getGrid(currentMapPosition).isBombHere()) {
-			player.setProp(new Bomb());
-			map.getGrid(currentMapPosition).setProp(null);
+			player.setTool(new Bomb());
+			map.getGrid(currentMapPosition).setTool(null);
 		}
 
 	}
@@ -45,7 +45,7 @@ public class RollExecutor implements Executor {
 	private void bombExplode(Player player) {
 		player.setCurrentMapPosition(map.getHospitalId());
 		player.setHospitalDays(HOSPITAL_DAYS);
-		player.setProp(null);
+		player.setTool(null);
 	}
 
 	private void reviseMapSymbolEveryStep(Map map, Player player, int currentMapPosition) {

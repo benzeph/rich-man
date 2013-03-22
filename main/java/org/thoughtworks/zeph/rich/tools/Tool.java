@@ -1,11 +1,11 @@
-package org.thoughtworks.zeph.rich.props;
+package org.thoughtworks.zeph.rich.tools;
 
-public abstract class Prop {
+public abstract class Tool {
 	private int id;
 	private int price;
 	private char icon;
 
-	public Prop(int id, int price, char icon) {
+	public Tool(int id, int price, char icon) {
 		this.id = id;
 		this.price = price;
 		this.icon = icon;
@@ -28,11 +28,11 @@ public abstract class Prop {
 		if (this == o) return true;
 		if (o == null || getClass() != o.getClass()) return false;
 
-		Prop prop = (Prop) o;
+		Tool tool = (Tool) o;
 
-		if (icon != prop.icon) return false;
-		if (id != prop.id) return false;
-		if (price != prop.price) return false;
+		if (icon != tool.icon) return false;
+		if (id != tool.id) return false;
+		if (price != tool.price) return false;
 
 		return true;
 	}

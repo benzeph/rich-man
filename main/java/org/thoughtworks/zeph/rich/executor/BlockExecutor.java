@@ -3,7 +3,7 @@ package org.thoughtworks.zeph.rich.executor;
 
 import org.thoughtworks.zeph.rich.map.Map;
 import org.thoughtworks.zeph.rich.player.Player;
-import org.thoughtworks.zeph.rich.props.Block;
+import org.thoughtworks.zeph.rich.tools.Block;
 
 public class BlockExecutor implements Executor {
 	private Map map;
@@ -31,7 +31,7 @@ public class BlockExecutor implements Executor {
 		} else {
 			if (player.isPlayerHasABlock()) {
 				player.useProp(new Block());
-				map.getGrid(blockPlace).setProp(new Block());
+				map.getGrid(blockPlace).setTool(new Block());
 			} else {
 
 			}

@@ -1,6 +1,6 @@
-package org.thoughtworks.zeph.rich.props;
+package org.thoughtworks.zeph.rich.tools;
 
-public class Bomb extends Prop {
+public class Bomb extends Tool {
 	private int leftTime;
 
 	public Bomb() {

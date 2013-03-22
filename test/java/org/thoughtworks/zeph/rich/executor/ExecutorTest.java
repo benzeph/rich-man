@@ -8,9 +8,9 @@ import org.thoughtworks.zeph.rich.map.Map;
 import org.thoughtworks.zeph.rich.map.MapFactory;
 import org.thoughtworks.zeph.rich.player.Player;
 import org.thoughtworks.zeph.rich.player.PlayerFactoryImp;
-import org.thoughtworks.zeph.rich.props.Block;
-import org.thoughtworks.zeph.rich.props.Bomb;
-import org.thoughtworks.zeph.rich.props.Prop;
+import org.thoughtworks.zeph.rich.tools.Block;
+import org.thoughtworks.zeph.rich.tools.Bomb;
+import org.thoughtworks.zeph.rich.tools.Tool;
 
 import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.core.Is.is;
@@ -41,8 +41,8 @@ public class ExecutorTest {
 		int n = 5;
 		executor = new BlockExecutor(map, player, n);
 		executor.execute();
-		Prop expectProp = new Block();
-		assertThat(map.getGrid(5).getProp(), is(expectProp));
+		Tool expectTool = new Block();
+		assertThat(map.getGrid(5).getTool(), is(expectTool));
 
 	}
 
@@ -52,8 +52,8 @@ public class ExecutorTest {
 		int n = 5;
 		executor = new BombExecutor(map, player, n);
 		executor.execute();
-		Prop expectProp = new Bomb();
-		assertThat(map.getGrid(5).getProp(), is(expectProp));
+		Tool expectTool = new Bomb();
+		assertThat(map.getGrid(5).getTool(), is(expectTool));
 	}
 
 	@Test
@@ -72,7 +72,7 @@ public class ExecutorTest {
 		executor.execute();
 		executor = new RobotExecutor(map, player);
 		executor.execute();
-		assertNull(map.getGrid(5).getProp());
+		assertNull(map.getGrid(5).getTool());
 	}
 
 	@Test

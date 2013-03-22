@@ -1,9 +1,9 @@
 package org.thoughtworks.zeph.rich.map.unit;
 
 import org.thoughtworks.zeph.rich.player.Player;
-import org.thoughtworks.zeph.rich.props.Block;
-import org.thoughtworks.zeph.rich.props.Bomb;
-import org.thoughtworks.zeph.rich.props.Prop;
+import org.thoughtworks.zeph.rich.tools.Block;
+import org.thoughtworks.zeph.rich.tools.Bomb;
+import org.thoughtworks.zeph.rich.tools.Tool;
 
 import java.util.Set;
 
@@ -12,7 +12,7 @@ public abstract class Grid {
 	private int id;
 	private char symbol;
 	private char playerSymbol = ' ';
-	private Prop prop;
+	private Tool tool;
 	private boolean isPlayerHere = false;
 
 	public abstract void doesWhatItNeedToDo(Player player);
@@ -28,22 +28,22 @@ public abstract class Grid {
 	public abstract Set<Player> getPlayers();
 
 	public boolean isPropHere() {
-		return prop != null;
+		return tool != null;
 	}
 
 	public boolean isBlockHere() {
-		if (null == prop) {
+		if (null == tool) {
 			return false;
 		} else {
-			return prop instanceof Block;
+			return tool instanceof Block;
 		}
 	}
 
 	public boolean isBombHere() {
-		if (null == prop) {
+		if (null == tool) {
 			return false;
 		} else {
-			return prop instanceof Bomb;
+			return tool instanceof Bomb;
 		}
 	}
 
@@ -51,12 +51,12 @@ public abstract class Grid {
 		return isPlayerHere;
 	}
 
-	public Prop getProp() {
-		return prop;
+	public Tool getTool() {
+		return tool;
 	}
 
-	public void setProp(Prop prop) {
-		this.prop = prop;
+	public void setTool(Tool tool) {
+		this.tool = tool;
 	}
 
 	public Grid(int id, char symbol) {
@@ -80,8 +80,8 @@ public abstract class Grid {
 		if (playerSymbol != ' ') {
 			return playerSymbol;
 		}
-		if (null != prop) {
-			return prop.getIcon();
+		if (null != tool) {
+			return tool.getIcon();
 		}
 		return getSymbol();
 	}
@@ -97,7 +97,7 @@ public abstract class Grid {
 		if (isPlayerHere != map.isPlayerHere) return false;
 		if (playerSymbol != map.playerSymbol) return false;
 		if (symbol != map.symbol) return false;
-		if (prop != null ? !prop.equals(map.prop) : map.prop != null) return false;
+		if (tool != null ? !tool.equals(map.tool) : map.tool != null) return false;
 
 		return true;
 	}
@@ -105,7 +105,7 @@ public abstract class Grid {
 	@Override
 	public int hashCode() {
 		int result = id;
-		result = 31 * result + (prop != null ? prop.hashCode() : 0);
+		result = 31 * result + (tool != null ? tool.hashCode() : 0);
 		result = 31 * result + (int) symbol;
 		result = 31 * result + (int) playerSymbol;
 		result = 31 * result + (isPlayerHere ? 1 : 0);

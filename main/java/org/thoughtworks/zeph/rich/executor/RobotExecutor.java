@@ -3,7 +3,7 @@ package org.thoughtworks.zeph.rich.executor;
 
 import org.thoughtworks.zeph.rich.map.Map;
 import org.thoughtworks.zeph.rich.player.Player;
-import org.thoughtworks.zeph.rich.props.Robot;
+import org.thoughtworks.zeph.rich.tools.Robot;
 
 public class RobotExecutor implements Executor {
 	public static final int step = 1;
@@ -22,7 +22,7 @@ public class RobotExecutor implements Executor {
 			int robotMapPosition = player.getCurrentMapPosition();
 			for (int i = 1; i <= 10; i++) {
 				robotMapPosition = robotMapPosition + step;
-				map.getGrid(robotMapPosition).setProp(null);
+				map.getGrid(robotMapPosition).setTool(null);
 			}
 		}
 	}

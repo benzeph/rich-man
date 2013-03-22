@@ -4,8 +4,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.thoughtworks.zeph.rich.map.unit.BuildingLandOneTwo;
-import org.thoughtworks.zeph.rich.props.Block;
-import org.thoughtworks.zeph.rich.props.Robot;
+import org.thoughtworks.zeph.rich.tools.Block;
+import org.thoughtworks.zeph.rich.tools.Robot;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;

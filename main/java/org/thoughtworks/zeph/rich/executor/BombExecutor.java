@@ -3,7 +3,7 @@ package org.thoughtworks.zeph.rich.executor;
 
 import org.thoughtworks.zeph.rich.map.Map;
 import org.thoughtworks.zeph.rich.player.Player;
-import org.thoughtworks.zeph.rich.props.Bomb;
+import org.thoughtworks.zeph.rich.tools.Bomb;
 
 public class BombExecutor implements Executor {
 
@@ -32,7 +32,7 @@ public class BombExecutor implements Executor {
 		} else {
 			if (player.isPlayerHasABomb()) {
 				player.useProp(new Bomb());
-				map.getGrid(bombPlace).setProp(new Bomb());
+				map.getGrid(bombPlace).setTool(new Bomb());
 			} else {
 
 			}
