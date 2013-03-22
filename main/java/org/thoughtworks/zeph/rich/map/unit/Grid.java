@@ -91,6 +91,10 @@ public abstract class Grid {
 		return symbol;
 	}
 
+	public void setSymbol(char symbol) {
+		this.symbol = symbol;
+	}
+
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) return true;

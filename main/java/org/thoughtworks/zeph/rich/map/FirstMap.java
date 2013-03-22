@@ -120,27 +120,43 @@ public class FirstMap implements Map {
 		if (isBuildingLandOneTwo(id)) {
 			BuildingLandOneTwo buildingLandOneTwo = (BuildingLandOneTwo) grids[id];
 			if (buildingLandOneTwo.isOwnerExist()) {
-				SystemOut.colorPrint(symbol, buildingLandOneTwo.getOwner().getColorNum());
+				if (isSymbolBelongToBuilding(symbol)) {
+					SystemOut.colorPrint(symbol, buildingLandOneTwo.getOwner().getColorNum());
+				}else{
+					SystemOut.colorPrint(symbol, Color.WHITE);
+				}
 			} else {
 				SystemOut.colorPrint(symbol, Color.WHITE);
 			}
 		} else if (isBuildingLandThree(id)) {
 			BuildingLandThree buildingLandThree = (BuildingLandThree) grids[id];
 			if (buildingLandThree.isOwnerExist()) {
-				SystemOut.colorPrint(symbol, buildingLandThree.getOwner().getColorNum());
+				if (isSymbolBelongToBuilding(symbol)) {
+					SystemOut.colorPrint(symbol, buildingLandThree.getOwner().getColorNum());
+				}else{
+					SystemOut.colorPrint(symbol, Color.WHITE);
+				}
 			} else {
 				SystemOut.colorPrint(symbol, Color.WHITE);
 			}
 		} else if (isBuildingLandFour(id)) {
 			BuildingLandFourFive buildingLandFourFive = (BuildingLandFourFive) grids[id];
 			if (buildingLandFourFive.isOwnerExist()) {
-				SystemOut.colorPrint(symbol, buildingLandFourFive.getOwner().getColorNum());
+				if (isSymbolBelongToBuilding(symbol)) {
+					SystemOut.colorPrint(symbol, buildingLandFourFive.getOwner().getColorNum());
+				}else{
+					SystemOut.colorPrint(symbol, Color.WHITE);
+				}
 			} else {
 				SystemOut.colorPrint(symbol, Color.WHITE);
 			}
 		} else {
 			SystemOut.colorPrint(grids[id].getSymbol(), Color.WHITE);
 		}
+	}
+
+	private boolean isSymbolBelongToBuilding(char symbol) {
+		return symbol == '0'||symbol=='1'||symbol=='2'||symbol=='3';
 	}
 
 	@Override

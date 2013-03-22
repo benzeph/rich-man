@@ -60,7 +60,9 @@ public class BuildingLandThree extends Grid {
 					if (player.getMoney() > price) {
 						level++;
 						player.subtractMoney(price);
+						setSymbol((char) (level + 48));
 					} else {
+						SystemOut.yourMoneyIsNotEnough();
 						return;
 					}
 				} else {

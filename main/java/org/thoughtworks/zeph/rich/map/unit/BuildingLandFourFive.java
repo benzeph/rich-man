@@ -59,7 +59,9 @@ public class BuildingLandFourFive extends Grid {
 					if (player.getMoney() > price) {
 						level++;
 						player.subtractMoney(price);
+						setSymbol((char) (level + 48));
 					} else {
+						SystemOut.yourMoneyIsNotEnough();
 						return;
 					}
 				} else {
@@ -124,12 +126,11 @@ public class BuildingLandFourFive extends Grid {
 
 	@Override
 	public void addPlayer(Player player) {
-		//To change body of implemented methods use File | Settings | File Templates.
+
 	}
 
 	@Override
 	public Set<Player> getPlayers() {
-		return null;  //To change body of implemented methods use File | Settings | File Templates.
+		return null;
 	}
-
 }
