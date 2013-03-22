@@ -119,9 +119,6 @@ public class Player {
 		hospitalDays = hospitalDays - 1;
 	}
 
-	public int getHospitalDays() {
-		return hospitalDays;
-	}
 
 	public void setPrisonDays(int prisonDays) {
 		this.prisonDays = prisonDays;
@@ -141,10 +138,6 @@ public class Player {
 
 	public void countDownPrisonDays() {
 		prisonDays = prisonDays - 1;
-	}
-
-	public int getPrisonDays() {
-		return prisonDays;
 	}
 
 	public void addGamePoint(int gamePoint) {

@@ -13,7 +13,7 @@ public class Rich {
 	public static final String WIN = " win";
 	public static final String WHAT_EVER = "what ever";
 	public static final int MINIMUM_PLAYER_NUMBER = 1;
-	public static final int FIRST_PLAYER_NUMER = 0;
+	public static final int FIRST_PLAYER_NUMBER = 0;
 	private int currentPlayerNum;
 	private int totalPlayerNum;
 	private Player[] players;
@@ -37,7 +37,7 @@ public class Rich {
 	}
 
 	public void run() {
-		int currentPlayer = FIRST_PLAYER_NUMER;
+		int currentPlayer = FIRST_PLAYER_NUMBER;
 		while (currentPlayerNum > MINIMUM_PLAYER_NUMBER) {
 			if (players[currentPlayer] != null) {
 				if (players[currentPlayer].isInHospital()) {

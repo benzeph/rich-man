@@ -15,6 +15,7 @@ public interface Map {
 
 	public void drawMap();
 
+	public void printGrid(int id,char symbol);
 
 
 	public boolean isBuildingLandOneTwo(int id);

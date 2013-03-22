@@ -24,4 +24,10 @@ public class ColorSystemOut {
 		api.INSTANCE.SetConsoleTextAttribute(ptr, color);
 		System.out.print(str);
 	}
+
+	public static void print(char ch, int color) {
+		int ptr = api.INSTANCE.GetStdHandle(-11);
+		api.INSTANCE.SetConsoleTextAttribute(ptr, color);
+		System.out.print(ch);
+	}
 }

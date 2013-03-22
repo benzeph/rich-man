@@ -86,6 +86,9 @@ public class BuildingLandThree extends Grid {
 		}
 	}
 
+	public Player getOwner() {
+		return owner;
+	}
 
 	public int getPrice() {
 		return price;

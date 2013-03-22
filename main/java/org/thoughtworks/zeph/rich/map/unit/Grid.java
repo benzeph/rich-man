@@ -11,8 +11,8 @@ public abstract class Grid {
 
 	private int id;
 	private char symbol;
-	private Prop prop;
 	private char playerSymbol = ' ';
+	private Prop prop;
 	private boolean isPlayerHere = false;
 
 	public abstract void doesWhatItNeedToDo(Player player);
@@ -51,10 +51,6 @@ public abstract class Grid {
 		return isPlayerHere;
 	}
 
-	public void setPlayerHere(boolean playerHere) {
-		isPlayerHere = playerHere;
-	}
-
 	public Prop getProp() {
 		return prop;
 	}
@@ -80,22 +76,14 @@ public abstract class Grid {
 		this.playerSymbol = playerSymbol;
 	}
 
-	public void getSymbol() {
-		/*if (playerSymbol != ' ') {
-			ColorSystemOut.print(String.valueOf(playerSymbol), Color.WHITE);
-			return;
-		}
-		if (this instanceof Land) {
-			if (null != ((Land) this).getBelongTo()) {
-				ColorSystemOut.print(String.valueOf(symbol), ((Land) this).getBelongTo().getColorNum());
-				return;
-			}
+	public char getSymbol() {
+		if (playerSymbol != ' ') {
+			return playerSymbol;
 		}
 		if (null != prop) {
-			ColorSystemOut.print(String.valueOf(prop.getIcon()), Color.WHITE);
-			return;
+			return prop.getIcon();
 		}
-		ColorSystemOut.print(String.valueOf(symbol), Color.WHITE);*/
+		return getSymbol();
 	}
 
 	@Override

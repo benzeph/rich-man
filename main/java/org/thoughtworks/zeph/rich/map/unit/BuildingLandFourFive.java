@@ -85,6 +85,9 @@ public class BuildingLandFourFive extends Grid {
 		}
 	}
 
+	public Player getOwner() {
+		return owner;
+	}
 
 	public int getPrice() {
 		return price;

@@ -1,6 +1,7 @@
 package org.thoughtworks.zeph.rich.map;
 
 import org.thoughtworks.zeph.rich.map.unit.*;
+import org.thoughtworks.zeph.rich.output.ColorSystemOut;
 
 public class FirstMap implements Map {
 
@@ -60,49 +61,70 @@ public class FirstMap implements Map {
 	@Override
 	public void drawMap() {
 		for (int i = 0; i < 29; i++) {
-			getGrid(i).getSymbol();
+			printGrid(i, getGrid(i).getSymbol());
 		}
 		System.out.println();
-		getGrid(69).getSymbol();
+
+		printGrid(69, getGrid(69).getSymbol());
 		for (int i = 1; i < 28; i++) {
-			System.out.print(" ");
+			System.out.print(' ');
 		}
-		getGrid(29).getSymbol();
+		printGrid(29, getGrid(29).getSymbol());
 		System.out.println();
-		getGrid(68).getSymbol();
+
+		printGrid(68, getGrid(68).getSymbol());
 		for (int i = 1; i < 28; i++) {
-			System.out.print(" ");
+			System.out.print(' ');
 		}
-		getGrid(30).getSymbol();
+		printGrid(30, getGrid(30).getSymbol());
 		System.out.println();
-		getGrid(67).getSymbol();
+
+		printGrid(67, getGrid(67).getSymbol());
 		for (int i = 1; i < 28; i++) {
-			System.out.print(" ");
+			System.out.print(' ');
 		}
-		getGrid(31).getSymbol();
+		printGrid(31, getGrid(31).getSymbol());
 		System.out.println();
-		getGrid(66).getSymbol();
+
+		printGrid(66, getGrid(66).getSymbol());
 		for (int i = 1; i < 28; i++) {
-			System.out.print(" ");
+			System.out.print(' ');
 		}
-		getGrid(32).getSymbol();
+		printGrid(32, getGrid(32).getSymbol());
 		System.out.println();
-		getGrid(65).getSymbol();
+
+		printGrid(65, getGrid(65).getSymbol());
 		for (int i = 1; i < 28; i++) {
-			System.out.print(" ");
+			System.out.print(' ');
 		}
-		getGrid(33).getSymbol();
+		printGrid(33, getGrid(33).getSymbol());
 		System.out.println();
-		getGrid(64).getSymbol();
+
+		printGrid(64, getGrid(64).getSymbol());
 		for (int i = 1; i < 28; i++) {
-			System.out.print(" ");
+			System.out.print(' ');
 		}
-		getGrid(34).getSymbol();
+		printGrid(34, getGrid(34).getSymbol());
 		System.out.println();
+
 		for (int i = 63; i >= 35; i--) {
-			getGrid(i).getSymbol();
+			printGrid(i, getGrid(i).getSymbol());
 		}
 		System.out.println();
+	}
+
+	@Override
+	public void printGrid(int id, char symbol) {
+		if (isBuildingLandOneTwo(id)) {
+			BuildingLandOneTwo buildingLandOneTwo = (BuildingLandOneTwo) grids[id];
+			ColorSystemOut.print(symbol, buildingLandOneTwo.getOwner().getColorNum());
+		} else if (isBuildingLandThree(id)) {
+			BuildingLandThree buildingLandThree = (BuildingLandThree) grids[id];
+			ColorSystemOut.print(symbol, buildingLandThree.getOwner().getColorNum());
+		} else if (isBuildingLandFour(id)) {
+			BuildingLandFourFive buildingLandFourFive = (BuildingLandFourFive) grids[id];
+			ColorSystemOut.print(symbol, buildingLandFourFive.getOwner().getColorNum());
+		}
 	}
 
 	@Override

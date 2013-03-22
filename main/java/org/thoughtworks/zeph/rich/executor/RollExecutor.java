@@ -6,6 +6,7 @@ import org.thoughtworks.zeph.rich.props.Bomb;
 
 public class RollExecutor implements Executor {
 
+	public static final int HOSPITAL_DAYS = 3;
 	private Map map;
 	private Player player;
 
@@ -43,7 +44,7 @@ public class RollExecutor implements Executor {
 
 	private void bombExplode(Player player) {
 		player.setCurrentMapPosition(map.getHospitalId());
-		player.setHospitalDays(3);
+		player.setHospitalDays(HOSPITAL_DAYS);
 		player.setProp(null);
 	}
 
