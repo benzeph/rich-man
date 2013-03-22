@@ -2,7 +2,6 @@ package org.thoughtworks.zeph.rich.executor;
 
 
 import org.thoughtworks.zeph.rich.map.Map;
-import org.thoughtworks.zeph.rich.map.unit.Grid;
 import org.thoughtworks.zeph.rich.output.SystemOut;
 import org.thoughtworks.zeph.rich.player.Player;
 
@@ -21,7 +20,7 @@ public class SellExecutor implements Executor {
 	public void execute() {
 
 		if (player.isPlayerHasBuilding(n)) {
-			player.sellLand((Grid) map.getGrid(n));
+			player.sellLand(map.getGrid(n));
 		} else {
 			SystemOut.sellFail();
 		}

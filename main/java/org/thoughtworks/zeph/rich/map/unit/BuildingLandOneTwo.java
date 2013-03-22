@@ -67,6 +67,12 @@ public class BuildingLandOneTwo extends Grid {
 			if (player.isGodExist()) {
 				return;
 			}
+			if (owner.isInHospital()) {
+				return;
+			}
+			if (owner.isInPrison()) {
+				return;
+			}
 			if (player.getMoney() > price * (level + 1) / 2) {
 				player.subtractMoney(price * (level + 1) / 2);
 				owner.addMoney(price * (level + 1) / 2);

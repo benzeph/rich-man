@@ -21,7 +21,7 @@ public class BuildingLandFourFive extends Grid {
 		this.price = 300;
 	}
 
-	public BuildingLandFourFive(int mapId, char symbol,String instructions) {
+	public BuildingLandFourFive(int mapId, char symbol, String instructions) {
 		super(mapId, symbol);
 		this.price = 300;
 		scanner = new Scanner(instructions);
@@ -68,6 +68,12 @@ public class BuildingLandFourFive extends Grid {
 			if (player.isGodExist()) {
 				return;
 			}
+			if (owner.isInHospital()) {
+				return;
+			}
+			if (owner.isInPrison()) {
+				return;
+			}
 			if (player.getMoney() > price * (level + 1) / 2) {
 				player.subtractMoney(price * (level + 1) / 2);
 				owner.addMoney(price * (level + 1) / 2);
@@ -95,9 +101,11 @@ public class BuildingLandFourFive extends Grid {
 	public int getPrice() {
 		return price;
 	}
-	public boolean isOwnerExist(){
+
+	public boolean isOwnerExist() {
 		return owner != null;
 	}
+
 	@Override
 	public int getLevel() {
 		return level;
