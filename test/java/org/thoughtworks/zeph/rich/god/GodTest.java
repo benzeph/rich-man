@@ -21,7 +21,7 @@ public class GodTest {
 	}
 
 	@Test
-	public void should_return_4_when_role_go_1_round() {
+	public void should_return_4_when_time_count_down() {
 		God god = new WealthGod();
 		god.timeCountDown();
 		assertThat(god.getLeftTime(), is(4));
