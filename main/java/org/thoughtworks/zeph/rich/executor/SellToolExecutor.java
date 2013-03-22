@@ -23,43 +23,37 @@ public class SellToolExecutor implements Executor {
 			case 1:
 				if (player.isPlayerHasABlock()) {
 					sellBlock(player);
+				} else {
+					SystemOut.sellToolFailed(new Bomb().getName());
 				}
 				break;
 			case 2:
 				if (player.isPlayerHasARobot()) {
 					sellRobot(player);
+				} else {
+					SystemOut.sellToolFailed(new Robot().getName());
 				}
 				break;
 			case 3:
 				if (player.isPlayerHasABomb()) {
 					sellBomb(player);
+				} else {
+					SystemOut.sellToolFailed(new Robot().getName());
 				}
 				break;
 		}
 	}
 
 	private void sellBomb(Player player) {
-		if (player.sellTool(new Bomb())) {
-
-		} else {
-			SystemOut.sellToolFailed(new Bomb().getName());
-		}
+		player.sellTool(new Bomb());
 	}
 
 	private void sellRobot(Player player) {
-		if (player.sellTool(new Robot())) {
-
-		} else {
-			SystemOut.sellToolFailed(new Robot().getName());
-		}
+		player.sellTool(new Robot());
 	}
 
 	private void sellBlock(Player player) {
-		if (player.sellTool(new Block())) {
-
-		} else {
-			SystemOut.sellToolFailed(new Robot().getName());
-		}
+		player.sellTool(new Block());
 	}
 
 	@Override

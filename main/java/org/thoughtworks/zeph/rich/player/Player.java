@@ -181,7 +181,7 @@ public class Player {
 		}
 	}
 
-	public boolean sellTool(Tool tool) {
+	public void sellTool(Tool tool) {
 		if (tools.containsKey(tool.getId())) {
 			int n = tools.get(tool.getId()) - 1;
 			if (n == 0) {
@@ -191,9 +191,6 @@ public class Player {
 				tools.put(tool.getId(), n);
 			}
 			gamePoint = gamePoint + tool.getPrice();
-			return true;
-		} else {
-			return false;
 		}
 	}
 
@@ -222,7 +219,7 @@ public class Player {
 			}
 		}
 		message += "地产:" + "空地" + blankLand + "处;" + "茅房" + room + "处;" + "洋房" + house + "处;" + "摩天楼" + skyscraper + "处\n";
-		message += "道具:" + "障碍" + tools.get(1) + "个;炸弹" + tools.get(3) + ";机器娃娃" + tools.get(2)+"\n";
+		message += "道具:" + "障碍" + tools.get(1) + "个;炸弹" + tools.get(3) + ";机器娃娃" + tools.get(2) + "\n";
 		return message;
 	}
 

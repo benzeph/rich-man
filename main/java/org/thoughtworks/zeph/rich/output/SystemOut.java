@@ -100,4 +100,8 @@ public class SystemOut {
 	public static void colorPrintLn(String str, int color) {
 		ColorSystemOut.println(str, color);
 	}
+
+	public static void illegalInstruction() {
+		colorPrintLn("你输入的命令不存在，请重新输入（输入help-查看帮助）", WHITE);
+	}
 }

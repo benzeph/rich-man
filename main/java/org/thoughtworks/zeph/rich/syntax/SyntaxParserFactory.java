@@ -49,7 +49,7 @@ public class SyntaxParserFactory {
 		if (isQuit(instruction)) {
 			return new QuitSyntaxParser();
 		}
-		return null;
+		return new SyntaxParserFailed();
 	}
 
 	private boolean isRobot(String instruction) {
