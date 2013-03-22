@@ -1,5 +1,6 @@
 package org.thoughtworks.zeph.rich.map.unit;
 
+import org.thoughtworks.zeph.rich.output.SystemOut;
 import org.thoughtworks.zeph.rich.player.Player;
 
 import java.util.Iterator;
@@ -30,6 +31,7 @@ public class BuildingLandThree extends Grid {
 	@Override
 	public void doesWhatItNeedToDo(Player player) {
 		if (owner == null) {
+			SystemOut.doYouWantToBuyThisLand(price);
 			instruction = scanner.nextLine();
 			while (instruction.equals("Y") && instruction.equals("N")) {
 				instruction = scanner.nextLine();
@@ -47,6 +49,7 @@ public class BuildingLandThree extends Grid {
 			}
 		} else if (owner.equals(player)) {
 			if (level < TOP_LEVEL) {
+				SystemOut.doYouWantToLevelUpThisLand(price);
 				instruction = scanner.nextLine();
 				while (instruction.equals("Y") && instruction.equals("N")) {
 					instruction = scanner.nextLine();
