@@ -104,4 +104,8 @@ public class SystemOut {
 	public static void illegalInstruction() {
 		colorPrintLn("你输入的命令不存在，请重新输入（输入help-查看帮助）", WHITE);
 	}
+
+	public static void paySomeoneMoney(String ownerName, int money) {
+		colorPrintLn("支付给玩家" + ownerName + money + "元过路费", WHITE);
+	}
 }

@@ -76,6 +76,7 @@ public class BuildingLandOneTwo extends Grid {
 			if (player.getMoney() > price * (level + 1) / 2) {
 				player.subtractMoney(price * (level + 1) / 2);
 				owner.addMoney(price * (level + 1) / 2);
+				SystemOut.paySomeoneMoney(owner.getName(),price * (level + 1) / 2);
 			} else {
 				Map<Integer, Grid> lands = player.getLands();
 				Set<Integer> set = lands.keySet();
