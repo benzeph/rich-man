@@ -46,8 +46,8 @@ public class Rich {
 						SystemOut.waitForInstruction(players[currentPlayer].getName());
 						instruction = scanner.nextLine();
 						parserFactory.buildSyntaxParser(instruction, map, players[currentPlayer]).parse().execute();
-						map.getGrid(players[currentPlayer].getCurrentMapPosition()).doesWhatItNeedToDo(players[currentPlayer]);
 					}
+					map.getGrid(players[currentPlayer].getCurrentMapPosition()).doesWhatItNeedToDo(players[currentPlayer]);
 				}
 				map.drawMap();
 				currentPlayer = (currentPlayer + PLAY_ARRAY_STEP) % totalPlayerNum;

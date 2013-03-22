@@ -1,6 +1,7 @@
 package org.thoughtworks.zeph.rich.executor;
 
 
+import org.thoughtworks.zeph.rich.output.SystemOut;
 import org.thoughtworks.zeph.rich.player.Player;
 import org.thoughtworks.zeph.rich.tools.Block;
 import org.thoughtworks.zeph.rich.tools.Bomb;
@@ -41,7 +42,7 @@ public class SellToolExecutor implements Executor {
 		if (player.sellTool(new Bomb())) {
 
 		} else {
-
+			SystemOut.sellToolFailed(new Bomb().getName());
 		}
 	}
 
@@ -49,7 +50,7 @@ public class SellToolExecutor implements Executor {
 		if (player.sellTool(new Robot())) {
 
 		} else {
-
+			SystemOut.sellToolFailed(new Robot().getName());
 		}
 	}
 
@@ -57,7 +58,7 @@ public class SellToolExecutor implements Executor {
 		if (player.sellTool(new Block())) {
 
 		} else {
-
+			SystemOut.sellToolFailed(new Robot().getName());
 		}
 	}
 

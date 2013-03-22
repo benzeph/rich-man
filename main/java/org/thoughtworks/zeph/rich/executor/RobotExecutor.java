@@ -2,6 +2,7 @@ package org.thoughtworks.zeph.rich.executor;
 
 
 import org.thoughtworks.zeph.rich.map.Map;
+import org.thoughtworks.zeph.rich.output.SystemOut;
 import org.thoughtworks.zeph.rich.player.Player;
 import org.thoughtworks.zeph.rich.tools.Robot;
 
@@ -24,6 +25,8 @@ public class RobotExecutor implements Executor {
 				robotMapPosition = robotMapPosition + step;
 				map.getGrid(robotMapPosition).setTool(null);
 			}
+		}else {
+			SystemOut.youDoNotHaveARobot();
 		}
 	}
 

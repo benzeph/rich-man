@@ -1,6 +1,7 @@
 package org.thoughtworks.zeph.rich.executor;
 
 import org.thoughtworks.zeph.rich.map.Map;
+import org.thoughtworks.zeph.rich.output.SystemOut;
 import org.thoughtworks.zeph.rich.player.Player;
 import org.thoughtworks.zeph.rich.tools.Bomb;
 
@@ -27,15 +28,18 @@ public class RollExecutor implements Executor {
 				player.bombTimeCountDown();
 				if (player.isBombExplode()) {
 					bombExplode(player);
+					SystemOut.bombExplode();
 					break;
 				}
 			}
 			if (map.getGrid(currentMapPosition).isBlockHere()) {
 				map.getGrid(currentMapPosition).setTool(null);
+				SystemOut.youMeetABlock();
 				break;
 			}
 		}
 		if (map.getGrid(currentMapPosition).isBombHere()) {
+			SystemOut.youMeetABomb();
 			player.setTool(new Bomb());
 			map.getGrid(currentMapPosition).setTool(null);
 		}

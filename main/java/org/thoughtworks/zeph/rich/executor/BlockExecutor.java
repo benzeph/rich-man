@@ -2,6 +2,7 @@ package org.thoughtworks.zeph.rich.executor;
 
 
 import org.thoughtworks.zeph.rich.map.Map;
+import org.thoughtworks.zeph.rich.output.SystemOut;
 import org.thoughtworks.zeph.rich.player.Player;
 import org.thoughtworks.zeph.rich.tools.Block;
 
@@ -27,13 +28,13 @@ public class BlockExecutor implements Executor {
 			isBeenOccupied = true;
 		}
 		if (isBeenOccupied) {
-
+			SystemOut.blockFailed();
 		} else {
 			if (player.isPlayerHasABlock()) {
 				player.useTool(new Block());
 				map.getGrid(blockPlace).setTool(new Block());
 			} else {
-
+				SystemOut.youDoNotHaveABlock();
 			}
 		}
 

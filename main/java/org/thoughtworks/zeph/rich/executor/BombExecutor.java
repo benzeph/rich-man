@@ -2,6 +2,7 @@ package org.thoughtworks.zeph.rich.executor;
 
 
 import org.thoughtworks.zeph.rich.map.Map;
+import org.thoughtworks.zeph.rich.output.SystemOut;
 import org.thoughtworks.zeph.rich.player.Player;
 import org.thoughtworks.zeph.rich.tools.Bomb;
 
@@ -28,13 +29,13 @@ public class BombExecutor implements Executor {
 			isBeenOccupied = true;
 		}
 		if (isBeenOccupied) {
-
+			SystemOut.bombFailed();
 		} else {
 			if (player.isPlayerHasABomb()) {
 				player.useTool(new Bomb());
 				map.getGrid(bombPlace).setTool(new Bomb());
 			} else {
-
+				SystemOut.youDoNotHaveABomb();
 			}
 		}
 	}

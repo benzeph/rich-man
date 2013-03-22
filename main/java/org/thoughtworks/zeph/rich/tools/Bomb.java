@@ -4,7 +4,7 @@ public class Bomb extends Tool {
 	private int leftTime;
 
 	public Bomb() {
-		super(3,50,'@');
+		super(3,50,'@',"炸弹");
 		this.leftTime = 3;
 	}
 

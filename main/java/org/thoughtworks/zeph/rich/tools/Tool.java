@@ -4,11 +4,13 @@ public abstract class Tool {
 	private int id;
 	private int price;
 	private char icon;
+	private String name;
 
-	public Tool(int id, int price, char icon) {
+	protected Tool(int id, int price, char icon, String name) {
 		this.id = id;
 		this.price = price;
 		this.icon = icon;
+		this.name = name;
 	}
 
 	public int getId() {
@@ -23,6 +25,10 @@ public abstract class Tool {
 		return icon;
 	}
 
+	public String getName() {
+		return name;
+	}
+
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) return true;
@@ -33,6 +39,7 @@ public abstract class Tool {
 		if (icon != tool.icon) return false;
 		if (id != tool.id) return false;
 		if (price != tool.price) return false;
+		if (name != null ? !name.equals(tool.name) : tool.name != null) return false;
 
 		return true;
 	}
@@ -42,6 +49,7 @@ public abstract class Tool {
 		int result = id;
 		result = 31 * result + price;
 		result = 31 * result + (int) icon;
+		result = 31 * result + (name != null ? name.hashCode() : 0);
 		return result;
 	}
 }
