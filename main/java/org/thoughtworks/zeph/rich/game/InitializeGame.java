@@ -34,11 +34,9 @@ public class InitializeGame {
 			if (inputLine.equals("")) {
 				break;
 			}
-			if (isNumber(inputLine)) {
-				if (isBetween1000and50000(inputLine)) {
-					money = Integer.valueOf(inputLine);
-					break;
-				}
+			if (isNumber(inputLine) && isBetween1000and50000(inputLine)) {
+				money = Integer.valueOf(inputLine);
+				break;
 			}
 		}
 	}
@@ -53,7 +51,7 @@ public class InitializeGame {
 			inputLine = scanner.nextLine();
 			if (isNumber(inputLine) && inputLine.length() <= MAX_PLAYER_NUM) {
 				for (int i = 0; i < inputLine.length(); i++) {
-					if (!list.contains(inputLine.charAt(i)) && Integer.valueOf(inputLine.charAt(i)) - 48 <= MAX_PLAYER_NUM) {
+					if (!list.contains(inputLine.charAt(i)) && charToInt(inputLine.charAt(i)) <= MAX_PLAYER_NUM) {
 						createPlayer(inputLine, playerFactory, i);
 						list.add(inputLine.charAt(i));
 						isDuplicate = false;
@@ -66,8 +64,12 @@ public class InitializeGame {
 		}
 	}
 
+	private static int charToInt(char ch) {
+		return (int) ch - 48;
+	}
+
 	private static void createPlayer(String inputLine, PlayerFactory playerFactory, int i) {
-		players[Integer.valueOf(inputLine.charAt(i)) - 49] = playerFactory.createPlayer(Integer.valueOf(inputLine.charAt(i)) - 48, money);
+		players[Integer.valueOf(inputLine.charAt(i)) - 49] = playerFactory.createPlayer(charToInt(inputLine.charAt(i)), money);
 	}
 
 	private static boolean isNumber(String inputLine) {
