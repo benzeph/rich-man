@@ -1,7 +1,7 @@
 package org.thoughtworks.zeph.rich.executor;
 
 import org.thoughtworks.zeph.rich.map.Map;
-import org.thoughtworks.zeph.rich.output.SystemOut;
+import org.thoughtworks.zeph.rich.output.Printer;
 import org.thoughtworks.zeph.rich.player.Player;
 import org.thoughtworks.zeph.rich.tools.Bomb;
 
@@ -20,7 +20,7 @@ public class RollExecutor implements Executor {
 	public void execute() {
 		int currentMapPosition = player.getCurrentMapPosition();
 		int step = player.dice();
-		SystemOut.dice(step);
+		Printer.dice(step);
 		for (int i = 1; i <= step; i++) {
 			currentMapPosition = (currentMapPosition + 1) % map.getMapLength();
 			player.setCurrentMapPosition(currentMapPosition);
@@ -29,18 +29,18 @@ public class RollExecutor implements Executor {
 				player.bombTimeCountDown();
 				if (player.isBombExplode()) {
 					bombExplode(player);
-					SystemOut.bombExplode();
+					Printer.bombExplode();
 					break;
 				}
 			}
 			if (map.getGrid(currentMapPosition).isBlockHere()) {
 				map.getGrid(currentMapPosition).setTool(null);
-				SystemOut.youMeetABlock();
+				Printer.youMeetABlock();
 				break;
 			}
 		}
 		if (map.getGrid(currentMapPosition).isBombHere()) {
-			SystemOut.youMeetABomb();
+			Printer.youMeetABomb();
 			player.setTool(new Bomb());
 			map.getGrid(currentMapPosition).setTool(null);
 		}

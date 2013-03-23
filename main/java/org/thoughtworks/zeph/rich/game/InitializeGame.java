@@ -1,6 +1,6 @@
 package org.thoughtworks.zeph.rich.game;
 
-import org.thoughtworks.zeph.rich.output.SystemOut;
+import org.thoughtworks.zeph.rich.output.Printer;
 import org.thoughtworks.zeph.rich.player.Player;
 import org.thoughtworks.zeph.rich.player.PlayerFactory;
 import org.thoughtworks.zeph.rich.player.PlayerFactoryImp;
@@ -29,7 +29,7 @@ public class InitializeGame {
 		String inputLine;
 		money = 10000;
 		while (true) {
-			SystemOut.pleaseSetInitialMoney();
+			Printer.pleaseSetInitialMoney();
 			inputLine = scanner.nextLine();
 			if (inputLine.equals("")) {
 				break;
@@ -49,7 +49,7 @@ public class InitializeGame {
 		boolean isDuplicate = true;
 		while (isDuplicate) {
 			List<Character> list = new ArrayList<Character>();
-			SystemOut.pleaseChoosePlayers();
+			Printer.pleaseChoosePlayers();
 			inputLine = scanner.nextLine();
 			if (isNumber(inputLine) && inputLine.length() <= MAX_PLAYER_NUM) {
 				for (int i = 0; i < inputLine.length(); i++) {

@@ -1,6 +1,6 @@
 package org.thoughtworks.zeph.rich.map.unit;
 
-import org.thoughtworks.zeph.rich.output.SystemOut;
+import org.thoughtworks.zeph.rich.output.Printer;
 import org.thoughtworks.zeph.rich.player.Player;
 import org.thoughtworks.zeph.rich.tools.Block;
 import org.thoughtworks.zeph.rich.tools.Bomb;
@@ -26,7 +26,7 @@ public class ToolRoom extends Grid {
 
 	@Override
 	public void doesWhatItNeedToDo(Player player) {
-		SystemOut.welcomeToToolRoom();
+		Printer.welcomeToToolRoom();
 		while (player.getGamePoint() >= BOTTOM_PRICE && !player.isYourToolBagFull()) {
 			instruction = scanner.nextLine();
 			if (instruction.equals("1")) {
@@ -40,7 +40,7 @@ public class ToolRoom extends Grid {
 				player.addProp(3);
 			}
 		}
-		SystemOut.youHaveExitToolRoom();
+		Printer.youHaveExitToolRoom();
 	}
 
 

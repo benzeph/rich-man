@@ -1,6 +1,6 @@
 package org.thoughtworks.zeph.rich.map.unit;
 
-import org.thoughtworks.zeph.rich.output.SystemOut;
+import org.thoughtworks.zeph.rich.output.Printer;
 import org.thoughtworks.zeph.rich.player.Player;
 
 import java.util.Iterator;
@@ -30,10 +30,10 @@ public class BuildingLandFourFive extends Grid {
 	@Override
 	public void doesWhatItNeedToDo(Player player) {
 		if (owner == null) {
-			SystemOut.doYouWantToBuyThisLand(price);
+			Printer.doYouWantToBuyThisLand(price);
 			instruction = scanner.nextLine();
 			while (!instruction.equals("Y") && !instruction.equals("N")) {
-				SystemOut.doYouWantToBuyThisLand(price);
+				Printer.doYouWantToBuyThisLand(price);
 				instruction = scanner.nextLine();
 			}
 			if (instruction.equals("Y")) {
@@ -42,7 +42,7 @@ public class BuildingLandFourFive extends Grid {
 					player.subtractMoney(price);
 					player.addBuilding(this);
 				} else {
-					SystemOut.yourMoneyIsNotEnough();
+					Printer.yourMoneyIsNotEnough();
 					return;
 				}
 			} else {
@@ -50,7 +50,7 @@ public class BuildingLandFourFive extends Grid {
 			}
 		} else if (owner.equals(player)) {
 			if (level < TOP_LEVEL) {
-				SystemOut.doYouWantToLevelUpThisLand(price);
+				Printer.doYouWantToLevelUpThisLand(price);
 				instruction = scanner.nextLine();
 				while (!instruction.equals("Y") && !instruction.equals("N")) {
 					instruction = scanner.nextLine();
@@ -61,7 +61,7 @@ public class BuildingLandFourFive extends Grid {
 						player.subtractMoney(price);
 						setSymbol((char) (level + 48));
 					} else {
-						SystemOut.yourMoneyIsNotEnough();
+						Printer.yourMoneyIsNotEnough();
 						return;
 					}
 				} else {
@@ -70,21 +70,21 @@ public class BuildingLandFourFive extends Grid {
 			}
 		} else {
 			if (player.isGodExist()) {
-				SystemOut.godBlessYou();
+				Printer.godBlessYou();
 				return;
 			}
 			if (owner.isInHospital()) {
-				SystemOut.ownerIsInTheHosptial(owner.getName());
+				Printer.ownerIsInTheHosptial(owner.getName());
 				return;
 			}
 			if (owner.isInPrison()) {
-				SystemOut.ownerIsInThePrison(owner.getName());
+				Printer.ownerIsInThePrison(owner.getName());
 				return;
 			}
 			if (player.getMoney() > price * (level + 1) / 2) {
 				player.subtractMoney(price * (level + 1) / 2);
 				owner.addMoney(price * (level + 1) / 2);
-				SystemOut.paySomeoneMoney(owner.getName(), price * (level + 1) / 2);
+				Printer.paySomeoneMoney(owner.getName(), price * (level + 1) / 2);
 			} else {
 				Map<Integer, Grid> lands = player.getLands();
 				Set<Integer> set = lands.keySet();

@@ -1,6 +1,6 @@
 package org.thoughtworks.zeph.rich.output;
 
-public class SystemOut {
+public class Printer {
 
 	public static void pleaseChoosePlayers() {
 		colorPrintLn("请选择2~4位不重复玩家，输入编号即可。(1.钱夫人; 2.阿土伯; 3.孙小美; 4.金贝贝):", Color.WHITE);

@@ -2,7 +2,7 @@ package org.thoughtworks.zeph.rich.map;
 
 import org.thoughtworks.zeph.rich.map.unit.*;
 import org.thoughtworks.zeph.rich.output.Color;
-import org.thoughtworks.zeph.rich.output.SystemOut;
+import org.thoughtworks.zeph.rich.output.Printer;
 
 public class FirstMap implements Map {
 
@@ -121,37 +121,37 @@ public class FirstMap implements Map {
 			BuildingLandOneTwo buildingLandOneTwo = (BuildingLandOneTwo) grids[id];
 			if (buildingLandOneTwo.isOwnerExist()) {
 				if (isSymbolBelongToBuilding(symbol)) {
-					SystemOut.colorPrint(symbol, buildingLandOneTwo.getOwner().getColorNum());
+					Printer.colorPrint(symbol, buildingLandOneTwo.getOwner().getColorNum());
 				}else{
-					SystemOut.colorPrint(symbol, Color.WHITE);
+					Printer.colorPrint(symbol, Color.WHITE);
 				}
 			} else {
-				SystemOut.colorPrint(symbol, Color.WHITE);
+				Printer.colorPrint(symbol, Color.WHITE);
 			}
 		} else if (isBuildingLandThree(id)) {
 			BuildingLandThree buildingLandThree = (BuildingLandThree) grids[id];
 			if (buildingLandThree.isOwnerExist()) {
 				if (isSymbolBelongToBuilding(symbol)) {
-					SystemOut.colorPrint(symbol, buildingLandThree.getOwner().getColorNum());
+					Printer.colorPrint(symbol, buildingLandThree.getOwner().getColorNum());
 				}else{
-					SystemOut.colorPrint(symbol, Color.WHITE);
+					Printer.colorPrint(symbol, Color.WHITE);
 				}
 			} else {
-				SystemOut.colorPrint(symbol, Color.WHITE);
+				Printer.colorPrint(symbol, Color.WHITE);
 			}
 		} else if (isBuildingLandFour(id)) {
 			BuildingLandFourFive buildingLandFourFive = (BuildingLandFourFive) grids[id];
 			if (buildingLandFourFive.isOwnerExist()) {
 				if (isSymbolBelongToBuilding(symbol)) {
-					SystemOut.colorPrint(symbol, buildingLandFourFive.getOwner().getColorNum());
+					Printer.colorPrint(symbol, buildingLandFourFive.getOwner().getColorNum());
 				}else{
-					SystemOut.colorPrint(symbol, Color.WHITE);
+					Printer.colorPrint(symbol, Color.WHITE);
 				}
 			} else {
-				SystemOut.colorPrint(symbol, Color.WHITE);
+				Printer.colorPrint(symbol, Color.WHITE);
 			}
 		} else {
-			SystemOut.colorPrint(grids[id].getSymbol(), Color.WHITE);
+			Printer.colorPrint(grids[id].getSymbol(), Color.WHITE);
 		}
 	}
 

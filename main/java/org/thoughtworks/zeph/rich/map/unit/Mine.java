@@ -1,6 +1,6 @@
 package org.thoughtworks.zeph.rich.map.unit;
 
-import org.thoughtworks.zeph.rich.output.SystemOut;
+import org.thoughtworks.zeph.rich.output.Printer;
 import org.thoughtworks.zeph.rich.player.Player;
 
 import java.util.Set;
@@ -16,7 +16,7 @@ public class Mine extends Grid {
 
 	@Override
 	public void doesWhatItNeedToDo(Player player) {
-		SystemOut.printGetGamePoint(gamePoint);
+		Printer.printGetGamePoint(gamePoint);
 		player.addGamePoint(gamePoint);
 	}
 

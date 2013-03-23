@@ -1,7 +1,7 @@
 package org.thoughtworks.zeph.rich.executor;
 
 
-import org.thoughtworks.zeph.rich.output.SystemOut;
+import org.thoughtworks.zeph.rich.output.Printer;
 import org.thoughtworks.zeph.rich.player.Player;
 import org.thoughtworks.zeph.rich.tools.Block;
 import org.thoughtworks.zeph.rich.tools.Bomb;
@@ -24,21 +24,21 @@ public class SellToolExecutor implements Executor {
 				if (player.isPlayerHasABlock()) {
 					sellBlock(player);
 				} else {
-					SystemOut.sellToolFailed(new Bomb().getName());
+					Printer.sellToolFailed(new Bomb().getName());
 				}
 				break;
 			case 2:
 				if (player.isPlayerHasARobot()) {
 					sellRobot(player);
 				} else {
-					SystemOut.sellToolFailed(new Robot().getName());
+					Printer.sellToolFailed(new Robot().getName());
 				}
 				break;
 			case 3:
 				if (player.isPlayerHasABomb()) {
 					sellBomb(player);
 				} else {
-					SystemOut.sellToolFailed(new Robot().getName());
+					Printer.sellToolFailed(new Robot().getName());
 				}
 				break;
 		}

@@ -1,7 +1,7 @@
 package org.thoughtworks.zeph.rich.game;
 
 import org.thoughtworks.zeph.rich.map.Map;
-import org.thoughtworks.zeph.rich.output.SystemOut;
+import org.thoughtworks.zeph.rich.output.Printer;
 import org.thoughtworks.zeph.rich.player.Player;
 import org.thoughtworks.zeph.rich.syntax.SyntaxParserFactory;
 
@@ -35,17 +35,17 @@ public class Rich {
 			if (players[currentPlayer] != null) {
 				if (players[currentPlayer].isInHospital()) {
 					players[currentPlayer].countDownHospitalDays();
-					SystemOut.hospitalLeftTime(players[currentPlayer].getName(), players[currentPlayer].getHospitalDays());
+					Printer.hospitalLeftTime(players[currentPlayer].getName(), players[currentPlayer].getHospitalDays());
 				} else if (players[currentPlayer].isInPrison()) {
 					players[currentPlayer].countDownPrisonDays();
-					SystemOut.prisonLeftTime(players[currentPlayer].getName(), players[currentPlayer].getPrisonDays());
+					Printer.prisonLeftTime(players[currentPlayer].getName(), players[currentPlayer].getPrisonDays());
 				} else {
 					if (players[currentPlayer].isGodExist()) {
 						players[currentPlayer].getGod().timeCountDown();
 					}
 					String instruction = WHAT_EVER;
 					while (!instruction.equals(ROLL)) {
-						SystemOut.waitForInstruction(players[currentPlayer].getName());
+						Printer.waitForInstruction(players[currentPlayer].getName());
 						instruction = scanner.nextLine();
 						parserFactory.buildSyntaxParser(instruction, map, players[currentPlayer]).parse().execute();
 					}
