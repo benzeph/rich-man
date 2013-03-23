@@ -22,5 +22,5 @@ public interface Map {
 
 	public boolean isBuildingLandThree(int id);
 
-	public boolean isBuildingLandFour(int id);
+	public boolean isBuildingLandFourFive(int id);
 }

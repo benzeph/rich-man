@@ -118,40 +118,56 @@ public class FirstMap implements Map {
 	@Override
 	public void printGrid(int id, char symbol) {
 		if (isBuildingLandOneTwo(id)) {
-			BuildingLandOneTwo buildingLandOneTwo = (BuildingLandOneTwo) grids[id];
-			if (buildingLandOneTwo.isOwnerExist()) {
-				if (isSymbolBelongToBuilding(symbol)) {
-					Printer.colorPrint(symbol, buildingLandOneTwo.getOwner().getColorNum());
-				}else{
-					Printer.colorPrint(symbol, Color.WHITE);
-				}
-			} else {
-				Printer.colorPrint(symbol, Color.WHITE);
-			}
+			printBuildingLandOneTwo(id, symbol);
 		} else if (isBuildingLandThree(id)) {
-			BuildingLandThree buildingLandThree = (BuildingLandThree) grids[id];
-			if (buildingLandThree.isOwnerExist()) {
-				if (isSymbolBelongToBuilding(symbol)) {
-					Printer.colorPrint(symbol, buildingLandThree.getOwner().getColorNum());
-				}else{
-					Printer.colorPrint(symbol, Color.WHITE);
-				}
-			} else {
-				Printer.colorPrint(symbol, Color.WHITE);
-			}
-		} else if (isBuildingLandFour(id)) {
-			BuildingLandFourFive buildingLandFourFive = (BuildingLandFourFive) grids[id];
-			if (buildingLandFourFive.isOwnerExist()) {
-				if (isSymbolBelongToBuilding(symbol)) {
-					Printer.colorPrint(symbol, buildingLandFourFive.getOwner().getColorNum());
-				}else{
-					Printer.colorPrint(symbol, Color.WHITE);
-				}
-			} else {
+			printBuildingLandThree(id, symbol);
+		} else if (isBuildingLandFourFive(id)) {
+			printBuildingLandFourFive(id, symbol);
+		} else {
+			printGeneralSymbol(id);
+		}
+	}
+
+	private void printGeneralSymbol(int id) {
+		Printer.colorPrint(grids[id].getSymbol(), Color.WHITE);
+	}
+
+	private void printBuildingLandFourFive(int id, char symbol) {
+		BuildingLandFourFive buildingLandFourFive = (BuildingLandFourFive) grids[id];
+		if (buildingLandFourFive.isOwnerExist()) {
+			if (isSymbolBelongToBuilding(symbol)) {
+				Printer.colorPrint(symbol, buildingLandFourFive.getOwner().getColorNum());
+			}else{
 				Printer.colorPrint(symbol, Color.WHITE);
 			}
 		} else {
-			Printer.colorPrint(grids[id].getSymbol(), Color.WHITE);
+			Printer.colorPrint(symbol, Color.WHITE);
+		}
+	}
+
+	private void printBuildingLandThree(int id, char symbol) {
+		BuildingLandThree buildingLandThree = (BuildingLandThree) grids[id];
+		if (buildingLandThree.isOwnerExist()) {
+			if (isSymbolBelongToBuilding(symbol)) {
+				Printer.colorPrint(symbol, buildingLandThree.getOwner().getColorNum());
+			}else{
+				Printer.colorPrint(symbol, Color.WHITE);
+			}
+		} else {
+			Printer.colorPrint(symbol, Color.WHITE);
+		}
+	}
+
+	private void printBuildingLandOneTwo(int id, char symbol) {
+		BuildingLandOneTwo buildingLandOneTwo = (BuildingLandOneTwo) grids[id];
+		if (buildingLandOneTwo.isOwnerExist()) {
+			if (isSymbolBelongToBuilding(symbol)) {
+				Printer.colorPrint(symbol, buildingLandOneTwo.getOwner().getColorNum());
+			}else{
+				Printer.colorPrint(symbol, Color.WHITE);
+			}
+		} else {
+			Printer.colorPrint(symbol, Color.WHITE);
 		}
 	}
 
@@ -170,7 +186,7 @@ public class FirstMap implements Map {
 	}
 
 	@Override
-	public boolean isBuildingLandFour(int id) {
+	public boolean isBuildingLandFourFive(int id) {
 		return (id >= 36 && id <= 48) || (id >= 50 && id <= 62);
 	}
 
