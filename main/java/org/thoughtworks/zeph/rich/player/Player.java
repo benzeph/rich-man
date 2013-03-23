@@ -8,17 +8,21 @@ import org.thoughtworks.zeph.rich.tools.Tool;
 import java.util.*;
 
 public class Player {
+	public static final int BLOCK_ID = 1;
+	public static final int ROBOT_ID = 2;
+	public static final int BOMB_ID = 3;
+	public static final int TOOL_BAG_SIZE = 10;
 	private int id;
-	private String name;
 	private int colorNum;
 	private int money;
-	private char symbol;
-	private God god = null;
-	private Tool tool = null;
 	private int gamePoint = 0;
 	private int currentMapPosition = 0;
 	private int hospitalDays = 0;
 	private int prisonDays = 0;
+	private char symbol;
+	private String name;
+	private God god = null;
+	private Tool tool = null;
 	private Map<Integer, Integer> tools = new HashMap<Integer, Integer>();
 	private Map<Integer, Grid> lands = new HashMap<Integer, Grid>();
 
@@ -64,15 +68,15 @@ public class Player {
 	}
 
 	public boolean isPlayerHasABlock() {
-		return tools.containsKey(1);
+		return tools.containsKey(BLOCK_ID);
 	}
 
 	public boolean isPlayerHasARobot() {
-		return tools.containsKey(2);
+		return tools.containsKey(ROBOT_ID);
 	}
 
 	public boolean isPlayerHasABomb() {
-		return tools.containsKey(3);
+		return tools.containsKey(BOMB_ID);
 	}
 
 	public boolean isPlayerHasBuilding(int id) {
@@ -86,7 +90,7 @@ public class Player {
 		while (it.hasNext()) {
 			num = num + tools.get(it.next());
 		}
-		return num >= 10;
+		return num >= TOOL_BAG_SIZE;
 	}
 
 	public int getPrisonDays() {
@@ -133,14 +137,10 @@ public class Player {
 		this.hospitalDays = hospitalDays;
 	}
 
-	public void countDownHospitalDays() {
-		hospitalDays = hospitalDays - 1;
-	}
-
-
 	public void setPrisonDays(int prisonDays) {
 		this.prisonDays = prisonDays;
 	}
+
 
 	public int getCurrentMapPosition() {
 		return currentMapPosition;
@@ -158,13 +158,13 @@ public class Player {
 		prisonDays = prisonDays - 1;
 	}
 
-	public void addGamePoint(int gamePoint) {
-		this.gamePoint = this.gamePoint + gamePoint;
+	public void bombTimeCountDown() {
+		Bomb bomb = (Bomb) tool;
+		bomb.timeCountDown();
 	}
 
-
-	public void addMoney(int money) {
-		this.money = this.money + money;
+	public void countDownHospitalDays() {
+		hospitalDays = hospitalDays - 1;
 	}
 
 
@@ -178,6 +178,7 @@ public class Player {
 			return false;
 		}
 	}
+
 
 	public void useTool(Tool tool) {
 		int n = tools.get(tool.getId()) - 1;
@@ -201,7 +202,6 @@ public class Player {
 			gamePoint = gamePoint + tool.getPrice();
 		}
 	}
-
 
 	public String query() {
 		String message = "\n资金:" + money + "\n";
@@ -231,25 +231,29 @@ public class Player {
 		return message;
 	}
 
+
 	public int dice() {
 		return new Random().nextInt(6) + 1;
-	}
-
-	public void bombTimeCountDown() {
-		Bomb bomb = (Bomb) tool;
-		bomb.timeCountDown();
 	}
 
 	public void subtractMoney(int price) {
 		money = money - price;
 	}
 
+	public void subtractGamePoint(int price) {
+		gamePoint = gamePoint - price;
+	}
+
+	public void addMoney(int money) {
+		this.money = this.money + money;
+	}
+
 	public void addBuilding(Grid grid) {
 		lands.put(grid.getId(), grid);
 	}
 
-	public void subtractGamePoint(int price) {
-		gamePoint = gamePoint - price;
+	public void addGamePoint(int gamePoint) {
+		this.gamePoint = this.gamePoint + gamePoint;
 	}
 
 	public void addProp(int i) {

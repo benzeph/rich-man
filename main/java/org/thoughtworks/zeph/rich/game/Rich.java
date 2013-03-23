@@ -10,9 +10,9 @@ import java.util.Scanner;
 public class Rich {
 
 	public static final String ROLL = "roll";
-	public static final int PLAY_ARRAY_STEP = 1;
 	public static final String WIN = " win";
 	public static final String WHAT_EVER = "what ever";
+	public static final int PLAY_ARRAY_STEP = 1;
 	public static final int MINIMUM_PLAYER_NUMBER = 1;
 	public static final int FIRST_PLAYER_NUMBER = 0;
 	private int currentPlayerNum;
